@@ -1,9 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Reflection;
+using DSMOOFramework.Analyzer;
 using DSMOOFramework.Logger;
 
 namespace DSMOOFramework.Managers;
 
+[Analyze(Priority = 2)]
 public class AssemblyManager(ILogger logger, Analyzer.Analyzer analyzer) : Manager
 {
     public ILogger Logger { get; set; } = logger;

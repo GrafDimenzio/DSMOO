@@ -20,7 +20,7 @@ public abstract class BasicLogger : ILogger
     {
         var msg = "";
         if(message != null)
-            msg = message.ToString() + "\n";
+            msg = message + "\n";
 
         Log?.Invoke(FormatMessage(msg + ex, LogType.Error), LogType.Error);
     }

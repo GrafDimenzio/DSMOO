@@ -1,18 +1,23 @@
 using System.Reflection;
-using DSMOOFramework.Analyzer;
-using DSMOOFramework.Commands;
-using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
+using DSMOOFramework.Plugins;
 
 namespace DSMOOFramework;
 
 public static class SetupHelper
 {
-    public static Controller.ObjectController BasicSetup(ILogger controllerLogger, Assembly? assembly = null,
+    public static Controller.ObjectController BasicSetup(ILogger controllerLogger, Dictionary<string,string> paths, Assembly[]? assemblies = null,
         ILogger? analyzerLogger = null, ILogger? managerLogger = null)
     {
         var controller = new Controller.ObjectController(controllerLogger);
+        var pathLocation = controller.GetObject<PathLocation>();
+        if (pathLocation == null)
+        {
+            controllerLogger.Error("Could not create PathLocation");
+            throw new Exception("PathLocation not created");
+        }
+        pathLocation.AddPaths(paths);
         var analyzer = controller.GetObject<Analyzer.Analyzer>(analyzerLogger ?? controllerLogger);
         var managerHandler = controller.GetObject<ManagerHandler>(managerLogger ?? controllerLogger);
         if (analyzer == null || managerHandler == null)
@@ -22,10 +27,12 @@ public static class SetupHelper
         }
         managerHandler.Setup();
         analyzer.AnalyzeAssembly(Assembly.GetExecutingAssembly());
-        if (assembly != null)
+        if (assemblies != null)
         {
-            analyzer.AnalyzeAssembly(assembly);
+            analyzer.AnalyzeAssemblies(assemblies);
         }
+        
+        controller.GetObject<PluginManager>()!.LoadPlugins();
         
         return controller;
     }

@@ -17,10 +17,6 @@ public class HelpCommand(CommandManager manager) : Command
                 $"\n\n{cmd.CommandInfo.CommandName} - {cmd.CommandInfo.Description}\n  Alias: {string.Join(", ", cmd.CommandInfo.Aliases)}\n  Parameters: {string.Join(", ", cmd.CommandInfo.Parameters)}";
         }
 
-        return new CommandResult
-        {
-            ResultType = ResultType.Success,
-            Message = msg,
-        };
+        return msg;
     }
 }

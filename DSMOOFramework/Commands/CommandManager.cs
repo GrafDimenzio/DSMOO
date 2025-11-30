@@ -4,6 +4,7 @@ using DSMOOFramework.Managers;
 
 namespace DSMOOFramework.Commands;
 
+[Analyze(Priority = 1)]
 public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectController objectController, ILogger logger) : Manager
 {
     public List<ICommand> Commands { get; set; } = [];
@@ -12,14 +13,7 @@ public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectControl
     {
         analyzer.OnAnalyze.Subscribe(OnAnalyze);
     }
-
-    public void AddCommand(ICommand command, CommandAttribute info)
-    {
-        command.CommandInfo = info;
-        Commands.Add(command);
-        logger.Setup($"Added command {command.CommandInfo.CommandName}");
-    }
-
+    
     private void OnAnalyze(AnalyzeEventArgs args)
     {
         if (!args.Is<ICommand>()) return;
@@ -27,6 +21,13 @@ public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectControl
         if (info == null) return;
         if (objectController.GetObject(args.Type) is not ICommand command) return;
         AddCommand(command, info);
+    }
+
+    public void AddCommand(ICommand command, CommandAttribute info)
+    {
+        command.CommandInfo = info;
+        Commands.Add(command);
+        logger.Setup($"Added command {command.CommandInfo.CommandName}");
     }
 
     public CommandResult ProcessQuery(string query)
