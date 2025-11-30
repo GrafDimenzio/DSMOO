@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>DSMOOServer</AssemblyName>
+        <RootNamespace>DSMOOServer</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="kingdoms.json" />
+      <EmbeddedResource Include="kingdoms.json" />
+    </ItemGroup>
+
+</Project>

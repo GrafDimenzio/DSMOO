@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOServer", "DSMOOServer\DSMOOServer.csproj", "{918EBF67-11C3-4508-9080-2319604A1516}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOFramework", "DSMOOFramework\DSMOOFramework.csproj", "{F1150E82-5C9F-409F-AACA-022A82F17458}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOConsole", "DSMOOConsole\DSMOOConsole.csproj", "{88F316D9-A1EA-4C72-B1F5-5E0FD72E8030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOFlip", "DSMOOFlip\DSMOOFlip.csproj", "{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{918EBF67-11C3-4508-9080-2319604A1516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{918EBF67-11C3-4508-9080-2319604A1516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{918EBF67-11C3-4508-9080-2319604A1516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{918EBF67-11C3-4508-9080-2319604A1516}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1150E82-5C9F-409F-AACA-022A82F17458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1150E82-5C9F-409F-AACA-022A82F17458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1150E82-5C9F-409F-AACA-022A82F17458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1150E82-5C9F-409F-AACA-022A82F17458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88F316D9-A1EA-4C72-B1F5-5E0FD72E8030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88F316D9-A1EA-4C72-B1F5-5E0FD72E8030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88F316D9-A1EA-4C72-B1F5-5E0FD72E8030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88F316D9-A1EA-4C72-B1F5-5E0FD72E8030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
