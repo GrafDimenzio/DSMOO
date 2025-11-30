@@ -255,9 +255,9 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
     
     public async Task Broadcast(IMemoryOwner<byte> data, Guid? sender = null) {
         
-        await Parallel.ForEachAsync(Clients, async (client, _) =>
+        await Parallel.ForEachAsync(Clients.Where(x => x is { Ignored: false, FirstPacketSend: true }), async (client, _) =>
         {
-            if (!client.FirstPacketSend || client.Ignored || client.Id == sender)
+            if (client.Id == sender)
                 return;
             await client.Send(data.Memory);
         });

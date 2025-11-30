@@ -4,7 +4,7 @@ using DSMOOServer.Network;
 namespace DSMOOServer.API.Recording;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct RecordingHeader : IPacket {
+public struct RecordingHeader {
     public int Timestamp;
     public PacketType Type;
 

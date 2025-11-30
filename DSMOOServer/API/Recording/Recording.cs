@@ -38,6 +38,12 @@ public class Recording
             });
         }
     }
+
+    public void Reset()
+    {
+        _stopwatch.Reset();
+        Elements.Clear();
+    }
     
     private readonly Stopwatch _stopwatch = new Stopwatch();
     

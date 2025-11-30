@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using DSMOOConsole;
 using DSMOOFramework;
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Controller;
 using DSMOOServer.Connection;
 
@@ -16,7 +15,7 @@ static ObjectController ConsoleSetup(string loggerName)
         { "config", Path.Combine(AppContext.BaseDirectory, "configs") },
         { "plugins", Path.Combine(AppContext.BaseDirectory, "plugins") },
         { "recordings", Path.Combine(AppContext.BaseDirectory, "recordings") },
-    }, [Assembly.GetAssembly(typeof(Server))]);
+    }, [Assembly.GetAssembly(typeof(Server))!]);
     var command = controller.GetObject<ConsoleCommands>();
     Task.Run(() => command?.ListenForCommands());
     return controller;
