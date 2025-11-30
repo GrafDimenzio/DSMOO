@@ -118,7 +118,7 @@ public class Recording
             element.Packet.Serialize(memory.Memory.Span[current..(current + element.Packet.Size)]);
             current += element.Packet.Size;
         }
-        File.WriteAllBytes(fileName, memory.Memory.Span[0..size]);
+        File.WriteAllBytes(fileName, memory.Memory.Span[0..size].ToArray());
         memory.Dispose();
     }
 
