@@ -47,15 +47,17 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
             Client = args.Sender,
             AllowJoin = playerManager.ValidPlayerCount <= Config.MaxPlayers
         };
+        if (!preJoinArgs.AllowJoin)
+        {
+            args.Sender.Logger.Warn("Rejected join since the server reached max players amount");
+        }
         eventManager.OnPlayerPreJoin.RaiseEvent(preJoinArgs);
         
         if (!preJoinArgs.AllowJoin)
         {
             args.Sender.Ignored = true;
-        }
-
-        if (args.Sender.Ignored)
             return;
+        }
 
         var isRestartReconnect = false;
 

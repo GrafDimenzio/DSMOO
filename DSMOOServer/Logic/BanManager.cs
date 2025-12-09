@@ -218,7 +218,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
     {
         switch (args.Packet)
         {
-            case GamePacket gamePacket:
+            case TagPacket tagPacket:
                 break;
         }
     }
