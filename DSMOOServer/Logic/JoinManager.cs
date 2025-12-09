@@ -36,13 +36,23 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
 
         args.Sender.Id = args.Header.Id;
         args.Sender.Name = connectPacket.ClientName;
-        
-        //Checks here for Ip,Id, server full and set client.Ignored=true if necessary
 
         args.Sender.Send(new InitPacket
         {
             MaxPlayers = Config.MaxPlayers,
         }).GetAwaiter().GetResult();
+        
+        var preJoinArgs = new PlayerPreJoinEventArgs()
+        {
+            Client = args.Sender,
+            AllowJoin = playerManager.ValidPlayerCount <= Config.MaxPlayers
+        };
+        eventManager.OnPlayerPreJoin.RaiseEvent(preJoinArgs);
+        
+        if (!preJoinArgs.AllowJoin)
+        {
+            args.Sender.Ignored = true;
+        }
 
         if (args.Sender.Ignored)
             return;

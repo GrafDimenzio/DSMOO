@@ -28,7 +28,7 @@ public class MoonManager(EventManager eventManager, ILogger logger, ConfigHolder
 
     public void SaveMoons()
     {
-        moonListHolder.Config.Moons = new SortedSet<int>(MoonSync).ToList();
+        moonListHolder.Config.Moons = new HashSet<int>(MoonSync);
         configManager.SaveConfig(moonListHolder.Config);
     }
 
@@ -140,5 +140,5 @@ public class MoonManager(EventManager eventManager, ILogger logger, ConfigHolder
 [Config(Name = "MoonList")]
 public class MoonList : IConfig
 {
-    public List<int> Moons { get; set; } = new List<int>() { };
+    public HashSet<int> Moons { get; set; } = [];
 }

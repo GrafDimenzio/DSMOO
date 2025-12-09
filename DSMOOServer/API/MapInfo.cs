@@ -12,6 +12,29 @@ public class MapInfo
     var json = reader.ReadToEnd();
     AllKingdoms = JsonSerializer.Deserialize<MapInfo[]>(json)!;
   }
+
+  public static string GetConnection(string fromStage, string toStage, bool useExit)
+  {
+    if (AllKingdoms.Any(x => x.MainStageName == toStage))
+    {
+      var kingdom = AllKingdoms.First(x => x.MainStageName == toStage);
+      var subArea = kingdom.SubAreas.FirstOrDefault(x => x.SubAreaName == fromStage);
+      if (subArea == null)
+        return "";
+      return useExit ? subArea.Exit : subArea.Entrance;
+    }
+
+    if (AllKingdoms.Any(x => x.MainStageName == fromStage))
+    {
+      var kingdom = AllKingdoms.First(x => x.MainStageName == fromStage);
+      var subArea = kingdom.SubAreas.FirstOrDefault(x => x.SubAreaName == toStage);
+      if (subArea == null)
+        return "";
+      return useExit ? subArea.Exit : subArea.Entrance;
+    }
+
+    return "";
+  }
   
   public static readonly MapInfo[] AllKingdoms;
   
@@ -32,5 +55,7 @@ public class MapInfo
   {
     public string SubAreaName { get; set; } = "";
     public OffsetObject Position { get; set; } = new OffsetObject();
+    public string Entrance { get; set; } = "";
+    public string Exit { get; set; } = "";
   }
 }

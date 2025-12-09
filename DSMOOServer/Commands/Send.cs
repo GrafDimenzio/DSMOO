@@ -2,6 +2,7 @@ using System.Text;
 using DSMOOFramework.Commands;
 using DSMOOServer.Helper;
 using DSMOOServer.Logic;
+using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Commands;
 
@@ -34,7 +35,7 @@ public class Send(PlayerManager manager) : Command
             };
         }
 
-        if (Encoding.UTF8.GetBytes(args[1]).Length > 0x10)
+        if (Encoding.UTF8.GetBytes(args[1]).Length > ChangeStagePacket.IdSize)
             return new CommandResult()
             {
                 ResultType = ResultType.InvalidParameter,

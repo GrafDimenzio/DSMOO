@@ -5,8 +5,8 @@ namespace DSMOOServer.Network.Packets;
 
 [Packet(PacketType.ChangeStage)]
 public struct ChangeStagePacket : IPacket {
-    private const int IdSize = 0x10;
-    private const int StageSize = 0x30;
+    public const int IdSize = 0x10;
+    public const int StageSize = 0x30;
     public string Stage = "";
     public string Id = "";
     public sbyte Scenario = 0;

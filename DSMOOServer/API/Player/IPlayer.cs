@@ -39,9 +39,9 @@ public interface IPlayer
 
     public void Crash(bool ban);
     
-    public void SendShine(int id);
+    public Task SendShine(int id);
 
-    public void ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0);
+    public Task ChangeStage(string stage, string warp, sbyte scenario = -1, byte subScenarioType = 0, int delay = 0);
 
     public Task Send<T>(T packet, Guid? sender) where T : struct, IPacket;
 }

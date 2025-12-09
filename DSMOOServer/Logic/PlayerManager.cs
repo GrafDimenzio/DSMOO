@@ -1,5 +1,6 @@
 using System.Net;
 using System.Numerics;
+using System.Text;
 using DSMOOFramework.Analyzer;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
@@ -17,6 +18,11 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
 {
     public readonly List<IPlayer> Players = [];
 
+    public List<IPlayer> RealPlayers =>
+        Players.Where(x => !x.IsDummy && x is Player { Client.Socket.Connected: true }).ToList();
+    
+    public int ValidPlayerCount => Players.Count(x => !x.IsDummy && x is Player { Client.Socket.Connected: true });
+
     public PlayerSearch SearchForPlayers(string[] args)
     {
         var search = new PlayerSearch();
@@ -27,12 +33,12 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
         switch (args[0])
         {
             case "*":
-                search.Players = Players;
+                search.Players = RealPlayers;
                 return search;
             
             case "!*":
                 search.IsInverted = true;
-                search.Players = Players;
+                search.Players = RealPlayers;
                 args = args[1..];
                 break;
         }
@@ -41,7 +47,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
         {
             if(string.IsNullOrWhiteSpace(argument)) continue;
             
-            var possiblePlayers = Players.Where(player =>
+            var possiblePlayers = RealPlayers.Where(player =>
                 player.Name.ToLower().StartsWith(argument.ToLower()) ||
                 (Guid.TryParse(argument, out var guid) && guid == player.Id) ||
                 (IPAddress.TryParse(argument, out var ip) && ip.Equals(player.Ip))).ToList();
@@ -107,14 +113,28 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
 
                 if (player.Stage != gamePacket.Stage || player.Scenario != gamePacket.ScenarioNum)
                 {
-                    eventManager.OnPlayerChangeStage.RaiseEvent(new PlayerChangeStageEventArgs()
+                    var warp = MapInfo.GetConnection(player.Stage, gamePacket.Stage, false);
+                    var bytes = Encoding.UTF8.GetBytes(warp);
+                    if (bytes.Length > ChangeStagePacket.IdSize)
+                        warp = "";
+                    
+                    var changeStageArgs = new PlayerChangeStageEventArgs()
                     {
                         Player = player,
                         NewStage = gamePacket.Stage,
                         PreviousStage = player.Stage,
                         PreviousScenario = player.Scenario,
                         NewScenario = gamePacket.ScenarioNum,
-                    });
+                        
+                        SendBackScenario = player.Scenario > sbyte.MaxValue ? (sbyte)-1 : (sbyte)player.Scenario,
+                        SendBackWarp = warp,
+                        SendBackStage = player.Stage
+                    };
+                    eventManager.OnPlayerChangeStage.RaiseEvent(changeStageArgs);
+                    if (changeStageArgs.SendBack && !string.IsNullOrWhiteSpace(changeStageArgs.SendBackStage))
+                    {
+                        player.ChangeStage(changeStageArgs.SendBackStage, changeStageArgs.SendBackWarp, changeStageArgs.SendBackScenario, 0, 1000);
+                    }
                 }
 
                 if (player.Is2d != gamePacket.Is2d)

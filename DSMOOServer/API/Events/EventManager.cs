@@ -17,5 +17,6 @@ public class EventManager(ILogger logger) : Manager
     public readonly EventReactor<PlayerCaptureEventArgs> OnPlayerCapture = new(logger);
     public readonly EventReactor<PlayerCollectMoonEventArgs> OnPlayerCollectMoon = new(logger);
     public readonly EventReactor<PlayerChangeCostumeEventArgs> OnPlayerChangeCostume = new(logger);
+    public readonly EventReactor<PlayerPreJoinEventArgs> OnPlayerPreJoin = new(logger);
     public readonly EventReactor<DummySendPacketEventArgs> OnDummySendPacket = new(logger);
 }

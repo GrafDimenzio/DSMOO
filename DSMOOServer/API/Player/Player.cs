@@ -47,7 +47,7 @@ public class Player : IPlayer
     
     public bool IsSaveLoaded { get; internal set; } = false;
     
-    public bool IsBanned { get; } = false;
+    public bool IsBanned { get; internal set; } = false;
     
     public bool DisableMoonSync { get; set; } = false;
     
@@ -55,7 +55,7 @@ public class Player : IPlayer
 
     public void Disconnect()
     {
-        Client.Socket.Disconnect(false);
+        Client.Socket?.Disconnect(false);
     }
 
     public void Crash(bool ban)
@@ -67,22 +67,26 @@ public class Player : IPlayer
         Client.Ignored = true;
     }
 
-    public void SendShine(int id)
+    public Task SendShine(int id)
     {
-        Client.Send(new ShinePacket()
+        return Client.Send(new ShinePacket()
         {
             ShineId = id
         });
     }
 
-    public void ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0)
+    public Task ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0, int delay = 0)
     {
-        Client.Send(new ChangeStagePacket()
+        return Task.Run(async () =>
         {
-            Stage = stage,
-            Id = warp,
-            Scenario = scenario,
-            SubScenarioType = subScenarioType
+            await Task.Delay(delay);
+            await Client.Send(new ChangeStagePacket()
+            {
+                Stage = stage,
+                Id = warp,
+                Scenario = scenario,
+                SubScenarioType = subScenarioType
+            });
         });
     }
 

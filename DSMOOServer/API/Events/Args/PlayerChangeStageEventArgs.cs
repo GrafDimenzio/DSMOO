@@ -8,6 +8,10 @@ public class PlayerChangeStageEventArgs : IEventArg
     public IPlayer Player { get; init; }
     public string PreviousStage { get; init; }
     public string NewStage { get; init; }
-    public int PreviousScenario { get; init; }
+    public byte PreviousScenario { get; init; }
     public int NewScenario { get; init; }
+    public bool SendBack { get; set; } = false;
+    public string SendBackStage { get; set; } = "";
+    public sbyte SendBackScenario { get; set; } = -1;
+    public string SendBackWarp { get; set; } = "";
 }
