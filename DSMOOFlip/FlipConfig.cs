@@ -3,7 +3,7 @@ using DSMOOFramework.Config;
 
 namespace DSMOOFlip;
 
-[Analyze(Priority = 1)]
+[Analyze(Priority = 2)]
 [Config(Name = "flip")]
 public class FlipConfig : IConfig
 {

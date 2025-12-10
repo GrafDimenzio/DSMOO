@@ -8,7 +8,7 @@ public class AnalyzeEventArgs : IEventArg
     public AnalyzeEventArgs(Type type)
     {
         Type = type;
-        var attribute = type.GetCustomAttribute<AnalyzeAttribute>();
+        var attribute = type.GetCustomAttributes<AnalyzeAttribute>().FirstOrDefault();
         Priority = attribute?.Priority ?? 0;
     }
     

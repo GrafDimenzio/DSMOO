@@ -1,4 +1,5 @@
 using System.Numerics;
+using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
@@ -11,6 +12,7 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOFlip;
 
+[Analyze(Priority = 1)]
 [Plugin(
     Name = "Flip",
     Description = "Plugin that adds the Flip Command",
@@ -23,6 +25,17 @@ public class FlipManager(ILogger logger, ConfigHolder<FlipConfig> holder, Config
     private readonly Quaternion _flip = Quaternion.CreateFromYawPitchRoll(MathF.PI, MathF.PI, 0);
     
     private FlipConfig Config => holder.Config;
+    public HashSet<Guid> Players => Config.Players;
+
+    public FlipOptions FlipOptions
+    {
+        get => Config.Options;
+        set
+        {
+            Config.Options = value;
+            SaveConfig();
+        }
+    }
     public void SaveConfig() => configManager.SaveConfig(holder.Config);
     
     

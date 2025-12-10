@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
+using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
@@ -10,10 +11,11 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-[Analyze(Priority = 0)]
+[Analyze(Priority = 1)]
 public class MoonManager(EventManager eventManager, ILogger logger, ConfigHolder<ServerMainConfig> configHolder, Server server, ConfigHolder<MoonList> moonListHolder, ConfigManager configManager) : Manager
 {
     public ConcurrentBag<int> MoonSync = new();
+    public SortedSet<int> ExcludedMoons => Config.ExcludedMoons;
 
     private System.Timers.Timer _timer = new(120000);
     
@@ -136,7 +138,6 @@ public class MoonManager(EventManager eventManager, ILogger logger, ConfigHolder
     
 }
 
-[Analyze(Priority = 1)]
 [Config(Name = "MoonList")]
 public class MoonList : IConfig
 {

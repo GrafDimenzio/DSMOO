@@ -5,8 +5,8 @@ using DSMOOServer.Logic;
 namespace DSMOOServer.Commands;
 
 [Command(
-    CommandName = "crash",
-    Aliases = [],
+    CommandName = "kick",
+    Aliases = ["crash"],
     Description = "Crashes a player",
     Parameters = ["players"]
 )]
