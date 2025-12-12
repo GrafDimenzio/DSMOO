@@ -12,7 +12,6 @@ namespace DSMOOServer.Commands;
 )]
 public class Config(
     ConfigHolder<ServerMainConfig> configHolder,
-    ConfigManager configManager,
     PlayerManager playerManager) : Command
 {
     public override CommandResult Execute(string command, string[] args)
@@ -35,7 +34,7 @@ public class Config(
                     };
 
                 configHolder.Config.ScenarioMerging = enable;
-                configManager.SaveConfig(configHolder.Config);
+                configHolder.SaveConfig();
                 return $"Set Scenario Merging to {enable}";
 
             case "merge" when args.Length == 1:
@@ -50,7 +49,7 @@ public class Config(
                     };
 
                 configHolder.Config.MaxPlayers = amount;
-                configManager.SaveConfig(configHolder.Config);
+                configHolder.SaveConfig();
                 foreach (var player in playerManager.Players)
                     player.Disconnect();
                 return $"Set Max Players to {amount}";

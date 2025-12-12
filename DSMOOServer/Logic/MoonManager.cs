@@ -15,8 +15,7 @@ public class MoonManager(
     ILogger logger,
     ConfigHolder<ServerMainConfig> configHolder,
     Server server,
-    ConfigHolder<MoonList> moonListHolder,
-    ConfigManager configManager) : Manager
+    ConfigHolder<MoonList> moonListHolder) : Manager
 {
     private readonly Timer _timer = new(120000);
     public ConcurrentBag<int> MoonSync = new();
@@ -30,7 +29,7 @@ public class MoonManager(
         set
         {
             Config.MoonSyncEnabled = value;
-            configManager.SaveConfig(moonListHolder.Config);
+            moonListHolder.SaveConfig();
         }
     }
 
@@ -44,7 +43,7 @@ public class MoonManager(
     public void SaveMoons()
     {
         moonListHolder.Config.Moons = new HashSet<int>(MoonSync);
-        configManager.SaveConfig(moonListHolder.Config);
+        moonListHolder.SaveConfig();
     }
 
     public async Task SyncMoons()

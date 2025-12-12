@@ -1,6 +1,7 @@
 using System.Buffers;
 using System.Net;
 using System.Net.Sockets;
+using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
@@ -12,6 +13,7 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Connection;
 
+[Analyze(Priority = -1)] // That way the actual server will start last when everything else is initialised
 public class Server(
     ILogger log,
     ConfigHolder<ServerMainConfig> configHolder,

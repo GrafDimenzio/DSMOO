@@ -69,10 +69,30 @@ public class ObjectController
                 // ignored
             }
 
-        if (hasEmptyConstructor) return Activator.CreateInstance(type);
+        if (hasEmptyConstructor)
+        {
+            var result = Activator.CreateInstance(type)!;
+            InjectObject(result);
+            return result;
+        }
 
         Logger.Warn("Cannot find any currently callable constructor for " + type.Name);
         return null;
+    }
+
+    public void InjectObject(object obj)
+    {
+        foreach (var field in obj.GetType().GetFields())
+        {
+            if (field.GetCustomAttribute<InjectAttribute>() == null) continue;
+            field.SetValue(obj, GetObject(field.FieldType));
+        }
+
+        foreach (var property in obj.GetType().GetProperties())
+        {
+            if (property.GetCustomAttribute<InjectAttribute>() == null) continue;
+            property.SetValue(obj, GetObject(property.PropertyType));
+        }
     }
 
     private object CreateFromConstructor(Type type, ConstructorInfo constructor, object[] overwriteObjects)
@@ -102,7 +122,9 @@ public class ObjectController
                 objects.Add(obj);
             }
         }
-
-        return Activator.CreateInstance(type, objects.ToArray())!;
+        
+        var result = Activator.CreateInstance(type, objects.ToArray())!;
+        InjectObject(result);
+        return result;
     }
 }

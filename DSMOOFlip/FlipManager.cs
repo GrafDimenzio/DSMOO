@@ -1,7 +1,6 @@
 using System.Numerics;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
-using DSMOOFramework.Managers;
 using DSMOOFramework.Plugins;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
@@ -20,14 +19,10 @@ namespace DSMOOFlip;
 )]
 public class FlipManager(
     ILogger logger,
-    ConfigHolder<FlipConfig> holder,
-    ConfigManager configManager,
     EventManager eventManager,
-    PlayerManager playerManager) : Manager
+    PlayerManager playerManager) : Plugin<FlipConfig>
 {
     private readonly Quaternion _flip = Quaternion.CreateFromYawPitchRoll(MathF.PI, MathF.PI, 0);
-
-    private FlipConfig Config => holder.Config;
     public HashSet<Guid> Players => Config.Players;
 
     public FlipOptions FlipOptions
@@ -39,7 +34,6 @@ public class FlipManager(
             SaveConfig();
         }
     }
-    public void SaveConfig() => configManager.SaveConfig(holder.Config);
     
     public override void Initialize()
     {

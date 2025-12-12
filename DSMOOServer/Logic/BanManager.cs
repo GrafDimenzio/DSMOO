@@ -12,7 +12,6 @@ namespace DSMOOServer.Logic;
 
 public class BanManager(
     ConfigHolder<BanList> holder,
-    ConfigManager configManager,
     EventManager eventManager,
     ILogger logger) : Manager
 {
@@ -68,7 +67,7 @@ public class BanManager(
         }
     }
 
-    private void SaveBanList() => configManager.SaveConfig(holder.ConfigObject);
+    private void SaveBanList() => holder.SaveConfig();
 
     public bool IsPlayerBanned(IPlayer player)
     {
