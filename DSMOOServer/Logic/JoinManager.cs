@@ -1,4 +1,3 @@
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
@@ -10,13 +9,17 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-[Analyze(Priority = 40)]
-public class JoinManager(EventManager eventManager, Server server, ILogger logger, PlayerManager playerManager, ConfigHolder<ServerMainConfig> configHolder) : Manager
+public class JoinManager(
+    EventManager eventManager,
+    Server server,
+    ILogger logger,
+    PlayerManager playerManager,
+    ConfigHolder<ServerMainConfig> configHolder) : Manager
 {
     private ILogger Logger { get; } = logger;
-    
+
     private ServerMainConfig Config { get; } = configHolder.Config;
-    
+
     public override void Initialize()
     {
         eventManager.OnPacketReceived.Subscribe(OnPacketReceived);
@@ -27,11 +30,11 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
         if (args.Packet is not ConnectPacket connectPacket)
         {
             if (!args.Sender.FirstPacketSend)
-            {
-                Logger.Debug($"First packet was not init, instead it was {args.PacketType} ({args.Sender.Socket.RemoteEndPoint})");
-            }
+                Logger.Debug(
+                    $"First packet was not init, instead it was {args.PacketType} ({args.Sender.Socket.RemoteEndPoint})");
             return;
         }
+
         args.Sender.FirstPacketSend = true;
 
         args.Sender.Id = args.Header.Id;
@@ -39,20 +42,18 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
 
         args.Sender.Send(new InitPacket
         {
-            MaxPlayers = Config.MaxPlayers,
+            MaxPlayers = Config.MaxPlayers
         }).GetAwaiter().GetResult();
-        
-        var preJoinArgs = new PlayerPreJoinEventArgs()
+
+        var preJoinArgs = new PlayerPreJoinEventArgs
         {
             Client = args.Sender,
             AllowJoin = playerManager.ValidPlayerCount <= Config.MaxPlayers
         };
         if (!preJoinArgs.AllowJoin)
-        {
             args.Sender.Logger.Warn("Rejected join since the server reached max players amount");
-        }
         eventManager.OnPlayerPreJoin.RaiseEvent(preJoinArgs);
-        
+
         if (!preJoinArgs.AllowJoin)
         {
             args.Sender.Ignored = true;
@@ -63,8 +64,9 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
 
         lock (server.Clients)
         {
-            if(!Enum.IsDefined(connectPacket.ConnectionType))
-                throw new Exception($"Invalid connection type {connectPacket.ConnectionType} for {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint})");
+            if (!Enum.IsDefined(connectPacket.ConnectionType))
+                throw new Exception(
+                    $"Invalid connection type {connectPacket.ConnectionType} for {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint})");
 
             var oldClient = server.Clients.Find(x => x.Id == args.Sender.Id);
             if (oldClient != null)
@@ -75,54 +77,50 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
                 else
                     isRestartReconnect = true;
                 server.Clients.Remove(oldClient);
-                if (oldClient.Socket.Connected) {
-                    oldClient.Logger.Info($"Disconnecting already connected client {oldClient.Socket?.RemoteEndPoint} for {args.Sender.Socket?.RemoteEndPoint}");
+                if (oldClient.Socket.Connected)
+                {
+                    oldClient.Logger.Info(
+                        $"Disconnecting already connected client {oldClient.Socket?.RemoteEndPoint} for {args.Sender.Socket?.RemoteEndPoint}");
                     oldClient.Dispose();
                 }
             }
-            
+
             server.Clients.Add(args.Sender);
         }
-        
-        Parallel.ForEachAsync(playerManager.Players.FindAll(x => x.Id != args.Sender.Id), async (ply, _) =>
-        {
-            await SendPlayerStateToOtherPlayer(ply, args.Sender.Player);
-        });
+
+        Parallel.ForEachAsync(playerManager.Players.FindAll(x => x.Id != args.Sender.Id),
+            async (ply, _) => { await SendPlayerStateToOtherPlayer(ply, args.Sender.Player); });
         if (isRestartReconnect)
+            Parallel.ForEachAsync(playerManager.Players.FindAll(x => x.Id != args.Sender.Id),
+                async (ply, _) => { await SendPlayerStateToOtherPlayer(args.Sender.Player, ply); });
+
+
+        eventManager.OnPlayerJoined.RaiseEvent(new PlayerJoinedEventArgs
         {
-            Parallel.ForEachAsync(playerManager.Players.FindAll(x => x.Id != args.Sender.Id), async (ply, _) =>
-            {
-                await SendPlayerStateToOtherPlayer(args.Sender.Player, ply);
-            });
-        }
-        
-        
-        eventManager.OnPlayerJoined.RaiseEvent(new PlayerJoinedEventArgs()
-        {
-            Player = args.Sender.Player,
+            Player = args.Sender.Player
         });
-        
+
         Logger.Info($"Client {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint}) connected.");
     }
 
     private async Task SendPlayerStateToOtherPlayer(IPlayer ply, IPlayer receiver)
     {
-        await receiver.Send(new ConnectPacket()
+        await receiver.Send(new ConnectPacket
         {
             ConnectionType = ConnectPacket.ConnectionTypes.FirstConnection,
             MaxPlayers = Config.MaxPlayers,
             ClientName = ply.Name
         }, ply.Id);
-        await receiver.Send(new CostumePacket()
+        await receiver.Send(new CostumePacket
         {
             CapName = ply.Costume.CapName,
-            BodyName = ply.Costume.BodyName,
+            BodyName = ply.Costume.BodyName
         }, ply.Id);
-        await receiver.Send(new CapturePacket()
+        await receiver.Send(new CapturePacket
         {
             ModelName = ply.Capture
         }, ply.Id);
-        await receiver.Send(new TagPacket()
+        await receiver.Send(new TagPacket
         {
             UpdateType = TagPacket.TagUpdate.Both,
             GameMode = ply.CurrentGameMode,
@@ -130,19 +128,19 @@ public class JoinManager(EventManager eventManager, Server server, ILogger logge
             Minutes = ply.Time.Minutes,
             Seconds = ply.Time.Seconds
         }, ply.Id);
-        await receiver.Send(new GamePacket()
+        await receiver.Send(new GamePacket
         {
             Is2d = ply.Is2d,
             Stage = ply.Stage,
             ScenarioNum = ply.Scenario
         }, ply.Id);
-        await receiver.Send(new PlayerPacket()
+        await receiver.Send(new PlayerPacket
         {
             Position = ply.Position,
             Rotation = ply.Rotation,
             Act = ply.Act,
             SubAct = ply.SubAct,
-            AnimationBlendWeights = ply.AnimationBlendWeights,
+            AnimationBlendWeights = ply.AnimationBlendWeights
         }, ply.Id);
     }
 }

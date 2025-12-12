@@ -1,7 +1,6 @@
 using System.Buffers;
 using System.Net;
 using System.Net.Sockets;
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
@@ -13,23 +12,26 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Connection;
 
-[Analyze(Priority = 50)]
-public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, EventManager eventManager, PlayerManager playerManager) : Manager
+public class Server(
+    ILogger log,
+    ConfigHolder<ServerMainConfig> configHolder,
+    EventManager eventManager,
+    PlayerManager playerManager) : Manager
 {
     private readonly MemoryPool<byte> _memoryPool = MemoryPool<byte>.Shared;
+
+    public readonly List<Client> Clients = [];
     private bool _active;
     private ILogger Logger { get; } = log;
     private ServerMainConfig Config { get; } = configHolder.Config;
     private EventManager EventManager { get; } = eventManager;
-    
-    public readonly List<Client> Clients = [];
 
     public override void Initialize() => Task.Run(Listen);
-    
+
     private async Task Listen()
     {
         var serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        
+
         try
         {
             serverSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
@@ -41,18 +43,17 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
             Logger.Error("Error while setting up the Server", ex);
             return;
         }
-        
+
         Logger.Info($"Listening on {Config.Address}:{Config.Port}");
 
         _active = true;
-        while(_active)
-        {
+        while (_active)
             try
             {
                 var socket = await serverSocket.AcceptAsync();
                 socket.SetSocketOption(SocketOptionLevel.Tcp, SocketOptionName.NoDelay, true);
                 Logger.Info($"Accepted connection from {socket.RemoteEndPoint}");
-                
+
                 _ = Task.Run(async () =>
                 {
                     try
@@ -67,9 +68,8 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
             }
             catch (Exception ex)
             {
-                Logger.Error("Error while setting up Socket Handler",ex);
+                Logger.Error("Error while setting up Socket Handler", ex);
             }
-        }
 
         try
         {
@@ -102,19 +102,19 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
                 var (result, packetHeader) = await ReadPacketHeader(socket, memory);
                 if (!result)
                     break;
-                
+
                 (result, memory) = await ReadPacketToMemory(socket, memory, packetHeader);
                 if (!result)
                     break;
-                
+
                 if (client.Id != Guid.Empty && packetHeader.Id != client.Id)
                 {
                     Logger.Warn($"Client {client.Socket.RemoteEndPoint} send Packet with ID of another client");
                     continue;
                 }
-                
+
                 id = packetHeader.Id;
-                
+
                 //Ignored players will still be connected but the server won't accept any Packets from them
                 if (client.Ignored)
                 {
@@ -125,11 +125,11 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
                         client.Player.Crash(client.Player.IsBanned);
                     continue;
                 }
-                
+
                 try
                 {
                     var packet = (IPacket)Activator.CreateInstance(Constants.PacketIdMap[packetHeader.Type])!;
-                    
+
                     packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
                     Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
 
@@ -137,15 +137,13 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
                     EventManager.OnPacketReceived.RaiseEvent(arg);
 
                     if (arg.Broadcast)
-                    {
                         await ReplaceBroadcast(arg.ReplacePacket ?? arg.Packet, client.Id, arg.SpecificReplacePackets);
-                    }
                 }
                 catch (Exception ex)
                 {
-                    client.Logger.Error($"Error while deserializing a packet", ex);
+                    client.Logger.Error("Error while deserializing a packet", ex);
                 }
-                
+
                 memory.Dispose();
             }
         }
@@ -156,12 +154,10 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
         }
 
         if (id != Guid.Empty)
-        {
             await Broadcast(new DisconnectPacket(), id);
-        }
-        
+
         Logger.Info($"Client {client.Name} disconnected from EndPoint {endPointString}");
-        
+
         Clients.Remove(client);
         playerManager.Players.Remove(client.Player);
         client.Dispose();
@@ -181,10 +177,10 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
                     if (socket.Connected) await socket.DisconnectAsync(false);
                     return false;
                 }
-            
+
                 readOffset += size;
             }
-        
+
             return true;
         }
         catch (SocketException e)
@@ -193,7 +189,7 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
             return false;
         }
     }
-    
+
     private async Task<(bool, PacketHeader)> ReadPacketHeader(Socket socket, IMemoryOwner<byte> memory)
     {
         var header = new PacketHeader();
@@ -210,7 +206,7 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
     {
         if (header.PacketSize == 0)
             return (true, memory);
-        
+
         var temporaryMemory = memory;
         memory = _memoryPool.Rent(Constants.HeaderSize + header.PacketSize);
         temporaryMemory.Memory.Span[..Constants.HeaderSize].CopyTo(memory.Memory.Span[..Constants.HeaderSize]);
@@ -228,38 +224,41 @@ public class Server(ILogger log, ConfigHolder<ServerMainConfig> configHolder, Ev
         {
             if (client.Ignored || !client.FirstPacketSend)
                 return;
-            
+
             if (replacePackets.ContainsKey(client.Id))
             {
                 await client.Send(replacePackets[client.Id], sender);
                 return;
             }
-            
+
             if (client.Id == sender) return;
-            
+
             await client.Send(packet, sender);
         });
     }
-    
-    public async Task Broadcast(IPacket packet, Guid? sender) {
+
+    public async Task Broadcast(IPacket packet, Guid? sender)
+    {
         var memory = MemoryPool<byte>.Shared.RentZero(Constants.HeaderSize + packet.Size);
-        var header = new PacketHeader {
-            Id         = sender ?? Guid.Empty,
-            Type       = Constants.PacketMap[packet.GetType()].Type,
-            PacketSize = packet.Size,
+        var header = new PacketHeader
+        {
+            Id = sender ?? Guid.Empty,
+            Type = Constants.PacketMap[packet.GetType()].Type,
+            PacketSize = packet.Size
         };
         PacketHelper.FillPacket(header, packet, memory.Memory);
         await Broadcast(memory, sender);
         memory.Dispose();
     }
-    
-    public async Task Broadcast(IMemoryOwner<byte> data, Guid? sender = null) {
-        
-        await Parallel.ForEachAsync(Clients.Where(x => x is { Ignored: false, FirstPacketSend: true }), async (client, _) =>
-        {
-            if (client.Id == sender)
-                return;
-            await client.Send(data.Memory);
-        });
+
+    public async Task Broadcast(IMemoryOwner<byte> data, Guid? sender = null)
+    {
+        await Parallel.ForEachAsync(Clients.Where(x => x is { Ignored: false, FirstPacketSend: true }),
+            async (client, _) =>
+            {
+                if (client.Id == sender)
+                    return;
+                await client.Send(data.Memory);
+            });
     }
 }

@@ -17,13 +17,13 @@ public class Client : IDisposable
     }
 
     public Player Player { get; }
-    
+
     public ILogger Logger { get; }
-    
+
     public Socket Socket { get; }
-    
+
     public bool FirstPacketSend { get; internal set; } = false;
-    
+
     public Guid Id { get; internal set; }
 
     public string Name
@@ -31,62 +31,66 @@ public class Client : IDisposable
         get => Logger.Name;
         set => Logger.Name = value;
     }
-    
+
     public bool Ignored { get; internal set; } = false;
-    
+
     public void Dispose()
     {
         if (Socket.Connected)
-        {
             Socket.Disconnect(false);
-        }
         Socket.Close();
     }
-    
+
     public async Task Send(IPacket packet, Guid? sender = null)
     {
-        if(!Socket.Connected)
+        if (!Socket.Connected)
             return;
-        
+
         if (Ignored && packet.GetType() != typeof(ChangeStagePacket))
             return;
-        
-        if (!FirstPacketSend && packet.GetType() != typeof(ConnectPacket)) {
+
+        if (!FirstPacketSend && packet.GetType() != typeof(ConnectPacket))
+        {
             Logger.Error($"Didn't send {packet.GetType()} to {Id} because they weren't connected yet");
             return;
         }
-        
+
         var memory = MemoryPool<byte>.Shared.RentZero(Constants.HeaderSize + packet.Size);
-        
+
 
         var packetAttribute = Constants.PacketMap[packet.GetType()];
-        try {
-            PacketHelper.FillPacket(new PacketHeader {
-                Id         = sender ?? Id,
-                Type       = packetAttribute.Type,
+        try
+        {
+            PacketHelper.FillPacket(new PacketHeader
+            {
+                Id = sender ?? Id,
+                Type = packetAttribute.Type,
                 PacketSize = packet.Size
             }, packet, memory.Memory);
-            
+
             await Socket!.SendAsync(memory.Memory[..(Constants.HeaderSize + packet.Size)], SocketFlags.None);
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Logger.Error($"Failed to serialize {packetAttribute.Type}", e);
         }
+
         memory.Dispose();
     }
-    
+
     public async Task Send(Memory<byte> data)
     {
-        if(!Socket.Connected)
-            return;
-        
-        var header = new PacketHeader();
-        header.Deserialize(data.Span);
-        
-        if(Ignored && header.Type != PacketType.ChangeStage)
+        if (!Socket.Connected)
             return;
 
-        if (!FirstPacketSend && header.Type != PacketType.Connect) {
+        var header = new PacketHeader();
+        header.Deserialize(data.Span);
+
+        if (Ignored && header.Type != PacketType.ChangeStage)
+            return;
+
+        if (!FirstPacketSend && header.Type != PacketType.Connect)
+        {
             Logger.Error($"Didn't send {header.Type} to {Id} because they weren't connected yet");
             return;
         }

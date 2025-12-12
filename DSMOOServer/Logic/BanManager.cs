@@ -1,5 +1,4 @@
 using System.Net;
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
@@ -11,16 +10,14 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-[Analyze(Priority = 90)]
-public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManager, EventManager eventManager, ILogger logger) : Manager
+public class BanManager(
+    ConfigHolder<BanList> holder,
+    ConfigManager configManager,
+    EventManager eventManager,
+    ILogger logger) : Manager
 {
-    private void SaveBanList()
-    {
-        configManager.SaveConfig(holder.ConfigObject);
-    }
-    
     private BanList Config => (BanList)holder.ConfigObject;
-    
+
     public bool Enabled
     {
         get => Config.Enabled;
@@ -30,7 +27,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
             SaveBanList();
         }
     }
-    
+
     public HashSet<string> IPs
     {
         get => Config.IPs;
@@ -40,7 +37,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
             SaveBanList();
         }
     }
-    
+
     public HashSet<Guid> Profiles
     {
         get => Config.Profiles;
@@ -50,7 +47,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
             SaveBanList();
         }
     }
-    
+
     public HashSet<string> Stages
     {
         get => Config.Stages;
@@ -60,7 +57,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
             SaveBanList();
         }
     }
-    
+
     public HashSet<sbyte> GameModes
     {
         get => Config.GameModes;
@@ -70,6 +67,8 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
             SaveBanList();
         }
     }
+
+    private void SaveBanList() => configManager.SaveConfig(holder.ConfigObject);
 
     public bool IsPlayerBanned(IPlayer player)
     {
@@ -86,7 +85,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
 
     public void BanPlayer(IPlayer player)
     {
-        if(player is Player realPlayer)
+        if (player is Player realPlayer)
             realPlayer.IsBanned = true;
         player.Crash(true);
         if (player.Ip != null)
@@ -103,7 +102,7 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
 
     public bool UnBanIPv4(IPAddress address)
     {
-        if(!IPs.Contains(address.ToString())) return false;
+        if (!IPs.Contains(address.ToString())) return false;
         IPs.Remove(address.ToString());
         SaveBanList();
         return true;
@@ -115,10 +114,10 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
         SaveBanList();
         return true;
     }
-    
+
     public bool UnBanProfile(Guid id)
     {
-        if(!Profiles.Contains(id)) return false;
+        if (!Profiles.Contains(id)) return false;
         Profiles.Remove(id);
         SaveBanList();
         return true;
@@ -130,10 +129,10 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
         SaveBanList();
         return true;
     }
-    
+
     public bool UnBanStage(string stage)
     {
-        if(!Stages.Contains(stage)) return false;
+        if (!Stages.Contains(stage)) return false;
         Stages.Remove(stage);
         SaveBanList();
         return true;
@@ -141,14 +140,14 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
 
     public bool BanGameMode(GameMode gameMode)
     {
-        if(!GameModes.Add((sbyte)gameMode)) return false;
+        if (!GameModes.Add((sbyte)gameMode)) return false;
         SaveBanList();
         return true;
     }
-    
+
     public bool UnBanGameMode(GameMode gameMode)
     {
-        if(!GameModes.Contains((sbyte)gameMode)) return false;
+        if (!GameModes.Contains((sbyte)gameMode)) return false;
         GameModes.Remove((sbyte)gameMode);
         SaveBanList();
         return true;
@@ -156,31 +155,23 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
 
     public string GetSafeStage(string currentStage)
     {
-        if(!IsStageBanned(currentStage)) return currentStage;
+        if (!IsStageBanned(currentStage)) return currentStage;
         var kingdom = MapInfo.AllKingdoms.FirstOrDefault(x => x.SubAreas.Any(y => y.SubAreaName == currentStage));
         //A Subarea is banned so send him back to the world the subarea belongs to
         if (kingdom != null && !IsStageBanned(kingdom.MainStageName))
-        {
             return kingdom.MainStageName;
-        }
 
         //Check if you can send him to any Kingdom
         var kingdoms = MapInfo.AllKingdoms.Where(x => x.MainStageName != "HomeShipInsideStage").ToList();
         foreach (var king in kingdoms)
-        {
-            if(!IsStageBanned(king.MainStageName))
+            if (!IsStageBanned(king.MainStageName))
                 return king.MainStageName;
-        }
         //All Kingdoms are banned. Send the player to any subarea
         foreach (var king in kingdoms)
-        {
             foreach (var subArea in king.SubAreas)
-            {
-                if(!IsStageBanned(subArea.SubAreaName))
+                if (!IsStageBanned(subArea.SubAreaName))
                     return subArea.SubAreaName;
-            }
-        }
-        
+
         return !IsStageBanned("HomeShipInsideStage") ? "HomeShipInsideStage" : "";
     }
 
@@ -199,14 +190,15 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
 
     private void OnPlayerPreJoin(PlayerPreJoinEventArgs args)
     {
-        if(!Enabled) return;
-        if(!IsProfileBanned(args.Client.Id) && !IsIPv4Banned((args.Client.Socket.RemoteEndPoint as IPEndPoint)?.Address)) return;
+        if (!Enabled) return;
+        if (!IsProfileBanned(args.Client.Id) &&
+            !IsIPv4Banned((args.Client.Socket.RemoteEndPoint as IPEndPoint)?.Address)) return;
         args.AllowJoin = false;
     }
 
     private void PlayerChangeStage(PlayerChangeStageEventArgs args)
     {
-        if(!IsStageBanned(args.NewStage)) return;
+        if (!IsStageBanned(args.NewStage)) return;
         args.SendBack = true;
         if (!IsStageBanned(args.SendBackStage) && !string.IsNullOrWhiteSpace(args.SendBackStage)) return;
         args.SendBackStage = GetSafeStage(string.IsNullOrWhiteSpace(args.SendBackStage) ? args.NewStage : args.SendBackStage);
@@ -224,7 +216,6 @@ public class BanManager(ConfigHolder<BanList> holder, ConfigManager configManage
     }
 }
 
-[Analyze(Priority = 91)]
 [Config(Name = "banlist")]
 public class BanList : IConfig
 {

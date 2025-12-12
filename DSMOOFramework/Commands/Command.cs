@@ -3,11 +3,12 @@ namespace DSMOOFramework.Commands;
 public abstract class Command : ICommand
 {
     public CommandAttribute CommandInfo { get; set; }
+
     public virtual CommandResult PreExecute(string command, string[] args)
     {
-        return new CommandResult()
+        return new CommandResult
         {
-            ResultType = ResultType.Success,
+            ResultType = ResultType.Success
         };
     }
 

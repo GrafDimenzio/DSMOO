@@ -7,7 +7,7 @@ namespace DSMOOFramework.Analyzer;
 public class Analyzer(ILogger logger)
 {
     public EventReactor<AnalyzeEventArgs> OnAnalyze { get; } = new(logger);
-    
+
     private ILogger Logger { get; } = logger;
 
     public void AnalyzeAssemblies(Assembly[] assemblies)
@@ -18,6 +18,7 @@ public class Analyzer(ILogger logger)
             Logger.Setup($"Preparing for analyzing Assembly {assembly.GetName().Name}");
             types.AddRange(assembly.GetTypes());
         }
+
         AnalyzeTypes(types.ToArray());
     }
 
@@ -30,7 +31,7 @@ public class Analyzer(ILogger logger)
     public void AnalyzeTypes(Type[] types)
     {
         var eventArgs = new List<AnalyzeEventArgs>();
-        
+
         foreach (var type in types)
         {
             var args = new AnalyzeEventArgs(type);

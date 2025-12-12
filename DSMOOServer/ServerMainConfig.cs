@@ -1,9 +1,7 @@
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 
 namespace DSMOOServer;
 
-[Analyze(Priority = 10000)]
 [Config(Name = "settings")]
 public class ServerMainConfig : IConfig
 {
@@ -11,7 +9,7 @@ public class ServerMainConfig : IConfig
     public int Port { get; set; } = 1027;
     public bool MoonSyncEnabled { get; set; } = true;
     public SortedSet<int> ExcludedMoons { get; set; } = [496];
-    public bool ClearOnNewSaves {get; set;} = true;
+    public bool ClearOnNewSaves { get; set; } = true;
     public bool ScenarioMerging { get; set; } = true;
     public ushort MaxPlayers { get; set; } = 4;
 }

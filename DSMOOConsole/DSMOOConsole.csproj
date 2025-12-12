@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DSMOOServer\DSMOOServer.csproj" />
-      <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj" />
+        <ProjectReference Include="..\DSMOOServer\DSMOOServer.csproj"/>
+        <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="ReadLine" Version="2.0.1" />
+        <PackageReference Include="ReadLine" Version="2.0.1"/>
     </ItemGroup>
 
 </Project>

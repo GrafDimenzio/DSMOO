@@ -9,8 +9,8 @@ using DSMOOServer.Network.Packets;
 namespace DSMOOServer.API.Player;
 
 /// <summary>
-/// The Player class is intended to be used as a abstract more easily usable Class.
-/// The Client can be null for Player's that are don't have a connection like a bot
+///     The Player class is intended to be used as a abstract more easily usable Class.
+///     The Client can be null for Player's that are don't have a connection like a bot
 /// </summary>
 /// <param name="client"></param>
 public class Player : IPlayer
@@ -19,8 +19,12 @@ public class Player : IPlayer
     {
         Client = client;
     }
-    
+
     public Client Client { get; set; }
+
+    public bool DisableMoonSync { get; set; } = false;
+
+    public ConcurrentBag<int> SyncedMoons { get; } = [];
 
     public IPAddress? Ip => Client.Socket.RemoteEndPoint is not IPEndPoint ip ? null : ip.Address;
     public Guid Id => Client.Id;
@@ -29,29 +33,25 @@ public class Player : IPlayer
 
     public Vector3 Position { get; internal set; } = Vector3.Zero;
     public Quaternion Rotation { get; internal set; } = Quaternion.Identity;
-    public ushort Act { get; internal set; } = 0;
-    public ushort SubAct { get; internal set; } = 0;
+    public ushort Act { get; internal set; }
+    public ushort SubAct { get; internal set; }
     public float[] AnimationBlendWeights { get; internal set; } = [0];
 
-    public CostumePacket Costume { get; internal set; } = new CostumePacket { BodyName = "", CapName = "" };
+    public CostumePacket Costume { get; internal set; } = new() { BodyName = "", CapName = "" };
     public string Capture { get; internal set; } = "";
-    
-    public bool Is2d { get; internal set; } = false;
-    public byte Scenario { get; internal set; } = 0;
+
+    public bool Is2d { get; internal set; }
+    public byte Scenario { get; internal set; }
     public string Stage { get; internal set; } = "";
 
     public GameMode CurrentGameMode { get; internal set; } = GameMode.None;
-    public bool IsIt { get; internal set; } = false;
+    public bool IsIt { get; internal set; }
 
-    public Time Time { get; internal set; } = new Time(0, 0, DateTime.Now);
-    
-    public bool IsSaveLoaded { get; internal set; } = false;
-    
+    public Time Time { get; internal set; } = new(0, 0, DateTime.Now);
+
+    public bool IsSaveLoaded { get; internal set; }
+
     public bool IsBanned { get; internal set; } = false;
-    
-    public bool DisableMoonSync { get; set; } = false;
-    
-    public ConcurrentBag<int> SyncedMoons { get; } = [];
 
     public void Disconnect()
     {
@@ -60,16 +60,16 @@ public class Player : IPlayer
 
     public void Crash(bool ban)
     {
-        Send(new ChangeStagePacket()
+        Send(new ChangeStagePacket
         {
-            Stage = ban ? "$ejected" : "$agogusStage",
+            Stage = ban ? "$ejected" : "$agogusStage"
         }, null).GetAwaiter().GetResult();
         Client.Ignored = true;
     }
 
     public Task SendShine(int id)
     {
-        return Client.Send(new ShinePacket()
+        return Client.Send(new ShinePacket
         {
             ShineId = id
         });
@@ -80,7 +80,7 @@ public class Player : IPlayer
         return Task.Run(async () =>
         {
             await Task.Delay(delay);
-            await Client.Send(new ChangeStagePacket()
+            await Client.Send(new ChangeStagePacket
             {
                 Stage = stage,
                 Id = warp,

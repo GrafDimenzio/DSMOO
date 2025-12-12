@@ -11,8 +11,6 @@ public class PathLocation
     public void AddPaths(Dictionary<string, string> paths)
     {
         foreach (var path in paths)
-        {
             _paths.Add(path.Key, path.Value);
-        }
     }
 }

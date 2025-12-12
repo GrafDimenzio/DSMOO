@@ -7,5 +7,5 @@ public enum ResultType
     NoPermission,
     NotFound,
     MissingParameter,
-    InvalidParameter,
+    InvalidParameter
 }

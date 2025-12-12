@@ -13,10 +13,10 @@ namespace DSMOOServer.API.Player;
 
 public class Dummy : IPlayer, IDisposable
 {
-    private readonly Server _server;
-    private readonly PlayerManager _playerManager;
     private readonly EventManager _eventManager;
     private readonly JoinManager _joinManager;
+    private readonly PlayerManager _playerManager;
+    private readonly Server _server;
 
     public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager)
     {
@@ -26,7 +26,13 @@ public class Dummy : IPlayer, IDisposable
         _joinManager = joinManager;
         _playerManager.Players.Add(this);
     }
-    
+
+    public void Dispose()
+    {
+        BroadcastPacket(new DisconnectPacket()).GetAwaiter().GetResult();
+        _playerManager.Players.Remove(this);
+    }
+
     public IPAddress? Ip { get; } = null;
     public Guid Id { get; } = Guid.NewGuid();
     public bool IsDummy => true;
@@ -37,7 +43,7 @@ public class Dummy : IPlayer, IDisposable
     public ushort SubAct { get; } = 0;
     public float[] AnimationBlendWeights { get; } = [];
 
-    public CostumePacket Costume { get; } = new CostumePacket()
+    public CostumePacket Costume { get; } = new()
     {
         BodyName = "Mario",
         CapName = "Mario"
@@ -49,7 +55,7 @@ public class Dummy : IPlayer, IDisposable
     public string Stage { get; } = "";
     public GameMode CurrentGameMode { get; } = GameMode.None;
     public bool IsIt { get; } = false;
-    public Time Time { get; } = new Time(0, 0, DateTime.Now);
+    public Time Time { get; } = new(0, 0, DateTime.Now);
     public bool IsSaveLoaded => true;
     public bool IsBanned => false;
 
@@ -68,7 +74,7 @@ public class Dummy : IPlayer, IDisposable
 
     public async Task Init()
     {
-        await BroadcastPacket(new ConnectPacket()
+        await BroadcastPacket(new ConnectPacket
         {
             ClientName = Name,
             ConnectionType = ConnectPacket.ConnectionTypes.FirstConnection,
@@ -79,10 +85,11 @@ public class Dummy : IPlayer, IDisposable
     public async Task BroadcastPacket(IPacket packet)
     {
         var memory = MemoryPool<byte>.Shared.RentZero(Constants.HeaderSize + packet.Size);
-        var header = new PacketHeader {
-            Id         = Id,
-            Type       = Constants.PacketMap[packet.GetType()].Type,
-            PacketSize = packet.Size,
+        var header = new PacketHeader
+        {
+            Id = Id,
+            Type = Constants.PacketMap[packet.GetType()].Type,
+            PacketSize = packet.Size
         };
         PacketHelper.FillPacket(header, packet, memory.Memory);
         var args = new DummySendPacketEventArgs(this, header, packet);
@@ -90,11 +97,5 @@ public class Dummy : IPlayer, IDisposable
         if (args.Broadcast)
             await _server.ReplaceBroadcast(args.ReplacePacket ?? args.Packet, Id, args.SpecificReplacePackets);
         memory.Dispose();
-    }
-
-    public void Dispose()
-    {
-        BroadcastPacket(new DisconnectPacket()).GetAwaiter().GetResult();
-        _playerManager.Players.Remove(this);
     }
 }

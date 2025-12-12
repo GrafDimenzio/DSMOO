@@ -1,6 +1,5 @@
 using System.Collections.ObjectModel;
 using DSMOOFramework;
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
@@ -10,12 +9,15 @@ using DSMOOServer.Logic;
 
 namespace DSMOOServer.API.Recording;
 
-[Analyze(Priority = 5)]
-public class RecordingManager(DummyManager dummyManager, EventManager eventManager, ILogger logger, PathLocation pathLocation) : Manager
+public class RecordingManager(
+    DummyManager dummyManager,
+    EventManager eventManager,
+    ILogger logger,
+    PathLocation pathLocation) : Manager
 {
     private readonly Dictionary<IPlayer, Recording> _activeRecordings = new();
     public ReadOnlyDictionary<IPlayer, Recording> ActiveRecordings => _activeRecordings.AsReadOnly();
-    
+
     public ReadOnlyDictionary<string, Recording> StoredRecordings { get; private set; }
 
     public Recording StartRecording(IPlayer player)
@@ -29,13 +31,11 @@ public class RecordingManager(DummyManager dummyManager, EventManager eventManag
     public void StopRecording(Recording recording)
     {
         foreach (var pair in _activeRecordings.ToList())
-        {
-            if(pair.Value == recording)
+            if (pair.Value == recording)
                 _activeRecordings.Remove(pair.Key);
-        }
         recording.StopRecording();
     }
-    
+
     public async Task PlayRecording(Recording recording, string name = "Replay")
     {
         var dummy = await dummyManager.CreateDummy(name);
@@ -45,7 +45,7 @@ public class RecordingManager(DummyManager dummyManager, EventManager eventManag
             await Task.Delay(element.Header.Timestamp);
             await dummy.BroadcastPacket(element.Packet);
         }
-        
+
         dummy.Dispose();
     }
 

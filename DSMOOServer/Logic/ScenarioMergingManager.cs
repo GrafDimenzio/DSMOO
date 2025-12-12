@@ -1,4 +1,3 @@
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
@@ -8,11 +7,13 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-[Analyze(Priority = 0)]
-public class ScenarioMergingManager(EventManager eventManager, Server server, ConfigHolder<ServerMainConfig> configHolder) : Manager
+public class ScenarioMergingManager(
+    EventManager eventManager,
+    Server server,
+    ConfigHolder<ServerMainConfig> configHolder) : Manager
 {
     private ServerMainConfig Config { get; } = configHolder.Config;
-    
+
     public override void Initialize()
     {
         eventManager.OnPacketReceived.Subscribe(OnPacket);
@@ -24,7 +25,6 @@ public class ScenarioMergingManager(EventManager eventManager, Server server, Co
         {
             case GamePacket gamePacket:
                 if (Config.ScenarioMerging)
-                {
                     foreach (var client in server.Clients)
                     {
                         if (client == args.Sender) continue;
@@ -32,15 +32,15 @@ public class ScenarioMergingManager(EventManager eventManager, Server server, Co
                         //255 means the player is in a transition between worlds
                         if (gamePacket.ScenarioNum == 255) continue;
                         if (client.Player.Scenario == gamePacket.ScenarioNum) continue;
-                        var newPacket = new GamePacket()
+                        var newPacket = new GamePacket
                         {
                             Is2d = gamePacket.Is2d,
                             Stage = gamePacket.Stage,
-                            ScenarioNum = client.Player.Scenario,
+                            ScenarioNum = client.Player.Scenario
                         };
                         args.SpecificReplacePackets[client.Id] = newPacket;
                     }
-                }
+
                 break;
         }
     }

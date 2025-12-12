@@ -4,7 +4,8 @@ using System.Runtime.InteropServices;
 namespace DSMOOServer.Network.Packets;
 
 [Packet(PacketType.Player)]
-public struct PlayerPacket : IPacket {
+public struct PlayerPacket : IPacket
+{
     public const int ActSize = 0x20;
     public const int SubActSize = 0x10;
 
@@ -16,7 +17,8 @@ public struct PlayerPacket : IPacket {
     public ushort Act;
     public ushort SubAct;
 
-    public PlayerPacket() {
+    public PlayerPacket()
+    {
         Position = default;
         Rotation = default;
         Act = 0;
@@ -25,8 +27,9 @@ public struct PlayerPacket : IPacket {
 
     public short Size => 0x38;
 
-    public void Serialize(Span<byte> data) {
-        int offset = 0;
+    public void Serialize(Span<byte> data)
+    {
+        var offset = 0;
         MemoryMarshal.Write(data[..(offset += Marshal.SizeOf<Vector3>())], ref Position);
         MemoryMarshal.Write(data[offset..(offset += Marshal.SizeOf<Quaternion>())], ref Rotation);
         AnimationBlendWeights.CopyTo(MemoryMarshal.Cast<byte, float>(data[offset..(offset += 4 * 6)]));
@@ -34,8 +37,9 @@ public struct PlayerPacket : IPacket {
         MemoryMarshal.Write(data[offset++..++offset], ref SubAct);
     }
 
-    public void Deserialize(ReadOnlySpan<byte> data) {
-        int offset = 0;
+    public void Deserialize(ReadOnlySpan<byte> data)
+    {
+        var offset = 0;
         Position = MemoryMarshal.Read<Vector3>(data[..(offset += Marshal.SizeOf<Vector3>())]);
         Rotation = MemoryMarshal.Read<Quaternion>(data[offset..(offset += Marshal.SizeOf<Quaternion>())]);
         AnimationBlendWeights = MemoryMarshal.Cast<byte, float>(data[offset..(offset += 4 * 6)]).ToArray();

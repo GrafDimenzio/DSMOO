@@ -16,7 +16,7 @@ public class MapLocation
             X = position.X;
             Y = position.Z;
         }
-        else if(infoTable.SubAreas.Any(x => x.SubAreaName == stageName))
+        else if (infoTable.SubAreas.Any(x => x.SubAreaName == stageName))
         {
             var sub = infoTable.SubAreas.First(x => x.SubAreaName == stageName);
             X = sub.Position.X;
@@ -28,13 +28,13 @@ public class MapLocation
             X = 2048;
             Y = 2048;
         }
-        
+
         if (infoTable.Rotation != 0)
         {
             var angle = Math.PI * -infoTable.Rotation;
             var oldX = X;
             var oldY = Y;
-            
+
             Y = oldY * Math.Cos(angle) - oldX * Math.Sin(angle);
             X = oldY * Math.Sin(angle) + oldX * Math.Cos(angle);
         }
@@ -45,17 +45,17 @@ public class MapLocation
         X /= infoTable.Scale;
         Y /= infoTable.Scale;
 
-        Number = (int)((X - 65) / 390) +1;
-        Letter = (int)((Y - 65) / 390) +1;
+        Number = (int)((X - 65) / 390) + 1;
+        Letter = (int)((Y - 65) / 390) + 1;
     }
 
-    public double X { get; set; } = 0;
-    public double Y { get; set; } = 0;
-    
-    public int Number { get; set; } = 0;
-    public int Letter { get; set; } = 0;
-    
-    public bool SubArea { get; set; } = false;
+    public double X { get; set; }
+    public double Y { get; set; }
+
+    public int Number { get; set; }
+    public int Letter { get; set; }
+
+    public bool SubArea { get; set; }
 
     public string GetCell()
     {

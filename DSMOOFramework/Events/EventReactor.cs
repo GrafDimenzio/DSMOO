@@ -1,14 +1,15 @@
-using System.Reflection;
 using DSMOOFramework.Logger;
 
 namespace DSMOOFramework.Events;
 
 public class EventReactor<T>(ILogger logger) where T : IEventArg
 {
-    private ILogger Logger { get; } = logger;
-    
     public delegate void EventReactorDelegate(T arg);
-    
+
+    private ILogger Logger { get; } = logger;
+
+    public Type EventArgType => typeof(T);
+
     private event EventReactorDelegate? OnEvent;
 
     public void Subscribe(EventReactorDelegate handler)
@@ -20,8 +21,6 @@ public class EventReactor<T>(ILogger logger) where T : IEventArg
     {
         OnEvent -= handler;
     }
-
-    public Type EventArgType => typeof(T);
 
     public void RaiseEvent(T e)
     {

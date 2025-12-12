@@ -9,7 +9,7 @@ public class CommandResult
     {
         return new CommandResult { Message = message };
     }
-    
+
     public static implicit operator CommandResult((string, ResultType) result)
     {
         return new CommandResult { Message = result.Item1, ResultType = result.Item2 };

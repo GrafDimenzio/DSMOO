@@ -5,7 +5,8 @@ using System.Text;
 namespace DSMOOServer.Network.Packets;
 
 [Packet(PacketType.Cap)]
-public struct CapPacket : IPacket {
+public struct CapPacket : IPacket
+{
     public const int NameSize = 0x30;
     public Vector3 Position;
     public Quaternion Rotation;
@@ -14,14 +15,16 @@ public struct CapPacket : IPacket {
 
     public short Size => 0x50;
 
-    public void Serialize(Span<byte> data) {
+    public void Serialize(Span<byte> data)
+    {
         MemoryMarshal.Write(data, ref Position);
         MemoryMarshal.Write(data[12..], ref Rotation);
         MemoryMarshal.Write(data[28..], ref CapOut);
         Encoding.ASCII.GetBytes(CapAnim).CopyTo(data[32..(32 + NameSize)]);
     }
 
-    public void Deserialize(ReadOnlySpan<byte> data) {
+    public void Deserialize(ReadOnlySpan<byte> data)
+    {
         Position = MemoryMarshal.Read<Vector3>(data);
         Rotation = MemoryMarshal.Read<Quaternion>(data[12..]);
         CapOut = MemoryMarshal.Read<bool>(data[28..]);

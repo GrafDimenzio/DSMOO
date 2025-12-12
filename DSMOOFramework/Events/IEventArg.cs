@@ -1,3 +1,3 @@
 namespace DSMOOFramework.Events;
 
-public class IEventArg {}
+public interface IEventArg { }

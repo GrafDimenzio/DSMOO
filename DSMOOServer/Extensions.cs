@@ -3,21 +3,26 @@ using System.Security.Cryptography;
 
 namespace DSMOOServer;
 
-public static class Extensions {
-    public static string Hex(this Span<byte> span) {
+public static class Extensions
+{
+    public static string Hex(this Span<byte> span)
+    {
         return span.ToArray().Hex();
     }
 
-    public static string Hex(this IEnumerable<byte> array) {
+    public static string Hex(this IEnumerable<byte> array)
+    {
         return string.Join(' ', array.ToArray().Select(x => x.ToString("X2")));
     }
 
-    public static string TrimNullTerm(this string text) {
+    public static string TrimNullTerm(this string text)
+    {
         return text.Split('\0').FirstOrDefault() ?? "";
     }
 
-    public static IMemoryOwner<byte> RentZero(this MemoryPool<byte> pool, int minSize) {
-        IMemoryOwner<byte> owner = pool.Rent(minSize);
+    public static IMemoryOwner<byte> RentZero(this MemoryPool<byte> pool, int minSize)
+    {
+        var owner = pool.Rent(minSize);
         CryptographicOperations.ZeroMemory(owner.Memory.Span);
         return owner;
     }

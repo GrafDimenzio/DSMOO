@@ -23,19 +23,19 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
         { "stage", "stage <stage-name>" },
         { "gamemode", "gamemode <gamemode>" }
     };
-    
+
     public override CommandResult Execute(string command, string[] args)
     {
         var banMode = command.Equals("ban", StringComparison.CurrentCultureIgnoreCase);
         var subcommands = $"[{(banMode ? "list/enable/disable/player/" : "")}profile/ip/stage/gamemode]";
         if (args.Length == 0)
-            return new CommandResult()
+            return new CommandResult
             {
                 ResultType = ResultType.MissingParameter,
                 Message = "You need to specify a sub command " + subcommands
             };
 
-        
+
         var hasParameter = args.Length > 1 && !string.IsNullOrWhiteSpace(args[1]);
 
         switch (args[0].ToLower())
@@ -45,12 +45,12 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
             case "ip" when !hasParameter:
             case "stage" when !hasParameter:
             case "gamemode" when !hasParameter:
-                return new CommandResult()
+                return new CommandResult
                 {
                     ResultType = ResultType.MissingParameter,
                     Message = $"Usage: {(banMode ? "ban" : "unban")} " + _usages[args[0].ToLower()]
                 };
-            
+
             case "list" when banMode:
                 var msg = new StringBuilder();
                 msg.Append($"Banlist: {(manager.Enabled ? "enabled" : "disabled")}");
@@ -62,19 +62,19 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                     msg.Append("\nBanned I4 adresses:" + join);
                     msg.Append(string.Join(join, manager.IPs));
                 }
-                
+
                 if (manager.Profiles.Count > 0)
                 {
                     msg.Append("\nBanned Profiles:" + join);
                     msg.Append(string.Join(join, manager.Profiles));
                 }
-                
+
                 if (manager.Stages.Count > 0)
                 {
                     msg.Append("\nBanned Stages:" + join);
                     msg.Append(string.Join(join, manager.Stages));
                 }
-                
+
                 if (manager.GameModes.Count > 0)
                 {
                     msg.Append("\nBanned Gamemodes:" + join);
@@ -82,26 +82,24 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                 }
 
                 return msg.ToString();
-            
+
             case "enable" when banMode:
                 manager.Enabled = true;
                 return "Banlist enabled";
-            
+
             case "disable" when banMode:
                 manager.Enabled = false;
                 return "Banlist disabled";
-            
+
             case "player" when banMode:
                 var players = playerManager.SearchForPlayers(args[1..]);
                 foreach (var player in players.Players)
-                {
                     manager.BanPlayer(player);
-                }
                 return MessageHelper.FormatMessage(players, "Banned");
-            
+
             case "profile":
                 if (!Guid.TryParse(args[1], out var id))
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "You need to specify a valid profile id"
@@ -109,19 +107,17 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                 if (banMode)
                 {
                     foreach (var player in playerManager.SearchForPlayers([args[1]]).Players)
-                    {
                         player.Crash(true);
-                    }
                     manager.BanProfile(id);
                     return "Banned profile " + id;
                 }
 
                 manager.UnBanProfile(id);
                 return "Unbanned profile " + id;
-            
+
             case "ip":
                 if (!IPAddress.TryParse(args[1], out var ip))
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "You need to specify a valid ip address"
@@ -130,20 +126,18 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                 if (banMode)
                 {
                     foreach (var player in playerManager.SearchForPlayers([args[1]]).Players)
-                    {
                         player.Crash(true);
-                    }
                     manager.BanIPv4(ip.ToString());
                     return "Banned ip " + ip;
                 }
 
                 manager.UnBanIPv4(ip);
                 return "Unbanned ip " + ip;
-            
+
             case "stage":
                 var stage = Stages.Input2Stage(args[1]);
                 if (stage == null)
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "You need to specify a valid stage"
@@ -152,20 +146,18 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                 {
                     manager.BanStage(stage);
                     foreach (var player in playerManager.RealPlayers)
-                    {
-                        if(player.Stage == stage)
+                        if (player.Stage == stage)
                             manager.SendPlayerToSafeStage(player);
-                    }
                     return "Banned Stage " + stage;
                 }
-                
+
                 manager.UnBanStage(stage);
                 return "Unbanned stage " + stage;
-                
-            
+
+
             case "gamemode":
                 if (!Enum.TryParse<GameMode>(args[1], out var gameMode))
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "You need to specify a valid gamemode"
@@ -175,15 +167,15 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                     manager.BanGameMode(gameMode);
                     return "Banned gamemode " + gameMode;
                 }
-                
+
                 manager.UnBanGameMode(gameMode);
                 return "Unbanned gamemode " + gameMode;
         }
 
-        return new CommandResult()
+        return new CommandResult
         {
             ResultType = ResultType.InvalidParameter,
-            Message = $"Invalid sub command use one of those " + subcommands
+            Message = "Invalid sub command use one of those " + subcommands
         };
     }
 }

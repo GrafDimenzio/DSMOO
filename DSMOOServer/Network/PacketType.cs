@@ -1,6 +1,7 @@
 namespace DSMOOServer.Network;
 
-public enum PacketType : short {
+public enum PacketType : short
+{
     Unknown,
     Init,
     Player,

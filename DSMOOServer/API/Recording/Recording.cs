@@ -1,6 +1,5 @@
 using System.Buffers;
 using System.Diagnostics;
-using System.Text;
 using DSMOOServer.API.Player;
 using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
@@ -9,6 +8,8 @@ namespace DSMOOServer.API.Recording;
 
 public class Recording
 {
+    private readonly Stopwatch _stopwatch = new();
+
     public Recording() {}
 
     public Recording(string path)
@@ -20,7 +21,7 @@ public class Recording
         {
             fs.ReadExactly(memory.Memory.Span[..length]);
         }
-        
+
         var current = 0;
         while (current < length)
         {
@@ -29,51 +30,49 @@ public class Recording
             current += header.Size;
             var packet = (IPacket)Activator.CreateInstance(Constants.PacketIdMap[header.Type])!;
             packet.Deserialize(memory.Memory.Span[current..(current + packet.Size)]);
-            
+
             current += packet.Size;
-            Elements.Add(new RecordingElement()
+            Elements.Add(new RecordingElement
             {
                 Header = header,
-                Packet = packet,
+                Packet = packet
             });
         }
     }
+
+    public bool IsRecording => _stopwatch.IsRunning;
+
+    public List<RecordingElement> Elements { get; set; } = [];
 
     public void Reset()
     {
         _stopwatch.Reset();
         Elements.Clear();
     }
-    
-    private readonly Stopwatch _stopwatch = new Stopwatch();
-    
-    public bool IsRecording => _stopwatch.IsRunning;
-
-    public List<RecordingElement> Elements { get; set; } = [];
 
     public void StartRecording(IPlayer player)
     {
         StartRecording([
-            new CostumePacket()
+            new CostumePacket
             {
                 BodyName = player.Costume.BodyName,
-                CapName = player.Costume.CapName,
+                CapName = player.Costume.CapName
             },
-            new GamePacket()
+            new GamePacket
             {
                 Is2d = player.Is2d,
                 Stage = player.Stage,
                 ScenarioNum = player.Scenario
             },
-            new PlayerPacket()
+            new PlayerPacket
             {
                 Act = player.Act,
                 Position = player.Position,
                 Rotation = player.Rotation,
                 SubAct = player.SubAct,
-                AnimationBlendWeights = player.AnimationBlendWeights,
+                AnimationBlendWeights = player.AnimationBlendWeights
             },
-            new TagPacket()
+            new TagPacket
             {
                 Minutes = player.Time.Minutes,
                 Seconds = player.Time.Seconds,
@@ -83,8 +82,6 @@ public class Recording
             }
         ]);
     }
-
-    public void StopRecording() => _stopwatch.Reset();
 
     public void StartRecording(IPacket[] startingPackets)
     {
@@ -100,9 +97,14 @@ public class Recording
         }
     }
 
+    public void StopRecording()
+    {
+        _stopwatch.Reset();
+    }
+
     public void AddPacket(IPacket packet)
     {
-        if(!_stopwatch.IsRunning || packet.Equals(Elements.Last().Packet))
+        if (!_stopwatch.IsRunning || packet.Equals(Elements.Last().Packet))
             return;
         AddPacket(packet, (int)_stopwatch.ElapsedMilliseconds);
         _stopwatch.Restart();
@@ -112,9 +114,7 @@ public class Recording
     {
         var size = 0;
         foreach (var element in Elements)
-        {
             size += element.Size;
-        }
         var memory = MemoryPool<byte>.Shared.RentZero(size);
         var current = 0;
         foreach (var element in Elements)
@@ -124,23 +124,24 @@ public class Recording
             element.Packet.Serialize(memory.Memory.Span[current..(current + element.Packet.Size)]);
             current += element.Packet.Size;
         }
-        File.WriteAllBytes(fileName, memory.Memory.Span[0..size].ToArray());
+
+        File.WriteAllBytes(fileName, memory.Memory.Span[..size].ToArray());
         memory.Dispose();
     }
 
     private void AddPacket(IPacket packet, int timestamp)
     {
-        Elements.Add(new RecordingElement()
+        Elements.Add(new RecordingElement
         {
-            Header = new RecordingHeader()
+            Header = new RecordingHeader
             {
                 Timestamp = timestamp,
-                Type = Constants.PacketMap[packet.GetType()].Type,
+                Type = Constants.PacketMap[packet.GetType()].Type
             },
             Packet = packet
         });
     }
-    
+
     public class RecordingElement
     {
         public required RecordingHeader Header;

@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj" />
-      <ProjectReference Include="..\DSMOOServer\DSMOOServer.csproj" />
+        <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj"/>
+        <ProjectReference Include="..\DSMOOServer\DSMOOServer.csproj"/>
     </ItemGroup>
 
 </Project>

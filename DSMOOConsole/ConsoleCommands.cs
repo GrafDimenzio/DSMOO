@@ -9,8 +9,8 @@ public class ConsoleCommands(CommandManager manager)
         ReadLine.HistoryEnabled = true;
         while (true)
         {
-            var line = ReadLine.Read("");
-            if(string.IsNullOrWhiteSpace(line))
+            var line = ReadLine.Read();
+            if (string.IsNullOrWhiteSpace(line))
                 continue;
             var response = manager.ProcessQuery(line);
             Console.ForegroundColor = response.ResultType switch

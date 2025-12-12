@@ -1,7 +1,6 @@
 using System.Net;
 using System.Numerics;
 using System.Text;
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API;
@@ -13,14 +12,13 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-[Analyze(Priority = 60)]
 public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
 {
     public readonly List<IPlayer> Players = [];
 
     public List<IPlayer> RealPlayers =>
         Players.Where(x => !x.IsDummy && x is Player { Client.Socket.Connected: true }).ToList();
-    
+
     public int ValidPlayerCount => Players.Count(x => !x.IsDummy && x is Player { Client.Socket.Connected: true });
 
     public PlayerSearch SearchForPlayers(string[] args)
@@ -35,7 +33,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
             case "*":
                 search.Players = RealPlayers;
                 return search;
-            
+
             case "!*":
                 search.IsInverted = true;
                 search.Players = RealPlayers;
@@ -45,24 +43,24 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
 
         foreach (var argument in args)
         {
-            if(string.IsNullOrWhiteSpace(argument)) continue;
-            
+            if (string.IsNullOrWhiteSpace(argument)) continue;
+
             var possiblePlayers = RealPlayers.Where(player =>
                 player.Name.ToLower().StartsWith(argument.ToLower()) ||
                 (Guid.TryParse(argument, out var guid) && guid == player.Id) ||
                 (IPAddress.TryParse(argument, out var ip) && ip.Equals(player.Ip))).ToList();
-            
+
 
             switch (possiblePlayers.Count)
             {
                 case 0:
                     search.FailedToFind.Add(argument);
                     continue;
-                
+
                 case 1:
                     HandlePlayer(possiblePlayers[0]);
                     continue;
-                
+
                 case > 1:
                     var exactName = possiblePlayers.FirstOrDefault(x => x.Name == argument);
                     if (exactName != null)
@@ -70,26 +68,23 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
                         HandlePlayer(exactName);
                         continue;
                     }
+
                     search.MultipleMatches.Add((argument, possiblePlayers.ToArray()));
                     continue;
             }
         }
-        
+
         return search;
-        
+
         void HandlePlayer(IPlayer player)
         {
             if (search.IsInverted)
-            {
                 search.Players.Remove(player);
-            }
             else
-            {
                 search.Players.Add(player);
-            }
         }
     }
-    
+
     public override void Initialize()
     {
         eventManager.OnPacketReceived.Subscribe(OnPacket);
@@ -117,43 +112,42 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
                     var bytes = Encoding.UTF8.GetBytes(warp);
                     if (bytes.Length > ChangeStagePacket.IdSize)
                         warp = "";
-                    
-                    var changeStageArgs = new PlayerChangeStageEventArgs()
+
+                    var changeStageArgs = new PlayerChangeStageEventArgs
                     {
                         Player = player,
                         NewStage = gamePacket.Stage,
                         PreviousStage = player.Stage,
                         PreviousScenario = player.Scenario,
                         NewScenario = gamePacket.ScenarioNum,
-                        
+
                         SendBackScenario = player.Scenario > sbyte.MaxValue ? (sbyte)-1 : (sbyte)player.Scenario,
                         SendBackWarp = warp,
                         SendBackStage = player.Stage
                     };
                     eventManager.OnPlayerChangeStage.RaiseEvent(changeStageArgs);
                     if (changeStageArgs.SendBack && !string.IsNullOrWhiteSpace(changeStageArgs.SendBackStage))
-                    {
-                        player.ChangeStage(changeStageArgs.SendBackStage, changeStageArgs.SendBackWarp, changeStageArgs.SendBackScenario, 0, 1000);
-                    }
+                        player.ChangeStage(changeStageArgs.SendBackStage, changeStageArgs.SendBackWarp,
+                            changeStageArgs.SendBackScenario, 0, 1000);
                 }
 
                 if (player.Is2d != gamePacket.Is2d)
-                {
-                    eventManager.OnPlayerSwitch2dState.RaiseEvent(new PlayerSwitch2dStateEventArgs()
+                    eventManager.OnPlayerSwitch2dState.RaiseEvent(new PlayerSwitch2dStateEventArgs
                     {
                         Player = player,
-                        IsNow2d = gamePacket.Is2d,
+                        IsNow2d = gamePacket.Is2d
                     });
-                }
 
                 player.Scenario = gamePacket.ScenarioNum;
                 player.Is2d = gamePacket.Is2d;
                 player.Stage = gamePacket.Stage;
                 break;
-            
+
             case TagPacket tagPacket:
-                var updateTime = tagPacket.UpdateType is TagPacket.TagUpdate.Time or TagPacket.TagUpdate.Both or TagPacket.TagUpdate.All;
-                var updateState = tagPacket.UpdateType is TagPacket.TagUpdate.State or TagPacket.TagUpdate.Both or TagPacket.TagUpdate.All;
+                var updateTime = tagPacket.UpdateType is TagPacket.TagUpdate.Time or TagPacket.TagUpdate.Both
+                    or TagPacket.TagUpdate.All;
+                var updateState = tagPacket.UpdateType is TagPacket.TagUpdate.State or TagPacket.TagUpdate.Both
+                    or TagPacket.TagUpdate.All;
                 if (updateState)
                 {
                     player.CurrentGameMode = tagPacket.GameMode;
@@ -161,34 +155,28 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
                 }
 
                 if (updateTime)
-                {
                     player.Time = new Time(tagPacket.Minutes, tagPacket.Seconds, DateTime.Now);
-                }
                 break;
-            
+
             case CapturePacket capturePacket:
                 if (player.Capture != capturePacket.ModelName)
-                {
-                    eventManager.OnPlayerCapture.RaiseEvent(new PlayerCaptureEventArgs()
+                    eventManager.OnPlayerCapture.RaiseEvent(new PlayerCaptureEventArgs
                     {
                         Player = player,
-                        Capture = capturePacket.ModelName,
+                        Capture = capturePacket.ModelName
                     });
-                }
                 player.Capture = capturePacket.ModelName;
                 break;
-            
+
             case CostumePacket costumePacket:
                 if (player.Costume.CapName != costumePacket.CapName ||
                     player.Costume.BodyName != costumePacket.BodyName)
-                {
-                    eventManager.OnPlayerChangeCostume.RaiseEvent(new PlayerChangeCostumeEventArgs()
+                    eventManager.OnPlayerChangeCostume.RaiseEvent(new PlayerChangeCostumeEventArgs
                     {
                         Player = player,
                         OldCostume = player.Costume,
-                        NewCostume = costumePacket,
+                        NewCostume = costumePacket
                     });
-                }
                 player.Costume = costumePacket;
 
                 if (!player.IsSaveLoaded)
@@ -196,8 +184,9 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
                     player.IsSaveLoaded = true;
                     eventManager.OnPlayerLoadedSave.RaiseEvent(new PlayerLoadedSaveEventArgs(player));
                 }
+
                 break;
-            
+
             case PlayerPacket playerPacket:
                 player.Position = playerPacket.Position;
                 player.Rotation = playerPacket.Rotation;
@@ -207,10 +196,10 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
                 break;
         }
     }
-    
+
     public class PlayerSearch
     {
-        public bool IsInverted { get; set; } = false;
+        public bool IsInverted { get; set; }
         public List<IPlayer> Players { get; set; } = [];
         public List<string> FailedToFind { get; set; } = [];
         public List<(string, IPlayer[])> MultipleMatches { get; set; } = [];

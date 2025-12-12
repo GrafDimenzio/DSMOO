@@ -1,19 +1,19 @@
 using DSMOOFramework.Analyzer;
+using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 
 namespace DSMOOFramework.Commands;
 
-[Analyze(Priority = 1)]
-public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectController objectController, ILogger logger) : Manager
+public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectController, ILogger logger) : Manager
 {
     public List<ICommand> Commands { get; set; } = [];
-    
+
     public override void Initialize()
     {
         analyzer.OnAnalyze.Subscribe(OnAnalyze);
     }
-    
+
     private void OnAnalyze(AnalyzeEventArgs args)
     {
         if (!args.Is<ICommand>()) return;
@@ -35,13 +35,11 @@ public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectControl
         var split = query.Trim(' ').Split(' ');
         var cmd = GetCommand(split[0]);
         if (cmd == null)
-        {
-            return new CommandResult()
+            return new CommandResult
             {
                 ResultType = ResultType.NotFound,
                 Message = "Invalid command. Use help for a list of commands"
             };
-        }
 
         try
         {
@@ -53,7 +51,7 @@ public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectControl
             return new CommandResult
             {
                 ResultType = ResultType.Error,
-                Message = e.Message + "\n" + e.ToString()
+                Message = e.Message + "\n" + e
             };
         }
     }
@@ -65,11 +63,10 @@ public class CommandManager(Analyzer.Analyzer analyzer, Controller.ObjectControl
             if (string.Equals(iCommand.CommandInfo.CommandName, command, StringComparison.OrdinalIgnoreCase))
                 return iCommand;
             foreach (var alias in iCommand.CommandInfo.Aliases)
-            {
                 if (string.Equals(alias, command, StringComparison.OrdinalIgnoreCase))
                     return iCommand;
-            }
         }
+
         return null;
     }
 }

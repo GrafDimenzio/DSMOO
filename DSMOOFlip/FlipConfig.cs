@@ -1,9 +1,7 @@
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 
 namespace DSMOOFlip;
 
-[Analyze(Priority = 2)]
 [Config(Name = "flip")]
 public class FlipConfig : IConfig
 {

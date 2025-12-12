@@ -9,12 +9,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj" />
+        <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="kingdoms.json" />
-      <EmbeddedResource Include="kingdoms.json" />
+        <None Remove="kingdoms.json"/>
+        <EmbeddedResource Include="kingdoms.json"/>
     </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
-using DSMOOFramework.Logger;
-
 namespace DSMOOFramework.Logger;
 
 public abstract class BasicLogger : ILogger
 {
+    public delegate void LogHandler(string message, LogType type);
+
     public abstract string Name { get; set; }
-    
+
     public void Info(object message)
     {
         Log?.Invoke(FormatMessage(message, LogType.Info), LogType.Info);
@@ -19,7 +19,7 @@ public abstract class BasicLogger : ILogger
     public void Error(object? message, Exception ex)
     {
         var msg = "";
-        if(message != null)
+        if (message != null)
             msg = message + "\n";
 
         Log?.Invoke(FormatMessage(msg + ex, LogType.Error), LogType.Error);
@@ -46,7 +46,6 @@ public abstract class BasicLogger : ILogger
     {
         return $"[{DateTime.Now.ToLocalTime()}] [{Name.ToUpper()}] [{type.ToString().ToUpper()}]: {message}";
     }
-    
-    public delegate void LogHandler(string message, LogType type);
+
     public event LogHandler? Log;
 }

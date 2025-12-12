@@ -3,7 +3,7 @@
     "KingdomName": "Odyssey",
     "MainStageName": "HomeShipInsideStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 550,
       "Y": 1800
     },
@@ -14,7 +14,7 @@
     "KingdomName": "Cap Kingdom",
     "MainStageName": "CapWorldHomeStage",
     "Rotation": 0.25,
-    "Offset" : {
+    "Offset": {
       "X": 38000,
       "Y": 24100
     },
@@ -71,7 +71,7 @@
     "KingdomName": "Cascade Kingdom",
     "MainStageName": "WaterfallWorldHomeStage",
     "Rotation": 0.25,
-    "Offset" : {
+    "Offset": {
       "X": 22500,
       "Y": 19500
     },
@@ -118,7 +118,7 @@
     "KingdomName": "Sand Kingdom",
     "MainStageName": "SandWorldHomeStage",
     "Rotation": 0.5,
-    "Offset" : {
+    "Offset": {
       "X": 30500,
       "Y": 43500
     },
@@ -249,7 +249,7 @@
     "KingdomName": "Lake Kingdom",
     "MainStageName": "LakeWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 23550,
       "Y": 15000
     },
@@ -296,7 +296,7 @@
     "KingdomName": "Wooded Kingdom",
     "MainStageName": "ForestWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 28800,
       "Y": 34500
     },
@@ -406,7 +406,7 @@
     "KingdomName": "Cloud Kingdom",
     "MainStageName": "CloudWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 16550,
       "Y": 18600
     },
@@ -432,7 +432,7 @@
     "KingdomName": "Lost Kingdom",
     "MainStageName": "ClashWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 15800,
       "Y": 13350
     },
@@ -465,7 +465,7 @@
     "KingdomName": "Metro Kingdom",
     "MainStageName": "CityWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 22900,
       "Y": 19800
     },
@@ -596,7 +596,7 @@
     "KingdomName": "Snow Kingdom",
     "MainStageName": "SnowWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 16650,
       "Y": 14250
     },
@@ -727,7 +727,7 @@
     "KingdomName": "Seaside Kingdom",
     "MainStageName": "SeaWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 29900,
       "Y": 48200
     },
@@ -809,7 +809,7 @@
     "KingdomName": "Luncheon Kingdom",
     "MainStageName": "LavaWorldHomeStage",
     "Rotation": 0.5,
-    "Offset" : {
+    "Offset": {
       "X": 26100,
       "Y": 28500
     },
@@ -905,7 +905,7 @@
     "KingdomName": "Ruined Kingdom",
     "MainStageName": "BossRaidWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 26300,
       "Y": 10800
     },
@@ -931,7 +931,7 @@
     "KingdomName": "Bowser's Kingdom",
     "MainStageName": "SkyWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 88500,
       "Y": 97200
     },
@@ -999,7 +999,7 @@
     "KingdomName": "Moon Kingdom",
     "MainStageName": "MoonWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 49400,
       "Y": 46800
     },
@@ -1081,7 +1081,7 @@
     "KingdomName": "Dark Side",
     "MainStageName": "Special1WorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 36300,
       "Y": 30000
     },
@@ -1163,7 +1163,7 @@
     "KingdomName": "Darker Side",
     "MainStageName": "Special2WorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 35750,
       "Y": 67650
     },
@@ -1196,7 +1196,7 @@
     "KingdomName": "Mushroom Kingdom",
     "MainStageName": "PeachWorldHomeStage",
     "Rotation": 0,
-    "Offset" : {
+    "Offset": {
       "X": 32300,
       "Y": 32100
     },
