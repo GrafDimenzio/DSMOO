@@ -1,5 +1,6 @@
 using DSMOOFramework.Config;
 using DSMOOFramework.Controller;
+using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 
 namespace DSMOOFramework.Plugins;
@@ -10,5 +11,7 @@ public abstract class Plugin<T> : Manager where T : IConfig
     
     [Inject]
     public ConfigHolder<T> ConfigHolder { get; set; }
+    [Inject]
+    public ILogger Logger { get; set; }
     public void SaveConfig() => ConfigHolder.SaveConfig();
 }
