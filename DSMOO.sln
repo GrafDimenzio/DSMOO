@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOConsole", "DSMOOConsol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOFlip", "DSMOOFlip\DSMOOFlip.csproj", "{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOODiscordBot", "DSMOODiscordBot\DSMOODiscordBot.csproj", "{B7343950-C44B-409C-9A57-2C3CD7C0A876}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5626AB20-AB3D-41D9-9DCF-0CD1F849B22D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7343950-C44B-409C-9A57-2C3CD7C0A876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7343950-C44B-409C-9A57-2C3CD7C0A876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7343950-C44B-409C-9A57-2C3CD7C0A876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7343950-C44B-409C-9A57-2C3CD7C0A876}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -33,6 +33,8 @@ public interface IPlayer
     public bool IsSaveLoaded { get; }
 
     public bool IsBanned { get; }
+    
+    public PlayerAction LastPlayerAction { get; set; }
 
 
     public void Disconnect();

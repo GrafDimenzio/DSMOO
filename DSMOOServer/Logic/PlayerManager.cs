@@ -88,6 +88,11 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
     public override void Initialize()
     {
         eventManager.OnPacketReceived.Subscribe(OnPacket);
+        eventManager.OnPlayerAction.Subscribe((args =>
+        {
+            if (args.Action != PlayerAction.None)
+                logger.Warn($"PLAYER ACTION: {args.Action}");
+        }));
     }
 
     private void OnPacket(PacketReceivedEventArgs args)
@@ -190,9 +195,24 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
             case PlayerPacket playerPacket:
                 player.Position = playerPacket.Position;
                 player.Rotation = playerPacket.Rotation;
+
+                var action = APIConstants.PlayerActions.GetValueOrDefault(playerPacket.Act, PlayerAction.None);
+                
+                if (player.LastPlayerAction != action)
+                {
+                    eventManager.OnPlayerAction.RaiseEvent(new PlayerActionEventArgs
+                    {
+                        Player = player,
+                        Action = action,
+                    });
+                    player.LastPlayerAction = action;
+                }
+                
                 player.AnimationBlendWeights = playerPacket.AnimationBlendWeights;
                 player.Act = playerPacket.Act;
                 player.SubAct = playerPacket.SubAct;
+                
+                logger.Warn(player.Act);
                 break;
         }
     }

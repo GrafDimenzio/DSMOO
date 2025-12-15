@@ -1,5 +1,4 @@
 using System.Numerics;
-using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Plugins;
 using DSMOOServer.API.Events;

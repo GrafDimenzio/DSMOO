@@ -58,6 +58,7 @@ public class Dummy : IPlayer, IDisposable
     public Time Time { get; } = new(0, 0, DateTime.Now);
     public bool IsSaveLoaded => true;
     public bool IsBanned => false;
+    public PlayerAction LastPlayerAction { get; set; }
 
     public void Disconnect() => Dispose();
 

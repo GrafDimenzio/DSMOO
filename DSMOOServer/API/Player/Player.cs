@@ -52,6 +52,8 @@ public class Player : IPlayer
     public bool IsSaveLoaded { get; internal set; }
 
     public bool IsBanned { get; internal set; } = false;
+    
+    public PlayerAction LastPlayerAction { get; set; }
 
     public void Disconnect()
     {

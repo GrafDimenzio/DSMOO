@@ -9,6 +9,7 @@ public class EventManager(ILogger logger) : Manager
 {
     public readonly EventReactor<DummySendPacketEventArgs> OnDummySendPacket = new(logger);
     public readonly EventReactor<PacketReceivedEventArgs> OnPacketReceived = new(logger);
+    public readonly EventReactor<PlayerActionEventArgs> OnPlayerAction = new(logger);
     public readonly EventReactor<PlayerCaptureEventArgs> OnPlayerCapture = new(logger);
     public readonly EventReactor<PlayerChangeCostumeEventArgs> OnPlayerChangeCostume = new(logger);
     public readonly EventReactor<PlayerChangeStageEventArgs> OnPlayerChangeStage = new(logger);

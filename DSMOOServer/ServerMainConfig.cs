@@ -12,4 +12,5 @@ public class ServerMainConfig : IConfig
     public bool ClearOnNewSaves { get; set; } = true;
     public bool ScenarioMerging { get; set; } = true;
     public ushort MaxPlayers { get; set; } = 4;
+    public bool HidersCanSeeEachOther { get; set; } = false;
 }
