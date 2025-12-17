@@ -8,4 +8,6 @@ public class ConfigHolder<TConfig>(ConfigManager configManager) : IConfigHolder 
     public IConfig ConfigObject { get; set; }
     
     public void SaveConfig() => configManager.SaveConfig(ConfigObject);
+
+    public void LoadConfig() => configManager.LoadConfig(typeof(TConfig));
 }

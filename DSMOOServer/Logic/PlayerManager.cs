@@ -1,6 +1,7 @@
 using System.Net;
 using System.Numerics;
 using System.Text;
+using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API;
@@ -12,7 +13,7 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
+public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHolder<ServerMainConfig> holder) : Manager
 {
     public readonly List<IPlayer> Players = [];
 
@@ -88,11 +89,6 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
     public override void Initialize()
     {
         eventManager.OnPacketReceived.Subscribe(OnPacket);
-        eventManager.OnPlayerAction.Subscribe((args =>
-        {
-            if (args.Action != PlayerAction.None)
-                logger.Warn($"PLAYER ACTION: {args.Action}");
-        }));
     }
 
     private void OnPacket(PacketReceivedEventArgs args)
@@ -211,8 +207,17 @@ public class PlayerManager(EventManager eventManager, ILogger logger) : Manager
                 player.AnimationBlendWeights = playerPacket.AnimationBlendWeights;
                 player.Act = playerPacket.Act;
                 player.SubAct = playerPacket.SubAct;
+
+                //logger.Warn(player.IsIt + " " + player.CurrentGameMode);
+                if(!holder.Config.HidersCanSeeEachOther && !player.IsIt && player.CurrentGameMode != GameMode.None)
+                    foreach (var realPlayer in RealPlayers)
+                        if (!realPlayer.IsIt && realPlayer.CurrentGameMode != GameMode.None)
+                        {
+                            var copy = playerPacket;
+                            copy.Position = Vector3.UnitY * -10000;
+                            args.SpecificReplacePackets[realPlayer.Id] = copy;
+                        }
                 
-                logger.Warn(player.Act);
                 break;
         }
     }

@@ -8,10 +8,11 @@ namespace DSMOOServer.Commands;
     CommandName = "config",
     Aliases = [],
     Description = "Set some configs through the console",
-    Parameters = ["[merge/maxplayer]", "(value)"]
+    Parameters = ["[merge/maxplayer/load]", "(value)"]
 )]
 public class Config(
     ConfigHolder<ServerMainConfig> configHolder,
+    ConfigManager configManager,
     PlayerManager playerManager) : Command
 {
     public override CommandResult Execute(string command, string[] args)
@@ -25,6 +26,13 @@ public class Config(
 
         switch (args[0])
         {
+            case "load":
+                foreach (var config in configManager.Configs.Values)
+                {
+                    config.LoadConfig();
+                }
+                return "Loaded all Config Files";
+            
             case "merge" when args.Length == 2:
                 if (!bool.TryParse(args[1], out var enable))
                     return new CommandResult

@@ -40,6 +40,7 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
 
     private void OnLog(string message, LogType type)
     {
+        if (type == LogType.Debug) return;
         try
         {
             if (_client == null || _logChannel == null) return;
@@ -85,7 +86,9 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
             _client = new DiscordClient(new DiscordConfiguration()
             {
                 Token = Config.Token,
-                MinimumLogLevel = LogLevel.None
+                TokenType = TokenType.Bot,
+                MinimumLogLevel = LogLevel.None,
+                Intents = DiscordIntents.GuildMessages | DiscordIntents.Guilds | DiscordIntents.MessageContents
             });
             await _client.ConnectAsync(new DiscordActivity("Super Mario Odyssey Online", ActivityType.Competing));
             if (Config.CommandChannel != 0)

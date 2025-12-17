@@ -31,7 +31,7 @@ public class AssemblyManager : Manager
     }
 
     public Assembly[] LoadAssemblies(string directory)
-        => LoadAssemblies(Directory.GetFiles(directory));
+        => LoadAssemblies(Directory.GetFiles(directory, "*.dll", SearchOption.AllDirectories));
 
     public Assembly[] LoadAssemblies(string[] paths)
     {

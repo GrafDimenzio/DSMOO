@@ -210,6 +210,7 @@ public class BanManager(
         switch (args.Packet)
         {
             case TagPacket tagPacket:
+                //TODO: Player enter Banned GameMode Logic
                 break;
         }
     }
