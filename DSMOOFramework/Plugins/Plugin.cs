@@ -5,7 +5,7 @@ using DSMOOFramework.Managers;
 
 namespace DSMOOFramework.Plugins;
 
-public abstract class Plugin<T> : Manager where T : IConfig
+public abstract class Plugin<T> : Manager, IInject where T : IConfig
 {
     public T Config => (T)ConfigHolder.ConfigObject;
     
@@ -14,4 +14,5 @@ public abstract class Plugin<T> : Manager where T : IConfig
     [Inject]
     public ILogger Logger { get; set; }
     public void SaveConfig() => ConfigHolder.SaveConfig();
+    public virtual void AfterInject() { }
 }

@@ -39,6 +39,8 @@ public class ObjectController
         return GetObject(typeof(T), overwriteObjects) as T;
     }
 
+    public T? CreateObject<T>(params object[] overwriteObjects) => (T?)CreateObject(typeof(T), overwriteObjects);
+    
     public object? CreateObject(Type type, params object[] overwriteObjects)
     {
         var constructors = type.GetConstructors();
@@ -66,7 +68,7 @@ public class ObjectController
             }
             catch (Exception e)
             {
-                // ignored
+                Logger.Error("Error while using Constructor", e);
             }
 
         if (hasEmptyConstructor)
@@ -93,6 +95,9 @@ public class ObjectController
             if (property.GetCustomAttribute<InjectAttribute>() == null) continue;
             property.SetValue(obj, GetObject(property.PropertyType));
         }
+        
+        if(obj is IInject inject)
+            inject.AfterInject();
     }
 
     private object CreateFromConstructor(Type type, ConstructorInfo constructor, object[] overwriteObjects)

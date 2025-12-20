@@ -208,16 +208,46 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
                 player.Act = playerPacket.Act;
                 player.SubAct = playerPacket.SubAct;
 
-                //logger.Warn(player.IsIt + " " + player.CurrentGameMode);
-                if(!holder.Config.HidersCanSeeEachOther && !player.IsIt && player.CurrentGameMode != GameMode.None)
-                    foreach (var realPlayer in RealPlayers)
-                        if (!realPlayer.IsIt && realPlayer.CurrentGameMode != GameMode.None)
-                        {
-                            var copy = playerPacket;
-                            copy.Position = Vector3.UnitY * -10000;
-                            args.SpecificReplacePackets[realPlayer.Id] = copy;
-                        }
-                
+                var ev = new PlayerStateEventArgs
+                {
+                    Player = player,
+                    Packet = playerPacket,
+                };
+                eventManager.OnPlayerState.RaiseEvent(ev);
+                if (!ev.Packet.Equals(playerPacket) || ev.Invisible)
+                {
+                    var copy = playerPacket;
+                    if (ev.Invisible)
+                        copy.Position = Vector3.UnitY * -10000;
+                    args.ReplacePacket = copy;
+                }
+
+                foreach (var packetPair in ev.SpecificPackets)
+                {
+                    args.SpecificReplacePackets[packetPair.Key] = packetPair.Value;
+                }
+
+                foreach (var id in ev.SpecificInvisible)
+                {
+                    if (args.SpecificReplacePackets.TryGetValue(id, out var packet))
+                    {
+                        //Nothing since TryGetValue already did its thing
+                    }
+                    else if (args.ReplacePacket != null)
+                    {
+                        packet = args.ReplacePacket;
+                    }
+                    else
+                    {
+                        packet = args.Packet;
+                    }
+
+                    if (packet is not PlayerPacket invisPacket)
+                        continue;
+                    
+                    invisPacket.Position = Vector3.UnitY * -10000;
+                    args.SpecificReplacePackets[id] = invisPacket;
+                }
                 break;
         }
     }

@@ -1,10 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
 namespace DSMOOServer.Network.Packets;
 
 [Packet(PacketType.Player)]
-public struct PlayerPacket : IPacket
+public struct PlayerPacket : IPacket, IEquatable<PlayerPacket>
 {
     public const int ActSize = 0x20;
     public const int SubActSize = 0x10;
@@ -12,7 +13,7 @@ public struct PlayerPacket : IPacket
     public Vector3 Position;
     public Quaternion Rotation;
 
-    public float[] AnimationBlendWeights = Array.Empty<float>();
+    public float[] AnimationBlendWeights = [];
 
     public ushort Act;
     public ushort SubAct;
@@ -45,5 +46,15 @@ public struct PlayerPacket : IPacket
         AnimationBlendWeights = MemoryMarshal.Cast<byte, float>(data[offset..(offset += 4 * 6)]).ToArray();
         Act = MemoryMarshal.Read<ushort>(data[offset++..++offset]);
         SubAct = MemoryMarshal.Read<ushort>(data[offset++..++offset]);
+    }
+
+    public bool Equals(PlayerPacket other)
+    {
+        return Position.Equals(other.Position) && Rotation.Equals(other.Rotation) && AnimationBlendWeights.Equals(other.AnimationBlendWeights) && Act == other.Act && SubAct == other.SubAct;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Position, Rotation, AnimationBlendWeights, Act, SubAct);
     }
 }

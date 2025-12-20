@@ -23,4 +23,6 @@ public class AnalyzeEventArgs : IEventArg
     public T? GetAttribute<T>() where T : Attribute => Type.GetCustomAttribute<T>(true);
     
     public bool Is<T>() => typeof(T).IsAssignableFrom(Type);
+    
+    public bool IsAbstract() => Type.IsAbstract;
 }

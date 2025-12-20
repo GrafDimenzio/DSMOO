@@ -30,7 +30,7 @@ public class EventReactor<T>(ILogger logger) where T : IEventArg
         }
         catch (Exception ex)
         {
-            Logger.Error("Error while raising event", ex);
+            Logger.Error("Error while raising event " + typeof(T).Name, ex);
         }
     }
 }

@@ -1,0 +1,12 @@
+{{ title = "Error" }}
+
+{{ capture content }}
+<div class="center">
+    <div class="card">
+        <h3>HTTP Error {{ status_code }}</h3>
+        <p>{{ message }}</p>
+    </div>
+</div>
+{{ end }}
+
+{{ include 'App.html' }}

@@ -21,6 +21,7 @@ public class ManagerHandler(Analyzer.Analyzer analyzer, ObjectController objectC
     {
         if (!args.Is<Manager>()) return;
         if (args.Type == typeof(Manager)) return;
+        if (args.Type.IsAbstract) return;
         if (ObjectController.GetObject(args.Type) is not Manager manager) return;
         Logger.Setup("Creating manager " + args.Type.Name);
         Managers.Add(manager);

@@ -29,6 +29,7 @@ public class PluginManager : Manager
 
     public void LoadPlugins()
     {
+        _logger.Info("Loading plugins...");
         _logger.Setup("Loading Dll's from Directory: " + PluginDirectory);
         _assemblyManager.LoadAssemblies(PluginDirectory);
     }

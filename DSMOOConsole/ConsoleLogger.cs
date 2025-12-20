@@ -4,10 +4,11 @@ namespace DSMOOConsole;
 
 public class ConsoleLogger : BasicLogger
 {
-    public readonly LogType[] Logs = [LogType.Error, LogType.Warn, LogType.Info, LogType.Setup];
+    public readonly LogType[] Logs;
 
-    public ConsoleLogger()
+    public ConsoleLogger(LogType[] logs)
     {
+        Logs = logs;
         Log += OnLog;
     }
 
@@ -15,7 +16,7 @@ public class ConsoleLogger : BasicLogger
 
     public override ILogger Copy()
     {
-        return new ConsoleLogger { Name = Name };
+        return new ConsoleLogger(Logs) { Name = Name };
     }
 
     private void OnLog(string message, LogType type)
