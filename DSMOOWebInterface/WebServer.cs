@@ -55,7 +55,7 @@ public class WebServer(TemplateManager templateManager, ObjectController objectC
     private async Task HttpException(IHttpContext context, IHttpException httpException)
     {
         context.Response.ContentType = "text/html";
-        var html = await templateManager.Render("DSMOOWebInterface.Templates.Exception.html", httpException);
+        var html = await templateManager.Render("DSMOOWebInterface.Templates.exception.html", httpException);
         await context.Response.OutputStream.WriteAsync(Encoding.UTF8.GetBytes(html));
         context.SetHandled();
     }

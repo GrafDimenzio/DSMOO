@@ -11,7 +11,7 @@ public class TemplateLoader(TemplateManager manager) : ITemplateLoader
 
     public string Load(TemplateContext context, SourceSpan callerSpan, string templatePath)
     {
-        return manager.Templates.TryGetValue(templatePath, out var template) ? template : manager.Templates["DSMOOWebInterface.Templates.InvalidTemplate.html"];
+        return manager.Templates.TryGetValue(templatePath, out var template) ? template : manager.Templates["DSMOOWebInterface.Templates.invalidTemplate.html"];
     }
 
     public ValueTask<string> LoadAsync(TemplateContext context, SourceSpan callerSpan, string templatePath)

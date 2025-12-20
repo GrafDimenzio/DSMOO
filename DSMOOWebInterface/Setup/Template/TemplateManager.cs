@@ -24,7 +24,7 @@ public class TemplateManager : Manager
         LoadTemplates(GetType().Assembly, "DSMOOWebInterface.Templates");
     }
 
-    public async Task<string> Render(string templateName, object? model = null, IHttpContext httpContext = null)
+    public async Task<string> Render(string templateName, object? model = null, IHttpContext? httpContext = null)
     {
         var context = CreateContext(model, httpContext);
         var templateString = Templates[GetFullTemplateName(templateName)];
@@ -59,7 +59,7 @@ public class TemplateManager : Manager
         if (possible.Count == 1)
             return possible[0].Key;
 
-        return Templates.ContainsKey(templateName) ? templateName : "DSMOOWebInterface.Templates.InvalidTemplate.html";
+        return Templates.ContainsKey(templateName) ? templateName : "DSMOOWebInterface.Templates.invalidTemplate.html";
     }
 
     private TemplateContext CreateContext(object? model = null, IHttpContext? httpContext = null)
@@ -79,7 +79,10 @@ public class TemplateManager : Manager
         if (httpContext != null)
         {
             var scriptObject = new ScriptObject();
-            scriptObject.Import(httpContext.Session);
+            foreach (var entry in httpContext.Session.TakeSnapshot())
+            {
+                scriptObject.SetValue(entry.Key, entry.Value, false);
+            }
             context.PushGlobal(scriptObject);
         }
 

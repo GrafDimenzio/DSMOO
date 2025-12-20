@@ -1,7 +1,7 @@
 {{ title = "Error" }}
 
 {{ capture content }}
-<div class="center">
+<div class="center max-size">
     <div class="card">
         <h3>HTTP Error {{ status_code }}</h3>
         <p>{{ message }}</p>
@@ -9,4 +9,4 @@
 </div>
 {{ end }}
 
-{{ include 'App.html' }}
+{{ include 'app.html' }}

@@ -34,7 +34,7 @@ https://tabler.io/icons
     --height-top: 4rem;
     --border-top: 1px solid var(--color-accent-dark);
     --shadow-top: 0 0.5rem 8px rgba(0, 0, 0, 0.15);
-    --width-sidebar: 12rem;
+    --width-sidebar: 16rem;
 }
 
 [data-theme="dark"] {
@@ -167,6 +167,41 @@ hr {
     width: 100%;
 }
 
+nav {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 0 1rem 0.5rem;
+}
+
+.selected {
+    background-color: var(--color-surface);
+}
+
+.nav-item a {
+    color: var(--color-text);
+    padding: 1rem 1rem 1rem;
+    width: 100%;
+    display: flex;
+    border-radius: 0.25rem;
+}
+
+.nav-item a:hover {
+    background-color: var(--color-bg);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.nav-item div {
+    margin-left: 0.5rem;
+}
+
 .page {
     display: flex;
     height: 100%;
@@ -206,11 +241,14 @@ hr {
 }
 
 .center {
-    height: 100%;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.max-size {
+    height: 100%;
+    width: 100%;
 }
 
 .expand {
