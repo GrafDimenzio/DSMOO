@@ -17,27 +17,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="wwwroot\index.html" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Components\app.html" />
-      <EmbeddedResource Include="Templates\app.html" />
-      <None Remove="Templates\InvalidTemplate.html" />
-      <EmbeddedResource Include="Templates\invalidTemplate.html" />
-      <None Remove="Templates\Page\Test.html" />
-      <None Remove="wwwroot\styles.css" />
-      <EmbeddedResource Include="Templates\Page\console.html" />
-      <EmbeddedResource Include="Templates\Page\dashboard.html" />
-      <EmbeddedResource Include="Templates\Page\map.html" />
-      <EmbeddedResource Include="Templates\Page\playerlist.html" />
-      <EmbeddedResource Include="wwwroot\styles.css" />
-      <None Remove="wwwroot\favicon-globe.png" />
-      <EmbeddedResource Include="wwwroot\favicon-globe.png" />
-      <None Remove="Templates\Exception.html" />
-      <EmbeddedResource Include="Templates\exception.html" />
-      <None Remove="Templates\Page\landing.html" />
-      <EmbeddedResource Include="Templates\Page\landing.html" />
+      <None Remove="Templates\**\*.*" />
+      <EmbeddedResource Include="Templates\**\*.*" />
+      <None Remove="wwwroot\**\*.*" />
+      <EmbeddedResource Include="wwwroot\**\*.*" />
     </ItemGroup>
 
 </Project>

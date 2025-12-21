@@ -1,10 +1,30 @@
-{{ title = "Welcome" }}
+{{ title = "Player List" }}
 {{ selected = 2 }}
 
 {{ capture content }}
 <div class="max-size center">
-    <div class="card">
-        Welcome!
+    <div class="player-grid">
+        {{ for player in players }}
+        <div class="card card-hover player-item" onclick="window.location.href='/player/{{player.id}}'">
+            <h3>{{ player.name }}</h3>
+            <p class="grid-2">
+                <span>Stage:</span>
+                <span>{{ player.stage }}</span>
+
+                <span>GameMode:</span>
+                <span>{{ player.game_mode }}</span>
+
+                <span>Seeker:</span>
+                <span>{{ player.is_it }}</span>
+
+                <span>2D:</span>
+                <span>{{ player.is2_d }}</span>
+
+                <span>Capture:</span>
+                <span>{{ player.capture }}</span>
+            </p>
+        </div>
+        {{ end }}
     </div>
 </div>
 {{ status }}
