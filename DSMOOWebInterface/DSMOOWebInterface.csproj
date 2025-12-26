@@ -21,6 +21,13 @@
       <EmbeddedResource Include="Templates\**\*.*" />
       <None Remove="wwwroot\**\*.*" />
       <EmbeddedResource Include="wwwroot\**\*.*" />
+      <None Remove="test\test.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="wwwroot\js\common.js" />
+      <Content Include="wwwroot\js\console.js" />
+      <Content Include="wwwroot\js\reload.js" />
     </ItemGroup>
 
 </Project>

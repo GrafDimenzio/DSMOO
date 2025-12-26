@@ -46,7 +46,7 @@ public class ControllerManager(WebServer webServer, Analyzer analyzer, ObjectCon
     private void RegisterController<T>(ControllerAttribute attribute) where T: WebApiController
     {
         //So for whatever stupid reasons does embedio not support generic factories
-        logger.Setup($"Registering WebController {typeof(T).Name} as {attribute} Type");
+        logger.Setup($"Registering WebController {typeof(T).Name} as {attribute.ControllerType} Type");
         switch (attribute.ControllerType)
         {
             case ControllerType.Html:

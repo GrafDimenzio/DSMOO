@@ -1,6 +1,10 @@
 {{ title = "Player List" }}
 {{ selected = 2 }}
 
+{{ capture head }}
+<script src="/static/js/reload.js"></script>
+{{ end }}
+
 {{ capture content }}
 <div class="max-size center">
     <div class="player-grid">
@@ -8,6 +12,23 @@
         <div class="card card-hover player-item" onclick="window.location.href='/player/{{player.id}}'">
             <h3>{{ player.name }}</h3>
             <p class="grid-2">
+                <span>Cap:</span>
+                <img class="small-image" alt="{{player.cap}}" src="{{ get_cap player.cap }}"/>
+                
+                <span>Costume:</span>
+                <img class="small-image" alt="{{player.body}}" src="{{ get_body player.body }}"/>
+
+                <span>Capture:</span>
+                {{ 
+                    if player.capture == "None"
+                        "<span>None</span>"
+                    else
+                        '<img class="small-image" alt="' + player.capture +'" src="' + get_capture player.capture + '"}}"/>'
+                    end
+                }}
+                
+                
+                
                 <span>Stage:</span>
                 <span>{{ player.stage }}</span>
 
@@ -19,15 +40,11 @@
 
                 <span>2D:</span>
                 <span>{{ player.is2_d }}</span>
-
-                <span>Capture:</span>
-                <span>{{ player.capture }}</span>
             </p>
         </div>
         {{ end }}
     </div>
 </div>
-{{ status }}
 {{ end }}
 
 {{ include 'app.html' }}

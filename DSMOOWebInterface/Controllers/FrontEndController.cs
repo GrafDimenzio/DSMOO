@@ -65,6 +65,7 @@ public class FrontEndController(TemplateManager manager, PlayerManager playerMan
     [Route(HttpVerbs.Get, "/login")]
     public void Login()
     {
+        Session["admin"] = true;
         Session["username"] = "dimenzio";
         HttpContext.Redirect("/");
     }

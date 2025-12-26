@@ -48,7 +48,7 @@ public class JoinManager(
         var preJoinArgs = new PlayerPreJoinEventArgs
         {
             Client = args.Sender,
-            AllowJoin = playerManager.ValidPlayerCount <= Config.MaxPlayers
+            AllowJoin = playerManager.PlayerCount <= Config.MaxPlayers
         };
         if (!preJoinArgs.AllowJoin)
             args.Sender.Logger.Warn("Rejected join since the server reached max players amount");

@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" sizes="70x70" href="/static/favicon-globe.png">
     <link rel="stylesheet" href="/static/styles.css">
     <title>{{ title }}</title>
+    <script src="/static/js/common.js"></script>
+    {{ head }}
 </head>
 <body>
-    <div class="page">
-        <div class="sidebar">
-            <div class="sidebar-top">
-                <h2>DSMOO</h2>
+<div class="sidebar">
+    <div class="sidebar-top">
+        <h2>DSMOO</h2>
+    </div>
+    <div>
+        <nav>
+            {{ for nav in navigation_elements }}
+            <div class="nav-item">
+                <a class="{{ selected == nav.selection_id ? "selected" : "" }}" href="{{ nav.href }}">
+                {{ nav.svg }}
+                <div class="center">{{ nav.text }}</div>
+                </a>
             </div>
-            <div>
-                <nav>
-                    {{ for nav in navigation_elements }}
-                    <div class="nav-item">
-                        <a class="{{ selected == nav.selection_id ? "selected" : "" }}" href="{{ nav.href }}">
-                            {{ nav.svg }}
-                            <div class="center">{{ nav.text }}</div>
-                        </a>
-                    </div>
-                    {{ end }}
-                </nav>
-            </div>
-            <div>
-                
-            </div>
+            {{ end }}
+        </nav>
+    </div>
+    <div>
+
+    </div>
+</div>
+<div class="right-side">
+    <div class="topbar">
+        <h2>Mario Odyssey Server</h2>
+        <div class="expand center">
+            {{ username }}
         </div>
-        <div class="right-side">
-            <div class="topbar">
-                <h2>Mario Odyssey Server</h2>
-                <div class="expand center">
-                    {{ username }}
-                </div>
-                <div>
-                    <div class="center max-size">
-                        <a href="/login">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
-                        </a>
-                    </div>
-                </div>
+        <div>
+            <div class="center max-size">
+                <a href="/login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                </a>
             </div>
-            <main>
-                {{ content }}
-            </main>
         </div>
     </div>
+    <main>
+        {{ content }}
+    </main>
+</div>
 </body>
 </html>

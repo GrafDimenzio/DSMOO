@@ -58,6 +58,8 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
 
     private ICommand? GetCommand(string command)
     {
+        if(string.IsNullOrWhiteSpace(command)) return null;
+        
         foreach (var iCommand in Commands)
         {
             if (string.Equals(iCommand.CommandInfo.CommandName, command, StringComparison.OrdinalIgnoreCase))

@@ -19,8 +19,8 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
 
     public List<IPlayer> RealPlayers =>
         Players.Where(x => !x.IsDummy && x is Player { Client.Socket.Connected: true }).ToList();
-
-    public int ValidPlayerCount => Players.Count(x => !x.IsDummy && x is Player { Client.Socket.Connected: true });
+    
+    public int PlayerCount => RealPlayers.Select(x => x.Id).Distinct().Count();
 
     public PlayerSearch SearchForPlayers(string[] args)
     {

@@ -99,6 +99,26 @@ public class TemplateManager : Manager
         return Templates.ContainsKey(templateName) ? templateName : "DSMOOWebInterface.Templates.invalidTemplate.html";
     }
 
+    private string GetCapture(string capture)
+    {
+        return $"/static/images/capture/{capture}.png";
+    }
+
+    private string GetBodyPath(string name)
+    {
+        return $"/static/images/body/{name}.png";
+    }
+
+    private string GetCapPath(string name)
+    {
+        return $"/static/images/cap/{name}.png";
+    }
+    
+    private string GetMapPath(string name)
+    {
+        return $"/static/images/cap/{name}.png";
+    }
+
     private TemplateContext CreateContext(object? model = null, IHttpContext? httpContext = null)
     {
         var context = new TemplateContext
@@ -106,6 +126,12 @@ public class TemplateManager : Manager
             TemplateLoader = _loader
         };
         var scriptObject = new ScriptObject();
+        
+        scriptObject.Import("get_body", GetBodyPath);
+        scriptObject.Import("get_cap", GetCapPath);
+        scriptObject.Import("get_map", GetMapPath);
+        scriptObject.Import("get_capture", GetCapture);
+        
         
         scriptObject.SetValue("navigation_elements", _navigation, true);
 
