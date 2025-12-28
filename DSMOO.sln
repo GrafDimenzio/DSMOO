@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOODiscordBot", "DSMOODis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOWebInterface", "DSMOOWebInterface\DSMOOWebInterface.csproj", "{90D8BBB7-A722-4D00-BC17-DC033DC7B32F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSMOOProxmityVoiceChat", "DSMOOProxmityVoiceChat\DSMOOProxmityVoiceChat.csproj", "{D6926B69-571B-48C1-B045-31683426EB62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{90D8BBB7-A722-4D00-BC17-DC033DC7B32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90D8BBB7-A722-4D00-BC17-DC033DC7B32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90D8BBB7-A722-4D00-BC17-DC033DC7B32F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6926B69-571B-48C1-B045-31683426EB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6926B69-571B-48C1-B045-31683426EB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6926B69-571B-48C1-B045-31683426EB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6926B69-571B-48C1-B045-31683426EB62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
