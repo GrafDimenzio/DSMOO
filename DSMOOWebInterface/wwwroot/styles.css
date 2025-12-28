@@ -303,8 +303,29 @@ nav {
 
 .console div {
     flex: 1;
+    overflow: auto;
 }
 
 .console input {
+    flex-shrink: 0;
+}
+
+.command-result {
+    margin-bottom: 1rem;
+    white-space: pre-wrap;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login div,
+.login input {
+    flex: 1;
+}
+
+.login button {
     flex-shrink: 0;
 }

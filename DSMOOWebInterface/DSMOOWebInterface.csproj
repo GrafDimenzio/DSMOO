@@ -25,6 +25,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Include="Templates\Page\hide_and_seek.html" />
+      <Content Include="Templates\Page\login.html" />
       <Content Include="wwwroot\js\common.js" />
       <Content Include="wwwroot\js\console.js" />
       <Content Include="wwwroot\js\reload.js" />

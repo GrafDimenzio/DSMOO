@@ -1,0 +1,42 @@
+{{ title = "Dashboard" }}
+
+{{ capture content }}
+<div class="max-size center">
+    <div class="card">
+        <h4>Player Login</h4>
+        {{ if username == null }}
+        <label for="playerInput">Player name:</label>
+        <form action="api/player-login" method="post" class="login">
+            <input type="text" id="playerInput" name="username" placeholder="Player name"/>
+            <button type="submit">Submit</button>
+        </form>
+        {{ else }}
+        <form action="api/player-logout" method="post" class="login">
+            <div>
+                <label>User:</label>
+                <span>{{ username }}</span>
+            </div>
+            <button type="submit">Logout</button>
+        </form>
+        {{ end }}
+        <hr/>
+        <h4>Admin Login</h4>
+        {{ if admin != true }}
+        <label for="adminInput">Password:</label>
+        <form action="api/admin-login" method="post" class="login">
+            <input type="text" id="adminInput" name="password" placeholder="Admin password"/>
+            <button>Submit</button>
+        </form>
+        {{ else }}
+        <form action="api/admin-logout" method="post" class="login">
+            <div>
+                <label>You are an Admin</label>
+            </div>
+            <button type="submit">Logout</button>
+        </form>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+{{ include 'app.html' }}

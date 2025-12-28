@@ -1,3 +1,22 @@
+const input = document.getElementById("commandInput");
+const responseDiv = document.getElementById("commandResponse");
+
+input.addEventListener("keydown", async function (event) {
+    if (event.key !== "Enter") {
+        return;
+    }
+    event.preventDefault();
+    const text = input.value.trim();
+    if (text === "") return;
+    const response = await sendConsoleCommand(text);
+    const resultDiv = document.createElement("div");
+    resultDiv.classList.add("command-result");
+    resultDiv.textContent = "> " + response.Message;
+    responseDiv.appendChild(resultDiv);
+    responseDiv.scrollTop = responseDiv.scrollHeight;
+    input.value = "";
+})
+
 async function sendConsoleCommand(message) {
     const response = await fetch("/api/console", {
         method: "POST",

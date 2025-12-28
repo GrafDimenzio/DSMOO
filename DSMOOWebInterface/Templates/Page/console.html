@@ -2,15 +2,15 @@
 {{ selected = 3 }}
 
 {{ capture head }}
-<script src="/static/js/console.js"></script>
+<script src="/static/js/console.js" defer></script>
 {{ end }}
 
 {{ capture content }}
 <div class="card console max-size">
-    <div>
+    <div id="commandResponse">
 
     </div>
-    <input/>
+    <input type="text" id="commandInput" placeholder="Enter command..."/>
 </div>
 {{ end }}
 
