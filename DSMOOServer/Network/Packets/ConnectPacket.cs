@@ -16,8 +16,8 @@ public struct ConnectPacket : IPacket
 
     public void Serialize(Span<byte> data)
     {
-        MemoryMarshal.Write(data, ref ConnectionType);
-        MemoryMarshal.Write(data[4..], ref MaxPlayers);
+        MemoryMarshal.Write(data, ConnectionType);
+        MemoryMarshal.Write(data[4..], MaxPlayers);
         Encoding.UTF8.GetBytes(ClientName).CopyTo(data[6..(6 + Constants.CostumeNameSize)]);
     }
 

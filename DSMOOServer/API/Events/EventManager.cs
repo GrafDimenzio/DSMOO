@@ -8,6 +8,7 @@ namespace DSMOOServer.API.Events;
 public class EventManager(ILogger logger) : Manager
 {
     public readonly EventReactor<DummySendPacketEventArgs> OnDummySendPacket = new(logger);
+    public readonly EventReactor<SendPlayerInitPacketEventArgs> OnSendPlayerInitPacket = new(logger);
     public readonly EventReactor<PacketReceivedEventArgs> OnPacketReceived = new(logger);
     public readonly EventReactor<PlayerActionEventArgs> OnPlayerAction = new(logger);
     public readonly EventReactor<PlayerCaptureEventArgs> OnPlayerCapture = new(logger);

@@ -12,7 +12,7 @@ public struct InitPacket : IPacket
 
     public void Serialize(Span<byte> data)
     {
-        MemoryMarshal.Write(data, ref MaxPlayers);
+        MemoryMarshal.Write(data, MaxPlayers);
     }
 
     public void Deserialize(ReadOnlySpan<byte> data)

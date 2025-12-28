@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
 using DSMOOConsole;
 using DSMOOFramework;
-using DSMOOFramework.Controller;using DSMOOFramework.Logger;
+using DSMOOFramework.Controller;
+using DSMOOFramework.Logger;
 using DSMOOServer.Connection;
 
 ConsoleSetup("Server");

@@ -19,8 +19,8 @@ public struct ChangeStagePacket : IPacket
     {
         Encoding.UTF8.GetBytes(Stage).CopyTo(data[..StageSize]);
         Encoding.UTF8.GetBytes(Id).CopyTo(data[StageSize..(IdSize + StageSize)]);
-        MemoryMarshal.Write(data[(IdSize + StageSize)..(IdSize + StageSize + 1)], ref Scenario);
-        MemoryMarshal.Write(data[(IdSize + StageSize + 1)..(IdSize + StageSize + 2)], ref SubScenarioType);
+        MemoryMarshal.Write(data[(IdSize + StageSize)..(IdSize + StageSize + 1)], Scenario);
+        MemoryMarshal.Write(data[(IdSize + StageSize + 1)..(IdSize + StageSize + 2)], SubScenarioType);
     }
 
     public void Deserialize(ReadOnlySpan<byte> data)
