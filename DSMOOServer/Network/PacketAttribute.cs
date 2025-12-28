@@ -5,8 +5,13 @@ public class PacketAttribute : Attribute
 {
     public PacketAttribute(PacketType type)
     {
-        Type = type;
+        Id = (short)type;
+    }
+    
+    public PacketAttribute(short id)
+    {
+        Id = id;
     }
 
-    public PacketType Type { get; }
+    public short Id { get; }
 }

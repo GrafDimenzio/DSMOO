@@ -6,12 +6,14 @@ using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.Player;
 using DSMOOServer.Logic;
+using DSMOOServer.Network;
 
 namespace DSMOOServer.API.Recording;
 
 public class RecordingManager(
     DummyManager dummyManager,
     EventManager eventManager,
+    PacketManager packetManager,
     ILogger logger,
     PathLocation pathLocation) : Manager
 {
@@ -22,7 +24,7 @@ public class RecordingManager(
 
     public Recording StartRecording(IPlayer player)
     {
-        var recording = new Recording();
+        var recording = new Recording(packetManager);
         recording.StartRecording(player);
         _activeRecordings[player] = recording;
         return recording;
@@ -57,7 +59,7 @@ public class RecordingManager(
         var dic = new Dictionary<string, Recording>();
         foreach (var file in Directory.GetFiles(path))
         {
-            var recording = new Recording(file);
+            var recording = new Recording(file, packetManager);
             dic[Path.GetFileNameWithoutExtension(file)] = recording;
         }
     }

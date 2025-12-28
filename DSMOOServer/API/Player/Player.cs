@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Net;
 using System.Numerics;
+using DSMOOServer.API.Enum;
 using DSMOOServer.Connection;
 using DSMOOServer.Helper;
 using DSMOOServer.Network;

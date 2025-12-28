@@ -9,8 +9,11 @@ namespace DSMOOServer.Connection;
 
 public class Client : IDisposable
 {
-    public Client(Socket socket, ILogger logger)
+    private readonly PacketManager _packetManager;
+    
+    public Client(Socket socket, ILogger logger, PacketManager packetManager)
     {
+        _packetManager = packetManager;
         Logger = logger;
         Socket = socket;
         Player = new Player(this);
@@ -58,13 +61,13 @@ public class Client : IDisposable
         var memory = MemoryPool<byte>.Shared.RentZero(Constants.HeaderSize + packet.Size);
 
 
-        var packetAttribute = Constants.PacketMap[packet.GetType()];
+        var packetTypeId = _packetManager.GetPacketId(packet.GetType());
         try
         {
             PacketHelper.FillPacket(new PacketHeader
             {
                 Id = sender ?? Id,
-                Type = packetAttribute.Type,
+                Type = packetTypeId,
                 PacketSize = packet.Size
             }, packet, memory.Memory);
 
@@ -72,7 +75,7 @@ public class Client : IDisposable
         }
         catch (Exception e)
         {
-            Logger.Error($"Failed to serialize {packetAttribute.Type}", e);
+            Logger.Error($"Failed to serialize {packetTypeId}", e);
         }
 
         memory.Dispose();
@@ -86,10 +89,10 @@ public class Client : IDisposable
         var header = new PacketHeader();
         header.Deserialize(data.Span);
 
-        if (Ignored && header.Type != PacketType.ChangeStage)
+        if (Ignored && header.Type != (short)PacketType.ChangeStage)
             return;
 
-        if (!FirstPacketSend && header.Type != PacketType.Connect)
+        if (!FirstPacketSend && header.Type != (short)PacketType.Connect)
         {
             Logger.Error($"Didn't send {header.Type} to {Id} because they weren't connected yet");
             return;

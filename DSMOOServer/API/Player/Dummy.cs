@@ -1,6 +1,7 @@
 using System.Buffers;
 using System.Net;
 using System.Numerics;
+using DSMOOServer.API.Enum;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.Connection;
@@ -16,14 +17,16 @@ public class Dummy : IPlayer, IDisposable
     private readonly EventManager _eventManager;
     private readonly JoinManager _joinManager;
     private readonly PlayerManager _playerManager;
+    private readonly PacketManager _packetManager;
     private readonly Server _server;
 
-    public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager)
+    public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager, PacketManager packetManager)
     {
         _server = server;
         _playerManager = playerManager;
         _eventManager = eventManager;
         _joinManager = joinManager;
+        _packetManager = packetManager;
         _playerManager.Players.Add(this);
     }
 
@@ -89,7 +92,7 @@ public class Dummy : IPlayer, IDisposable
         var header = new PacketHeader
         {
             Id = Id,
-            Type = Constants.PacketMap[packet.GetType()].Type,
+            Type = _packetManager.GetPacketId(packet.GetType()),
             PacketSize = packet.Size
         };
         PacketHelper.FillPacket(header, packet, memory.Memory);

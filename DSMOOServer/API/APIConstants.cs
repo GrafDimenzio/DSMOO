@@ -1,3 +1,5 @@
+using DSMOOServer.API.Enum;
+
 namespace DSMOOServer.API;
 
 public static class APIConstants

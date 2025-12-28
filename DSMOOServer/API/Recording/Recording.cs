@@ -8,12 +8,18 @@ namespace DSMOOServer.API.Recording;
 
 public class Recording
 {
+    private readonly PacketManager _packetManager;
+    
     private readonly Stopwatch _stopwatch = new();
 
-    public Recording() {}
-
-    public Recording(string path)
+    public Recording(PacketManager packetManager)
     {
+        _packetManager = packetManager;
+    }
+
+    public Recording(string path, PacketManager packetManager)
+    {
+        _packetManager = packetManager;
         var fileInfo = new FileInfo(path);
         var length = (int)fileInfo.Length;
         var memory = MemoryPool<byte>.Shared.RentZero(length);
@@ -28,7 +34,7 @@ public class Recording
             var header = new RecordingHeader();
             header.Deserialize(memory.Memory.Span[current..(current + header.Size)]);
             current += header.Size;
-            var packet = (IPacket)Activator.CreateInstance(Constants.PacketIdMap[header.Type])!;
+            var packet = (IPacket)Activator.CreateInstance(packetManager.GetPacketType(header.Type))!;
             packet.Deserialize(memory.Memory.Span[current..(current + packet.Size)]);
 
             current += packet.Size;
@@ -136,7 +142,7 @@ public class Recording
             Header = new RecordingHeader
             {
                 Timestamp = timestamp,
-                Type = Constants.PacketMap[packet.GetType()].Type
+                Type = _packetManager.GetPacketId(packet.GetType())
             },
             Packet = packet
         });

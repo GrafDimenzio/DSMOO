@@ -14,7 +14,10 @@
 
     <ItemGroup>
         <None Remove="kingdoms.json"/>
-        <EmbeddedResource Include="kingdoms.json"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Data\kingdoms.json" />
     </ItemGroup>
 
 </Project>

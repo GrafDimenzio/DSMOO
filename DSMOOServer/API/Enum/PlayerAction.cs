@@ -1,4 +1,4 @@
-namespace DSMOOServer.API;
+namespace DSMOOServer.API.Enum;
 
 public enum PlayerAction : ushort
 {

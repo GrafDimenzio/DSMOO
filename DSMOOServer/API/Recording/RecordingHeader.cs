@@ -7,7 +7,7 @@ namespace DSMOOServer.API.Recording;
 public struct RecordingHeader
 {
     public int Timestamp;
-    public PacketType Type;
+    public short Type;
 
     public static short StaticSize => 6;
     public short Size => StaticSize;
@@ -21,6 +21,6 @@ public struct RecordingHeader
     public void Deserialize(ReadOnlySpan<byte> data)
     {
         Timestamp = MemoryMarshal.Read<int>(data[..4]);
-        Type = MemoryMarshal.Read<PacketType>(data[4..]);
+        Type = MemoryMarshal.Read<short>(data[4..]);
     }
 }

@@ -7,7 +7,7 @@ public struct PacketHeader : IPacket
 {
     // public int Length;
     public Guid Id;
-    public PacketType Type;
+    public short Type;
     public short PacketSize;
 
     public static short StaticSize => 20;
@@ -23,7 +23,7 @@ public struct PacketHeader : IPacket
     public void Deserialize(ReadOnlySpan<byte> data)
     {
         Id = MemoryMarshal.Read<Guid>(data[..16]);
-        Type = MemoryMarshal.Read<PacketType>(data[16..]);
+        Type = MemoryMarshal.Read<short>(data[16..]);
         PacketSize = MemoryMarshal.Read<short>(data[18..]);
     }
 }

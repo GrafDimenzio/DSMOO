@@ -1,5 +1,6 @@
 using System.Net;
 using System.Numerics;
+using DSMOOServer.API.Enum;
 using DSMOOServer.Helper;
 using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;

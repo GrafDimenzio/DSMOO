@@ -1,17 +1,17 @@
 using System.Numerics;
 using DSMOOServer.Helper;
 
-namespace DSMOOServer.API;
+namespace DSMOOServer.API.Map;
 
 public class MapLocation
 {
     public MapLocation(Vector3 position, string stageName)
     {
-        var kingdom = Stages.Alias2Stage[Stages.Stage2Alias[stageName]];
-        var infoTable = MapInfo.AllKingdoms.FirstOrDefault(x => x.MainStageName == kingdom);
+        Kingdom = Stages.Alias2Stage[Stages.Stage2Alias[stageName]];
+        var infoTable = MapInfo.AllKingdoms.FirstOrDefault(x => x.MainStageName == Kingdom);
         if (infoTable == null)
             return;
-        if (stageName == kingdom)
+        if (stageName == Kingdom)
         {
             X = position.X;
             Y = position.Z;
@@ -48,6 +48,8 @@ public class MapLocation
         Number = (int)((X - 65) / 390) + 1;
         Letter = (int)((Y - 65) / 390) + 1;
     }
+    
+    public string Kingdom { get; set; }
 
     public double X { get; set; }
     public double Y { get; set; }

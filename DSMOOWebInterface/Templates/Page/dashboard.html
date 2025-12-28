@@ -3,8 +3,44 @@
 
 {{ capture content }}
 <div class="max-size center">
-    <div class="card">
-        Welcome!
+    <div class="max-size dashboard">
+        <div class="card dashboard-info">
+            Info
+            <p class="grid-2">
+                <span>Players:</span>
+                <span class="center">{{ player_count }}</span>
+
+                <span>It:</span>
+                <span class="center">{{ it }}</span>
+
+                <span>Not It:</span>
+                <span class="center">{{ not_it }}</span>
+
+                <span>Playerlist:</span>
+                <span></span>
+                {{ for player in players }}
+                <span>
+                    {{ player.name }}
+                </span>
+                {{ end }}
+            </p>
+            
+        </div>
+        <div class="card dashboard-send">Send</div>
+        <div class="card dashboard-banstage">
+            Ban Stage
+            <br>
+            <label>Kingdom:</label>
+            <select></select>
+            <label>Stage:</label>
+            <select></select>
+            <hr>
+            <label>Manual</label>
+            <input/>
+            <button>Ban</button>
+        </div>
+        <div class="card dashboard-banlist">Ban List</div>
+        <div class="card dashboard-config">Config</div>
     </div>
 </div>
 {{ end }}

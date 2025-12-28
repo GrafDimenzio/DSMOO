@@ -329,3 +329,48 @@ nav {
 .login button {
     flex-shrink: 0;
 }
+
+.dashboard {
+    display: grid;
+    gap: 2rem;
+    max-width: 1000px;
+    max-height: 750px;
+    grid-template-areas:
+    "info banstage config"
+    "send banlist config"
+    "send banlist config"
+}
+
+.dashboard-info {
+    overflow-y: auto;
+    grid-area: info;
+}
+
+.dashboard-send {
+    grid-area: send;
+}
+
+.dashboard-banstage {
+    overflow-y: auto;
+    grid-area: banstage;
+}
+
+.dashboard-banstage br {
+    margin: 0.5rem;
+}
+
+.dashboard-banstage input {
+    margin-bottom: 0.75rem;
+}
+
+.dashboard-banstage button {
+    width: 100%;
+}
+
+.dashboard-banlist {
+    grid-area: banlist;
+}
+
+.dashboard-config {
+    grid-area: config;
+}

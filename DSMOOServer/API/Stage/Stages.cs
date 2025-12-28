@@ -258,20 +258,8 @@ public static class Stages
         return Stage2Alias.ContainsKey(input);
     }
 
-    public static IEnumerable<string> StagesByInput(string input)
+    public static string GetKingdom(string stage)
     {
-        if (IsAlias(input))
-        {
-            var stages = Stage2Alias
-                    .Where(e => e.Value == input)
-                    .Select(e => e.Key)
-                ;
-            foreach (var stage in stages) yield return stage;
-        }
-        else
-        {
-            var stage = Input2Stage(input);
-            if (stage != null) yield return stage;
-        }
+        return stage;
     }
 }

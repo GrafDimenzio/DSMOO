@@ -5,6 +5,7 @@ using DSMOOFramework.Managers;
 using DSMOOServer.API;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
+using DSMOOServer.API.Map;
 using DSMOOServer.API.Player;
 using DSMOOServer.Network.Packets;
 

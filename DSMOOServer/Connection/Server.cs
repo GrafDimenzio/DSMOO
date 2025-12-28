@@ -18,7 +18,8 @@ public class Server(
     ILogger log,
     ConfigHolder<ServerMainConfig> configHolder,
     EventManager eventManager,
-    PlayerManager playerManager) : Manager
+    PlayerManager playerManager,
+    PacketManager packetManager) : Manager
 {
     private readonly MemoryPool<byte> _memoryPool = MemoryPool<byte>.Shared;
 
@@ -90,7 +91,7 @@ public class Server(
 
     private async Task HandleSocket(Socket socket)
     {
-        var client = new Client(socket, Logger.Copy());
+        var client = new Client(socket, Logger.Copy(), packetManager);
         playerManager.Players.Add(client.Player);
         IMemoryOwner<byte> memory = null!;
         var id = Guid.Empty;
@@ -123,14 +124,14 @@ public class Server(
                     playerManager.Players.Remove(client.Player);
                     //If the player is getting kicked/banned while he can't receive a ChangeStagePacket he won't see the notification
                     //therefore this will send it a second time if he is still able to switch stages
-                    if (packetHeader.Type == PacketType.Game)
+                    if (packetHeader.Type == (short)PacketType.Game)
                         client.Player.Crash(client.Player.IsBanned);
                     continue;
                 }
 
                 try
                 {
-                    var packet = (IPacket)Activator.CreateInstance(Constants.PacketIdMap[packetHeader.Type])!;
+                    var packet = (IPacket)Activator.CreateInstance(packetManager.GetPacketType(packetHeader.Type))!;
 
                     packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
                     Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
@@ -245,7 +246,7 @@ public class Server(
         var header = new PacketHeader
         {
             Id = sender ?? Guid.Empty,
-            Type = Constants.PacketMap[packet.GetType()].Type,
+            Type = packetManager.GetPacketId(packet.GetType()),
             PacketSize = packet.Size
         };
         PacketHelper.FillPacket(header, packet, memory.Memory);

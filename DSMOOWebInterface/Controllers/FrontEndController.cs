@@ -1,4 +1,5 @@
 using DSMOOServer.Logic;
+using DSMOOServer.Network.Packets;
 using DSMOOWebInterface.Models;
 using DSMOOWebInterface.Setup;
 using DSMOOWebInterface.Setup.Controller;
@@ -29,7 +30,18 @@ public class FrontEndController(TemplateManager manager, PlayerManager playerMan
     {
         if (!CheckAdmin())
             return "";
-        return await RenderTemplate("dashboard.html");
+        var players = playerManager.RealPlayers;
+        var playersInGameMode = players.Where(x =>
+            x.CurrentGameMode is GameMode.Legacy or not GameMode.None).ToArray();
+        var modelPlayers = players.Select(x => new PlayerModel(x)).ToList();
+        return await RenderTemplate("dashboard.html",
+            new
+            {
+                PlayerCount = playerManager.PlayerCount,
+                It = playersInGameMode.Count(x => x.IsIt),
+                NotIt = playersInGameMode.Count(x => !x.IsIt),
+                players = modelPlayers
+            });
     }
     
     [Route(HttpVerbs.Get, "/playerlist")]

@@ -1,7 +1,8 @@
 using System.Reflection;
 using System.Text.Json;
+using DSMOOServer.API.Serialized;
 
-namespace DSMOOServer.API;
+namespace DSMOOServer.API.Map;
 
 public class MapInfo
 {
@@ -9,7 +10,7 @@ public class MapInfo
 
     static MapInfo()
     {
-        var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DSMOOServer.kingdoms.json");
+        var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DSMOOServer.Data.kingdoms.json");
         using var reader = new StreamReader(stream!);
         var json = reader.ReadToEnd();
         AllKingdoms = JsonSerializer.Deserialize<MapInfo[]>(json)!;
@@ -18,9 +19,9 @@ public class MapInfo
     public string KingdomName { get; set; } = "";
     public string MainStageName { get; set; } = "";
     public float Rotation { get; set; } = 0;
-    public OffsetObject Offset { get; set; } = new();
+    public SerializedVector2 Offset { get; set; } = new();
     public float Scale { get; set; } = 1;
-    public SubAreaObject[] SubAreas { get; set; } = [];
+    public SubArea[] SubAreas { get; set; } = [];
 
     public static string GetConnection(string fromStage, string toStage, bool useExit)
     {
@@ -43,19 +44,5 @@ public class MapInfo
         }
 
         return "";
-    }
-
-    public class OffsetObject
-    {
-        public float X { get; set; } = 0;
-        public float Y { get; set; } = 0;
-    }
-
-    public class SubAreaObject
-    {
-        public string SubAreaName { get; set; } = "";
-        public OffsetObject Position { get; set; } = new();
-        public string Entrance { get; set; } = "";
-        public string Exit { get; set; } = "";
     }
 }
