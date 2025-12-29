@@ -11,8 +11,9 @@ public struct InitPacket : IPacket
     public const int VersionSize = 0x20;
     
     public short Size { get; } = sizeof(ushort) + VersionSize;
+    
     public ushort MaxPlayers = 0;
-    public string Version { get; set; } = "DSMOOPlus 0.1 pre";
+    public string Version = "DSMOOPlus 0.1";
 
     public InitPacket() { }
 

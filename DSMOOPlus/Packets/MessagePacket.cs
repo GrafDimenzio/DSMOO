@@ -13,11 +13,9 @@ public struct MessagePacket : IPacket
     
     public MessagePacket() { }
     
-    public uint SenderId { get; set; } = 0;
-
-    public MessageType MessageType { get; set; } = MessageType.Chat;
-    
-    public string Message { get; set; } = string.Empty;
+    public uint SenderId = 0;
+    public MessageType MessageType = MessageType.Chat;
+    public string Message = string.Empty;
     
     public short Size => sizeof(uint) + sizeof(MessageType) + MessageSize;
 

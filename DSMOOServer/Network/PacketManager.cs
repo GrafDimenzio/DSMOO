@@ -21,7 +21,7 @@ public class PacketManager(Analyzer analyzer) : Manager
     
     public short GetPacketId(Type packetType) => _packetAttributes[packetType];
     public PacketType GetPacketType(Type packetType) => (PacketType)_packetAttributes[packetType];
-    public Type GetPacketType(short packetType) => _packetIdMap[packetType];
+    public Type? GetPacketType(short packetType) => _packetIdMap.ContainsKey(packetType) ? _packetIdMap[packetType] : null;
     public Type GetPacketType(PacketType packetType) => _packetIdMap[(short)packetType];
 
     private void OnAnalyze(AnalyzeEventArgs args)

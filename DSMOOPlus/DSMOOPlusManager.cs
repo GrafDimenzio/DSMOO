@@ -4,6 +4,7 @@ using DSMOOFramework.Plugins;
 using DSMOOPlus.Packets;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
+using DSMOOServer.Network.Packets;
 using InitPacket = DSMOOServer.Network.Packets.InitPacket;
 
 namespace DSMOOPlus;
@@ -31,8 +32,11 @@ public class DSMOOPlusManager(EventManager eventManager, ILogger logger) : Manag
             case ChangeCostumePacket changeCostumePacket:
             case MessagePacket sendMessagePacket:
             case PlayerStatePacket playerStatePacket:
-            case SettingsPacket settingsPacket:
                 logger.Warn("Received packet  " + args.Packet.GetType().Name);
+                break;
+            
+            case DisconnectPacket:
+                args.Sender.Send(new UnhandledPacket());
                 break;
         }
     }

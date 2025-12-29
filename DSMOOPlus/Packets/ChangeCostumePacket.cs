@@ -7,8 +7,10 @@ namespace DSMOOPlus.Packets;
 [Packet(19)]
 public struct ChangeCostumePacket : IPacket
 {
-    public string Body { get; set; }
-    public string Cap { get; set; }
+    public string Body = "";
+    public string Cap = "";
+
+    public ChangeCostumePacket() { }
 
     public short Size => Constants.CostumeNameSize * 2;
     

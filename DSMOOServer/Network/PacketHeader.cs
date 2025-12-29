@@ -5,7 +5,6 @@ namespace DSMOOServer.Network;
 [StructLayout(LayoutKind.Sequential)]
 public struct PacketHeader : IPacket
 {
-    // public int Length;
     public Guid Id;
     public short Type;
     public short PacketSize;
@@ -15,9 +14,9 @@ public struct PacketHeader : IPacket
 
     public void Serialize(Span<byte> data)
     {
-        MemoryMarshal.Write(data[..16], ref Id);
-        MemoryMarshal.Write(data[16..], ref Type);
-        MemoryMarshal.Write(data[18..], ref PacketSize);
+        MemoryMarshal.Write(data[..16], Id);
+        MemoryMarshal.Write(data[16..], Type);
+        MemoryMarshal.Write(data[18..], PacketSize);
     }
 
     public void Deserialize(ReadOnlySpan<byte> data)

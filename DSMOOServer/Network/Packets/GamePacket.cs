@@ -11,9 +11,7 @@ public struct GamePacket : IPacket
     public byte ScenarioNum = 0;
     public string Stage = "";
 
-    public GamePacket()
-    {
-    }
+    public GamePacket() { }
 
     public short Size => 0x42;
 

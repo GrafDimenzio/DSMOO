@@ -8,11 +8,11 @@ public class PlayerPlus : PlayerComponent
 {
     public async Task SendMessage(string message, MessageType messageType = MessageType.System, Guid? sender = null)
     {
-        await Player.Send(new MessagePacket()
+        await Player.Send(new MessagePacket
         {
             MessageType = messageType,
             Message = message,
-            SenderId = (uint)sender.GetHashCode(),
+            SenderId = (uint)sender.GetHashCode()
         }, sender);
     }
 }

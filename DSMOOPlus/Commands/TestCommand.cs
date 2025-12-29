@@ -16,11 +16,11 @@ public class TestCommand(PlayerManager manager) : Command
     {
         foreach (var player in manager.RealPlayers)
         {
-            player.Send(new PlayerStatePacket()
+            player.Send(new PlayerStatePacket
             {
                 Coins = 500,
-                Health = 10,
-                Kill = true
+                Health = 1,
+                AssistModeHealth = false
             }, null);
         }
         return "Executed 5";
