@@ -1,6 +1,7 @@
 using System.Buffers;
 using System.Net;
 using System.Numerics;
+using DSMOOFramework.Controller;
 using DSMOOServer.API.Enum;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
@@ -18,15 +19,18 @@ public class Dummy : IPlayer, IDisposable
     private readonly JoinManager _joinManager;
     private readonly PlayerManager _playerManager;
     private readonly PacketManager _packetManager;
+    private readonly ObjectController _objectController;
+    private readonly Dictionary<Type, PlayerComponent> _components = [];
     private readonly Server _server;
 
-    public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager, PacketManager packetManager)
+    public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager, PacketManager packetManager, ObjectController objectController)
     {
         _server = server;
         _playerManager = playerManager;
         _eventManager = eventManager;
         _joinManager = joinManager;
         _packetManager = packetManager;
+        _objectController = objectController;
         _playerManager.Players.Add(this);
     }
 
@@ -101,5 +105,19 @@ public class Dummy : IPlayer, IDisposable
         if (args.Broadcast)
             await _server.ReplaceBroadcast(args.ReplacePacket ?? args.Packet, Id, args.SpecificReplacePackets);
         memory.Dispose();
+    }
+    
+    public T? GetComponent<T>() where T : PlayerComponent
+    {
+        if(_components.TryGetValue(typeof(T), out var component))
+            return (T) component;
+        return null;
+    }
+
+    public T AddComponent<T>() where T : PlayerComponent
+    {
+        if(_components.TryGetValue(typeof(T), out var component))
+            return (T) component;
+        return _objectController.CreateObject<T>()!;
     }
 }

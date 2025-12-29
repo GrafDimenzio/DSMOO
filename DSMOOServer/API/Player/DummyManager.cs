@@ -1,3 +1,4 @@
+using DSMOOFramework.Controller;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
 using DSMOOServer.Connection;
@@ -11,11 +12,12 @@ public class DummyManager(
     PlayerManager playerManager,
     EventManager eventManager,
     JoinManager joinManager,
+    ObjectController objectController,
     PacketManager packetManager) : Manager
 {
     public async Task<Dummy> CreateDummy(string? dummyName = null)
     {
-        var dummy = new Dummy(server, playerManager, eventManager, joinManager, packetManager);
+        var dummy = new Dummy(server, playerManager, eventManager, joinManager, packetManager, objectController);
         if (dummyName != null)
             dummy.Name = dummyName;
         await dummy.Init();

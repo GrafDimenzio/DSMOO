@@ -7,11 +7,11 @@ using DSMOOServer.Network;
 namespace DSMOOPlus.Packets;
 
 [Packet(13)]
-public struct SendMessagePacket : IPacket
+public struct MessagePacket : IPacket
 {
     public const int MessageSize = 0x4B;
     
-    public SendMessagePacket() { }
+    public MessagePacket() { }
     
     public uint SenderId { get; set; } = 0;
 
@@ -19,19 +19,19 @@ public struct SendMessagePacket : IPacket
     
     public string Message { get; set; } = string.Empty;
     
-    public short Size => 8 + MessageSize;
+    public short Size => sizeof(uint) + sizeof(MessageType) + MessageSize;
 
     public void Serialize(Span<byte> data)
     {
         MemoryMarshal.Write(data, SenderId);
-        MemoryMarshal.Write(data[4..], MessageType);
-        Encoding.ASCII.GetBytes(Message).CopyTo(data[8..]);
+        MemoryMarshal.Write(data[sizeof(uint)..], MessageType);
+        Encoding.ASCII.GetBytes(Message).CopyTo(data[(sizeof(uint) + sizeof(MessageType))..]);
     }
 
     public void Deserialize(ReadOnlySpan<byte> data)
     {
         SenderId = MemoryMarshal.Read<uint>(data);
-        MessageType = MemoryMarshal.Read<MessageType>(data[4..]);
-        Message = Encoding.ASCII.GetString(data[8..]).TrimNullTerm();
+        MessageType = MemoryMarshal.Read<MessageType>(data[sizeof(uint)..]);
+        Message = Encoding.ASCII.GetString(data[(sizeof(uint) + sizeof(MessageType))..]).TrimNullTerm();
     }
 }

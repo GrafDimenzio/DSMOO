@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
+using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
@@ -19,6 +20,7 @@ public class Server(
     ConfigHolder<ServerMainConfig> configHolder,
     EventManager eventManager,
     PlayerManager playerManager,
+    ObjectController objectController,
     PacketManager packetManager) : Manager
 {
     private readonly MemoryPool<byte> _memoryPool = MemoryPool<byte>.Shared;
@@ -91,7 +93,7 @@ public class Server(
 
     private async Task HandleSocket(Socket socket)
     {
-        var client = new Client(socket, Logger.Copy(), packetManager);
+        var client = new Client(socket, Logger.Copy(), packetManager, objectController, EventManager);
         playerManager.Players.Add(client.Player);
         IMemoryOwner<byte> memory = null!;
         var id = Guid.Empty;

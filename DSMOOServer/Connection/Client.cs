@@ -1,6 +1,9 @@
 using System.Buffers;
 using System.Net.Sockets;
+using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
+using DSMOOServer.API.Events;
+using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.Player;
 using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
@@ -11,12 +14,13 @@ public class Client : IDisposable
 {
     private readonly PacketManager _packetManager;
     
-    public Client(Socket socket, ILogger logger, PacketManager packetManager)
+    public Client(Socket socket, ILogger logger, PacketManager packetManager, ObjectController objectController, EventManager eventManager)
     {
         _packetManager = packetManager;
         Logger = logger;
         Socket = socket;
-        Player = new Player(this);
+        Player = new Player(this, objectController);
+        eventManager.OnPlayerAddComponents.RaiseEvent(new PlayerAddComponentsEventArgs() { Player = Player });
     }
 
     public Player Player { get; }

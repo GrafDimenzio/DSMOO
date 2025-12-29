@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Net;
 using System.Numerics;
+using DSMOOFramework.Controller;
 using DSMOOServer.API.Enum;
 using DSMOOServer.Connection;
 using DSMOOServer.Helper;
@@ -16,8 +17,12 @@ namespace DSMOOServer.API.Player;
 /// <param name="client"></param>
 public class Player : IPlayer
 {
-    public Player(Client client)
+    private readonly ObjectController _objectController;
+    private readonly Dictionary<Type, PlayerComponent> _components = [];
+    
+    public Player(Client client, ObjectController objectController)
     {
+        _objectController = objectController;
         Client = client;
     }
 
@@ -114,5 +119,19 @@ public class Player : IPlayer
         IsIt = player.IsIt;
         Time = player.Time;
         IsSaveLoaded = player.IsSaveLoaded;
+    }
+
+    public T? GetComponent<T>() where T : PlayerComponent
+    {
+        if(_components.TryGetValue(typeof(T), out var component))
+            return (T) component;
+        return null;
+    }
+
+    public T AddComponent<T>() where T : PlayerComponent
+    {
+        if(_components.TryGetValue(typeof(T), out var component))
+            return (T) component;
+        return _objectController.CreateObject<T>()!;
     }
 }

@@ -20,4 +20,5 @@ public class EventManager(ILogger logger) : Manager
     public readonly EventReactor<PlayerPreJoinEventArgs> OnPlayerPreJoin = new(logger);
     public readonly EventReactor<PlayerStateEventArgs> OnPlayerState = new(logger);
     public readonly EventReactor<PlayerSwitch2dStateEventArgs> OnPlayerSwitch2dState = new(logger);
+    public readonly EventReactor<PlayerAddComponentsEventArgs> OnPlayerAddComponents = new(logger);
 }
