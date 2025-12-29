@@ -1,5 +1,5 @@
-using DSMOOWebInterface.Setup;
 using DSMOOWebInterface.Setup.Controller;
+using DSMOOWebInterface.Setup.Template;
 using EmbedIO;
 using EmbedIO.Routing;
 

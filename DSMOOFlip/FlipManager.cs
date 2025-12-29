@@ -33,7 +33,7 @@ public class FlipManager(
             SaveConfig();
         }
     }
-    
+
     public override void Initialize()
     {
         eventManager.OnPacketReceived.Subscribe(OnPacket);
@@ -77,5 +77,8 @@ public class FlipManager(
         return playerPacket;
     }
 
-    private float MarioSize(bool is2d) => is2d ? 180 : 160;
+    private float MarioSize(bool is2d)
+    {
+        return is2d ? 180 : 160;
+    }
 }

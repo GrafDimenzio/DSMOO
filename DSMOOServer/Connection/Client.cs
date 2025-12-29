@@ -13,14 +13,15 @@ namespace DSMOOServer.Connection;
 public class Client : IDisposable
 {
     private readonly PacketManager _packetManager;
-    
-    public Client(Socket socket, ILogger logger, PacketManager packetManager, ObjectController objectController, EventManager eventManager)
+
+    public Client(Socket socket, ILogger logger, PacketManager packetManager, ObjectController objectController,
+        EventManager eventManager)
     {
         _packetManager = packetManager;
         Logger = logger;
         Socket = socket;
         Player = new Player(this, objectController);
-        eventManager.OnPlayerAddComponents.RaiseEvent(new PlayerAddComponentsEventArgs() { Player = Player });
+        eventManager.OnPlayerAddComponents.RaiseEvent(new PlayerAddComponentsEventArgs { Player = Player });
     }
 
     public Player Player { get; }

@@ -7,7 +7,7 @@ namespace DSMOODiscordBot;
     Aliases = ["discordrestart"],
     Parameters = [],
     Description = "Restarts the Discord Bot"
-    )]
+)]
 public class RestartCommand(DiscordBot bot) : Command
 {
     public override CommandResult Execute(string command, string[] args)

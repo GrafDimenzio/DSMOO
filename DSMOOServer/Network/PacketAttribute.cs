@@ -7,7 +7,7 @@ public class PacketAttribute : Attribute
     {
         Id = (short)type;
     }
-    
+
     public PacketAttribute(short id)
     {
         Id = id;

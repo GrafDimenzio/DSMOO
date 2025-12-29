@@ -9,13 +9,15 @@ namespace DSMOOPlus.Packets;
 public struct InitPacket : IPacket
 {
     public const int VersionSize = 0x20;
-    
+
     public short Size { get; } = sizeof(ushort) + VersionSize;
-    
+
     public ushort MaxPlayers = 0;
     public string Version = "DSMOOPlus 0.1";
 
-    public InitPacket() { }
+    public InitPacket()
+    {
+    }
 
     public void Serialize(Span<byte> data)
     {

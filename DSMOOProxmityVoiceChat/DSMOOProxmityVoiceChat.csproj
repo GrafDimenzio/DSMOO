@@ -7,14 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj" />
-      <ProjectReference Include="..\DSMOOServer\DSMOOServer.csproj" />
-      <ProjectReference Include="..\DSMOOWebInterface\DSMOOWebInterface.csproj" />
+        <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj"/>
+        <ProjectReference Include="..\DSMOOServer\DSMOOServer.csproj"/>
+        <ProjectReference Include="..\DSMOOWebInterface\DSMOOWebInterface.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="Templates\proximity_voice_chat.html" />
-      <EmbeddedResource Include="Templates\proximity_voice_chat.html" />
+        <None Remove="Templates\proximity_voice_chat.html"/>
+        <EmbeddedResource Include="Templates\proximity_voice_chat.html"/>
     </ItemGroup>
 
 </Project>

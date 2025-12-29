@@ -15,6 +15,6 @@ public class PlayerModel(IPlayer player)
     public Quaternion Rotation { get; set; } = player.Rotation;
     public string Cap { get; set; } = player.Costume.CapName;
     public string Body { get; set; } = player.Costume.BodyName;
-    public string Stage {get; set;} = player.Stage;
+    public string Stage { get; set; } = player.Stage;
     public GameMode GameMode { get; set; } = player.CurrentGameMode;
 }

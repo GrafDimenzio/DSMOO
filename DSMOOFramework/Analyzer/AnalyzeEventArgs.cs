@@ -11,18 +11,33 @@ public class AnalyzeEventArgs : IEventArg
         var attribute = type.GetCustomAttributes<AnalyzeAttribute>().FirstOrDefault();
         Priority = attribute?.Priority ?? 0;
     }
-    
+
     public Type Type { get; }
-    
+
     public int Priority { get; }
-    
-    public bool HasAttribute(Type attributeType) => Type.GetCustomAttributes(attributeType, true).Length > 0;
-    
-    public bool HasAttribute<T>() => Type.GetCustomAttributes(typeof(T), true).Length > 0;
-    
-    public T? GetAttribute<T>() where T : Attribute => Type.GetCustomAttribute<T>(true);
-    
-    public bool Is<T>() => typeof(T).IsAssignableFrom(Type);
-    
-    public bool IsAbstract() => Type.IsAbstract;
+
+    public bool HasAttribute(Type attributeType)
+    {
+        return Type.GetCustomAttributes(attributeType, true).Length > 0;
+    }
+
+    public bool HasAttribute<T>()
+    {
+        return Type.GetCustomAttributes(typeof(T), true).Length > 0;
+    }
+
+    public T? GetAttribute<T>() where T : Attribute
+    {
+        return Type.GetCustomAttribute<T>(true);
+    }
+
+    public bool Is<T>()
+    {
+        return typeof(T).IsAssignableFrom(Type);
+    }
+
+    public bool IsAbstract()
+    {
+        return Type.IsAbstract;
+    }
 }

@@ -10,7 +10,9 @@ public struct ConnectPacket : IPacket
     public ushort MaxPlayers = 0;
     public string ClientName = "?????";
 
-    public ConnectPacket() { }
+    public ConnectPacket()
+    {
+    }
 
     public short Size => 6 + Constants.CostumeNameSize;
 

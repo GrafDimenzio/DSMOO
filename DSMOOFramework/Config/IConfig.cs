@@ -1,3 +1,5 @@
 namespace DSMOOFramework.Config;
 
-public interface IConfig { }
+public interface IConfig
+{
+}

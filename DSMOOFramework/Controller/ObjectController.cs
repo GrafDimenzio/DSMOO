@@ -39,8 +39,11 @@ public class ObjectController
         return GetObject(typeof(T), overwriteObjects) as T;
     }
 
-    public T? CreateObject<T>(params object[] overwriteObjects) => (T?)CreateObject(typeof(T), overwriteObjects);
-    
+    public T? CreateObject<T>(params object[] overwriteObjects)
+    {
+        return (T?)CreateObject(typeof(T), overwriteObjects);
+    }
+
     public object? CreateObject(Type type, params object[] overwriteObjects)
     {
         var constructors = type.GetConstructors();
@@ -95,8 +98,8 @@ public class ObjectController
             if (property.GetCustomAttribute<InjectAttribute>() == null) continue;
             property.SetValue(obj, GetObject(property.PropertyType));
         }
-        
-        if(obj is IInject inject)
+
+        if (obj is IInject inject)
             inject.AfterInject();
     }
 
@@ -127,7 +130,7 @@ public class ObjectController
                 objects.Add(obj);
             }
         }
-        
+
         var result = Activator.CreateInstance(type, objects.ToArray())!;
         InjectObject(result);
         return result;

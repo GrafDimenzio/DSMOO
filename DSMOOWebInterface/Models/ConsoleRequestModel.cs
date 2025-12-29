@@ -4,6 +4,5 @@ namespace DSMOOWebInterface.Models;
 
 public class ConsoleRequestModel
 {
-    [JsonProperty("command")]
-    public string Command { get; set; } = "";
+    [JsonProperty("command")] public string Command { get; set; } = "";
 }

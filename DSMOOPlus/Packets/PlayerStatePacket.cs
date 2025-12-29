@@ -10,10 +10,12 @@ public struct PlayerStatePacket : IPacket
     public int Coins = 0;
     public bool AssistModeHealth = false;
 
-    public PlayerStatePacket() { }
+    public PlayerStatePacket()
+    {
+    }
 
     public short Size => sizeof(byte) + sizeof(int) + sizeof(bool);
-    
+
     public void Serialize(Span<byte> data)
     {
         MemoryMarshal.Write(data, Health);

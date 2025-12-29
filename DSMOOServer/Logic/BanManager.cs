@@ -2,7 +2,6 @@ using System.Net;
 using DSMOOFramework.Config;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
-using DSMOOServer.API;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.Map;
@@ -68,19 +67,41 @@ public class BanManager(
         }
     }
 
-    private void SaveBanList() => holder.SaveConfig();
+    private void SaveBanList()
+    {
+        holder.SaveConfig();
+    }
 
     public bool IsPlayerBanned(IPlayer player)
     {
         if (player.IsDummy || player.Ip == null) return false;
         return IsIPv4Banned(player.Ip) || IsProfileBanned(player.Id);
     }
-    
-    public bool IsIPv4Banned(IPAddress? address) => IsIPv4Banned(address?.ToString() ?? string.Empty);
-    public bool IsIPv4Banned(string ip) => IPs.Contains(ip);
-    public bool IsProfileBanned(Guid id) => Profiles.Contains(id);
-    public bool IsStageBanned(string stage) => Stages.Contains(stage);
-    public bool IsGameModeBanned(GameMode gameMode) => GameModes.Contains((sbyte)gameMode);
+
+    public bool IsIPv4Banned(IPAddress? address)
+    {
+        return IsIPv4Banned(address?.ToString() ?? string.Empty);
+    }
+
+    public bool IsIPv4Banned(string ip)
+    {
+        return IPs.Contains(ip);
+    }
+
+    public bool IsProfileBanned(Guid id)
+    {
+        return Profiles.Contains(id);
+    }
+
+    public bool IsStageBanned(string stage)
+    {
+        return Stages.Contains(stage);
+    }
+
+    public bool IsGameModeBanned(GameMode gameMode)
+    {
+        return GameModes.Contains((sbyte)gameMode);
+    }
 
 
     public void BanPlayer(IPlayer player)
@@ -168,9 +189,9 @@ public class BanManager(
                 return king.MainStageName;
         //All Kingdoms are banned. Send the player to any subarea
         foreach (var king in kingdoms)
-            foreach (var subArea in king.SubAreas)
-                if (!IsStageBanned(subArea.SubAreaName))
-                    return subArea.SubAreaName;
+        foreach (var subArea in king.SubAreas)
+            if (!IsStageBanned(subArea.SubAreaName))
+                return subArea.SubAreaName;
 
         return !IsStageBanned("HomeShipInsideStage") ? "HomeShipInsideStage" : "";
     }
@@ -201,7 +222,8 @@ public class BanManager(
         if (!IsStageBanned(args.NewStage)) return;
         args.SendBack = true;
         if (!IsStageBanned(args.SendBackStage) && !string.IsNullOrWhiteSpace(args.SendBackStage)) return;
-        args.SendBackStage = GetSafeStage(string.IsNullOrWhiteSpace(args.SendBackStage) ? args.NewStage : args.SendBackStage);
+        args.SendBackStage =
+            GetSafeStage(string.IsNullOrWhiteSpace(args.SendBackStage) ? args.NewStage : args.SendBackStage);
         args.SendBackScenario = -1;
         args.SendBackWarp = MapInfo.GetConnection(args.PreviousStage, args.SendBackStage, false);
     }

@@ -40,9 +40,9 @@ public class JoinManager(
         args.Sender.Id = args.Header.Id;
         args.Sender.Name = connectPacket.ClientName;
 
-        var initArgs = new SendPlayerInitPacketEventArgs(new InitPacket()
+        var initArgs = new SendPlayerInitPacketEventArgs(new InitPacket
         {
-            MaxPlayers = Config.MaxPlayers,
+            MaxPlayers = Config.MaxPlayers
         }, args.Sender.Player);
         eventManager.OnSendPlayerInitPacket.RaiseEvent(initArgs);
         args.Sender.Send(initArgs.Packet).GetAwaiter().GetResult();

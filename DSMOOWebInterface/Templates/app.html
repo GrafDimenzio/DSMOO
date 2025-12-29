@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html data-theme="dark" lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/png" sizes="70x70" href="/static/favicon-globe.png">
-    <link rel="stylesheet" href="/static/styles.css">
+    <link href="/static/favicon-globe.png" rel="icon" sizes="70x70" type="image/png">
+    <link href="/static/styles.css" rel="stylesheet">
     <title>{{ title }}</title>
     <script src="/static/js/common.js"></script>
     {{ head }}
@@ -19,7 +19,7 @@
             {{ if nav.admin_required == false || admin == true }}
             {{ if nav.player_login_required == false || username != null }}
             <div class="nav-item">
-                <a class="{{ selected == nav.selection_id ? "selected" : "" }}" href="{{ nav.href }}">
+                <a class="{{ selected == nav.selection_id ? " selected" : "" }}" href="{{ nav.href }}">
                 {{ nav.svg }}
                 <div class="center">{{ nav.text }}</div>
                 </a>
@@ -37,7 +37,12 @@
     <div class="topbar">
         {{ if admin == true }}
         <div class="center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            <svg class="lucide lucide-shield-check-icon lucide-shield-check" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                 stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+                <path d="m9 12 2 2 4-4"/>
+            </svg>
         </div>
         {{ end }}
         <div class="expand center">
@@ -46,7 +51,13 @@
         <div>
             <div class="center max-size">
                 <a href="/login">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-icon lucide-circle-user"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3"/><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/></svg>
+                    <svg class="lucide lucide-circle-user-icon lucide-circle-user" fill="none" height="24" stroke="currentColor" stroke-linecap="round"
+                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="10" r="3"/>
+                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+                    </svg>
                 </a>
             </div>
         </div>

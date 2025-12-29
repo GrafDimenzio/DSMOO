@@ -3,7 +3,7 @@ namespace DSMOOServer.API.Enum;
 public enum PlayerAction : ushort
 {
     None,
-    
+
     Backflip,
     Bonk,
     CapTrample,

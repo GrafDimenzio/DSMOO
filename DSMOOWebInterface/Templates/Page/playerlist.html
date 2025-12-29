@@ -13,22 +13,21 @@
             <h3>{{ player.name }}</h3>
             <p class="grid-2">
                 <span>Cap:</span>
-                <img class="small-image" alt="{{player.cap}}" src="{{ get_cap player.cap }}"/>
-                
+                <img alt="{{player.cap}}" class="small-image" src="{{ get_cap player.cap }}"/>
+
                 <span>Costume:</span>
-                <img class="small-image" alt="{{player.body}}" src="{{ get_body player.body }}"/>
+                <img alt="{{player.body}}" class="small-image" src="{{ get_body player.body }}"/>
 
                 <span>Capture:</span>
-                {{ 
-                    if player.capture == "None"
-                        "<span>None</span>"
-                    else
-                        '<img class="small-image" alt="' + player.capture +'" src="' + get_capture player.capture + '"}}"/>'
-                    end
+                {{
+                if player.capture == "None"
+                "<span>None</span>"
+                else
+                '<img alt="' + player.capture +'" class="small-image" src="' + get_capture player.capture + '" }}"/>'
+                end
                 }}
-                
-                
-                
+
+
                 <span>Stage:</span>
                 <span>{{ player.stage }}</span>
 

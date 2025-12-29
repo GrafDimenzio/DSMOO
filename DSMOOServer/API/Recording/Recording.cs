@@ -9,7 +9,7 @@ namespace DSMOOServer.API.Recording;
 public class Recording
 {
     private readonly PacketManager _packetManager;
-    
+
     private readonly Stopwatch _stopwatch = new();
 
     public Recording(PacketManager packetManager)

@@ -8,29 +8,29 @@ https://tabler.io/icons
     --color-primary: #E11D48;
     --color-primary-light: #FB7185;
     --color-primary-dark: #9F1239;
-    
+
     --color-secondary: #2563EB;
     --color-secondary-light: #60A5FA;
     --color-secondary-dark: #1E40AF;
-    
+
     --color-accent: #FACC15;
     --color-accent-light: #FDE047;
     --color-accent-dark: #CA8A04;
-    
+
     --color-bg: #F8FAFC;
     --color-bg-dark: #E5E7EB;
     --color-surface: #FFFFFF;
-    
+
     --color-text: #0F172A;
     --color-text-secondary: #475569;
-    
+
     --color-border: #E2E8F0;
-    
+
     --color-success: #22C55E;
     --color-warning: #F59E0B;
     --color-error: #EF4444;
     --color-info: #38BDF8;
-    
+
     --height-top: 4rem;
     --border-top: 1px solid var(--color-accent-dark);
     --shadow-top: 0 0.5rem 8px rgba(0, 0, 0, 0.15);
@@ -252,7 +252,7 @@ nav {
 .max-size {
     height: 100%;
     width: 100%;
-    box-sizing:  border-box;
+    box-sizing: border-box;
 }
 
 .expand {

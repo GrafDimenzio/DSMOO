@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using DSMOOFramework.Commands;
+using DSMOOServer.API.Stage;
 using DSMOOServer.Helper;
 using DSMOOServer.Logic;
 using DSMOOServer.Network.Packets;

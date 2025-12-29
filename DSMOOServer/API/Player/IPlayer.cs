@@ -34,7 +34,7 @@ public interface IPlayer
     public bool IsSaveLoaded { get; }
 
     public bool IsBanned { get; }
-    
+
     public PlayerAction LastPlayerAction { get; set; }
 
 
@@ -47,7 +47,7 @@ public interface IPlayer
     public Task ChangeStage(string stage, string warp, sbyte scenario = -1, byte subScenarioType = 0, int delay = 0);
 
     public Task Send<T>(T packet, Guid? sender) where T : struct, IPacket;
-    
+
     public T? GetComponent<T>() where T : PlayerComponent;
     public T AddComponent<T>() where T : PlayerComponent;
 }

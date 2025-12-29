@@ -31,8 +31,8 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
             Logger.Warn("No Token set for DiscordBot!");
             return;
         }
-        
-        if(Logger is BasicLogger basicLogger)
+
+        if (Logger is BasicLogger basicLogger)
             basicLogger.Log += OnLog;
 
         Task.Run(Run);
@@ -53,21 +53,19 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
             Logger.Error("Error while logging to discord", ex);
         }
     }
-    
+
     private static List<string> SplitMessage(string message, int maxSizePerElem = 2000)
     {
-        List<string> result = new List<string>();
-        for (int i = 0; i < message.Length; i += maxSizePerElem) 
-        {
+        var result = new List<string>();
+        for (var i = 0; i < message.Length; i += maxSizePerElem)
             result.Add(message.Substring(i, message.Length - i < maxSizePerElem ? message.Length - i : maxSizePerElem));
-        }
         return result;
     }
 
     public async Task Reconnect()
     {
         _reconnecting = true;
-        if(_client != null)
+        if (_client != null)
             await _client.DisconnectAsync();
         await Run();
     }
@@ -83,7 +81,7 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
 
         try
         {
-            _client = new DiscordClient(new DiscordConfiguration()
+            _client = new DiscordClient(new DiscordConfiguration
             {
                 Token = Config.Token,
                 TokenType = TokenType.Bot,
@@ -92,7 +90,6 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
             });
             await _client.ConnectAsync(new DiscordActivity("Super Mario Odyssey Online", ActivityType.Competing));
             if (Config.CommandChannel != 0)
-            {
                 try
                 {
                     _commandChannel = await _client.GetChannelAsync(Config.CommandChannel);
@@ -101,14 +98,10 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
                 {
                     Logger.Error("Couldn't get Discord Command Channel", ex);
                 }
-            }
             else
-            {
                 _commandChannel = null;
-            }
-            
+
             if (Config.LogChannel != 0)
-            {
                 try
                 {
                     _logChannel = await _client.GetChannelAsync(Config.LogChannel);
@@ -117,12 +110,9 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
                 {
                     Logger.Error("Couldn't get Discord Log Channel", ex);
                 }
-            }
             else
-            {
-                _logChannel = null; 
-            }
-            
+                _logChannel = null;
+
             Logger.Info($"Discord bot logged in as {_client.CurrentUser.Username}#{_client.CurrentUser.Discriminator}");
             _reconnecting = false;
             _mentionPrefix = $"{_client.CurrentUser.Mention}";
@@ -150,23 +140,22 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
 
     private async Task ClientOnMessageCreated(DiscordClient sender, MessageCreateEventArgs e)
     {
-        if(e.Author.IsCurrent) return;
-        if(e.Channel is DiscordDmChannel) return;
-        if(e.Channel.Id != _commandChannel?.Id) return;
+        if (e.Author.IsCurrent) return;
+        if (e.Channel is DiscordDmChannel) return;
+        if (e.Channel.Id != _commandChannel?.Id) return;
         try
         {
             var msg = e.Message?.Content ?? "";
             if (msg.StartsWith(_mentionPrefix))
             {
-                msg = msg[(_mentionPrefix.Length)..];
+                msg = msg[_mentionPrefix.Length..];
             }
             else if (string.IsNullOrWhiteSpace(Config.Prefix))
             {
-                
             }
             else if (msg.StartsWith(Config.Prefix))
             {
-                msg = msg[(Config.Prefix.Length)..];
+                msg = msg[Config.Prefix.Length..];
             }
             else
             {
@@ -176,7 +165,6 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
             var response = commandManager.ProcessQuery(msg);
             foreach (var splitMessage in SplitMessage(response.Message))
                 await e.Message?.RespondAsync(splitMessage);
-
         }
         catch (Exception exception)
         {

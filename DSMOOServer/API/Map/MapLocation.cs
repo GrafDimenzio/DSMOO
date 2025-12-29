@@ -1,5 +1,5 @@
 using System.Numerics;
-using DSMOOServer.Helper;
+using DSMOOServer.API.Stage;
 
 namespace DSMOOServer.API.Map;
 
@@ -48,7 +48,7 @@ public class MapLocation
         Number = (int)((X - 65) / 390) + 1;
         Letter = (int)((Y - 65) / 390) + 1;
     }
-    
+
     public string Kingdom { get; set; }
 
     public double X { get; set; }

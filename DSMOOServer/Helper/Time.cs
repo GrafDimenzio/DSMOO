@@ -1,3 +1,5 @@
 namespace DSMOOServer.Helper;
 
-public record Time(ushort Minutes, byte Seconds, DateTime When) { }
+public record Time(ushort Minutes, byte Seconds, DateTime When)
+{
+}

@@ -1,6 +1,6 @@
-using DSMOOFramework.Plugins;
+using DSMOOFramework.Commands;
 
-namespace DSMOOFramework.Commands;
+namespace DSMOOFramework.Plugins;
 
 [Command(
     CommandName = "plugin",

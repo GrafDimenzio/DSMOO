@@ -18,7 +18,7 @@ public class Debug(PlayerManager manager, DummyManager dummyManager) : Command
     {
         var dummy = dummyManager.CreateDummy("ActTest").GetAwaiter().GetResult();
         var player = manager.RealPlayers.First();
-        dummy.BroadcastPacket(new GamePacket()
+        dummy.BroadcastPacket(new GamePacket
         {
             Is2d = false,
             Stage = player.Stage,

@@ -8,7 +8,9 @@ public struct InitPacket : IPacket
     public short Size { get; } = 2;
     public ushort MaxPlayers = 0;
 
-    public InitPacket() { }
+    public InitPacket()
+    {
+    }
 
     public void Serialize(Span<byte> data)
     {

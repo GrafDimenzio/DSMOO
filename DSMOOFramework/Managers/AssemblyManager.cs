@@ -7,7 +7,9 @@ namespace DSMOOFramework.Managers;
 public class AssemblyManager : Manager
 {
     private readonly Analyzer.Analyzer _analyzer;
-    
+
+    private readonly List<Assembly> _assemblies = [];
+
     public AssemblyManager(ILogger logger, Analyzer.Analyzer analyzer)
     {
         _analyzer = analyzer;
@@ -15,12 +17,13 @@ public class AssemblyManager : Manager
         AppDomain.CurrentDomain.AssemblyResolve += ResolveAssembly;
     }
 
-    private Assembly ResolveAssembly(object? sender, ResolveEventArgs args)
-        => _assemblies.FirstOrDefault(x => x.FullName == args.Name)!;
-    
-    private readonly List<Assembly> _assemblies = [];
     public ILogger Logger { get; }
     public ReadOnlyCollection<Assembly> Assemblies => _assemblies.AsReadOnly();
+
+    private Assembly ResolveAssembly(object? sender, ResolveEventArgs args)
+    {
+        return _assemblies.FirstOrDefault(x => x.FullName == args.Name)!;
+    }
 
     public Assembly LoadAssembly(string path)
     {
@@ -31,7 +34,9 @@ public class AssemblyManager : Manager
     }
 
     public Assembly[] LoadAssemblies(string directory)
-        => LoadAssemblies(Directory.GetFiles(directory, "*.dll", SearchOption.AllDirectories));
+    {
+        return LoadAssemblies(Directory.GetFiles(directory, "*.dll", SearchOption.AllDirectories));
+    }
 
     public Assembly[] LoadAssemblies(string[] paths)
     {

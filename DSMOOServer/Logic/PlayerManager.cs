@@ -21,7 +21,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
 
     public List<IPlayer> RealPlayers =>
         Players.Where(x => !x.IsDummy && x is Player { Client.Socket.Connected: true }).ToList();
-    
+
     public int PlayerCount => RealPlayers.Select(x => x.Id).Distinct().Count();
 
     public PlayerSearch SearchForPlayers(string[] args)
@@ -195,17 +195,17 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
                 player.Rotation = playerPacket.Rotation;
 
                 var action = APIConstants.PlayerActions.GetValueOrDefault(playerPacket.Act, PlayerAction.None);
-                
+
                 if (player.LastPlayerAction != action)
                 {
                     eventManager.OnPlayerAction.RaiseEvent(new PlayerActionEventArgs
                     {
                         Player = player,
-                        Action = action,
+                        Action = action
                     });
                     player.LastPlayerAction = action;
                 }
-                
+
                 player.AnimationBlendWeights = playerPacket.AnimationBlendWeights;
                 player.Act = playerPacket.Act;
                 player.SubAct = playerPacket.SubAct;
@@ -213,7 +213,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
                 var ev = new PlayerStateEventArgs
                 {
                     Player = player,
-                    Packet = playerPacket,
+                    Packet = playerPacket
                 };
                 eventManager.OnPlayerState.RaiseEvent(ev);
                 if (!ev.Packet.Equals(playerPacket) || ev.Invisible)
@@ -225,9 +225,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
                 }
 
                 foreach (var packetPair in ev.SpecificPackets)
-                {
                     args.SpecificReplacePackets[packetPair.Key] = packetPair.Value;
-                }
 
                 foreach (var id in ev.SpecificInvisible)
                 {
@@ -246,10 +244,11 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
 
                     if (packet is not PlayerPacket invisPacket)
                         continue;
-                    
+
                     invisPacket.Position = Vector3.UnitY * -10000;
                     args.SpecificReplacePackets[id] = invisPacket;
                 }
+
                 break;
         }
     }

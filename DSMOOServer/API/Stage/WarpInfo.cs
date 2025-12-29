@@ -1,6 +1,6 @@
 using DSMOOServer.API.Serialized;
 
-namespace DSMOOServer.API;
+namespace DSMOOServer.API.Stage;
 
 public class WarpInfo
 {

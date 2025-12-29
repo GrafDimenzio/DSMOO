@@ -17,9 +17,9 @@ namespace DSMOOServer.API.Player;
 /// <param name="client"></param>
 public class Player : IPlayer
 {
-    private readonly ObjectController _objectController;
     private readonly Dictionary<Type, PlayerComponent> _components = [];
-    
+    private readonly ObjectController _objectController;
+
     public Player(Client client, ObjectController objectController)
     {
         _objectController = objectController;
@@ -58,7 +58,7 @@ public class Player : IPlayer
     public bool IsSaveLoaded { get; internal set; }
 
     public bool IsBanned { get; internal set; } = false;
-    
+
     public PlayerAction LastPlayerAction { get; set; }
 
     public void Disconnect()
@@ -103,6 +103,20 @@ public class Player : IPlayer
         await Client.Send(packet, sender);
     }
 
+    public T? GetComponent<T>() where T : PlayerComponent
+    {
+        if (_components.TryGetValue(typeof(T), out var component))
+            return (T)component;
+        return null;
+    }
+
+    public T AddComponent<T>() where T : PlayerComponent
+    {
+        if (_components.TryGetValue(typeof(T), out var component))
+            return (T)component;
+        return _objectController.CreateObject<T>()!;
+    }
+
     public void CopyDataFromOtherPlayer(IPlayer player)
     {
         Position = player.Position;
@@ -119,19 +133,5 @@ public class Player : IPlayer
         IsIt = player.IsIt;
         Time = player.Time;
         IsSaveLoaded = player.IsSaveLoaded;
-    }
-
-    public T? GetComponent<T>() where T : PlayerComponent
-    {
-        if(_components.TryGetValue(typeof(T), out var component))
-            return (T) component;
-        return null;
-    }
-
-    public T AddComponent<T>() where T : PlayerComponent
-    {
-        if(_components.TryGetValue(typeof(T), out var component))
-            return (T) component;
-        return _objectController.CreateObject<T>()!;
     }
 }

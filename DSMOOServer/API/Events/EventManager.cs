@@ -8,9 +8,9 @@ namespace DSMOOServer.API.Events;
 public class EventManager(ILogger logger) : Manager
 {
     public readonly EventReactor<DummySendPacketEventArgs> OnDummySendPacket = new(logger);
-    public readonly EventReactor<SendPlayerInitPacketEventArgs> OnSendPlayerInitPacket = new(logger);
     public readonly EventReactor<PacketReceivedEventArgs> OnPacketReceived = new(logger);
     public readonly EventReactor<PlayerActionEventArgs> OnPlayerAction = new(logger);
+    public readonly EventReactor<PlayerAddComponentsEventArgs> OnPlayerAddComponents = new(logger);
     public readonly EventReactor<PlayerCaptureEventArgs> OnPlayerCapture = new(logger);
     public readonly EventReactor<PlayerChangeCostumeEventArgs> OnPlayerChangeCostume = new(logger);
     public readonly EventReactor<PlayerChangeStageEventArgs> OnPlayerChangeStage = new(logger);
@@ -20,5 +20,5 @@ public class EventManager(ILogger logger) : Manager
     public readonly EventReactor<PlayerPreJoinEventArgs> OnPlayerPreJoin = new(logger);
     public readonly EventReactor<PlayerStateEventArgs> OnPlayerState = new(logger);
     public readonly EventReactor<PlayerSwitch2dStateEventArgs> OnPlayerSwitch2dState = new(logger);
-    public readonly EventReactor<PlayerAddComponentsEventArgs> OnPlayerAddComponents = new(logger);
+    public readonly EventReactor<SendPlayerInitPacketEventArgs> OnSendPlayerInitPacket = new(logger);
 }

@@ -15,15 +15,16 @@ namespace DSMOOServer.API.Player;
 
 public class Dummy : IPlayer, IDisposable
 {
+    private readonly Dictionary<Type, PlayerComponent> _components = [];
     private readonly EventManager _eventManager;
     private readonly JoinManager _joinManager;
-    private readonly PlayerManager _playerManager;
-    private readonly PacketManager _packetManager;
     private readonly ObjectController _objectController;
-    private readonly Dictionary<Type, PlayerComponent> _components = [];
+    private readonly PacketManager _packetManager;
+    private readonly PlayerManager _playerManager;
     private readonly Server _server;
 
-    public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager, PacketManager packetManager, ObjectController objectController)
+    public Dummy(Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager,
+        PacketManager packetManager, ObjectController objectController)
     {
         _server = server;
         _playerManager = playerManager;
@@ -67,18 +68,44 @@ public class Dummy : IPlayer, IDisposable
     public bool IsBanned => false;
     public PlayerAction LastPlayerAction { get; set; }
 
-    public void Disconnect() => Dispose();
+    public void Disconnect()
+    {
+        Dispose();
+    }
 
-    public void Crash(bool ban) => Dispose();
+    public void Crash(bool ban)
+    {
+        Dispose();
+    }
 
-    public Task SendShine(int id) => Task.CompletedTask;
+    public Task SendShine(int id)
+    {
+        return Task.CompletedTask;
+    }
 
     public Task ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0, int delay = 0)
     {
         return Task.CompletedTask;
     }
 
-    public Task Send<T>(T packet, Guid? sender) where T : struct, IPacket => Task.CompletedTask;
+    public Task Send<T>(T packet, Guid? sender) where T : struct, IPacket
+    {
+        return Task.CompletedTask;
+    }
+
+    public T? GetComponent<T>() where T : PlayerComponent
+    {
+        if (_components.TryGetValue(typeof(T), out var component))
+            return (T)component;
+        return null;
+    }
+
+    public T AddComponent<T>() where T : PlayerComponent
+    {
+        if (_components.TryGetValue(typeof(T), out var component))
+            return (T)component;
+        return _objectController.CreateObject<T>()!;
+    }
 
     public async Task Init()
     {
@@ -105,19 +132,5 @@ public class Dummy : IPlayer, IDisposable
         if (args.Broadcast)
             await _server.ReplaceBroadcast(args.ReplacePacket ?? args.Packet, Id, args.SpecificReplacePackets);
         memory.Dispose();
-    }
-    
-    public T? GetComponent<T>() where T : PlayerComponent
-    {
-        if(_components.TryGetValue(typeof(T), out var component))
-            return (T) component;
-        return null;
-    }
-
-    public T AddComponent<T>() where T : PlayerComponent
-    {
-        if(_components.TryGetValue(typeof(T), out var component))
-            return (T) component;
-        return _objectController.CreateObject<T>()!;
     }
 }

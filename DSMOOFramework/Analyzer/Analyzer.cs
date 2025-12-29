@@ -38,9 +38,6 @@ public class Analyzer(ILogger logger)
             eventArgs.Add(args);
         }
 
-        foreach (var arg in eventArgs.OrderByDescending(x => x.Priority))
-        {
-            OnAnalyze.RaiseEvent(arg);
-        }
+        foreach (var arg in eventArgs.OrderByDescending(x => x.Priority)) OnAnalyze.RaiseEvent(arg);
     }
 }

@@ -10,13 +10,15 @@ namespace DSMOOPlus.Packets;
 public struct MessagePacket : IPacket
 {
     public const int MessageSize = 0x4B;
-    
-    public MessagePacket() { }
-    
+
+    public MessagePacket()
+    {
+    }
+
     public uint SenderId = 0;
     public MessageType MessageType = MessageType.Chat;
     public string Message = string.Empty;
-    
+
     public short Size => sizeof(uint) + sizeof(MessageType) + MessageSize;
 
     public void Serialize(Span<byte> data)

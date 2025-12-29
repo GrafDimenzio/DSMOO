@@ -27,12 +27,9 @@ public class Config(
         switch (args[0])
         {
             case "load":
-                foreach (var config in configManager.Configs.Values)
-                {
-                    config.LoadConfig();
-                }
+                foreach (var config in configManager.Configs.Values) config.LoadConfig();
                 return "Loaded all Config Files";
-            
+
             case "merge" when args.Length == 2:
                 if (!bool.TryParse(args[1], out var enable))
                     return new CommandResult

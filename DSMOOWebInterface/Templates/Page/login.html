@@ -6,12 +6,12 @@
         <h4>Player Login</h4>
         {{ if username == null }}
         <label for="playerInput">Player name:</label>
-        <form action="api/player-login" method="post" class="login">
-            <input type="text" id="playerInput" name="username" placeholder="Player name"/>
+        <form action="api/player-login" class="login" method="post">
+            <input id="playerInput" name="username" placeholder="Player name" type="text"/>
             <button type="submit">Submit</button>
         </form>
         {{ else }}
-        <form action="api/player-logout" method="post" class="login">
+        <form action="api/player-logout" class="login" method="post">
             <div>
                 <label>User:</label>
                 <span>{{ username }}</span>
@@ -23,12 +23,12 @@
         <h4>Admin Login</h4>
         {{ if admin != true }}
         <label for="adminInput">Password:</label>
-        <form action="api/admin-login" method="post" class="login">
-            <input type="text" id="adminInput" name="password" placeholder="Admin password"/>
+        <form action="api/admin-login" class="login" method="post">
+            <input id="adminInput" name="password" placeholder="Admin password" type="text"/>
             <button>Submit</button>
         </form>
         {{ else }}
-        <form action="api/admin-logout" method="post" class="login">
+        <form action="api/admin-logout" class="login" method="post">
             <div>
                 <label>You are an Admin</label>
             </div>

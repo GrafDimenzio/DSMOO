@@ -13,7 +13,10 @@ public struct ChangeStagePacket : IPacket
     public sbyte Scenario = 0;
     public byte SubScenarioType = 0;
     public short Size => 0x44;
-    public ChangeStagePacket() { }
+
+    public ChangeStagePacket()
+    {
+    }
 
     public void Serialize(Span<byte> data)
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Specialized;
 
-namespace DSMOOServer.Helper;
+namespace DSMOOServer.API.Stage;
 
 public static class Stages
 {

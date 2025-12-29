@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
@@ -50,7 +49,8 @@ public struct PlayerPacket : IPacket, IEquatable<PlayerPacket>
 
     public bool Equals(PlayerPacket other)
     {
-        return Position.Equals(other.Position) && Rotation.Equals(other.Rotation) && AnimationBlendWeights.Equals(other.AnimationBlendWeights) && Act == other.Act && SubAct == other.SubAct;
+        return Position.Equals(other.Position) && Rotation.Equals(other.Rotation) &&
+               AnimationBlendWeights.Equals(other.AnimationBlendWeights) && Act == other.Act && SubAct == other.SubAct;
     }
 
     public override int GetHashCode()

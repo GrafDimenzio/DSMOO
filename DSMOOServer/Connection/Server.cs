@@ -31,7 +31,10 @@ public class Server(
     private ServerMainConfig Config { get; } = configHolder.Config;
     private EventManager EventManager { get; } = eventManager;
 
-    public override void Initialize() => Task.Run(Listen);
+    public override void Initialize()
+    {
+        Task.Run(Listen);
+    }
 
     private async Task Listen()
     {
@@ -135,17 +138,12 @@ public class Server(
                 {
                     var packetType = packetManager.GetPacketType(packetHeader.Type);
                     if (packetType == null)
-                    {
                         //The Client send an unknown Packet Type
                         //Most likely a modification that the Server doesn't Support
                         //Ignore the Packet and don't broadcast it to other Player
                         continue;
-                    }
                     var packet = (IPacket?)Activator.CreateInstance(packetType);
-                    if (packet == null)
-                    {
-                        continue;
-                    }
+                    if (packet == null) continue;
 
                     packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
                     Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");

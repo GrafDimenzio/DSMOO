@@ -10,10 +10,12 @@ public struct ChangeCostumePacket : IPacket
     public string Body = "";
     public string Cap = "";
 
-    public ChangeCostumePacket() { }
+    public ChangeCostumePacket()
+    {
+    }
 
     public short Size => Constants.CostumeNameSize * 2;
-    
+
     public void Serialize(Span<byte> data)
     {
         Encoding.ASCII.GetBytes(Body).CopyTo(data[..Constants.CostumeNameSize]);

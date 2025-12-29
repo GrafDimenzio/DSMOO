@@ -1,6 +1,6 @@
 using EmbedIO.WebApi;
 
-namespace DSMOOWebInterface.Setup;
+namespace DSMOOWebInterface.Setup.Template;
 
 public abstract class TemplateController(TemplateManager manager) : WebApiController
 {
