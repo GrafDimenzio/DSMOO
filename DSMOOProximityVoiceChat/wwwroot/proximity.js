@@ -6,15 +6,27 @@ const audioElements = {};
 document.getElementById("joinBtn").addEventListener("click", joinVoiceChat);
 
 window.addEventListener("beforeunload", () => {
+    cleanupAll();
     if (ws != null && ws.readyState === WebSocket.OPEN) {
         ws.close(1000, "");
     }
 });
 
 async function joinVoiceChat() {
+    cleanupAll()
+    if(ws) {
+        ws.close();
+        ws = null;
+    }
     try {
         localStream = await navigator.mediaDevices.getUserMedia({
-            audio: true,
+            audio: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                autoGainControl: true,
+                channelCount: 1,
+            },
+            video: false,
         });   
     } catch (error) {
         console.error(error);
@@ -29,11 +41,12 @@ async function joinVoiceChat() {
     }
 
     ws.onopen = () => {
-        console.log("WebSocket verbunden!");
+        console.log("WebSocket connected!");
     };
 
     ws.onclose = () => {
-        console.log("WebSocket geschlossen");
+        console.log("WebSocket closed");
+        cleanupAll();
     };
 }
 
@@ -111,30 +124,58 @@ async function callUser(username) {
 }
 
 async function handleOffer(msg) {
-    const pc = createPeer(msg.from);
+    let pc;
+    
+    if(peers[msg.from]) {
+        pc = peers[msg.from];
+    } else {
+        pc = createPeer(msg.from);
+    }
 
-    await pc.setRemoteDescription(msg.sdp);
+    const desc = new RTCSessionDescription(msg.sdp);
+    await pc.setRemoteDescription(desc);
+
+    if (pc._iceQueue) {
+        for (const cand of pc._iceQueue) {
+            await pc.addIceCandidate(new RTCIceCandidate(cand));
+        }
+        delete pc._iceQueue;
+    }
+    
     const answer = await pc.createAnswer();
     await pc.setLocalDescription(answer);
 
     ws.send(JSON.stringify({
         type: "answer",
         to: msg.from,
-        sdp: answer
+        sdp: pc.localDescription
     }))
 }
 
 async function handleAnswer(msg) {
     const pc = peers[msg.from];
-    if (pc) {
-        await pc.setRemoteDescription(msg.sdp);
+    if (!pc) return;
+    
+    const desc = new RTCSessionDescription(msg.sdp);
+    await pc.setRemoteDescription(desc);
+
+    if (pc._iceQueue) {
+        for (const cand of pc._iceQueue) {
+            await pc.addIceCandidate(new RTCIceCandidate(cand));
+        }
+        delete pc._iceQueue;
     }
 }
 
 async function handleIce(msg) {
     const pc = peers[msg.from];
-    if (pc && msg.candidate) {
-        await pc.addIceCandidate(msg.candidate);
+    if(!pc || !msg.candidate) return;
+    
+    if(pc.remoteDescription) {
+        await pc.addIceCandidate(new RTCIceCandidate (msg.candidate));
+    } else {
+        pc._iceQueue = pc._iceQueue || [];
+        pc._iceQueue.push(msg.candidate);
     }
 }
 
@@ -153,5 +194,24 @@ function cleanup(username) {
     if (audioElements[username]) {
         audioElements[username].remove();
         delete audioElements[username];
+    }
+}
+
+function cleanupAll(){
+    for (const username in peers) {
+        peers[username].close();
+        delete peers[username];
+    }
+    
+    for (const username in audioElements) {
+        audioElements[username].pause();
+        audioElements[username].srcObject = null;
+        audioElements[username].remove();
+        delete audioElements[username];
+    }
+    
+    if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+        localStream = null;
     }
 }

@@ -28,15 +28,22 @@ public class VoiceChatWebSocket : WebSocketModule
             return context.WebSocket.CloseAsync();
         }
         
+        Console.WriteLine($"{username} connected");
+        
         lock (_clients)
         {
             _clients[username] = context;
         }
-        BroadcastAsync(JsonSerializer.Serialize(new
+
+        foreach (var webSocketContext in ActiveContexts)
         {
-            type = "user-joined",
-            id = username
-        }));
+            if(webSocketContext == context) continue;
+            SendAsync(webSocketContext, JsonSerializer.Serialize(new
+            {
+                type = "user-joined",
+                id = username
+            }));
+        }
         return Task.CompletedTask;
     }
 
@@ -99,6 +106,9 @@ public class VoiceChatWebSocket : WebSocketModule
         while (true)
         {
             await Task.Delay(50);
+            
+            if(_clients.Count == 0)
+                continue;
 
             var connectedPlayers = _playerManager.RealPlayers.Where(x => _clients.ContainsKey(x.Name)).ToList();
 

@@ -24,13 +24,6 @@ public class DSMOOPlusManager(EventManager eventManager, ILogger logger) : Manag
         eventManager.OnSendPlayerInitPacket.Subscribe(OnSendInitPacket);
         eventManager.OnPlayerAddComponents.Subscribe(OnAddComponent);
         eventManager.OnPacketReceived.Subscribe(OnPacket);
-        eventManager.OnPlayerAction.Subscribe(OnPlayerAction);
-    }
-
-    private void OnPlayerAction(PlayerActionEventArgs args)
-    {
-        if (args.Action != PlayerAction.None)
-            args.Player.GetComponent<PlayerPlus>()!.SendMessage(args.Action.ToString());
     }
 
     private void OnPacket(PacketReceivedEventArgs args)
