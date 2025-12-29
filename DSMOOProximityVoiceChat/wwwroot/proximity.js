@@ -33,7 +33,9 @@ async function joinVoiceChat() {
         return;
     }
 
-    ws = new WebSocket("ws://localhost:6783/ws/proximity-chat");
+    const url = getWebSocketUrl("/ws/proximity-chat");
+    console.log(url);
+    ws = new WebSocket(url);
 
     ws.onmessage = async (e) => {
         const msg = JSON.parse(e.data);

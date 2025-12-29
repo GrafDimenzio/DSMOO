@@ -19,7 +19,7 @@ public class WebServer(TemplateManager templateManager, ObjectController objectC
 {
     public EmbedIO.WebServer Server { get; internal set; }
 
-    public string FullUrl => $"{Config.Url}:{Config.Port}";
+    public string FullUrl => $"{Config.Url}:{Config.Port}/";
 
     public override void Initialize()
     {
