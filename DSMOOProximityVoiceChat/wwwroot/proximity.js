@@ -101,7 +101,7 @@ function createPeer(username) {
         const audio = document.createElement("audio");
         audio.autoplay = true;
         audio.srcObject = e.streams[0];
-        audio.volume = 0;
+        audio.volume = 1;
         document.body.appendChild(audio);
 
         audioElements[username] = audio;

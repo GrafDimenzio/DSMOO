@@ -28,8 +28,6 @@ public class VoiceChatWebSocket : WebSocketModule
             return context.WebSocket.CloseAsync();
         }
         
-        Console.WriteLine($"{username} connected");
-        
         lock (_clients)
         {
             _clients[username] = context;
