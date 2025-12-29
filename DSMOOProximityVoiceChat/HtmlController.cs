@@ -3,7 +3,7 @@ using DSMOOWebInterface.Setup.Template;
 using EmbedIO;
 using EmbedIO.Routing;
 
-namespace DSMOOProxmityVoiceChat;
+namespace DSMOOProximityVoiceChat;
 
 [Controller(Route = "/proximity", ControllerType = ControllerType.Html)]
 public class HtmlController(TemplateManager manager) : TemplateController(manager)

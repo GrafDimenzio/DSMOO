@@ -4,6 +4,8 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>DSMOOProximityVoiceChat</AssemblyName>
+        <RootNamespace>DSMOOProximityVoiceChat</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,6 +17,8 @@
     <ItemGroup>
         <None Remove="Templates\proximity_voice_chat.html"/>
         <EmbeddedResource Include="Templates\proximity_voice_chat.html"/>
+        <None Remove="wwwroot\proximity.js" />
+        <EmbeddedResource Include="wwwroot\proximity.js" />
     </ItemGroup>
 
 </Project>

@@ -4,8 +4,10 @@ using System.Net.Sockets;
 using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Controller;
+using DSMOOFramework.Events;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
+using DSMOOFramework.Plugins;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.Logic;
@@ -21,6 +23,7 @@ public class Server(
     EventManager eventManager,
     PlayerManager playerManager,
     ObjectController objectController,
+    PluginManager pluginManager,
     PacketManager packetManager) : Manager
 {
     private readonly MemoryPool<byte> _memoryPool = MemoryPool<byte>.Shared;
@@ -32,6 +35,11 @@ public class Server(
     private EventManager EventManager { get; } = eventManager;
 
     public override void Initialize()
+    {
+        pluginManager.OnPluginLoaded.Subscribe(Start);
+    }
+
+    private void Start(EventArg _)
     {
         Task.Run(Listen);
     }

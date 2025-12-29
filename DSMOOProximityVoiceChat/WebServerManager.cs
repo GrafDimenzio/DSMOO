@@ -1,23 +1,25 @@
 using DSMOOFramework.Managers;
 using DSMOOFramework.Plugins;
-using DSMOOWebInterface;
+using DSMOOServer.Logic;
 using DSMOOWebInterface.Models;
 using DSMOOWebInterface.Setup.Template;
+using EmbedIO;
+using WebServer = DSMOOWebInterface.WebServer;
 
-namespace DSMOOProxmityVoiceChat;
+namespace DSMOOProximityVoiceChat;
 
 [Plugin(
     Author = "Dimenzio",
-    Name = "DSMOOProxmityVoiceChat",
+    Name = "DSMOOProximityVoiceChat",
     Description = "Proximty Voice Chat via WebInterface",
     Repository = "https://github.com/GrafDimenzio/DSMOO",
     Version = "1.0.0"
 )]
-public class WebServerManager(TemplateManager templateManager, WebServer webServer) : Manager
+public class WebServerManager(TemplateManager templateManager, WebServer webServer, PlayerManager playerManager) : Manager
 {
     public override void Initialize()
     {
-        templateManager.LoadTemplates(GetType().Assembly, "DSMOOProxmityVoiceChat.Templates");
+        templateManager.LoadTemplates(GetType().Assembly, "DSMOOProximityVoiceChat.Templates");
         templateManager.AddNavigation(new NavigationElementModel
         {
             Href = "/proximity/chat",
@@ -27,5 +29,7 @@ public class WebServerManager(TemplateManager templateManager, WebServer webServ
             SelectionId = 6547,
             PlayerLoginRequired = true
         });
+        webServer.Server.WithEmbeddedResources("/static-proximity", GetType().Assembly, "DSMOOProximityVoiceChat.wwwroot");
+        webServer.Server.WithModule(new VoiceChatWebSocket("/ws/proximity-chat", true, playerManager));
     }
 }

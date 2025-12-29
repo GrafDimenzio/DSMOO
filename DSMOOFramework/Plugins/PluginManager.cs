@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using DSMOOFramework.Analyzer;
+using DSMOOFramework.Events;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 
@@ -12,10 +13,13 @@ public class PluginManager : Manager
     private readonly ILogger _logger;
     private readonly List<PluginAttribute> plugins = [];
 
+    public readonly EventReactor<EventArg> OnPluginLoaded;
+
     public PluginManager(ILogger logger, PathLocation pathLocation, AssemblyManager assemblyManager,
         Analyzer.Analyzer analyzer)
     {
         _logger = logger;
+        OnPluginLoaded = new EventReactor<EventArg>(logger);
         _assemblyManager = assemblyManager;
         _analyzer = analyzer;
         PluginDirectory = pathLocation.GetPath("plugins") ?? "";
@@ -32,6 +36,7 @@ public class PluginManager : Manager
         _logger.Info("Loading plugins...");
         _logger.Setup("Loading Dll's from Directory: " + PluginDirectory);
         _assemblyManager.LoadAssemblies(PluginDirectory);
+        OnPluginLoaded.RaiseEvent(new());
     }
 
     public override void Initialize()

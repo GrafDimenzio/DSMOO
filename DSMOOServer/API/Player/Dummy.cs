@@ -104,7 +104,10 @@ public class Dummy : IPlayer, IDisposable
     {
         if (_components.TryGetValue(typeof(T), out var component))
             return (T)component;
-        return _objectController.CreateObject<T>()!;
+        var comp = _objectController.CreateObject<T>()!;
+        comp.Player = this;
+        _components[typeof(T)] = comp;
+        return comp;
     }
 
     public async Task Init()

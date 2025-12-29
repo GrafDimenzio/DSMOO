@@ -1,0 +1,157 @@
+let ws = null;
+let localStream = null;
+const peers = {};
+const audioElements = {};
+
+document.getElementById("joinBtn").addEventListener("click", joinVoiceChat);
+
+window.addEventListener("beforeunload", () => {
+    if (ws != null && ws.readyState === WebSocket.OPEN) {
+        ws.close(1000, "");
+    }
+});
+
+async function joinVoiceChat() {
+    try {
+        localStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+        });   
+    } catch (error) {
+        console.error(error);
+        return;
+    }
+
+    ws = new WebSocket("ws://localhost:6783/ws/proximity-chat");
+
+    ws.onmessage = async (e) => {
+        const msg = JSON.parse(e.data);
+        await handleSignal(msg)
+    }
+
+    ws.onopen = () => {
+        console.log("WebSocket verbunden!");
+    };
+
+    ws.onclose = () => {
+        console.log("WebSocket geschlossen");
+    };
+}
+
+async function handleSignal(msg) {
+    switch (msg.type) {
+        case "user-joined":
+            await callUser(msg.id);
+            break;
+
+        case "offer":
+            await handleOffer(msg);
+            break;
+
+        case "answer":
+            await handleAnswer(msg);
+            break;
+
+        case "ice":
+            await handleIce(msg);
+            break;
+
+        case "volume":
+            await handleVolume(msg);
+            break;
+
+        case "user-left":
+            cleanup(msg.id);
+            break;
+    }
+}
+
+function createPeer(username) {
+    const pc = new RTCPeerConnection({
+        iceServers: [{urls: "stun:stun.l.google.com:19302"}]
+    });
+
+    localStream.getTracks().forEach(track => {
+        pc.addTrack(track, localStream);
+    });
+
+    pc.onicecandidate = e => {
+        if (e.candidate) {
+            ws.send(JSON.stringify({
+                type: "ice",
+                to: username,
+                candidate: e.candidate,
+            }));
+        }
+    };
+
+    pc.ontrack = e => {
+        const audio = document.createElement("audio");
+        audio.autoplay = true;
+        audio.srcObject = e.streams[0];
+        audio.volume = 0;
+        document.body.appendChild(audio);
+
+        audioElements[username] = audio;
+    }
+
+    peers[username] = pc;
+    return pc;
+}
+
+async function callUser(username) {
+    const pc = createPeer(username);
+    const offer = await pc.createOffer();
+    await pc.setLocalDescription(offer);
+
+    ws.send(JSON.stringify({
+        type: "offer",
+        to: username,
+        sdp: offer
+    }));
+}
+
+async function handleOffer(msg) {
+    const pc = createPeer(msg.from);
+
+    await pc.setRemoteDescription(msg.sdp);
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+
+    ws.send(JSON.stringify({
+        type: "answer",
+        to: msg.from,
+        sdp: answer
+    }))
+}
+
+async function handleAnswer(msg) {
+    const pc = peers[msg.from];
+    if (pc) {
+        await pc.setRemoteDescription(msg.sdp);
+    }
+}
+
+async function handleIce(msg) {
+    const pc = peers[msg.from];
+    if (pc && msg.candidate) {
+        await pc.addIceCandidate(msg.candidate);
+    }
+}
+
+function handleVolume(msg) {
+    const audio = audioElements[msg.from];
+    if (audio) {
+        audio.volume = msg.value;
+    }
+}
+
+function cleanup(username) {
+    if (peers[username]) {
+        peers[username].close();
+        delete peers[username];
+    }
+    if (audioElements[username]) {
+        audioElements[username].remove();
+        delete audioElements[username];
+    }
+}

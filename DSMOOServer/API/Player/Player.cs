@@ -114,7 +114,10 @@ public class Player : IPlayer
     {
         if (_components.TryGetValue(typeof(T), out var component))
             return (T)component;
-        return _objectController.CreateObject<T>()!;
+        var comp = _objectController.CreateObject<T>()!;
+        comp.Player = this;
+        _components[typeof(T)] = comp;
+        return comp;
     }
 
     public void CopyDataFromOtherPlayer(IPlayer player)
