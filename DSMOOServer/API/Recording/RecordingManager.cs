@@ -44,7 +44,7 @@ public class RecordingManager(
         foreach (var element in recording.Elements)
         {
             await Task.Delay(element.Header.Timestamp);
-            await dummy.BroadcastPacket(element.Packet);
+            await dummy.BroadcastPacketAsync(element.Packet);
         }
 
         dummy.Dispose();

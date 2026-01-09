@@ -1,3 +1,4 @@
+using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOFramework.Plugins;
 using DSMOOServer.Logic;
@@ -15,7 +16,7 @@ namespace DSMOOProximityVoiceChat;
     Repository = "https://github.com/GrafDimenzio/DSMOO",
     Version = "1.0.0"
 )]
-public class WebServerManager(TemplateManager templateManager, WebServer webServer, PlayerManager playerManager) : Manager
+public class WebServerManager(TemplateManager templateManager, WebServer webServer, PlayerManager playerManager, ILogger logger) : Manager
 {
     public override void Initialize()
     {
@@ -30,6 +31,6 @@ public class WebServerManager(TemplateManager templateManager, WebServer webServ
             PlayerLoginRequired = true
         });
         webServer.Server.WithEmbeddedResources("/static-proximity", GetType().Assembly, "DSMOOProximityVoiceChat.wwwroot");
-        webServer.Server.WithModule(new VoiceChatWebSocket("/ws/proximity-chat", true, playerManager));
+        webServer.Server.WithModule(new VoiceChatWebSocket("/ws/proximity-chat", true, playerManager, logger));
     }
 }

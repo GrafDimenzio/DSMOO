@@ -17,9 +17,7 @@ public class DummyManager(
 {
     public async Task<Dummy> CreateDummy(string? dummyName = null)
     {
-        var dummy = new Dummy(server, playerManager, eventManager, joinManager, packetManager, objectController);
-        if (dummyName != null)
-            dummy.Name = dummyName;
+        var dummy = new Dummy(dummyName ?? "Dummy", server, playerManager, eventManager, joinManager, packetManager, objectController);
         await dummy.Init();
         return dummy;
     }

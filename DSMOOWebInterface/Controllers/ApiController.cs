@@ -28,6 +28,7 @@ public class ApiController(CommandManager commandManager, LoginManager manager) 
     [Route(HttpVerbs.Post, "/admin-login")]
     public void AdminLogin([FormField] string password)
     {
+        return;
         Session["admin"] = true;
         HttpContext.Redirect("/dashboard");
     }

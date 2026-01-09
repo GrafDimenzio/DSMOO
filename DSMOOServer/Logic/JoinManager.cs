@@ -105,7 +105,7 @@ public class JoinManager(
         Logger.Info($"Client {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint}) connected.");
     }
 
-    private async Task SendPlayerStateToOtherPlayer(IPlayer ply, IPlayer receiver)
+    public async Task SendPlayerStateToOtherPlayer(IPlayer ply, IPlayer receiver)
     {
         await receiver.Send(new ConnectPacket
         {

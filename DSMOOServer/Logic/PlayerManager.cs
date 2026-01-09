@@ -27,6 +27,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
     public PlayerSearch SearchForPlayers(string[] args)
     {
         var search = new PlayerSearch();
+        var playerList = Players.DistinctBy(x => x.Id).ToList();
 
         if (args.Length == 0)
             return search;
@@ -34,12 +35,12 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
         switch (args[0])
         {
             case "*":
-                search.Players = RealPlayers;
+                search.Players = playerList;
                 return search;
 
             case "!*":
                 search.IsInverted = true;
-                search.Players = RealPlayers;
+                search.Players = playerList;
                 args = args[1..];
                 break;
         }
@@ -48,7 +49,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
         {
             if (string.IsNullOrWhiteSpace(argument)) continue;
 
-            var possiblePlayers = RealPlayers.Where(player =>
+            var possiblePlayers = playerList.Where(player =>
                 player.Name.ToLower().StartsWith(argument.ToLower()) ||
                 (Guid.TryParse(argument, out var guid) && guid == player.Id) ||
                 (IPAddress.TryParse(argument, out var ip) && ip.Equals(player.Ip))).ToList();
@@ -147,17 +148,10 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
                 break;
 
             case TagPacket tagPacket:
-                var updateTime = tagPacket.UpdateType is TagPacket.TagUpdate.Time or TagPacket.TagUpdate.Both
-                    or TagPacket.TagUpdate.All;
-                var updateState = tagPacket.UpdateType is TagPacket.TagUpdate.State or TagPacket.TagUpdate.Both
-                    or TagPacket.TagUpdate.All;
-                if (updateState)
-                {
-                    player.CurrentGameMode = tagPacket.GameMode;
-                    player.IsIt = tagPacket.IsIt;
-                }
+                player.CurrentGameMode = tagPacket.GameMode;
+                if (tagPacket.UpdateType.HasFlag(TagPacket.TagUpdate.State)) player.IsIt = tagPacket.IsIt;
 
-                if (updateTime)
+                if (tagPacket.UpdateType.HasFlag(TagPacket.TagUpdate.Time))
                     player.Time = new Time(tagPacket.Minutes, tagPacket.Seconds, DateTime.Now);
                 break;
 

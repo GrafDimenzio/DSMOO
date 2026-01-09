@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using DSMOOFramework.Logger;
 using DSMOOServer.API.Player;
 using DSMOOServer.Logic;
 using EmbedIO.WebSockets;
@@ -10,10 +11,12 @@ namespace DSMOOProximityVoiceChat;
 public class VoiceChatWebSocket : WebSocketModule
 {
     private readonly PlayerManager _playerManager;
+    private readonly ILogger _logger;
     
-    public VoiceChatWebSocket(string urlPath, bool enableConnectionWatchdog, PlayerManager playerManager) : base(urlPath, enableConnectionWatchdog)
+    public VoiceChatWebSocket(string urlPath, bool enableConnectionWatchdog, PlayerManager playerManager, ILogger logger) : base(urlPath, enableConnectionWatchdog)
     {
         _playerManager = playerManager;
+        _logger = logger;
         Task.Run(VolumeLoop);
     }
     
@@ -104,28 +107,40 @@ public class VoiceChatWebSocket : WebSocketModule
         while (true)
         {
             await Task.Delay(50);
-            
-            if(_clients.Count == 0)
-                continue;
 
-            var connectedPlayers = _playerManager.RealPlayers.Where(x => _clients.ContainsKey(x.Name)).ToList();
-
-            foreach (var listener in connectedPlayers)
+            try
             {
-                foreach (var speaker in connectedPlayers)
+                if(_clients.Count == 0)
+                    continue;
+
+                var connectedPlayers = _playerManager.RealPlayers.Where(x => _clients.ContainsKey(x.Name)).ToList();
+
+                foreach (var listener in connectedPlayers)
                 {
-                    if (listener.Name == speaker.Name) continue;
-                    if (!_clients.TryGetValue(listener.Name, out var webSocket))
-                        continue;
-                    var volume = ComputeVolume(listener, speaker);
-                    var msg = JsonSerializer.Serialize(new
+                    foreach (var speaker in connectedPlayers)
                     {
-                        type = "volume",
-                        from = speaker.Name,
-                        value = volume
-                    });
-                    await webSocket.WebSocket.SendAsync(Encoding.UTF8.GetBytes(msg), true);
+                        if (listener.Name == speaker.Name) continue;
+                        IWebSocketContext? context;
+                        lock (_clients)
+                        {
+                            if (!_clients.TryGetValue(listener.Name, out context))
+                                continue;
+                        }
+                        var volume = ComputeVolume(listener, speaker);
+                        var msg = JsonSerializer.Serialize(new
+                        {
+                            type = "volume",
+                            from = speaker.Name,
+                            value = volume
+                        });
+                        if (!context.CancellationToken.IsCancellationRequested)
+                            await context.WebSocket.SendAsync(Encoding.UTF8.GetBytes(msg), true);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error on VolumeLoop", e);
             }
         }
     }

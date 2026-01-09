@@ -103,7 +103,7 @@ function createPeer(username) {
         const audio = document.createElement("audio");
         audio.autoplay = true;
         audio.srcObject = e.streams[0];
-        audio.volume = 1;
+        audio.volume = 0;
         document.body.appendChild(audio);
 
         audioElements[username] = audio;
@@ -182,6 +182,7 @@ async function handleIce(msg) {
 }
 
 function handleVolume(msg) {
+    console.log(msg);
     const audio = audioElements[msg.from];
     if (audio) {
         audio.volume = msg.value;
