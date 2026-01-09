@@ -61,18 +61,42 @@ public class Record(DummyManager dummyManager, PlayerManager playerManager, Reco
                         ResultType = ResultType.Error,
                         Message = "You haven't recorded anything yet"
                     };
-                recordingManager.SaveRecord("command", _recording);
-                return "Saved recording to file";
-
-            case "play":
-                if (_recording == null)
+                if (args.Length < 2)
                     return new CommandResult
                     {
-                        ResultType = ResultType.Error,
-                        Message = "You haven't recorded anything yet"
+                        ResultType = ResultType.MissingParameter,
+                        Message = "Usage: record save (name)"
                     };
-                recordingManager.PlayRecording(_recording);
+                recordingManager.SaveRecord(args[1].ToLower(), _recording);
+                return "Saved recording to file " + args[1].ToLower() + ".dsmoo";
+
+            case "play":
+                if (args.Length < 2)
+                {
+                    if (_recording == null)
+                        return new CommandResult
+                        {
+                            ResultType = ResultType.Error,
+                            Message = "You haven't recorded anything yet"
+                        };
+
+                    recordingManager.PlayRecording(_recording);
+                    return "Playing recording";
+                }
+
+                var recording = recordingManager.GetRecording(args[1]);
+                if (recording == null)
+                    return new CommandResult
+                    {
+                        ResultType = ResultType.InvalidParameter,
+                        Message = "No recording with that name found"
+                    };
+                recordingManager.PlayRecording(recording);
                 return "Playing recording";
+
+
+            case "list":
+                return "All recordings:\n    - " + string.Join("\n    - ", recordingManager.StoredRecordings.Keys);
 
             default:
                 return new CommandResult
