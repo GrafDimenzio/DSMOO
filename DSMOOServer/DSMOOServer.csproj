@@ -18,6 +18,8 @@
 
     <ItemGroup>
         <EmbeddedResource Include="Data\kingdoms.json"/>
+        <None Remove="Data\stages.json" />
+        <EmbeddedResource Include="Data\stages.json" />
     </ItemGroup>
 
 </Project>

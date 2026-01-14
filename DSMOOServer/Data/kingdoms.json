@@ -25,45 +25,35 @@
         "Position": {
           "X": 4400,
           "Y": -3400
-        },
-        "Entrance": "Ex",
-        "Exit": "Goal"
+        }
       },
       {
         "SubAreaName": "FrogSearchExStage",
         "Position": {
           "X": -9690,
           "Y": 9980
-        },
-        "Entrance": "FrogSearchExStageEnt",
-        "Exit": "FrogSearchExStageEnt"
+        }
       },
       {
         "SubAreaName": "RollingExStage",
         "Position": {
           "X": -7680,
           "Y": 12500
-        },
-        "Entrance": "rollingstart",
-        "Exit": "rollinggoal"
+        }
       },
       {
         "SubAreaName": "PushBlockExStage",
         "Position": {
           "X": 4900,
           "Y": -6915
-        },
-        "Entrance": "PushBlockExStageEnt",
-        "Exit": "PushblockExStageEntDokan"
+        }
       },
       {
         "SubAreaName": "PoisonWaveExStage",
         "Position": {
           "X": 7865,
           "Y": -6875
-        },
-        "Entrance": "PoisonWaveExEnt",
-        "Exit": "PoisonWaveExExit"
+        }
       }
     ]
   },

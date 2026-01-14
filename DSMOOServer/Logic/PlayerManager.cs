@@ -10,12 +10,13 @@ using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.Map;
 using DSMOOServer.API.Player;
+using DSMOOServer.API.Stage;
 using DSMOOServer.Helper;
 using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHolder<ServerMainConfig> holder) : Manager
+public class PlayerManager(EventManager eventManager, StageManager stageManager) : Manager
 {
     public readonly List<IPlayer> Players = [];
 
@@ -112,7 +113,7 @@ public class PlayerManager(EventManager eventManager, ILogger logger, ConfigHold
 
                 if (player.Stage != gamePacket.Stage || player.Scenario != gamePacket.ScenarioNum)
                 {
-                    var warp = MapInfo.GetConnection(player.Stage, gamePacket.Stage, false);
+                    var warp = stageManager.GetConnection(player.Stage, gamePacket.Stage);
                     var bytes = Encoding.UTF8.GetBytes(warp);
                     if (bytes.Length > ChangeStagePacket.IdSize)
                         warp = "";

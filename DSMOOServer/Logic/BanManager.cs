@@ -6,6 +6,7 @@ using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.Map;
 using DSMOOServer.API.Player;
+using DSMOOServer.API.Stage;
 using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
@@ -13,6 +14,7 @@ namespace DSMOOServer.Logic;
 public class BanManager(
     ConfigHolder<BanList> holder,
     EventManager eventManager,
+    StageManager stageManager,
     ILogger logger) : Manager
 {
     private BanList Config => (BanList)holder.ConfigObject;
@@ -199,7 +201,7 @@ public class BanManager(
     public void SendPlayerToSafeStage(IPlayer player)
     {
         var newStage = GetSafeStage(player.Stage);
-        player.ChangeStage(newStage, MapInfo.GetConnection(player.Stage, newStage, false));
+        player.ChangeStage(newStage, stageManager.GetConnection(player.Stage, newStage));
     }
 
     public override void Initialize()
@@ -225,7 +227,7 @@ public class BanManager(
         args.SendBackStage =
             GetSafeStage(string.IsNullOrWhiteSpace(args.SendBackStage) ? args.NewStage : args.SendBackStage);
         args.SendBackScenario = -1;
-        args.SendBackWarp = MapInfo.GetConnection(args.PreviousStage, args.SendBackStage, false);
+        args.SendBackWarp = stageManager.GetConnection(args.PreviousStage, args.SendBackStage);
     }
 
     public void OnPacket(PacketReceivedEventArgs args)

@@ -1,0 +1,410 @@
+[
+  {
+    "StageName": "CapWorldHomeStage",
+    "Alias": [
+      "Cap",
+      "CapKingdom"
+    ],
+    "Warps": [
+      {
+        "Name": "Ex",
+        "ConnectedStage": "CapWorldTowerStage",
+        "Position": {
+          "X": 4101,
+          "Y": -850,
+          "Z": -3111
+        }
+      },
+      {
+        "Name": "Goal",
+        "ConnectedStage": "CapWorldTowerStage",
+        "Position": {
+          "X": 5113,
+          "Y": 5102,
+          "Z": -3366
+        }
+      },
+      {
+        "Name": "PoisonWaveExEnt",
+        "ConnectedStage": "PoisonWaveExStage",
+        "Position": {
+          "X": 8294,
+          "Y": 550,
+          "Z": -7304
+        }
+      },
+      {
+        "Name": "PushBlockExStageEnt",
+        "ConnectedStage": "PushBlockExStage",
+        "Position": {
+          "X": -1,
+          "Y": -1,
+          "Z": -1
+        }
+      },
+      {
+        "Name": "PushBlockExStageEntDokan",
+        "ConnectedStage": "PushBlockExStage",
+        "Position": {
+          "X": -1,
+          "Y": -1,
+          "Z": -1
+        }
+      },
+      {
+        "Name": "FrogSearchExStageEnt",
+        "ConnectedStage": "FrogSearchExStage",
+        "Position": {
+          "X": -1,
+          "Y": -1,
+          "Z": -1
+        }
+      },
+      {
+        "Name": "rollingstart",
+        "ConnectedStage": "RollingExStage",
+        "Position": {
+          "X": -7878,
+          "Y": -650,
+          "Z": 12321
+        }
+      },
+      {
+        "Name": "rollinggoal",
+        "ConnectedStage": "RollingExStage",
+        "Position": {
+          "X": -7628,
+          "Y": -650,
+          "Z": 12071
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "CapWorldTowerStage",
+    "Alias": [
+      "Tower",
+      "CapTower"
+    ],
+    "Warps": [
+      {
+        "Name": "Ex",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -500,
+          "Y": -2,
+          "Z": -13750
+        }
+      },
+      {
+        "Name": "Goal",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -1750,
+          "Y": 7250,
+          "Z": -2500
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "PoisonWaveExStage",
+    "Alias": [
+      "PoisonWaveCap",
+      "ParaGoombaSubArea"
+    ],
+    "Warps": [
+      {
+        "Name": "PoisonWaveExEnt",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": 0,
+          "Y": 300,
+          "Z": 400
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "PushBlockExStage",
+    "Alias": [
+      "PushBlock"
+    ],
+    "Warps": [
+      {
+        "Name": "PushBlockExStageEnt",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -1,
+          "Y": -1,
+          "Z": -1
+        }
+      },
+      {
+        "Name": "PushBlockExStageEntDokan",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -1,
+          "Y": -1,
+          "Z": -1
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "FrogSearchExStage",
+    "Alias": [
+      "FrogSearch"
+    ],
+    "Warps": [
+      {
+        "Name": "FrogSearchExStageEnt",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -1,
+          "Y": -1,
+          "Z": -1
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "RollingExStage",
+    "Alias": [
+      "Rolling"
+    ],
+    "Warps": [
+      {
+        "Name": "rollingstart",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -550,
+          "Y": 1015,
+          "Z": -6052
+        }
+      },
+      {
+        "Name": "rollinggoal",
+        "ConnectedStage": "CapWorldHomeStage",
+        "Position": {
+          "X": -28250,
+          "Y": -16174,
+          "Z": -29327
+        }
+      }
+    ]
+  },
+  
+  {
+    "StageName": "WaterfallWorldHomeStage",
+    "Alias": [
+      "Cascade"
+    ],
+    "Warps": [
+      {
+        "Name": "WindBlowExStart",
+        "ConnectedStage": "WindBlowExStage",
+        "Position": {
+          "X": -349,
+          "Y": 1633,
+          "Z": 4419
+        }
+      },
+      {
+        "Name": "WindBlowExGoal",
+        "ConnectedStage": "WindBlowExStage",
+        "Position": {
+          "X": -74,
+          "Y": 1638,
+          "Z": 4419
+        }
+      },
+      {
+        "Name": "Lift2D",
+        "ConnectedStage": "Lift2DExStage",
+        "Position": {
+          "X": 812,
+          "Y": 2598,
+          "Z": -3217
+        }
+      },
+      {
+        "Name": "Lift2DExit",
+        "ConnectedStage": "Lift2DExStage",
+        "Position": {
+          "X": 458,
+          "Y": 2600,
+          "Z": -2862
+        }
+      },
+      {
+        "Name": "RexPoppunEx",
+        "ConnectedStage": "TrexPoppunExStage",
+        "Position": {
+          "X": 4894,
+          "Y": 2290,
+          "Z": -8240
+        }
+      },
+      {
+        "Name": "WanwanExStart",
+        "ConnectedStage": "WanwanClashExStage",
+        "Position": {
+          "X": -10431,
+          "Y": 3590,
+          "Z": -956
+        }
+      },
+      {
+        "Name": "WanwanExGoal",
+        "ConnectedStage": "WanwanClashExStage",
+        "Position": {
+          "X": -10746,
+          "Y": 3203,
+          "Z": -1627
+        }
+      },
+      {
+        "Name": "CapAppearExEnt",
+        "ConnectedStage": "CapAppearExStage",
+        "Position": {
+          "X": -5372,
+          "Y": 3227,
+          "Z": -1483
+        }
+      },
+      {
+        "Name": "CapAppearExExit",
+        "ConnectedStage": "CapAppearExStage",
+        "Position": {
+          "X": -5054,
+          "Y": 3209,
+          "Z": -1164
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "WindBlowExStage",
+    "Alias": [
+      "WindBlow"
+    ],
+    "Warps": [
+      {
+        "Name": "WindBlowExStart",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": 1650,
+          "Y": 0,
+          "Z": -452
+        }
+      },
+      {
+        "Name": "WindBlowExGoal",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": 20221,
+          "Y": -200,
+          "Z": -2264
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "Lift2DExStage",
+    "Alias": [
+      "Lift2D",
+      "Cascade2D"
+    ],
+    "Warps": [
+      {
+        "Name": "Lift2D",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": -2849,
+          "Y": -997,
+          "Z": 1898
+        }
+      },
+      {
+        "Name": "Lift2DExit",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": 7950,
+          "Y": 1429,
+          "Z": -5153
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "TrexPoppunExStage",
+    "Alias": [
+      "Trex"
+    ],
+    "Warps": [
+      {
+        "Name": "RexPoppunEx",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": 141,
+          "Y": -188,
+          "Z": 224
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "WanwanClashExStage",
+    "Alias": [
+      "ChainChomp",
+      "Wanwan"
+    ],
+    "Warps": [
+      {
+        "Name": "WanwanExStart",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": -1848,
+          "Y": 0,
+          "Z": -200
+        }
+      },
+      {
+        "Name": "WanwanExGoal",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": 16050,
+          "Y": 600,
+          "Z": -1398
+        }
+      }
+    ]
+  },
+  {
+    "StageName": "CapAppearExStage",
+    "Alias": [
+      "CapAppear"
+    ],
+    "Warps": [
+      {
+        "Name": "CapAppearExEnt",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": 1200,
+          "Y": -300,
+          "Z": 6748
+        }
+      },
+      {
+        "Name": "CapAppearExExit",
+        "ConnectedStage": "WaterfallWorldHomeStage",
+        "Position": {
+          "X": -900,
+          "Y": 1850,
+          "Z": -16648
+        }
+      }
+    ]
+  }
+]

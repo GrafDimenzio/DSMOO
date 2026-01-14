@@ -24,6 +24,10 @@ public class LogManager(EventManager eventManager, ILogger logger) : Manager
             case CostumePacket costumePacket:
                 args.Sender.Logger.Info($"Got costume packet from {costumePacket.BodyName}->{costumePacket.CapName}");
                 break;
+            
+            case PlayerPacket playerPacket:
+                args.Sender.Logger.Debug($"Position: {playerPacket.Position}");
+                break;
         }
     }
 }

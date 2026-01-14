@@ -22,27 +22,4 @@ public class MapInfo
     public SerializedVector2 Offset { get; set; } = new();
     public float Scale { get; set; } = 1;
     public SubArea[] SubAreas { get; set; } = [];
-
-    public static string GetConnection(string fromStage, string toStage, bool useExit)
-    {
-        if (AllKingdoms.Any(x => x.MainStageName == toStage))
-        {
-            var kingdom = AllKingdoms.First(x => x.MainStageName == toStage);
-            var subArea = kingdom.SubAreas.FirstOrDefault(x => x.SubAreaName == fromStage);
-            if (subArea == null)
-                return "";
-            return useExit ? subArea.Exit : subArea.Entrance;
-        }
-
-        if (AllKingdoms.Any(x => x.MainStageName == fromStage))
-        {
-            var kingdom = AllKingdoms.First(x => x.MainStageName == fromStage);
-            var subArea = kingdom.SubAreas.FirstOrDefault(x => x.SubAreaName == toStage);
-            if (subArea == null)
-                return "";
-            return useExit ? subArea.Exit : subArea.Entrance;
-        }
-
-        return "";
-    }
 }
