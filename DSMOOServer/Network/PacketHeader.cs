@@ -8,9 +8,8 @@ public struct PacketHeader : IPacket
     public Guid Id;
     public short Type;
     public short PacketSize;
-
-    public static short StaticSize => 20;
-    public short Size => StaticSize;
+    
+    public short Size => Constants.HeaderSize;
 
     public void Serialize(Span<byte> data)
     {

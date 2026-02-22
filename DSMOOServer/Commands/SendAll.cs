@@ -2,6 +2,7 @@ using System.Text;
 using DSMOOFramework.Commands;
 using DSMOOServer.API.Stage;
 using DSMOOServer.Logic;
+using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Commands;
@@ -36,7 +37,7 @@ public class SendAll(PlayerManager manager, StageManager stageManager) : Command
         if (args.Length > 1)
         {
             warpId = args[1];
-            if (Encoding.UTF8.GetBytes(args[1]).Length > ChangeStagePacket.IdSize)
+            if (Encoding.UTF8.GetBytes(args[1]).Length > Constants.WarpIdSize)
                 return new CommandResult
                 {
                     ResultType = ResultType.InvalidParameter,

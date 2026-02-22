@@ -3,6 +3,7 @@ using DSMOOFramework.Commands;
 using DSMOOServer.API.Stage;
 using DSMOOServer.Helper;
 using DSMOOServer.Logic;
+using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Commands;
@@ -32,7 +33,7 @@ public class Send(PlayerManager manager, StageManager stageManager) : Command
                 Message = "Invalid Stage Name\n" + stageManager.KingdomNames()
             };
 
-        if (Encoding.UTF8.GetBytes(args[1]).Length > ChangeStagePacket.IdSize)
+        if (Encoding.UTF8.GetBytes(args[1]).Length > Constants.WarpIdSize)
             return new CommandResult
             {
                 ResultType = ResultType.InvalidParameter,

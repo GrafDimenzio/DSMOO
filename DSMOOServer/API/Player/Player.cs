@@ -77,9 +77,9 @@ public class Player : IPlayer
 
     public Task SendShine(int id)
     {
-        return Client.Send(new ShinePacket
+        return Client.Send(new MoonPacket
         {
-            ShineId = id
+            MoonId = id
         });
     }
 

@@ -11,7 +11,7 @@ public enum PacketType : short
     Connect,
     Disconnect,
     Costume,
-    Shine,
+    Moon,
     Capture,
     ChangeStage,
     Command

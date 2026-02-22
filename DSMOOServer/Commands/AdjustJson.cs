@@ -5,6 +5,7 @@ using DSMOOFramework.Commands;
 using DSMOOServer.API.Serialized;
 using DSMOOServer.API.Stage;
 using DSMOOServer.Logic;
+using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Commands;
@@ -29,7 +30,7 @@ public class AdjustJson(StageManager manager, PlayerManager playerManager) : Com
             {
                 Console.WriteLine($"\n\nTesting {stage.StageName}-{currentWarp.Name}");
                 var tooLong = false;
-                if (Encoding.UTF8.GetBytes(currentWarp.Name).Length > ChangeStagePacket.IdSize)
+                if (Encoding.UTF8.GetBytes(currentWarp.Name).Length > Constants.WarpIdSize)
                 {
                     Console.WriteLine("Warp is Too Long!");
                     tooLong = true;

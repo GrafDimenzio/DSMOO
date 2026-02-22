@@ -12,6 +12,7 @@ using DSMOOServer.API.Map;
 using DSMOOServer.API.Player;
 using DSMOOServer.API.Stage;
 using DSMOOServer.Helper;
+using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
@@ -115,7 +116,7 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
                 {
                     var warp = stageManager.GetConnection(gamePacket.Stage, player.Stage);
                     var bytes = Encoding.UTF8.GetBytes(warp);
-                    if (bytes.Length > ChangeStagePacket.IdSize)
+                    if (bytes.Length > Constants.WarpIdSize)
                         warp = "";
 
                     var changeStageArgs = new PlayerChangeStageEventArgs

@@ -60,9 +60,9 @@ public class MoonManager(
     {
         if (!Config.MoonSyncEnabled || client.Player.DisableMoonSync || !client.FirstPacketSend) return;
         if (Config.ExcludedMoons.Contains(moonId) || client.Player.SyncedMoons.Contains(moonId)) return;
-        await client.Send(new ShinePacket
+        await client.Send(new MoonPacket
         {
-            ShineId = moonId
+            MoonId = moonId
         });
         client.Player.SyncedMoons.Add(moonId);
     }
@@ -89,20 +89,20 @@ public class MoonManager(
 
         switch (args.Packet)
         {
-            case ShinePacket shinePacket:
-                if (Config.ExcludedMoons.Contains(shinePacket.ShineId))
+            case MoonPacket shinePacket:
+                if (Config.ExcludedMoons.Contains(shinePacket.MoonId))
                 {
                     logger.Info(
-                        $"{args.Sender.Name} collected shine {shinePacket.ShineId} that is disabled by the config");
+                        $"{args.Sender.Name} collected shine {shinePacket.MoonId} that is disabled by the config");
                     return;
                 }
 
                 if (!args.Sender.Player.IsSaveLoaded) return;
-                args.Sender.Logger.Info($"Got Moon {shinePacket.ShineId}");
+                args.Sender.Logger.Info($"Got Moon {shinePacket.MoonId}");
                 var ev = new PlayerCollectMoonEventArgs
                 {
                     Player = args.Sender.Player,
-                    Moon = shinePacket.ShineId
+                    Moon = shinePacket.MoonId
                 };
                 eventManager.OnPlayerCollectMoon.RaiseEvent(ev);
                 Task.Run(() => AddMoon(ev.Moon));

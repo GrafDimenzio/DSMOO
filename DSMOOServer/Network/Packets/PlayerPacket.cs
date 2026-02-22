@@ -6,9 +6,6 @@ namespace DSMOOServer.Network.Packets;
 [Packet(PacketType.Player)]
 public struct PlayerPacket : IPacket, IEquatable<PlayerPacket>
 {
-    public const int ActSize = 0x20;
-    public const int SubActSize = 0x10;
-
     public Vector3 Position;
     public Quaternion Rotation;
 

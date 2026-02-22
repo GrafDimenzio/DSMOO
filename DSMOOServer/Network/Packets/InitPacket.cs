@@ -5,7 +5,7 @@ namespace DSMOOServer.Network.Packets;
 [Packet(PacketType.Init)]
 public struct InitPacket : IPacket
 {
-    public short Size { get; } = 2;
+    public short Size { get; } = sizeof(ushort);
     public ushort MaxPlayers = 0;
 
     public InitPacket()
