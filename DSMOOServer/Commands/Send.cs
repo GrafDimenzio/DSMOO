@@ -13,7 +13,7 @@ namespace DSMOOServer.Commands;
     Description = "Sends a player to the specified stage",
     Parameters = ["stage", "warp-id", "scenario", "players"]
 )]
-public class Send(PlayerManager manager) : Command
+public class Send(PlayerManager manager, StageManager stageManager) : Command
 {
     public override CommandResult Execute(string command, string[] args)
     {
@@ -24,12 +24,12 @@ public class Send(PlayerManager manager) : Command
                 Message = "Usage: send [stage] [id] [scenario] [players]"
             };
 
-        var stage = Stages.Input2Stage(args[0]);
+        var stage = stageManager.GetStageFromInput(args[0]);
         if (stage == null)
             return new CommandResult
             {
                 ResultType = ResultType.InvalidParameter,
-                Message = "Invalid Stage Name\n" + Stages.KingdomAliasMapping()
+                Message = "Invalid Stage Name\n" + stageManager.KingdomNames()
             };
 
         if (Encoding.UTF8.GetBytes(args[1]).Length > ChangeStagePacket.IdSize)

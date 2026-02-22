@@ -12,7 +12,7 @@ namespace DSMOOServer.Commands;
     Description = "Sends all players to the stage",
     Parameters = ["stage", "(warp-id)"]
 )]
-public class SendAll(PlayerManager manager) : Command
+public class SendAll(PlayerManager manager, StageManager stageManager) : Command
 {
     public override CommandResult Execute(string command, string[] args)
     {
@@ -23,12 +23,12 @@ public class SendAll(PlayerManager manager) : Command
                 Message = "Usage: sendall [stage] optional warp id"
             };
 
-        var stage = Stages.Input2Stage(args[0]);
+        var stage = stageManager.GetStageFromInput(args[0]);
         if (stage == null)
             return new CommandResult
             {
                 ResultType = ResultType.InvalidParameter,
-                Message = "Invalid Stage Name\n" + Stages.KingdomAliasMapping()
+                Message = $"Invalid Stage Name: {args[0]}\n" + stageManager.KingdomNames()
             };
 
         var warpId = "";

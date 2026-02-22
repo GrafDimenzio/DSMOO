@@ -16,6 +16,23 @@ public class MapInfo
         AllKingdoms = JsonSerializer.Deserialize<MapInfo[]>(json)!;
     }
 
+    public static string? GetKingdomFromStage(string stage)
+    {
+        foreach (var kingdom in AllKingdoms)
+        {
+            if (stage == kingdom.MainStageName)
+                return kingdom.MainStageName;
+            
+            foreach (var subArea in kingdom.SubAreas)
+            {
+                if(subArea.SubAreaName == stage)
+                    return kingdom.MainStageName;
+            }
+        }
+
+        return null;
+    }
+
     public string KingdomName { get; set; } = "";
     public string MainStageName { get; set; } = "";
     public float Rotation { get; set; } = 0;

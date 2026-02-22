@@ -7,7 +7,10 @@ public class MapLocation
 {
     public MapLocation(Vector3 position, string stageName)
     {
-        Kingdom = Stages.Alias2Stage[Stages.Stage2Alias[stageName]];
+        var kingdom = MapInfo.GetKingdomFromStage(stageName);
+        if (kingdom == null)
+            return;
+        Kingdom = kingdom;
         var infoTable = MapInfo.AllKingdoms.FirstOrDefault(x => x.MainStageName == Kingdom);
         if (infoTable == null)
             return;

@@ -1,3 +1,4 @@
+using System.Text;
 using DSMOOFramework.Analyzer;
 using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
@@ -32,8 +33,12 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
 
     public CommandResult ProcessQuery(string query)
     {
-        var split = query.Trim(' ').Split(' ');
-        var cmd = GetCommand(split[0]);
+        return ProcessArguments(GetArguments(query));
+    }
+
+    public CommandResult ProcessArguments(string[] arguments)
+    {
+        var cmd = GetCommand(arguments[0]);
         if (cmd == null)
             return new CommandResult
             {
@@ -43,8 +48,8 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
 
         try
         {
-            var preResult = cmd.PreExecute(split[0], split[1..]);
-            return preResult.ResultType != ResultType.Success ? preResult : cmd.Execute(split[0], split[1..]);
+            var preResult = cmd.PreExecute(arguments[0], arguments[1..]);
+            return preResult.ResultType != ResultType.Success ? preResult : cmd.Execute(arguments[0], arguments[1..]);
         }
         catch (Exception e)
         {
@@ -54,6 +59,40 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
                 Message = e.Message + "\n" + e
             };
         }
+    }
+
+    private string[] GetArguments(string query)
+    {
+        query = query.Trim();
+        var args = new List<string>();
+        var current = new StringBuilder();
+        var inQuotes = false;
+
+        foreach (var letter in query)
+        {
+            if (letter == '"')
+            {
+                inQuotes = !inQuotes;
+                continue;
+            }
+
+            if (letter == ' ' && !inQuotes)
+            {
+                if (current.Length > 0)
+                {
+                    args.Add(current.ToString());
+                    current.Clear();
+                }
+                continue;
+            }
+
+            current.Append(letter);
+        }
+        
+        if (current.Length > 0)
+            args.Add(current.ToString());
+        
+        return args.ToArray();
     }
 
     private ICommand? GetCommand(string command)

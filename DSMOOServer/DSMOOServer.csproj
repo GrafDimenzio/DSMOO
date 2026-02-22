@@ -20,6 +20,10 @@
         <EmbeddedResource Include="Data\kingdoms.json"/>
         <None Remove="Data\stages.json" />
         <EmbeddedResource Include="Data\stages.json" />
+        <None Remove="Data\entrances.txt" />
+        <None Remove="Data\stages-test.json" />
+        <None Remove="Data\zones.json" />
+        <EmbeddedResource Include="Data\zones.json" />
     </ItemGroup>
 
 </Project>

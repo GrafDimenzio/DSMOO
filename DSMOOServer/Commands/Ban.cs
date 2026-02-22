@@ -14,7 +14,7 @@ namespace DSMOOServer.Commands;
     Description = "Command for managing bans",
     Parameters = ["[list/enable/disable/player/profile/ip/stage/gamemode]"]
 )]
-public class Ban(BanManager manager, PlayerManager playerManager) : Command
+public class Ban(BanManager manager, PlayerManager playerManager, StageManager stageManager) : Command
 {
     private readonly Dictionary<string, string> _usages = new()
     {
@@ -136,7 +136,7 @@ public class Ban(BanManager manager, PlayerManager playerManager) : Command
                 return "Unbanned ip " + ip;
 
             case "stage":
-                var stage = Stages.Input2Stage(args[1]);
+                var stage = stageManager.GetStageFromInput(args[1]);
                 if (stage == null)
                     return new CommandResult
                     {

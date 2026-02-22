@@ -16,7 +16,7 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Logic;
 
-public class PlayerManager(EventManager eventManager, StageManager stageManager) : Manager
+public class PlayerManager(EventManager eventManager, StageManager stageManager, ILogger logger) : Manager
 {
     public readonly List<IPlayer> Players = [];
 
@@ -113,7 +113,7 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager)
 
                 if (player.Stage != gamePacket.Stage || player.Scenario != gamePacket.ScenarioNum)
                 {
-                    var warp = stageManager.GetConnection(player.Stage, gamePacket.Stage);
+                    var warp = stageManager.GetConnection(gamePacket.Stage, player.Stage);
                     var bytes = Encoding.UTF8.GetBytes(warp);
                     if (bytes.Length > ChangeStagePacket.IdSize)
                         warp = "";
