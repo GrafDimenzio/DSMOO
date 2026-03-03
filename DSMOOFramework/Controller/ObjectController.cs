@@ -6,6 +6,7 @@ namespace DSMOOFramework.Controller;
 public class ObjectController
 {
     public readonly Dictionary<Type, object> Objects = new();
+    public readonly Dictionary<Type, IFactory<object>> Factories = new();
 
     public ObjectController(ILogger logger)
     {
@@ -46,6 +47,10 @@ public class ObjectController
 
     public object? CreateObject(Type type, params object[] overwriteObjects)
     {
+        var factoryObject = CreateFromFactory(type, null);
+        if (factoryObject != null)
+            return factoryObject;
+        
         var constructors = type.GetConstructors();
         var hasEmptyConstructor = false;
         var possibleConstructors = new List<ConstructorInfo>();
@@ -90,13 +95,15 @@ public class ObjectController
         foreach (var field in obj.GetType().GetFields())
         {
             if (field.GetCustomAttribute<InjectAttribute>() == null) continue;
-            field.SetValue(obj, GetObject(field.FieldType));
+            var factoryObject = CreateFromFactory(field.FieldType, obj.GetType());
+            field.SetValue(obj, factoryObject ?? GetObject(field.FieldType));
         }
 
         foreach (var property in obj.GetType().GetProperties())
         {
             if (property.GetCustomAttribute<InjectAttribute>() == null) continue;
-            property.SetValue(obj, GetObject(property.PropertyType));
+            var factoryObject = CreateFromFactory(property.PropertyType, obj.GetType());
+            property.SetValue(obj, factoryObject ?? GetObject(property.PropertyType));
         }
 
         if (obj is IInject inject)
@@ -117,7 +124,12 @@ public class ObjectController
                 continue;
             }
 
-            if (Objects.TryGetValue(parameter.ParameterType, out var o))
+            var factoryObject = CreateFromFactory(parameter.ParameterType, type);
+            if (factoryObject != null)
+            {
+                objects.Add(factoryObject);
+            }
+            else if (Objects.TryGetValue(parameter.ParameterType, out var o))
             {
                 objects.Add(o);
             }
@@ -134,5 +146,10 @@ public class ObjectController
         var result = Activator.CreateInstance(type, objects.ToArray())!;
         InjectObject(result);
         return result;
+    }
+
+    private object? CreateFromFactory(Type type, Type? forType)
+    {
+        return Factories.TryGetValue(type, out var factory) ? factory.Create(forType) : null;
     }
 }

@@ -2,11 +2,9 @@ using System.Numerics;
 using System.Text;
 using System.Text.Json;
 using DSMOOFramework.Commands;
-using DSMOOServer.API.Serialized;
 using DSMOOServer.API.Stage;
 using DSMOOServer.Logic;
 using DSMOOServer.Network;
-using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Commands;
 
@@ -40,16 +38,15 @@ public class AdjustJson(StageManager manager, PlayerManager playerManager) : Com
                 {
                     player.ChangeStage(stage.StageName, currentWarp.Name);
                 }
+
                 Console.WriteLine("Press a key once loaded in");
                 var response = Console.ReadKey();
                 if (response.Key == ConsoleKey.F1)
                     goto END;
                 var position = Vector3.Zero;
                 if (!tooLong)
-                {
                     position = new Vector3((float)Math.Round(player.Position.X), (float)Math.Round(player.Position.Y),
                         (float)Math.Round(player.Position.Z));
-                }
                 Console.WriteLine($"Using Position {position}");
                 var connStage = currentWarp.ConnectedStage;
                 if (string.IsNullOrWhiteSpace(connStage))
@@ -58,8 +55,8 @@ public class AdjustJson(StageManager manager, PlayerManager playerManager) : Com
                     Console.ReadKey();
                     connStage = player.Stage;
                 }
-                
-                warps.Add(new WarpInfo()
+
+                warps.Add(new WarpInfo
                 {
                     Name = currentWarp.Name,
                     Position = position,
@@ -67,19 +64,20 @@ public class AdjustJson(StageManager manager, PlayerManager playerManager) : Com
                     ConnectedStage = connStage
                 });
             }
-            
-            stages.Add(new StageInfo()
+
+            stages.Add(new StageInfo
             {
                 StageName = stage.StageName,
                 Warps = warps.ToArray(),
-                Alias = stage.Alias,
+                Alias = stage.Alias
             });
         }
+
         END:
-        
+
         var json = JsonSerializer.Serialize(stages);
         File.WriteAllText("/home/dimenzio/Applications/stages.json", json);
-        
-        return $"DONE!";
+
+        return "DONE!";
     }
 }

@@ -83,15 +83,16 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
                     args.Add(current.ToString());
                     current.Clear();
                 }
+
                 continue;
             }
 
             current.Append(letter);
         }
-        
+
         if (current.Length > 0)
             args.Add(current.ToString());
-        
+
         return args.ToArray();
     }
 

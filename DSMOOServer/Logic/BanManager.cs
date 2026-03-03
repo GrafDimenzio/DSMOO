@@ -69,6 +69,16 @@ public class BanManager(
         }
     }
 
+    public HashSet<string> Captures
+    {
+        get => Config.Captures;
+        set
+        {
+            Config.Captures = value;
+            SaveBanList();
+        }
+    }
+
     private void SaveBanList()
     {
         holder.SaveConfig();
@@ -103,6 +113,11 @@ public class BanManager(
     public bool IsGameModeBanned(GameMode gameMode)
     {
         return GameModes.Contains((sbyte)gameMode);
+    }
+
+    public bool IsCapturesBanned(string capture)
+    {
+        return Captures.Contains(capture);
     }
 
 
@@ -176,6 +191,21 @@ public class BanManager(
         return true;
     }
 
+    public bool BanCapture(string capture)
+    {
+        if (!Captures.Add(capture)) return false;
+        SaveBanList();
+        return true;
+    }
+
+    public bool UnBanCapture(string capture)
+    {
+        if (!Captures.Contains(capture)) return false;
+        Captures.Remove(capture);
+        SaveBanList();
+        return true;
+    }
+
     public string GetSafeStage(string currentStage)
     {
         if (!IsStageBanned(currentStage)) return currentStage;
@@ -209,6 +239,15 @@ public class BanManager(
         eventManager.OnPlayerChangeStage.Subscribe(PlayerChangeStage);
         eventManager.OnPacketReceived.Subscribe(OnPacket);
         eventManager.OnPlayerPreJoin.Subscribe(OnPlayerPreJoin);
+        eventManager.OnPlayerCapture.Subscribe(OnPlayerCapture);
+    }
+
+    private void OnPlayerCapture(PlayerCaptureEventArgs args)
+    {
+        if (!Enabled) return;
+        if (IsCapturesBanned(args.Capture))
+            args.Player.ChangeStage(args.Player.Stage,
+                stageManager.GetNearestWarp(args.Player.Stage, args.Player.Position) ?? "");
     }
 
     private void OnPlayerPreJoin(PlayerPreJoinEventArgs args)
@@ -221,6 +260,7 @@ public class BanManager(
 
     private void PlayerChangeStage(PlayerChangeStageEventArgs args)
     {
+        if (!Enabled) return;
         if (!IsStageBanned(args.NewStage)) return;
         args.SendBack = true;
         if (!IsStageBanned(args.SendBackStage) && !string.IsNullOrWhiteSpace(args.SendBackStage)) return;
@@ -249,4 +289,5 @@ public class BanList : IConfig
     public HashSet<Guid> Profiles { get; set; } = [];
     public HashSet<string> Stages { get; set; } = [];
     public HashSet<sbyte> GameModes { get; set; } = [];
+    public HashSet<string> Captures { get; set; } = [];
 }

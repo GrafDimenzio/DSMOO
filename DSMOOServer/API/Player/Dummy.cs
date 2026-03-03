@@ -52,7 +52,8 @@ public class Dummy : IPlayer, IDisposable
     private Time _time = new(0, 0, DateTime.Now);
 
 
-    public Dummy(string name, Server server, PlayerManager playerManager, EventManager eventManager, JoinManager joinManager,
+    public Dummy(string name, Server server, PlayerManager playerManager, EventManager eventManager,
+        JoinManager joinManager,
         PacketManager packetManager, ObjectController objectController)
     {
         _name = name;
@@ -341,12 +342,12 @@ public class Dummy : IPlayer, IDisposable
 
     public async Task BroadcastStateAsync()
     {
-        await BroadcastPacketAsync(new CostumePacket()
+        await BroadcastPacketAsync(new CostumePacket
         {
             CapName = _costume.CapName,
-            BodyName = _costume.BodyName,
+            BodyName = _costume.BodyName
         });
-        await BroadcastPacketAsync(new CapturePacket()
+        await BroadcastPacketAsync(new CapturePacket
         {
             ModelName = _capture
         });
@@ -356,21 +357,21 @@ public class Dummy : IPlayer, IDisposable
             GameMode = _gameMode,
             IsIt = _isIt,
             Minutes = _time.Minutes,
-            Seconds = _time.Seconds,
+            Seconds = _time.Seconds
         });
-        await BroadcastPacketAsync(new GamePacket()
+        await BroadcastPacketAsync(new GamePacket
         {
             Is2d = _is2D,
             Stage = _stage,
-            ScenarioNum = _scenario,
+            ScenarioNum = _scenario
         });
-        await BroadcastPacketAsync(new PlayerPacket()
+        await BroadcastPacketAsync(new PlayerPacket
         {
             Position = _position,
             Rotation = _rotation,
             Act = _act,
             SubAct = _subAct,
-            AnimationBlendWeights = _animationBlendWeights,
+            AnimationBlendWeights = _animationBlendWeights
         });
     }
 

@@ -10,27 +10,24 @@ namespace DSMOOProximityVoiceChat;
 
 public class VoiceChatWebSocket : WebSocketModule
 {
-    private readonly PlayerManager _playerManager;
+    private const float MaxDistance = 3500f;
+    private readonly Dictionary<string, IWebSocketContext> _clients = new();
     private readonly ILogger _logger;
-    
-    public VoiceChatWebSocket(string urlPath, bool enableConnectionWatchdog, PlayerManager playerManager, ILogger logger) : base(urlPath, enableConnectionWatchdog)
+    private readonly PlayerManager _playerManager;
+
+    public VoiceChatWebSocket(string urlPath, bool enableConnectionWatchdog, PlayerManager playerManager,
+        ILogger logger) : base(urlPath, enableConnectionWatchdog)
     {
         _playerManager = playerManager;
         _logger = logger;
         Task.Run(VolumeLoop);
     }
-    
-    private const float MaxDistance = 3500f;
-    private readonly Dictionary<string, IWebSocketContext> _clients = new();
-    
+
     protected override Task OnClientConnectedAsync(IWebSocketContext context)
     {
         var username = context.Session["username"] as string;
-        if (string.IsNullOrEmpty(username))
-        {
-            return context.WebSocket.CloseAsync();
-        }
-        
+        if (string.IsNullOrEmpty(username)) return context.WebSocket.CloseAsync();
+
         lock (_clients)
         {
             _clients[username] = context;
@@ -38,28 +35,27 @@ public class VoiceChatWebSocket : WebSocketModule
 
         foreach (var webSocketContext in ActiveContexts)
         {
-            if(webSocketContext == context) continue;
+            if (webSocketContext == context) continue;
             SendAsync(webSocketContext, JsonSerializer.Serialize(new
             {
                 type = "user-joined",
                 id = username
             }));
         }
+
         return Task.CompletedTask;
     }
 
     protected override Task OnClientDisconnectedAsync(IWebSocketContext context)
     {
         var username = context.Session["username"] as string;
-        if (string.IsNullOrEmpty(username))
-        {
-            return context.WebSocket.CloseAsync();
-        }
-        
+        if (string.IsNullOrEmpty(username)) return context.WebSocket.CloseAsync();
+
         lock (_clients)
         {
             _clients.Remove(username);
         }
+
         BroadcastAsync(JsonSerializer.Serialize(new
         {
             type = "user-left",
@@ -68,7 +64,8 @@ public class VoiceChatWebSocket : WebSocketModule
         return Task.CompletedTask;
     }
 
-    protected override Task OnMessageReceivedAsync(IWebSocketContext context, byte[] buffer, IWebSocketReceiveResult result)
+    protected override Task OnMessageReceivedAsync(IWebSocketContext context, byte[] buffer,
+        IWebSocketReceiveResult result)
     {
         var json = Encoding.UTF8.GetString(buffer, 0, result.Count);
         var msg = JsonNode.Parse(json);
@@ -84,7 +81,7 @@ public class VoiceChatWebSocket : WebSocketModule
                 ForwardSignaling(username!, msg);
                 break;
         }
-        
+
         return Task.CompletedTask;
     }
 
@@ -96,9 +93,7 @@ public class VoiceChatWebSocket : WebSocketModule
         lock (_clients)
         {
             if (_clients.TryGetValue(to, out var target))
-            {
                 target.WebSocket.SendAsync(Encoding.UTF8.GetBytes(msg.ToJsonString()), true);
-            }
         }
     }
 
@@ -110,32 +105,31 @@ public class VoiceChatWebSocket : WebSocketModule
 
             try
             {
-                if(_clients.Count == 0)
+                if (_clients.Count == 0)
                     continue;
 
                 var connectedPlayers = _playerManager.RealPlayers.Where(x => _clients.ContainsKey(x.Name)).ToList();
 
                 foreach (var listener in connectedPlayers)
+                foreach (var speaker in connectedPlayers)
                 {
-                    foreach (var speaker in connectedPlayers)
+                    if (listener.Name == speaker.Name) continue;
+                    IWebSocketContext? context;
+                    lock (_clients)
                     {
-                        if (listener.Name == speaker.Name) continue;
-                        IWebSocketContext? context;
-                        lock (_clients)
-                        {
-                            if (!_clients.TryGetValue(listener.Name, out context))
-                                continue;
-                        }
-                        var volume = ComputeVolume(listener, speaker);
-                        var msg = JsonSerializer.Serialize(new
-                        {
-                            type = "volume",
-                            from = speaker.Name,
-                            value = volume
-                        });
-                        if (!context.CancellationToken.IsCancellationRequested)
-                            await context.WebSocket.SendAsync(Encoding.UTF8.GetBytes(msg), true);
+                        if (!_clients.TryGetValue(listener.Name, out context))
+                            continue;
                     }
+
+                    var volume = ComputeVolume(listener, speaker);
+                    var msg = JsonSerializer.Serialize(new
+                    {
+                        type = "volume",
+                        from = speaker.Name,
+                        value = volume
+                    });
+                    if (!context.CancellationToken.IsCancellationRequested)
+                        await context.WebSocket.SendAsync(Encoding.UTF8.GetBytes(msg), true);
                 }
             }
             catch (Exception e)
@@ -144,14 +138,11 @@ public class VoiceChatWebSocket : WebSocketModule
             }
         }
     }
-    
+
     private float ComputeVolume(IPlayer listener, IPlayer speaker)
     {
-        if (listener.Stage != speaker.Stage)
-        {
-            return 0;
-        }
+        if (listener.Stage != speaker.Stage) return 0;
         var dist = (listener.Position - speaker.Position).Length();
-        return Math.Clamp(1f - (dist / MaxDistance), 0f, 1f);
+        return Math.Clamp(1f - dist / MaxDistance, 0f, 1f);
     }
 }

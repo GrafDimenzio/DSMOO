@@ -17,8 +17,8 @@
     <ItemGroup>
         <None Remove="Templates\proximity_voice_chat.html"/>
         <EmbeddedResource Include="Templates\proximity_voice_chat.html"/>
-        <None Remove="wwwroot\proximity.js" />
-        <EmbeddedResource Include="wwwroot\proximity.js" />
+        <None Remove="wwwroot\proximity.js"/>
+        <EmbeddedResource Include="wwwroot\proximity.js"/>
     </ItemGroup>
 
 </Project>

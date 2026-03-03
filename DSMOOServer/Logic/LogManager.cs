@@ -1,6 +1,7 @@
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events.Args;
+using DSMOOServer.API.GameModes.Hints;
 using DSMOOServer.Network.Packets;
 using EventManager = DSMOOServer.API.Events.EventManager;
 
@@ -24,7 +25,7 @@ public class LogManager(EventManager eventManager, ILogger logger) : Manager
             case CostumePacket costumePacket:
                 args.Sender.Logger.Info($"Got costume packet from {costumePacket.BodyName}->{costumePacket.CapName}");
                 break;
-            
+
             case PlayerPacket playerPacket:
                 args.Sender.Logger.Debug($"Position: {playerPacket.Position}");
                 break;

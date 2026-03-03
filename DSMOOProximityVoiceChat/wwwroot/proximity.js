@@ -14,7 +14,7 @@ window.addEventListener("beforeunload", () => {
 
 async function joinVoiceChat() {
     cleanupAll()
-    if(ws) {
+    if (ws) {
         ws.close();
         ws = null;
     }
@@ -27,7 +27,7 @@ async function joinVoiceChat() {
                 channelCount: 1,
             },
             video: false,
-        });   
+        });
     } catch (error) {
         console.error(error);
         return;
@@ -127,8 +127,8 @@ async function callUser(username) {
 
 async function handleOffer(msg) {
     let pc;
-    
-    if(peers[msg.from]) {
+
+    if (peers[msg.from]) {
         pc = peers[msg.from];
     } else {
         pc = createPeer(msg.from);
@@ -143,7 +143,7 @@ async function handleOffer(msg) {
         }
         delete pc._iceQueue;
     }
-    
+
     const answer = await pc.createAnswer();
     await pc.setLocalDescription(answer);
 
@@ -157,7 +157,7 @@ async function handleOffer(msg) {
 async function handleAnswer(msg) {
     const pc = peers[msg.from];
     if (!pc) return;
-    
+
     const desc = new RTCSessionDescription(msg.sdp);
     await pc.setRemoteDescription(desc);
 
@@ -171,10 +171,10 @@ async function handleAnswer(msg) {
 
 async function handleIce(msg) {
     const pc = peers[msg.from];
-    if(!pc || !msg.candidate) return;
-    
-    if(pc.remoteDescription) {
-        await pc.addIceCandidate(new RTCIceCandidate (msg.candidate));
+    if (!pc || !msg.candidate) return;
+
+    if (pc.remoteDescription) {
+        await pc.addIceCandidate(new RTCIceCandidate(msg.candidate));
     } else {
         pc._iceQueue = pc._iceQueue || [];
         pc._iceQueue.push(msg.candidate);
@@ -200,19 +200,19 @@ function cleanup(username) {
     }
 }
 
-function cleanupAll(){
+function cleanupAll() {
     for (const username in peers) {
         peers[username].close();
         delete peers[username];
     }
-    
+
     for (const username in audioElements) {
         audioElements[username].pause();
         audioElements[username].srcObject = null;
         audioElements[username].remove();
         delete audioElements[username];
     }
-    
+
     if (localStream) {
         localStream.getTracks().forEach(track => track.stop());
         localStream = null;

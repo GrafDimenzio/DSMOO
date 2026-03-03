@@ -8,11 +8,13 @@ namespace DSMOOFramework;
 
 public static class SetupHelper
 {
-    public static ObjectController BasicSetup(ILogger controllerLogger, Dictionary<string, string> paths,
+    public static ObjectController BasicSetup<T>(T controllerLogger, Dictionary<string, string> paths,
         Assembly[]? assemblies = null,
         ILogger? analyzerLogger = null, ILogger? managerLogger = null)
+    where T : ILogger
     {
         var controller = new ObjectController(controllerLogger);
+        controller.Factories[typeof(ILogger)] = (IFactory<object>)new LoggerFactory<T>(controllerLogger);
         var pathLocation = controller.GetObject<PathLocation>();
         if (pathLocation == null)
         {

@@ -82,6 +82,12 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
                     msg.Append(string.Join(join, manager.GameModes.Select(x => (GameMode)x)));
                 }
 
+                if (manager.Captures.Count > 0)
+                {
+                    msg.Append("\nBanned Captures:" + join);
+                    msg.Append(string.Join(join, manager.Captures));
+                }
+
                 return msg.ToString();
 
             case "enable" when banMode:
@@ -171,6 +177,16 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
 
                 manager.UnBanGameMode(gameMode);
                 return "Unbanned gamemode " + gameMode;
+
+            case "capture":
+                if (banMode)
+                {
+                    manager.BanCapture(args[1]);
+                    return "Banned capture " + args[1];
+                }
+
+                manager.UnBanCapture(args[1]);
+                return "Unbanned capture " + args[1];
         }
 
         return new CommandResult

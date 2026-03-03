@@ -11,9 +11,9 @@ public class PluginManager : Manager
     private readonly Analyzer.Analyzer _analyzer;
     private readonly AssemblyManager _assemblyManager;
     private readonly ILogger _logger;
-    private readonly List<PluginAttribute> plugins = [];
 
     public readonly EventReactor<EventArg> OnPluginLoaded;
+    private readonly List<PluginAttribute> plugins = [];
 
     public PluginManager(ILogger logger, PathLocation pathLocation, AssemblyManager assemblyManager,
         Analyzer.Analyzer analyzer)
@@ -36,7 +36,7 @@ public class PluginManager : Manager
         _logger.Info("Loading plugins...");
         _logger.Setup("Loading Dll's from Directory: " + PluginDirectory);
         _assemblyManager.LoadAssemblies(PluginDirectory);
-        OnPluginLoaded.RaiseEvent(new());
+        OnPluginLoaded.RaiseEvent(new EventArg());
     }
 
     public override void Initialize()

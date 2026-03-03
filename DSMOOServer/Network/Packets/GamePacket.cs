@@ -14,7 +14,7 @@ public struct GamePacket : IPacket
     {
     }
 
-    public short Size => sizeof(bool) + sizeof(byte) + Constants.GamePacketStageSize;//0x42;
+    public short Size => sizeof(bool) + sizeof(byte) + Constants.GamePacketStageSize; //0x42;
 
     public void Serialize(Span<byte> data)
     {

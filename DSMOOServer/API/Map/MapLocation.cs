@@ -1,5 +1,4 @@
 using System.Numerics;
-using DSMOOServer.API.Stage;
 
 namespace DSMOOServer.API.Map;
 
@@ -52,7 +51,7 @@ public class MapLocation
         Letter = (int)((Y - 65) / 390) + 1;
     }
 
-    public string Kingdom { get; set; }
+    public string Kingdom { get; set; } = "";
 
     public double X { get; set; }
     public double Y { get; set; }
@@ -62,22 +61,27 @@ public class MapLocation
 
     public bool SubArea { get; set; }
 
-    public string GetCell()
+    public string GetLetter()
     {
         switch (Letter)
         {
             case 1:
-                return "A" + Number;
+                return "A";
             case 2:
-                return "B" + Number;
+                return "B";
             case 3:
-                return "C" + Number;
+                return "C";
             case 4:
-                return "D" + Number;
+                return "D";
             case 5:
-                return "E" + Number;
+                return "E";
             default:
                 return "??";
         }
+    }
+
+    public string GetCell()
+    {
+        return GetLetter() + Number;
     }
 }

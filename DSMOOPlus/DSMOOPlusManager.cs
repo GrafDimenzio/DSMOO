@@ -2,7 +2,6 @@ using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOFramework.Plugins;
 using DSMOOPlus.Packets;
-using DSMOOServer.API.Enum;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.Network.Packets;

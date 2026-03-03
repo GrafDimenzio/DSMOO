@@ -17,18 +17,19 @@ public class RecordingManager(
     PathLocation pathLocation) : Manager
 {
     private readonly Dictionary<IPlayer, Recording> _activeRecordings = new();
+
     /// <summary>
-    /// A Collection of all Recordings that are currently recording a Player
+    ///     A Collection of all Recordings that are currently recording a Player
     /// </summary>
     public ReadOnlyDictionary<IPlayer, Recording> ActiveRecordings => _activeRecordings.AsReadOnly();
 
     /// <summary>
-    /// A Collection of all Recordings that are stored to file and ready to be used
+    ///     A Collection of all Recordings that are stored to file and ready to be used
     /// </summary>
     public ReadOnlyDictionary<string, Recording> StoredRecordings { get; private set; }
 
     /// <summary>
-    /// Gets a returning based on it's name stored on disk
+    ///     Gets a returning based on it's name stored on disk
     /// </summary>
     /// <param name="recordingName"></param>
     /// <returns></returns>

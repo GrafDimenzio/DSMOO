@@ -3,7 +3,6 @@ using DSMOOFramework.Commands;
 using DSMOOFramework.Logger;
 using DSMOOServer.API.Player;
 using DSMOOServer.Logic;
-using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Commands;
 
@@ -40,6 +39,7 @@ public class Debug(PlayerManager manager, DummyManager dummyManager, ILogger log
             await Task.Delay(50);
             dummy.Position += forward;
         }
+
         dummy.Disconnect();
     }
 }
