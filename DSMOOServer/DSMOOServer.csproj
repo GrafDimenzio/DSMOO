@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Data\kingdoms.json"/>
+        <EmbeddedResource Include="Data\map_data.json" />
         <None Remove="Data\stages.json"/>
         <EmbeddedResource Include="Data\stages.json"/>
         <None Remove="Data\entrances.txt"/>

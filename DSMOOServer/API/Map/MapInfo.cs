@@ -10,7 +10,7 @@ public class MapInfo
 
     static MapInfo()
     {
-        var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DSMOOServer.Data.kingdoms.json");
+        var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("DSMOOServer.Data.map_data.json");
         using var reader = new StreamReader(stream!);
         var json = reader.ReadToEnd();
         AllKingdoms = JsonSerializer.Deserialize<MapInfo[]>(json)!;

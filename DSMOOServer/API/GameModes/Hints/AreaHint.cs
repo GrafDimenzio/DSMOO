@@ -1,4 +1,3 @@
-using DSMOOFramework.Analyzer;
 using DSMOOServer.API.Player;
 
 namespace DSMOOServer.API.GameModes.Hints;
@@ -8,6 +7,6 @@ public class AreaHint : IHint
 {
     public string GetHint(IPlayer player)
     {
-        throw new NotImplementedException();
+        return "NOT IMPLEMENTED";
     }
 }

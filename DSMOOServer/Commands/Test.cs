@@ -1,6 +1,9 @@
 using System.Numerics;
 using DSMOOFramework.Commands;
+using DSMOOFramework.Config;
+using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
+using DSMOOServer.API.GameModes;
 using DSMOOServer.API.Player;
 using DSMOOServer.Logic;
 
@@ -13,10 +16,15 @@ namespace DSMOOServer.Commands;
     Description = "Debug Command",
     Parameters = ["DEBUG"]
 )]
-public class Debug(PlayerManager manager, DummyManager dummyManager, ILogger logger) : Command
+public class Debug(PlayerManager manager, DummyManager dummyManager, ILogger logger, GameModeManager gameModeManager, ObjectController objectController, ConfigHolder<GameModeConfig> gameConfig) : Command
 {
     public override CommandResult Execute(string command, string[] args)
     {
+        objectController.CreateObject<TestGameMode>()?.StartGame(manager.Players.ToArray(), gameConfig.Config.StageConfigs[0],
+            gameConfig.Config.HintConfigs[0], []);
+        return "";
+        gameModeManager.GetHint("MapCell", manager.Players[0], null);
+        return "";
         Task.Run(Run);
         return "TEST";
     }

@@ -1,14 +1,12 @@
 namespace DSMOOServer.API.GameModes;
 
-public struct StageConfig
+public class StageConfig
 {
-    public string Name = "";
-    public string[] StartingStage = [];
-    public string[] WaitingStage = [];
-    public string[] AllowedStages = [];
-    public bool AllowAll = false;
-
-    public StageConfig()
-    {
-    }
+    public string Name { get; set; } = "";
+    public string[] StartingStage { get; set; } = [];
+    public bool AllOnSameStartingStage { get; set; } = true;
+    public string[] WaitingStage { get; set; } = [];
+    public bool AllOnSameWaitingStage { get; set; } = true;
+    public string[] AllowedStages { get; set; } = [];
+    public bool AllowAll { get; set; } = false;
 }

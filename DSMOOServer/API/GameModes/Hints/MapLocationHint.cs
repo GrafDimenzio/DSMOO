@@ -1,4 +1,3 @@
-using DSMOOFramework.Analyzer;
 using DSMOOServer.API.Map;
 using DSMOOServer.API.Player;
 
@@ -10,7 +9,7 @@ public abstract class MapLocationHint : IHint
     {
         return GetHint(player, new MapLocation(player.Position, player.Stage));
     }
-    
+
     protected abstract string GetHint(IPlayer player, MapLocation location);
 }
 

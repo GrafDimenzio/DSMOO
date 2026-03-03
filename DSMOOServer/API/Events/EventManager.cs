@@ -21,4 +21,9 @@ public class EventManager(ILogger logger) : Manager
     public readonly EventReactor<PlayerStateEventArgs> OnPlayerState = new(logger);
     public readonly EventReactor<PlayerSwitch2dStateEventArgs> OnPlayerSwitch2dState = new(logger);
     public readonly EventReactor<SendPlayerInitPacketEventArgs> OnSendPlayerInitPacket = new(logger);
+    public readonly EventReactor<GetHintEventArgs> OnGetHint = new(logger);
+    public readonly EventReactor<SendHintEventArgs> OnSendHint = new(logger);
+    public readonly EventReactor<GameEventArgs> OnPreGameStart = new(logger);
+    public readonly EventReactor<GameEventArgs> OnGameStart = new(logger);
+    public readonly EventReactor<GameEventArgs> OnGameEnd = new(logger);
 }
