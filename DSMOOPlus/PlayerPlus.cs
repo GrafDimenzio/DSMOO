@@ -15,4 +15,13 @@ public class PlayerPlus : PlayerComponent
             SenderId = (uint)sender.GetHashCode()
         }, sender);
     }
+
+    public async Task SetHealth(byte health, bool useAssistHealth = false)
+    {
+        await Player.Send(new PlayerStatePacket()
+        {
+            Health = health,
+            AssistModeHealth = useAssistHealth
+        }, null);
+    }
 }

@@ -4,6 +4,7 @@ using DSMOOFramework.Plugins;
 using DSMOOPlus.Packets;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
+using DSMOOServer.Logic;
 using DSMOOServer.Network.Packets;
 using InitPacket = DSMOOServer.Network.Packets.InitPacket;
 
@@ -16,13 +17,14 @@ namespace DSMOOPlus;
     Repository = "https://github.com/GrafDimenzio/DSMOO",
     Version = "1.0.0"
 )]
-public class DSMOOPlusManager(EventManager eventManager, ILogger logger) : Manager
+public class DSMOOPlusManager(EventManager eventManager, PlayerManager playerManager, ILogger logger) : Manager
 {
     public override void Initialize()
     {
         eventManager.OnSendPlayerInitPacket.Subscribe(OnSendInitPacket);
         eventManager.OnPlayerAddComponents.Subscribe(OnAddComponent);
         eventManager.OnPacketReceived.Subscribe(OnPacket);
+        
     }
 
     private void OnPacket(PacketReceivedEventArgs args)

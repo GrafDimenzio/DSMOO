@@ -1,4 +1,5 @@
 using DSMOOFramework.Controller;
+using DSMOOFramework.Logger;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.GameModes.Hints;
@@ -8,16 +9,24 @@ namespace DSMOOServer.API.GameModes;
 
 public abstract class BasicGame : IGame, IInject, IDisposable
 {
-    private Task? _hintTask;
-    private readonly Random _random = new();
+    protected readonly Random _random = new();
+    protected Task? _hintTask;
     private string? _startingStage;
     private string? _waitingStage;
 
+    [Inject] public ILogger Logger;
     [Inject] public GameModeManager GameModeManager { get; set; }
 
     [Inject] public EventManager EventManager { get; set; }
+    public string[] Arguments { get; private set; } = [];
 
-    public abstract string Name { get; }
+    public void Dispose()
+    {
+        _hintTask?.Dispose();
+        EventManager.OnPlayerChangeStage.Unsubscribe(OnChangeStage);
+    }
+
+    public abstract string DisplayName { get; }
     public IPlayer[] Players { get; private set; } = [];
     public StageConfig StageConfig { get; private set; }
     public HintConfig HintConfig { get; private set; }
@@ -27,8 +36,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
         Players = playingPlayers;
         StageConfig = stageConfig;
         HintConfig = hintConfig;
-        if (HintConfig.Hints.Length > 0)
-            _hintTask = Task.Run(HintTask);
+        Arguments = arguments;
         EventManager.OnPreGameStart.RaiseEvent(new GameEventArgs { Game = this });
         OnGameStart();
         EventManager.OnGameStart.RaiseEvent(new GameEventArgs { Game = this });
@@ -56,6 +64,8 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     public virtual void OnGameStart()
     {
+        if (HintConfig.Hints.Length > 0)
+            _hintTask = Task.Run(HintTask);
         foreach (var player in Players) player.ChangeStage(GetStartingStage());
     }
 
@@ -70,9 +80,13 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     public virtual void SendHint(HintData hintData)
     {
+        foreach (var player in Players)
+            //if (player == hintData.Player)
+            //continue;
+            GameModeManager.SendHintToPlayer(player, hintData);
     }
 
-    private async Task HintTask()
+    protected async Task HintTask()
     {
         var current = 0;
         var time = 0;
@@ -83,15 +97,20 @@ public abstract class BasicGame : IGame, IInject, IDisposable
             var timeToWait = hint.Time - time;
             await Task.Delay(timeToWait * 1000);
             time += timeToWait;
+
+            var hintTypes = new HashSet<string>();
+            var hintIndex = HintConfig.UpdateOldHintOnNewOnes ? 0 : current;
+            while (hintIndex <= current)
+            {
+                var currentHint = HintConfig.Hints[hintIndex];
+                hintTypes.Add(currentHint.HintType);
+                hintIndex++;
+            }
+
             foreach (var player in PlayersToHint())
             {
-                var hintIndex = HintConfig.UpdateOldHintOnNewOnes ? 0 : current;
-                while (hintIndex <= current)
-                {
-                    var hintData = GameModeManager.GetHint(HintConfig.Hints[hintIndex].HintType, player, this);
-                    SendHint(hintData);
-                    hintIndex++;
-                }
+                var hintData = GameModeManager.GetHint(hintTypes.ToArray(), player, this);
+                SendHint(hintData);
             }
 
             current++;
@@ -116,18 +135,12 @@ public abstract class BasicGame : IGame, IInject, IDisposable
         var stages = StageConfig.WaitingStage;
         var stage = stages[_random.Next(stages.Length)];
         if (StageConfig.AllOnSameWaitingStage)
-            _startingStage = stage;
+            _waitingStage = stage;
         return stage;
     }
 
     public bool IsStageAllowed(string stage)
     {
         return StageConfig.StartingStage.Contains(stage) || StageConfig.AllowedStages.Contains(stage);
-    }
-
-    public void Dispose()
-    {
-        _hintTask?.Dispose();
-        EventManager.OnPlayerChangeStage.Unsubscribe(OnChangeStage);
     }
 }

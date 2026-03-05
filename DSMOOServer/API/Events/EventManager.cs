@@ -25,5 +25,6 @@ public class EventManager(ILogger logger) : Manager
     public readonly EventReactor<SendHintEventArgs> OnSendHint = new(logger);
     public readonly EventReactor<GameEventArgs> OnPreGameStart = new(logger);
     public readonly EventReactor<GameEventArgs> OnGameStart = new(logger);
+    public readonly EventReactor<WaitingGameEventArgs> OnWaitingPlayersReleased = new(logger);
     public readonly EventReactor<GameEventArgs> OnGameEnd = new(logger);
 }

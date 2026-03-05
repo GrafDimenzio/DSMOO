@@ -8,6 +8,7 @@ using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.GameModes.Hints;
 using DSMOOServer.API.Player;
+using DSMOOServer.API.Stage;
 using DSMOOServer.Logic;
 using DSMOOServer.Network.Packets;
 
@@ -15,6 +16,7 @@ namespace DSMOOServer.API.GameModes;
 
 public class GameModeManager(
     EventManager eventManager,
+    StageManager stageManager,
     ConfigHolder<ServerMainConfig> configHolder,
     ConfigHolder<GameModeConfig> gameConfigHolder,
     Analyzer analyzer,
@@ -22,29 +24,74 @@ public class GameModeManager(
     ILogger logger,
     PlayerManager playerManager) : Manager
 {
-    private readonly List<Type> _games = [];
-    public Dictionary<string, IHint> Hints = new();
-    public ReadOnlyCollection<Type> Games => _games.AsReadOnly();
+    private readonly Dictionary<string, Type> _games = [];
+    public readonly Dictionary<string, IHint> Hints = new();
+    public ReadOnlyDictionary<string, Type> Games => _games.AsReadOnly();
 
     public override void Initialize()
     {
-        analyzer.OnAnalyze.Subscribe(OnAnalyze);
+        analyzer.OnAnalyze.Subscribe(OnAnalyzeGames);
+        analyzer.OnAnalyze.Subscribe(OnAnalyzeHint);
         eventManager.OnPlayerState.Subscribe(OnPlayerState);
     }
 
-    public HintData GetHint(string hintType, IPlayer player, IGame? forGame = null)
+    public IGame? StartGame(string gameName, IPlayer[] players, StageConfig stageConfig, HintConfig hintConfig,
+        string[] arguments)
     {
-        var hintGenerator = Hints[hintType];
-        var hintString = hintGenerator.GetHint(player);
+        if(!_games.ContainsKey(gameName.ToLower()))
+            return null;
+        
+        var game = (IGame?)objectController.CreateObject(_games[gameName.ToLower()]);
+        if (game == null)
+            return null;
+        game.StartGame(players, stageConfig, hintConfig, arguments);
+        return game;
+    }
+
+    public StageConfig? GetStageConfig(string configName)
+    {
+        foreach (var stageConfig in gameConfigHolder.Config.StageConfigs)
+        {
+            if (string.Equals(stageConfig.Name, configName, StringComparison.OrdinalIgnoreCase))
+                return stageConfig;
+        }
+        
+        var stage = stageManager.GetStageFromInput(configName);
+        if (stage == null)
+            return null;
+        
+        return new StageConfig()
+        {
+            Name = configName,
+            AllowAll = false,
+            AllowedStages = [stage],
+            StartingStage = [stage],
+            WaitingStage = [stage],
+        };
+    }
+
+    public HintData GetHint(string[] hintTypes, IPlayer player, IGame? forGame = null)
+    {
+        var hints = new List<string>();
+        var types = new List<string>();
+
+        foreach (var hintType in hintTypes)
+        {
+            if (!Hints.TryGetValue(hintType, out var hintGenerator))
+                continue;
+            hints.Add(hintGenerator.GetHint(player));
+            types.Add(hintType);
+        }
+
         var hintData = new HintData
         {
             Player = player,
-            HintName = hintType,
-            HintText = hintString
+            HintTypes = types.ToArray(),
+            HintTexts = hints.ToArray()
         };
         var ev = new GetHintEventArgs { HintData = hintData, Game = forGame };
         eventManager.OnGetHint.RaiseEvent(ev);
-        logger.Info($"Hint about {ev.HintData.Player.Name}-{ev.HintData.HintName}: {ev.HintData.HintText}");
+        logger.Info($"Hint about {ev.HintData.Player.Name}: {string.Join(' ', ev.HintData.HintTexts)}");
         return ev.HintData;
     }
 
@@ -58,7 +105,18 @@ public class GameModeManager(
         eventManager.OnSendHint.RaiseEvent(ev);
     }
 
-    private void OnAnalyze(AnalyzeEventArgs args)
+    private void OnAnalyzeGames(AnalyzeEventArgs args)
+    {
+        if(!args.Is<IGame>()) return;
+        var names = args.GetAttribute<GameAttribute>()?.Names;
+        if (names == null) return;
+        foreach (var name in names)
+        {
+            _games[name.ToLower()] = args.Type;
+        }
+    }
+    
+    private void OnAnalyzeHint(AnalyzeEventArgs args)
     {
         if (!args.Is<IHint>()) return;
         var name = args.GetAttribute<HintAttribute>()?.Name;

@@ -20,10 +20,10 @@ public class Debug(PlayerManager manager, DummyManager dummyManager, ILogger log
 {
     public override CommandResult Execute(string command, string[] args)
     {
-        objectController.CreateObject<TestGameMode>()?.StartGame(manager.Players.ToArray(), gameConfig.Config.StageConfigs[0],
+        objectController.CreateObject<HideAndSeek>()?.StartGame(manager.Players.ToArray(), gameConfig.Config.StageConfigs[0],
             gameConfig.Config.HintConfigs[0], []);
         return "";
-        gameModeManager.GetHint("MapCell", manager.Players[0], null);
+        gameModeManager.GetHint(["MapCell"], manager.Players[0], null);
         return "";
         Task.Run(Run);
         return "TEST";
