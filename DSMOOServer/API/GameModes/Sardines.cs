@@ -5,22 +5,20 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.API.GameModes;
 
-[Game(Names = ["HideAndSeek", "Hide&Seek"])]
-public class HideAndSeek : WaitingGame
+[Game(Names = ["sardines", "sardine"])]
+public class Sardines : WaitingGame
 {
     [Inject] public Server Server { get; set; }
 
-    public override string DisplayName { get; } = "Hide & Seek";
-    
+    public override int TeamSize => Players.Length - 1;
+
+    public override string DisplayName { get; } = "Sardines";
+
     public override void OnGameStart()
     {
         if (Arguments.Length > 0 && int.TryParse(Arguments[0], out var waitingTime))
         {
             WaitingTime = waitingTime * 1000;
-        }
-        if (Arguments.Length > 1 && int.TryParse(Arguments[1], out var teamSize))
-        {
-            TeamSize = teamSize;
         }
         base.OnGameStart();
     }
@@ -29,8 +27,8 @@ public class HideAndSeek : WaitingGame
     {
         var packet = new TagPacket
         {
-            IsIt = true,
-            GameMode = GameMode.HideAndSeek,
+            IsIt = false,
+            GameMode = GameMode.Sardines,
             UpdateType = TagPacket.TagUpdate.State
         };
         foreach (var player in StartTeamPlayers)
@@ -45,8 +43,8 @@ public class HideAndSeek : WaitingGame
     {
         var packet = new TagPacket
         {
-            IsIt = true,
-            GameMode = GameMode.HideAndSeek,
+            IsIt = false,
+            GameMode = GameMode.Sardines,
             UpdateType = TagPacket.TagUpdate.State
         };
         foreach (var player in WaitingTeamPlayers)
@@ -61,8 +59,8 @@ public class HideAndSeek : WaitingGame
     {
         var packet = new TagPacket
         {
-            IsIt = false,
-            GameMode = GameMode.HideAndSeek,
+            IsIt = true,
+            GameMode = GameMode.Sardines,
             UpdateType = TagPacket.TagUpdate.State
         };
         foreach (var player in StartTeamPlayers)

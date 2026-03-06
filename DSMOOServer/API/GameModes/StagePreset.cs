@@ -1,6 +1,6 @@
 namespace DSMOOServer.API.GameModes;
 
-public class StageConfig
+public class StagePreset
 {
     public string Name { get; set; } = "";
     public string[] StartingStage { get; set; } = [];

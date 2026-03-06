@@ -35,10 +35,10 @@ public class Game(GameModeManager gameModeManager, PlayerManager playerManager, 
                     {
                         ResultType = ResultType.MissingParameter,
                         Message =
-                            "usage: game start (game) (stage preset) (hint preset) (player names in \" or * for everyone) (additional arguments)" +
+                            "usage: game start (game) (stage preset) (hint preset) (player names in \" or * for everyone) (additional arguments for hide and seek you can specify waiting time and how many players should search)" +
                             "\n Use game list for a list of all games, stage presets and hint presets." +
                             "\n Use none as hint preset to disable hints" +
-                            "\n Example usage: game start hide&seek cap none * or game start hideAndseek cap-nosub default \"mario luigi\""
+                            "\n Example usage: game start hide&seek cap none * 60 2 (this means all players participate, 2 players search and have to wait 60 seconds) or game start hide&seek cap-nosub default \"mario luigi\""
                     };
                 if (!gameModeManager.Games.ContainsKey(args[1].ToLower()))
                     return new CommandResult()

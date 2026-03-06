@@ -10,8 +10,8 @@ public abstract class WaitingGame : BasicGame
     public IPlayer[] WaitingTeamPlayers { get; protected set; }
     public IPlayer[] StartTeamPlayers { get; protected set; }
 
-    public int WaitingTime { get; protected set; } = 15000;
-    public int TeamSize { get; protected set; } = 1;
+    public virtual int WaitingTime { get; protected set; } = 15000;
+    public virtual int TeamSize { get; protected set; } = 1;
 
     public bool Waiting { get; protected set; }
 
@@ -35,12 +35,20 @@ public abstract class WaitingGame : BasicGame
         _waitingTask = Task.Run(WaitForStart);
     }
 
+    public override void OnGameEnd()
+    {
+        WaitingTeamPlayers = [];
+        StartTeamPlayers = [];
+    }
+
     protected virtual async Task WaitForStart()
     {
         await Task.Delay(WaitingTime);
+        if (!IsRunning)
+            return;
         Waiting = false;
         SpawnWaitingPlayers();
-        if (HintConfig.Hints.Length > 0)
+        if (HintPreset.Hints.Length > 0)
             _hintTask = Task.Run(HintTask);
     }
 
@@ -51,9 +59,9 @@ public abstract class WaitingGame : BasicGame
 
     protected override void OnChangeStage(PlayerChangeStageEventArgs eventArgs)
     {
-        if (Waiting && WaitingTeamPlayers.Contains(eventArgs.Player))
+        if (IsRunning && Waiting && WaitingTeamPlayers.Contains(eventArgs.Player))
         {
-            if (StageConfig.WaitingStage.Contains(eventArgs.NewStage))
+            if (StagePreset.WaitingStage.Contains(eventArgs.NewStage))
                 return;
 
             eventArgs.SendBack = true;

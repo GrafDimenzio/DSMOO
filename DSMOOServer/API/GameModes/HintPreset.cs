@@ -1,6 +1,6 @@
 namespace DSMOOServer.API.GameModes;
 
-public class HintConfig
+public class HintPreset
 {
     public string Name { get; set; } = "";
     public bool UpdateOldHintOnNewOnes { get; set; } = true;

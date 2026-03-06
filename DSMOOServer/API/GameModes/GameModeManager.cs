@@ -48,7 +48,7 @@ public class GameModeManager(
             : StartGame(gameName, playerSearch.Players.ToArray(), stage, hint, args);
     }
 
-    public IGame? StartGame(string gameName, IPlayer[] players, StageConfig stageConfig, HintConfig hintConfig,
+    public IGame? StartGame(string gameName, IPlayer[] players, StagePreset stagePreset, HintPreset hintPreset,
         params string[] arguments)
     {
         if (!_games.ContainsKey(gameName.ToLower()))
@@ -57,11 +57,11 @@ public class GameModeManager(
         var game = (IGame?)objectController.CreateObject(_games[gameName.ToLower()]);
         if (game == null)
             return null;
-        game.StartGame(players, stageConfig, hintConfig, arguments);
+        game.StartGame(players, stagePreset, hintPreset, arguments);
         return game;
     }
 
-    public StageConfig? GetStageConfig(string configName)
+    public StagePreset? GetStageConfig(string configName)
     {
         foreach (var stageConfig in gameConfigHolder.Config.StageConfigs)
             if (string.Equals(stageConfig.Name, configName, StringComparison.OrdinalIgnoreCase))
@@ -71,7 +71,7 @@ public class GameModeManager(
         if (stage == null)
             return null;
 
-        return new StageConfig
+        return new StagePreset
         {
             Name = configName,
             AllowAll = false,
@@ -81,14 +81,14 @@ public class GameModeManager(
         };
     }
 
-    public HintConfig? GetHintConfig(string configName)
+    public HintPreset? GetHintConfig(string configName)
     {
         foreach (var hintConfig in gameConfigHolder.Config.HintConfigs)
             if (string.Equals(hintConfig.Name, configName, StringComparison.OrdinalIgnoreCase))
                 return hintConfig;
 
         if (configName.ToLower() == "none")
-            return new HintConfig()
+            return new HintPreset()
             {
                 Name = "None",
                 Hints = [],
@@ -165,7 +165,7 @@ public class GameModeManager(
 [Config(Name = "gameModes")]
 public class GameModeConfig : IConfig
 {
-    public StageConfig[] StageConfigs { get; set; } =
+    public StagePreset[] StageConfigs { get; set; } =
     [
         new()
         {
@@ -194,44 +194,44 @@ public class GameModeConfig : IConfig
         }
     ];
 
-    public HintConfig[] HintConfigs { get; set; } =
+    public HintPreset[] HintConfigs { get; set; } =
     [
         new()
         {
             Name = "default",
             Hints =
             [
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 300,
                     HintType = "Area"
                 },
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 600,
                     HintType = "MapNorthSouth"
                 },
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 900,
                     HintType = "MapEastWest"
                 },
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 1200,
                     HintType = "MapNumber"
                 },
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 1500,
                     HintType = "MapLetter"
                 },
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 1800,
                     HintType = "MapCell"
                 },
-                new HintConfig.Hint
+                new HintPreset.Hint
                 {
                     Time = 2100,
                     HintType = "Position"

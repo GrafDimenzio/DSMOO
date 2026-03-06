@@ -22,22 +22,21 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     public void Dispose()
     {
-        _hintTask?.Dispose();
         EventManager.OnPlayerChangeStage.Unsubscribe(OnChangeStage);
     }
 
     public bool IsRunning { get; protected set; }
     public abstract string DisplayName { get; }
     public IPlayer[] Players { get; private set; } = [];
-    public StageConfig StageConfig { get; private set; }
-    public HintConfig HintConfig { get; private set; }
+    public StagePreset StagePreset { get; private set; }
+    public HintPreset HintPreset { get; private set; }
 
-    public void StartGame(IPlayer[] playingPlayers, StageConfig stageConfig, HintConfig hintConfig, string[] arguments)
+    public void StartGame(IPlayer[] playingPlayers, StagePreset stagePreset, HintPreset hintPreset, string[] arguments)
     {
         IsRunning = true;
         Players = playingPlayers;
-        StageConfig = stageConfig;
-        HintConfig = hintConfig;
+        StagePreset = stagePreset;
+        HintPreset = hintPreset;
         Arguments = arguments;
         EventManager.OnPreGameStart.RaiseEvent(new GameEventArgs { Game = this });
         OnGameStart();
@@ -46,7 +45,6 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     public void EndGame()
     {
-        _hintTask?.Dispose();
         OnGameEnd();
         EventManager.OnGameEnd.RaiseEvent(new GameEventArgs { Game = this });
         Players = [];
@@ -60,14 +58,14 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     protected virtual void OnChangeStage(PlayerChangeStageEventArgs eventArgs)
     {
-        if (!Players.Contains(eventArgs.Player) || IsStageAllowed(eventArgs.NewStage))
+        if (!IsRunning || !Players.Contains(eventArgs.Player) || IsStageAllowed(eventArgs.NewStage))
             return;
         eventArgs.SendBack = true;
     }
 
     public virtual void OnGameStart()
     {
-        if (HintConfig.Hints.Length > 0)
+        if (HintPreset.Hints.Length > 0)
             _hintTask = Task.Run(HintTask);
         foreach (var player in Players) player.ChangeStage(GetStartingStage());
     }
@@ -94,18 +92,20 @@ public abstract class BasicGame : IGame, IInject, IDisposable
         var current = 0;
         var time = 0;
 
-        while (current < HintConfig.Hints.Length)
+        while (current < HintPreset.Hints.Length)
         {
-            var hint = HintConfig.Hints[current];
+            var hint = HintPreset.Hints[current];
             var timeToWait = hint.Time - time;
             await Task.Delay(timeToWait * 1000);
+            if (!IsRunning)
+                break;
             time += timeToWait;
 
             var hintTypes = new HashSet<string>();
-            var hintIndex = HintConfig.UpdateOldHintOnNewOnes ? 0 : current;
+            var hintIndex = HintPreset.UpdateOldHintOnNewOnes ? 0 : current;
             while (hintIndex <= current)
             {
-                var currentHint = HintConfig.Hints[hintIndex];
+                var currentHint = HintPreset.Hints[hintIndex];
                 hintTypes.Add(currentHint.HintType);
                 hintIndex++;
             }
@@ -124,9 +124,9 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         if (!string.IsNullOrEmpty(_startingStage))
             return _startingStage;
-        var stages = StageConfig.StartingStage;
+        var stages = StagePreset.StartingStage;
         var stage = stages[_random.Next(stages.Length)];
-        if (StageConfig.AllOnSameStartingStage)
+        if (StagePreset.AllOnSameStartingStage)
             _startingStage = stage;
         return stage;
     }
@@ -135,15 +135,15 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         if (!string.IsNullOrEmpty(_waitingStage))
             return _waitingStage;
-        var stages = StageConfig.WaitingStage;
+        var stages = StagePreset.WaitingStage;
         var stage = stages[_random.Next(stages.Length)];
-        if (StageConfig.AllOnSameWaitingStage)
+        if (StagePreset.AllOnSameWaitingStage)
             _waitingStage = stage;
         return stage;
     }
 
     public bool IsStageAllowed(string stage)
     {
-        return StageConfig.StartingStage.Contains(stage) || StageConfig.AllowedStages.Contains(stage);
+        return StagePreset.StartingStage.Contains(stage) || StagePreset.AllowedStages.Contains(stage);
     }
 }
