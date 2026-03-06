@@ -26,6 +26,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
         EventManager.OnPlayerChangeStage.Unsubscribe(OnChangeStage);
     }
 
+    public bool IsRunning { get; protected set; }
     public abstract string DisplayName { get; }
     public IPlayer[] Players { get; private set; } = [];
     public StageConfig StageConfig { get; private set; }
@@ -33,6 +34,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     public void StartGame(IPlayer[] playingPlayers, StageConfig stageConfig, HintConfig hintConfig, string[] arguments)
     {
+        IsRunning = true;
         Players = playingPlayers;
         StageConfig = stageConfig;
         HintConfig = hintConfig;
@@ -48,6 +50,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
         OnGameEnd();
         EventManager.OnGameEnd.RaiseEvent(new GameEventArgs { Game = this });
         Players = [];
+        IsRunning = false;
     }
 
     public void AfterInject()

@@ -1,7 +1,6 @@
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events.Args;
-using DSMOOServer.API.GameModes.Hints;
 using DSMOOServer.Network.Packets;
 using EventManager = DSMOOServer.API.Events.EventManager;
 

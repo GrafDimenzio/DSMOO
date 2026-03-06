@@ -1,4 +1,5 @@
 using DSMOOFramework.Controller;
+using DSMOOServer.API.Player;
 using DSMOOServer.Connection;
 using DSMOOServer.Network.Packets;
 
@@ -58,5 +59,10 @@ public class HideAndSeek : WaitingGame
         }
 
         base.SpawnWaitingPlayers();
+    }
+
+    public override IPlayer[] PlayersToHint()
+    {
+        return StartTeamPlayers.Where(x => !x.IsIt).ToArray();
     }
 }

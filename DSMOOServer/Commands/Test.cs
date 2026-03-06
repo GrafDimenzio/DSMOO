@@ -16,14 +16,19 @@ namespace DSMOOServer.Commands;
     Description = "Debug Command",
     Parameters = ["DEBUG"]
 )]
-public class Debug(PlayerManager manager, DummyManager dummyManager, ILogger logger, GameModeManager gameModeManager, ObjectController objectController, ConfigHolder<GameModeConfig> gameConfig) : Command
+public class Debug(
+    PlayerManager manager,
+    DummyManager dummyManager,
+    ILogger logger,
+    GameModeManager gameModeManager,
+    ObjectController objectController,
+    ConfigHolder<GameModeConfig> gameConfig) : Command
 {
     public override CommandResult Execute(string command, string[] args)
     {
-        objectController.CreateObject<HideAndSeek>()?.StartGame(manager.Players.ToArray(), gameConfig.Config.StageConfigs[0],
-            gameConfig.Config.HintConfigs[0], []);
+        gameModeManager.StartGame(args[0], args[1], args[2], args[3]);
         return "";
-        gameModeManager.GetHint(["MapCell"], manager.Players[0], null);
+        gameModeManager.GetHint(["MapCell"], manager.Players[0]);
         return "";
         Task.Run(Run);
         return "TEST";

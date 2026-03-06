@@ -4,6 +4,7 @@ namespace DSMOOServer.API.GameModes;
 
 public interface IGame
 {
+    public bool IsRunning { get; }
     public string DisplayName { get; }
     public IPlayer[] Players { get; }
     public StageConfig StageConfig { get; }

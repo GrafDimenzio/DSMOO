@@ -1,4352 +1,5 @@
 [
   {
-    "StageName": "SandWorldHomeStage",
-    "Alias": [
-      "sand",
-      "Sand Kingdom"
-    ],
-    "Warps": [
-      {
-        "Name": "",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 32900,
-          "Y": -1150,
-          "Z": -12700
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "SandWorldRacemanStart",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -30950,
-          "Y": -1487,
-          "Z": 10700
-        },
-        "ActiveScenarios": [
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "SandWorldRacemanStart",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -33093,
-          "Y": 100,
-          "Z": 11738
-        },
-        "ActiveScenarios": [
-          7
-        ]
-      },
-      {
-        "Name": "MoonRock",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 14000,
-          "Y": -1057,
-          "Z": -4100
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "Come",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 21550,
-          "Y": 5600,
-          "Z": 7500
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Go",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -11460,
-          "Y": -1300,
-          "Z": -27883
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "arijigoku",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -8850,
-          "Y": -4900,
-          "Z": -21250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "arijigoku1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -5850,
-          "Y": -900,
-          "Z": -19350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "arijigoku2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -2600,
-          "Y": 200,
-          "Z": -33050
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "doukutu1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -32375,
-          "Y": -1550,
-          "Z": 11700
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "doukutu2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -32050,
-          "Y": 100,
-          "Z": 11550
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "pyramid01",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -23500,
-          "Y": -900,
-          "Z": -26200
-        },
-        "ActiveScenarios": [
-          1,
-          8,
-          9
-        ]
-      },
-      {
-        "Name": "pyramid01",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -23500,
-          "Y": 4650,
-          "Z": -26150
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "pyramid02",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -20782,
-          "Y": 9350,
-          "Z": -21610
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "pyramid03",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -20700,
-          "Y": 9350,
-          "Z": -28834
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "pyramid04",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -23450,
-          "Y": 3900,
-          "Z": -23200
-        },
-        "ActiveScenarios": [
-          1,
-          8,
-          9
-        ]
-      },
-      {
-        "Name": "pyramid04",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -23450,
-          "Y": 9600,
-          "Z": -23200
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          10
-        ]
-      },
-      {
-        "Name": "bar1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 23055,
-          "Y": -2420,
-          "Z": -11315
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "bar2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 21568,
-          "Y": -2600,
-          "Z": -10217
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "meganelift01",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 27250,
-          "Y": -1678,
-          "Z": -11050
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "meganelift02",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 28100,
-          "Y": -2000,
-          "Z": -11600
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "start",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -26100,
-          "Y": -9250,
-          "Z": -12800
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "Name": "aaa",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -2950,
-          "Y": -2450,
-          "Z": -29300
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "abc",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 17020,
-          "Y": -1750,
-          "Z": -9978
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "wall",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -16600,
-          "Y": -2900,
-          "Z": 250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "hide",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -9700,
-          "Y": -1850,
-          "Z": -14400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "anki2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -16100,
-          "Y": -1659,
-          "Z": 250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "run00",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -1065,
-          "Y": -1700,
-          "Z": -37365
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      },
-      {
-        "Name": "town",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 21005,
-          "Y": -1925,
-          "Z": -14095
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "shindo",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 19150,
-          "Y": -1240,
-          "Z": -10600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "icestart",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -23450,
-          "Y": -11250,
-          "Z": -25200
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          10
-        ]
-      },
-      {
-        "Name": "Under01",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -18350,
-          "Y": -542,
-          "Z": -23400
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4,
-          5,
-          10
-        ]
-      },
-      {
-        "Name": "Out",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -26200,
-          "Y": -2291,
-          "Z": -11850
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "rocket",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 3200,
-          "Y": -1020,
-          "Z": -11900
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "EX_2DHosui",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -21900,
-          "Y": 73,
-          "Z": -35750
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "EX_2DHosui_Exit",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -21900,
-          "Y": 83,
-          "Z": -35200
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "biru",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 18954,
-          "Y": -350,
-          "Z": -14176
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8,
-          9,
-          10
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldCostumeStage",
-    "Alias": [
-      "sandcostume",
-      "sand-costume",
-      "sand costume"
-    ],
-    "Warps": [
-      {
-        "Name": "abc",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -100,
-          "Z": 1200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "MeganeLiftExStage",
-    "Alias": [
-      "MeganeLift"
-    ],
-    "Warps": [
-      {
-        "Name": "meganelift01",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -2000,
-          "Y": 200,
-          "Z": 1600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "meganelift02",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 400,
-          "Y": 300,
-          "Z": -18200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "RocketFlowerExStage",
-    "Alias": [
-      "RocketFlowerWall"
-    ],
-    "Warps": [
-      {
-        "Name": "rocket",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 13900,
-          "Y": -1000,
-          "Z": 2800
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldPressExStage",
-    "Alias": [
-      "Press"
-    ],
-    "Warps": [
-      {
-        "Name": "arijigoku2",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -5334,
-          "Y": 1400,
-          "Z": -12227
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "arijigoku1",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -5200,
-          "Y": -600,
-          "Z": 150
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "arijigoku",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -5250,
-          "Y": 3512,
-          "Z": -700
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldKillerExStage",
-    "Alias": [
-      "BulletBillMaze"
-    ],
-    "Warps": [
-      {
-        "Name": "doukutu1",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 3250,
-          "Y": 550,
-          "Z": 900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "doukutu2",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 1950,
-          "Y": 700,
-          "Z": -18900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldPyramid000Stage",
-    "Alias": [
-      "PyramidEntrance"
-    ],
-    "Warps": [
-      {
-        "Name": "pyramid01",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -1750,
-          "Y": -1700,
-          "Z": 1950
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "pyramid02",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 7000,
-          "Y": 2900,
-          "Z": -4600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldPyramid001Stage",
-    "Alias": [
-      "PyramidExit"
-    ],
-    "Warps": [
-      {
-        "Name": "pyramid04",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 9050,
-          "Y": 3900,
-          "Z": -15850
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "pyramid03",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -850,
-          "Y": 1350,
-          "Z": -19850
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldShopStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "bar1",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -100,
-          "Z": -50
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "bar2",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -497,
-          "Y": 0,
-          "Z": -1350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldSecretStage",
-    "Alias": [
-      "SandSphinx"
-    ],
-    "Warps": [
-      {
-        "Name": "hide",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -100,
-          "Z": 650
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldRotateExStage",
-    "Alias": [
-      "Rotate"
-    ],
-    "Warps": [
-      {
-        "Name": "aa",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 3100,
-          "Y": 1000,
-          "Z": -450
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "birureturn",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -5600,
-          "Y": 1000,
-          "Z": 50
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "biru",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 3100,
-          "Y": 1000,
-          "Z": 0
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldSlotStage",
-    "Alias": [
-      "SandSlot"
-    ],
-    "Warps": [
-      {
-        "Name": "town",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -150,
-          "Z": 950
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldVibrationStage",
-    "Alias": [
-      "SandGroundPound",
-      "SandVibration"
-    ],
-    "Warps": [
-      {
-        "Name": "shindo",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -800,
-          "Y": 100,
-          "Z": 0
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldUnderground000Stage",
-    "Alias": [
-      "Underground"
-    ],
-    "Warps": [
-      {
-        "Name": "Yadokari00",
-        "ConnectedStage": "SandWorldUnderground001Stage",
-        "Position": {
-          "X": 35500,
-          "Y": -1250,
-          "Z": -10900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "icestart",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 1950,
-          "Y": 4800,
-          "Z": -1650
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Under01",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 2325,
-          "Y": 800,
-          "Z": -1300
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldUnderground001Stage",
-    "Alias": [
-      "SandBoss"
-    ],
-    "Warps": [
-      {
-        "Name": "Yadokari00",
-        "ConnectedStage": "SandWorldUnderground000Stage",
-        "Position": {
-          "X": 0,
-          "Y": 2000,
-          "Z": 24250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "start",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": -700
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "Name": "start",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 4000,
-          "Z": -700
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "Name": "Out",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": -3950
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "WaterTubeExStage",
-    "Alias": [
-      "WaterTube"
-    ],
-    "Warps": [
-      {
-        "Name": "EX_2DHosui",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -100,
-          "Y": -500,
-          "Z": 3100
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EX_2DHosui_Exit",
-        "ConnectedStage": "SandWorldHomeStage",
-        "Position": {
-          "X": -100,
-          "Y": 4700,
-          "Z": -18300
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldMeganeExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "wall",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 1500,
-          "Y": 0,
-          "Z": 2100
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "megane",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 450,
-          "Y": 50,
-          "Z": 2100
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "anki2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -6850,
-          "Y": 250,
-          "Z": 1900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "SandWorldSphinxExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "run00",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 29400,
-          "Y": -110,
-          "Z": 10250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "run00return",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 14900,
-          "Y": 1040,
-          "Z": -43250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "aaa",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 28400,
-          "Y": 3900,
-          "Z": 10750
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "LakeWorldHomeStage",
-    "Alias": [
-      "lake",
-      "Lake Kingdom"
-    ],
-    "Warps": [
-      {
-        "Name": "StartPoint",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 700,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost3Lv1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -400,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -200,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 200,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost0",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 400,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost3Lv2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -400,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "LakeWorldRacemanStart",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -800,
-          "Y": 493,
-          "Z": 3850
-        },
-        "ActiveScenarios": [
-          3,
-          4
-        ]
-      },
-      {
-        "Name": "MoonRock",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 4400,
-          "Y": 1200,
-          "Z": -550
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "LakeWorldMoonEX1a",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 1750,
-          "Y": 1040,
-          "Z": 5550
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "LakeWorldMoonEX1b",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 1750,
-          "Y": 801,
-          "Z": 6150
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "LakeWorldRacemanStart",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -0,
-          "Y": 800,
-          "Z": 6350
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "CapTrampolineA",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -17300,
-          "Y": 2650,
-          "Z": -8550
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "Name": "FastenerEx",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -15700,
-          "Y": -3050,
-          "Z": -7750
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "Name": "Come",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -5850,
-          "Y": 3950,
-          "Z": -5600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "CapTrampolineB",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -18150,
-          "Y": 1750,
-          "Z": -7300
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Go",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -7600,
-          "Y": 850,
-          "Z": 2450
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "LakeWorldShop",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -19750,
-          "Y": -2550,
-          "Z": -5200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Goton",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -15100,
-          "Y": -1850,
-          "Z": 650
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "GotogotonExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Goton",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": 1750,
-          "Y": -50,
-          "Z": 5750
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "FastenerExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "FastenerEx",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": 1000,
-          "Y": 200,
-          "Z": 450
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "FrogPoisonExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "LakeWorldMoonEX1a",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": 64200,
-          "Y": -850,
-          "Z": 36100
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "LakeWorldMoonEX1b",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": 58200,
-          "Y": -500,
-          "Z": 22600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "TrampolineWallCatchExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "CapTrampolineA",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": -1000,
-          "Y": -100,
-          "Z": 400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "CapTrampolineB",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": -2800,
-          "Y": 600,
-          "Z": -9500
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "LakeWorldShopStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "LakeWorldShop",
-        "ConnectedStage": "LakeWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -100,
-          "Z": 50
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldHomeStage",
-    "Alias": [
-      "wooded",
-      "Wooded Kingdom",
-      "forest"
-    ],
-    "Warps": [
-      {
-        "Name": "Tower001",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -4970,
-          "Y": 1950,
-          "Z": -21516
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "boss001",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 3650,
-          "Y": 8600,
-          "Z": -22500
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai001",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -1450,
-          "Y": -5000,
-          "Z": 17869
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai003",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -20705,
-          "Y": -5050,
-          "Z": -7650
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EX_Tankuro",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6695,
-          "Y": 11050,
-          "Z": -4923
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "EX_RailCollision",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 5450,
-          "Y": 7150,
-          "Z": -5300
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "Tower002",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -5000,
-          "Y": 5650,
-          "Z": -20250
-        },
-        "ActiveScenarios": [
-          1,
-          8
-        ]
-      },
-      {
-        "Name": "StartPoint",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -11950,
-          "Y": 21,
-          "Z": 6329
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EX_Water_Exit",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -2800,
-          "Y": -869,
-          "Z": -11650
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "boss002",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 3630,
-          "Y": 12269,
-          "Z": -20600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "bonus2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6550,
-          "Y": 10800,
-          "Z": -8800
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "MoonRock",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -2632,
-          "Y": -116,
-          "Z": 11668
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "Go",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -7750,
-          "Y": 6100,
-          "Z": -4950
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "EX_RailCollision_Exit",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 7600,
-          "Y": 7000,
-          "Z": -5400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai001v",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -14200,
-          "Y": -300,
-          "Z": 2200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "Jyukai002",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 8250,
-          "Y": 2400,
-          "Z": 6650
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "Jyukai003v",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10050,
-          "Y": -850,
-          "Z": -12000
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "EX_Tankuro_Exit",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 7379,
-          "Y": 11162,
-          "Z": -5100
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EX_Water",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -3599,
-          "Y": -1705,
-          "Z": -10693
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Come",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -3200,
-          "Y": 10550,
-          "Z": -2350
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          8
-        ]
-      },
-      {
-        "Name": "Ghost1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10300,
-          "Y": 3497,
-          "Z": -5150
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost0",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10300,
-          "Y": 3497,
-          "Z": -4950
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10300,
-          "Y": 3497,
-          "Z": -5550
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost3Lv1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10300,
-          "Y": 3497,
-          "Z": -5750
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost3Lv2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10300,
-          "Y": 3497,
-          "Z": -5750
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Tower002",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -5000,
-          "Y": 5700,
-          "Z": -20250
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "Name": "EX_Mist",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10600,
-          "Y": 4400,
-          "Z": -7700
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "bonus",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 5850,
-          "Y": 4850,
-          "Z": -8900
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-        ]
-      },
-      {
-        "Name": "Boss_Respawn",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 3630,
-          "Y": 12269,
-          "Z": -20400
-        },
-        "ActiveScenarios": [
-          2
-        ]
-      },
-      {
-        "Name": "EXCloud",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 4300,
-          "Y": 22000,
-          "Z": -5100
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "Jyukai004",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -400,
-          "Y": 2900,
-          "Z": -15950
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "RaceStart",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -9900,
-          "Y": 3497,
-          "Z": -4350
-        },
-        "ActiveScenarios": [
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "EX_AnimalChase",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -6650,
-          "Y": 2900,
-          "Z": -50
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "PoisonEx",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 3100,
-          "Y": 11250,
-          "Z": -16600
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "PoisonEx_Exit",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 4100,
-          "Y": 11250,
-          "Z": -16600
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "KillerRoad",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -374,
-          "Y": 450,
-          "Z": -11688
-        },
-        "ActiveScenarios": [
-          5
-        ]
-      },
-      {
-        "Name": "RaceStart",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -10300,
-          "Y": 3497,
-          "Z": -5350
-        },
-        "ActiveScenarios": [
-          7
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldCloudBonusExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "EXCloud",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 950,
-          "Y": -2900,
-          "Z": -6356
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EXCloud",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -650,
-          "Y": -800,
-          "Z": 1200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "AnimalChaseExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "EX_AnimalChase",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -4092,
-          "Y": -400,
-          "Z": 12550
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "FogMountainExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "EX_Mist",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 200,
-          "Z": 400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldBossStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Boss_Respawn",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": -2200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "boss001",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 3250,
-          "Z": 1000
-        },
-        "ActiveScenarios": [
-          2
-        ]
-      },
-      {
-        "Name": "boss001",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 1150,
-          "Y": 3250,
-          "Z": 1000
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5
-        ]
-      },
-      {
-        "Name": "boss002",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": -5290
-        },
-        "ActiveScenarios": [
-          3,
-          4,
-          5
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "PackunPoisonExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "PoisonEx",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 3850,
-          "Y": 600,
-          "Z": -10400
-        },
-        "ActiveScenarios": [
-          1
-        ]
-      },
-      {
-        "Name": "PoisonEx_Exit",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 2750,
-          "Y": 800,
-          "Z": 3000
-        },
-        "ActiveScenarios": [
-          1
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "KillerRoadExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "KillerRoad",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 1556,
-          "Y": 200,
-          "Z": 1131
-        },
-        "ActiveScenarios": [
-          1
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldWaterExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "EX_Water_Exit",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -300,
-          "Y": 1530,
-          "Z": -2000
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EX_Water",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -300,
-          "Y": 500,
-          "Z": 6000
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldBonusStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "bonus",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": 250
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "bonus2",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 200,
-          "Z": -1200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ShootingElevatorExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "EX_Tankuro",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -1350,
-          "Y": 5550,
-          "Z": 2950
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "EX_Tankuro_Exit",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 50,
-          "Y": 800,
-          "Z": -12900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldTowerStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Tower002",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -1874,
-          "Y": 5100,
-          "Z": -1874
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Tower001",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -50,
-          "Z": 2600
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldWoodsStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Jyukai001v",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 7950,
-          "Y": 4700,
-          "Z": -18550
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai002",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -6800,
-          "Y": 4500,
-          "Z": -18900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai004",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -9200,
-          "Y": 2750,
-          "Z": -4700
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai003v",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 8300,
-          "Y": 2700,
-          "Z": -4200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Explorer_Bonus",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -5875,
-          "Y": 513,
-          "Z": -23942
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "TreasureTree",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 999,
-          "Y": -1400,
-          "Z": -8050
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai001",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 7900,
-          "Y": 5700,
-          "Z": -20900
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Jyukai003",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 10350,
-          "Y": 3700,
-          "Z": -4550
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldWoodsCostumeStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Explorer_Bonus",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 0,
-          "Y": -100,
-          "Z": 1100
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ForestWorldWoodsTreasureStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "TreasureTree",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": 450
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "RailCollisionExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "EX_RailCollision",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": -1000,
-          "Y": 350,
-          "Z": 500
-        },
-        "ActiveScenarios": [
-          1
-        ]
-      },
-      {
-        "Name": "EX_RailCollision_Exit",
-        "ConnectedStage": "ForestWorldHomeStage",
-        "Position": {
-          "X": 10700,
-          "Y": 2900,
-          "Z": -20150
-        },
-        "ActiveScenarios": [
-          1
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "CloudWorldHomeStage",
-    "Alias": [
-      "cloud",
-      "Cloud Kingdom"
-    ],
-    "Warps": [
-      {
-        "Name": "Fukuwarai",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -0,
-          "Y": 274,
-          "Z": 0
-        },
-        "ActiveScenarios": [
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "Name": "MoonRock",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -50,
-          "Y": 50,
-          "Z": -10650
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "cube",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -3200,
-          "Y": 200,
-          "Z": 3200
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "Cube2DExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "cube",
-        "ConnectedStage": "CloudWorldHomeStage",
-        "Position": {
-          "X": 1650,
-          "Y": 4520,
-          "Z": -1400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "FukuwaraiKuriboStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Fukuwarai",
-        "ConnectedStage": "CloudWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": 1400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ClashWorldHomeStage",
-    "Alias": [
-      "lost",
-      "Lost Kingdom"
-    ],
-    "Warps": [
-      {
-        "Name": "Kinopio",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -2800,
-          "Y": 7300,
-          "Z": 3200
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4
-        ]
-      },
-      {
-        "Name": "Ghost1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6289,
-          "Y": 400,
-          "Z": 13434
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost3Lv1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 5722,
-          "Y": 400,
-          "Z": 13631
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 5911,
-          "Y": 400,
-          "Z": 13566
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost0",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6476,
-          "Y": 400,
-          "Z": 13363
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "Ghost3Lv2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 5722,
-          "Y": 400,
-          "Z": 13631
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "ClashStart1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6700,
-          "Y": 400,
-          "Z": 13300
-        },
-        "ActiveScenarios": [
-          3,
-          4
-        ]
-      },
-      {
-        "Name": "MoonRock",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 8200,
-          "Y": -428,
-          "Z": -1150
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "ClashWorldMoonEX2",
-        "ConnectedStage": "",
-        "Position": {
-          "X": -1200,
-          "Y": 4100,
-          "Z": 3050
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "imomu_01",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6600,
-          "Y": 400,
-          "Z": 9000
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "imomu_02",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 5662,
-          "Y": 400,
-          "Z": 8632
-        },
-        "ActiveScenarios": [
-          4
-        ]
-      },
-      {
-        "Name": "ClashStart1",
-        "ConnectedStage": "",
-        "Position": {
-          "X": 6100,
-          "Y": 400,
-          "Z": 13500
-        },
-        "ActiveScenarios": [
-          6
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ClashWorldShopStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "Kinopio",
-        "ConnectedStage": "ClashWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": -100,
-          "Z": 50
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "kinopio",
-        "ConnectedStage": "ClashWorldHomeStage",
-        "Position": {
-          "X": 0,
-          "Y": 0,
-          "Z": -400
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "JangoExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "ClashWorldMoonEX2",
-        "ConnectedStage": "ClashWorldHomeStage",
-        "Position": {
-          "X": 460,
-          "Y": 100,
-          "Z": 2850
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
-    "StageName": "ImomuPoisonExStage",
-    "Alias": [
-    ],
-    "Warps": [
-      {
-        "Name": "imomu_01",
-        "ConnectedStage": "ClashWorldHomeStage",
-        "Position": {
-          "X": -15200,
-          "Y": -300,
-          "Z": -4700
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      },
-      {
-        "Name": "imomu_02",
-        "ConnectedStage": "ClashWorldHomeStage",
-        "Position": {
-          "X": -15300,
-          "Y": -100,
-          "Z": -27450
-        },
-        "ActiveScenarios": [
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12,
-          13,
-          14,
-          15
-        ]
-      }
-    ]
-  },
-  {
     "StageName": "CityWorldHomeStage",
     "Alias": [
       "metro",
@@ -14190,6 +9843,7 @@
       }
     ]
   },
+  
   {
     "StageName": "CapWorldHomeStage",
     "Alias": [
@@ -14657,6 +10311,7 @@
       }
     ]
   },
+  
   {
     "StageName": "WaterfallWorldHomeStage",
     "Alias": [
@@ -15162,6 +10817,4021 @@
           "Z": 6748
         },
         "ActiveScenarios": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  
+  {
+    "StageName":"SandWorldHomeStage",
+    "Alias":[
+      "sand",
+      "Sand Kingdom"
+    ],
+    "Warps":[
+      {
+        "Name":"",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":32900,
+          "Y":-1150,
+          "Z":-12700
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"SandWorldRacemanStart",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"SandWorldRacemanStart",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          7
+        ]
+      },
+      {
+        "Name":"MoonRock",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":14000,
+          "Y":-1057,
+          "Z":-4100
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"Come",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":21341,
+          "Y":5600,
+          "Z":7220
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Go",
+        "ConnectedStage":"CityWorldHomeStage",
+        "Position":{
+          "X":-11807,
+          "Y":-1449,
+          "Z":-27630
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"arijigoku",
+        "ConnectedStage":"SandWorldPressExStage",
+        "Position":{
+          "X":-4750,
+          "Y":250,
+          "Z":-20950
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"arijigoku1",
+        "ConnectedStage":"SandWorldPressExStage",
+        "Position":{
+          "X":-5850,
+          "Y":-900,
+          "Z":-19602
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"arijigoku2",
+        "ConnectedStage":"SandWorldPressExStage",
+        "Position":{
+          "X":-2600,
+          "Y":200,
+          "Z":-32798
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"doukutu1",
+        "ConnectedStage":"SandWorldKillerExStage",
+        "Position":{
+          "X":-31074,
+          "Y":-1633,
+          "Z":11706
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"doukutu2",
+        "ConnectedStage":"SandWorldKillerExStage",
+        "Position":{
+          "X":-32050,
+          "Y":100,
+          "Z":11802
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"pyramid01",
+        "ConnectedStage":"SandWorldPyramid000Stage",
+        "Position":{
+          "X":-23450,
+          "Y":4050,
+          "Z":-24734
+        },
+        "ActiveScenarios":[
+          1,
+          8,
+          9
+        ]
+      },
+      {
+        "Name":"pyramid01",
+        "ConnectedStage":"SandWorldPyramid000Stage",
+        "Position":{
+          "X":-23450,
+          "Y":4050,
+          "Z":-24734
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"pyramid02",
+        "ConnectedStage":"SandWorldPyramid000Stage",
+        "Position":{
+          "X":-20783,
+          "Y":9351,
+          "Z":-21610
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"pyramid03",
+        "ConnectedStage":"SandWorldPyramid001Stage",
+        "Position":{
+          "X":-20699,
+          "Y":9351,
+          "Z":-28835
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"pyramid04",
+        "ConnectedStage":"SandWorldPyramid001Stage",
+        "Position":{
+          "X":-23450,
+          "Y":10700,
+          "Z":-21056
+        },
+        "ActiveScenarios":[
+          1,
+          8,
+          9
+        ]
+      },
+      {
+        "Name":"pyramid04",
+        "ConnectedStage":"SandWorldPyramid001Stage",
+        "Position":{
+          "X":-23450,
+          "Y":10700,
+          "Z":-21056
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          10
+        ]
+      },
+      {
+        "Name":"bar1",
+        "ConnectedStage":"SandWorldShopStage",
+        "Position":{
+          "X":23205,
+          "Y":-2416,
+          "Z":-11315
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"bar2",
+        "ConnectedStage":"SandWorldShopStage",
+        "Position":{
+          "X":21303,
+          "Y":-2433,
+          "Z":-9425
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"meganelift01",
+        "ConnectedStage":"MeganeLiftExStage",
+        "Position":{
+          "X":27249,
+          "Y":-1715,
+          "Z":-10785
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"meganelift02",
+        "ConnectedStage":"MeganeLiftExStage",
+        "Position":{
+          "X":28098,
+          "Y":-1987,
+          "Z":-11845
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"start",
+        "ConnectedStage":"SandWorldUnderground001Stage",
+        "Position":{
+          "X":-25299,
+          "Y":-2371,
+          "Z":-12850
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "Name":"aaa",
+        "ConnectedStage":"SandWorldSphinxExStage",
+        "Position":{
+          "X":-2950,
+          "Y":-1700,
+          "Z":-36050
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"abc",
+        "ConnectedStage":"SandWorldCostumeStage",
+        "Position":{
+          "X":16870,
+          "Y":-1750,
+          "Z":-9978
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"wall",
+        "ConnectedStage":"SandWorldMeganeExStage",
+        "Position":{
+          "X":-15650,
+          "Y":-2850,
+          "Z":250
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"hide",
+        "ConnectedStage":"SandWorldSecretStage",
+        "Position":{
+          "X":-10450,
+          "Y":-1685,
+          "Z":-14400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"anki2",
+        "ConnectedStage":"SandWorldMeganeExStage",
+        "Position":{
+          "X":-16097,
+          "Y":-1648,
+          "Z":494
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"run00",
+        "ConnectedStage":"SandWorldSphinxExStage",
+        "Position":{
+          "X":-1065,
+          "Y":-1700,
+          "Z":-37113
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "Name":"town",
+        "ConnectedStage":"SandWorldSlotStage",
+        "Position":{
+          "X":21005,
+          "Y":-1925,
+          "Z":-13945
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"shindo",
+        "ConnectedStage":"SandWorldVibrationStage",
+        "Position":{
+          "X":19150,
+          "Y":-1240,
+          "Z":-10348
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"icestart",
+        "ConnectedStage":"SandWorldUnderground000Stage",
+        "Position":{
+          "X":-18100,
+          "Y":-511,
+          "Z":-23400
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          10
+        ]
+      },
+      {
+        "Name":"Under01",
+        "ConnectedStage":"SandWorldUnderground000Stage",
+        "Position":{
+          "X":-18112,
+          "Y":-513,
+          "Z":-23400
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4,
+          5,
+          10
+        ]
+      },
+      {
+        "Name":"Out",
+        "ConnectedStage":"SandWorldUnderground001Stage",
+        "Position":{
+          "X":-26200,
+          "Y":-2252,
+          "Z":-11614
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"rocket",
+        "ConnectedStage":"RocketFlowerExStage",
+        "Position":{
+          "X":3426,
+          "Y":-944,
+          "Z":-11900
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"EX_2DHosui",
+        "ConnectedStage":"WaterTubeExStage",
+        "Position":{
+          "X":-21648,
+          "Y":52,
+          "Z":-35750
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"EX_2DHosui_Exit",
+        "ConnectedStage":"WaterTubeExStage",
+        "Position":{
+          "X":-21647,
+          "Y":71,
+          "Z":-35201
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"biru",
+        "ConnectedStage":"SandWorldRotateExStage",
+        "Position":{
+          "X":19200,
+          "Y":-350,
+          "Z":-13933
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          9,
+          10
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldCostumeStage",
+    "Alias":[
+      "sandcostume",
+      "sand-costume",
+      "sand costume"
+    ],
+    "Warps":[
+      {
+        "Name":"abc",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-0,
+          "Y":1,
+          "Z":650
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"MeganeLiftExStage",
+    "Alias":[
+      "MeganeLift"
+    ],
+    "Warps":[
+      {
+        "Name":"meganelift01",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-1710,
+          "Y":100,
+          "Z":1600
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"meganelift02",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":110,
+          "Y":200,
+          "Z":-18200
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"RocketFlowerExStage",
+    "Alias":[
+      "RocketFlowerWall"
+    ],
+    "Warps":[
+      {
+        "Name":"rocket",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":13900,
+          "Y":-1000,
+          "Z":2548
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldPressExStage",
+    "Alias":[
+      "Press"
+    ],
+    "Warps":[
+      {
+        "Name":"arijigoku2",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-5129,
+          "Y":1300,
+          "Z":-12022
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"arijigoku1",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-5200,
+          "Y":-600,
+          "Z":402
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"arijigoku",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-5250,
+          "Y":-528,
+          "Z":-700
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldKillerExStage",
+    "Alias":[
+      "BulletBillMaze"
+    ],
+    "Warps":[
+      {
+        "Name":"doukutu1",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":2200,
+          "Y":600,
+          "Z":900
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"doukutu2",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":1950,
+          "Y":600,
+          "Z":-18610
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldPyramid000Stage",
+    "Alias":[
+      "PyramidEntrance"
+    ],
+    "Warps":[
+      {
+        "Name":"pyramid01",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":443,
+          "Y":-0,
+          "Z":-2148
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"pyramid02",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":6990,
+          "Y":2701,
+          "Z":-4600
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldPyramid001Stage",
+    "Alias":[
+      "PyramidExit"
+    ],
+    "Warps":[
+      {
+        "Name":"pyramid04",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":6674,
+          "Y":3350,
+          "Z":-15900
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"pyramid03",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-855,
+          "Y":1549,
+          "Z":-19850
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldShopStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"bar1",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"bar2",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-347,
+          "Y":-0,
+          "Z":-1350
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldSecretStage",
+    "Alias":[
+      "SandSphinx"
+    ],
+    "Warps":[
+      {
+        "Name":"hide",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":200
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldRotateExStage",
+    "Alias":[
+      "Rotate"
+    ],
+    "Warps":[
+      {
+        "Name":"aa",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":3100,
+          "Y":1000,
+          "Z":-450
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"birureturn",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":19243,
+          "Y":-350,
+          "Z":-13937
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"biru",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":3101,
+          "Y":1000,
+          "Z":-414
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldSlotStage",
+    "Alias":[
+      "SandSlot"
+    ],
+    "Warps":[
+      {
+        "Name":"town",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":200
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldVibrationStage",
+    "Alias":[
+      "SandGroundPound",
+      "SandVibration"
+    ],
+    "Warps":[
+      {
+        "Name":"shindo",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-510,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldUnderground000Stage",
+    "Alias":[
+      "Underground"
+    ],
+    "Warps":[
+      {
+        "Name":"Yadokari00",
+        "ConnectedStage":"SandWorldUnderground001Stage",
+        "Position":{
+          "X":32000,
+          "Y":1950,
+          "Z":-11000
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"icestart",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":1950,
+          "Y":847,
+          "Z":-1647
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Under01",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":2325,
+          "Y":800,
+          "Z":-1048
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldUnderground001Stage",
+    "Alias":[
+      "SandBoss"
+    ],
+    "Warps":[
+      {
+        "Name":"Yadokari00",
+        "ConnectedStage":"SandWorldUnderground000Stage",
+        "Position":{
+          "X":-0,
+          "Y":2550,
+          "Z":21250
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"start",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":2550,
+          "Z":21250
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "Name":"start",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":2550,
+          "Z":21250
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "Name":"Out",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":2550,
+          "Z":21250
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"WaterTubeExStage",
+    "Alias":[
+      "WaterTube"
+    ],
+    "Warps":[
+      {
+        "Name":"EX_2DHosui",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-100,
+          "Y":-600,
+          "Z":2810
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EX_2DHosui_Exit",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-100,
+          "Y":4600,
+          "Z":-18590
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldMeganeExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"wall",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":450,
+          "Y":50,
+          "Z":2100
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"megane",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":450,
+          "Y":50,
+          "Z":2100
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"anki2",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-6560,
+          "Y":150,
+          "Z":1900
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"SandWorldSphinxExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"run00",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":29400,
+          "Y":-100,
+          "Z":10495
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"run00return",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":14900,
+          "Y":1050,
+          "Z":-43005
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"aaa",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":28400,
+          "Y":-100,
+          "Z":10750
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  
+  {
+    "StageName":"LakeWorldHomeStage",
+    "Alias":[
+      "lake",
+      "Lake Kingdom"
+    ],
+    "Warps":[
+      {
+        "Name":"",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":700,
+          "Y":800,
+          "Z":6350
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"LakeWorldRacemanStart",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          3,
+          4
+        ]
+      },
+      {
+        "Name":"MoonRock",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":4400,
+          "Y":1200,
+          "Z":-550
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"LakeWorldMoonEX1a",
+        "ConnectedStage":"FrogPoisonExStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"LakeWorldMoonEX1b",
+        "ConnectedStage":"FrogPoisonExStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"LakeWorldRacemanStart",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"CapTrampolineA",
+        "ConnectedStage":"TrampolineWallCatchExStage",
+        "Position":{
+          "X":-17300,
+          "Y":2750,
+          "Z":-7950
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "Name":"FastenerEx",
+        "ConnectedStage":"FastenerExStage",
+        "Position":{
+          "X":-15700,
+          "Y":-2950,
+          "Z":-7150
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "Name":"Come",
+        "ConnectedStage":"SeaWorldHomeStage",
+        "Position":{
+          "X":-5850,
+          "Y":3950,
+          "Z":-5950
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"CapTrampolineB",
+        "ConnectedStage":"TrampolineWallCatchExStage",
+        "Position":{
+          "X":-17945,
+          "Y":1650,
+          "Z":-7095
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Go",
+        "ConnectedStage":"SandWorldHomeStage",
+        "Position":{
+          "X":-7600,
+          "Y":933,
+          "Z":2450
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"LakeWorldShop",
+        "ConnectedStage":"LakeWorldShopStage",
+        "Position":{
+          "X":-19600,
+          "Y":-2550,
+          "Z":-5200
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Goton",
+        "ConnectedStage":"GotogotonExStage",
+        "Position":{
+          "X":-15100,
+          "Y":-1745,
+          "Z":50
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"GotogotonExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Goton",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":1750,
+          "Y":-0,
+          "Z":3350
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"FastenerExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"FastenerEx",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":150,
+          "Y":250,
+          "Z":450
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"FrogPoisonExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"LakeWorldMoonEX1a",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"LakeWorldMoonEX1b",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"TrampolineWallCatchExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"CapTrampolineA",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":-400,
+          "Y":-0,
+          "Z":400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"CapTrampolineB",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":-2548,
+          "Y":600,
+          "Z":-9500
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"LakeWorldShopStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"LakeWorldShop",
+        "ConnectedStage":"LakeWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+
+  {
+    "StageName":"ForestWorldHomeStage",
+    "Alias":[
+      "wooded",
+      "Wooded Kingdom",
+      "forest"
+    ],
+    "Warps":[
+      {
+        "Name":"",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-11950,
+          "Y":20,
+          "Z":6329
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Tower001",
+        "ConnectedStage":"ForestWorldTowerStage",
+        "Position":{
+          "X":-5391,
+          "Y":1997,
+          "Z":-21941
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"boss001",
+        "ConnectedStage":"ForestWorldBossStage",
+        "Position":{
+          "X":3630,
+          "Y":11250,
+          "Z":-16850
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai001",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-14451,
+          "Y":-262,
+          "Z":2852
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai003",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-9450,
+          "Y":-853,
+          "Z":-12000
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EX_Tankuro",
+        "ConnectedStage":"ShootingElevatorExStage",
+        "Position":{
+          "X":7401,
+          "Y":11062,
+          "Z":-4663
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"EX_RailCollision",
+        "ConnectedStage":"RailCollisionExStage",
+        "Position":{
+          "X":-11950,
+          "Y":20,
+          "Z":6329
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"Tower002",
+        "ConnectedStage":"ForestWorldTowerStage",
+        "Position":{
+          "X":-5666,
+          "Y":5772,
+          "Z":-19583
+        },
+        "ActiveScenarios":[
+          1,
+          8
+        ]
+      },
+      {
+        "Name":"StartPoint",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-11950,
+          "Y":20,
+          "Z":6329
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EX_Water_Exit",
+        "ConnectedStage":"ForestWorldWaterExStage",
+        "Position":{
+          "X":-3043,
+          "Y":-870,
+          "Z":-11715
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"boss002",
+        "ConnectedStage":"ForestWorldBossStage",
+        "Position":{
+          "X":3630,
+          "Y":12269,
+          "Z":-20348
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"bonus2",
+        "ConnectedStage":"ForestWorldBonusStage",
+        "Position":{
+          "X":6550,
+          "Y":10807,
+          "Z":-9045
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"MoonRock",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-2632,
+          "Y":-116,
+          "Z":11668
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"Go",
+        "ConnectedStage":"LavaWorldHomeStage",
+        "Position":{
+          "X":-8200,
+          "Y":5902,
+          "Z":-4950
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"EX_RailCollision_Exit",
+        "ConnectedStage":"RailCollisionExStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai001v",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-14451,
+          "Y":-262,
+          "Z":2853
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"Jyukai002",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":7350,
+          "Y":2421,
+          "Z":6650
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"Jyukai003v",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-9450,
+          "Y":-853,
+          "Z":-12000
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"EX_Tankuro_Exit",
+        "ConnectedStage":"ShootingElevatorExStage",
+        "Position":{
+          "X":7379,
+          "Y":11062,
+          "Z":-4810
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EX_Water",
+        "ConnectedStage":"ForestWorldWaterExStage",
+        "Position":{
+          "X":-3804,
+          "Y":-1821,
+          "Z":-10898
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Come",
+        "ConnectedStage":"CityWorldHomeStage",
+        "Position":{
+          "X":-3200,
+          "Y":10550,
+          "Z":-2700
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          8
+        ]
+      },
+      {
+        "Name":"Tower002",
+        "ConnectedStage":"ForestWorldTowerStage",
+        "Position":{
+          "X":-5666,
+          "Y":5772,
+          "Z":-19583
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "Name":"EX_Mist",
+        "ConnectedStage":"FogMountainExStage",
+        "Position":{
+          "X":-10676,
+          "Y":4400,
+          "Z":-7511
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"bonus",
+        "ConnectedStage":"ForestWorldBonusStage",
+        "Position":{
+          "X":6140,
+          "Y":4750,
+          "Z":-8900
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "Name":"Boss_Respawn",
+        "ConnectedStage":"ForestWorldBossStage",
+        "Position":{
+          "X":-11950,
+          "Y":20,
+          "Z":6329
+        },
+        "ActiveScenarios":[
+          2
+        ]
+      },
+      {
+        "Name":"EXCloud",
+        "ConnectedStage":"ForestWorldCloudBonusExStage",
+        "Position":{
+          "X":5500,
+          "Y":14741,
+          "Z":-5100
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"Jyukai004",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-300,
+          "Y":2902,
+          "Z":-16400
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"RaceStart",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-9900,
+          "Y":3497,
+          "Z":-4350
+        },
+        "ActiveScenarios":[
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"EX_AnimalChase",
+        "ConnectedStage":"AnimalChaseExStage",
+        "Position":{
+          "X":-6650,
+          "Y":2902,
+          "Z":-302
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"PoisonEx",
+        "ConnectedStage":"PackunPoisonExStage",
+        "Position":{
+          "X":3100,
+          "Y":11250,
+          "Z":-16348
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"PoisonEx_Exit",
+        "ConnectedStage":"PackunPoisonExStage",
+        "Position":{
+          "X":4100,
+          "Y":11250,
+          "Z":-16348
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"KillerRoad",
+        "ConnectedStage":"KillerRoadExStage",
+        "Position":{
+          "X":-579,
+          "Y":350,
+          "Z":-11483
+        },
+        "ActiveScenarios":[
+          5
+        ]
+      },
+      {
+        "Name":"RaceStart",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-9900,
+          "Y":3497,
+          "Z":-4350
+        },
+        "ActiveScenarios":[
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldCloudBonusExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"EXCloud",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-650,
+          "Y":-800,
+          "Z":650
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EXCloud",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-650,
+          "Y":-800,
+          "Z":650
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"AnimalChaseExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"EX_AnimalChase",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-4382,
+          "Y":-500,
+          "Z":12550
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"FogMountainExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"EX_Mist",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-1,
+          "Y":200,
+          "Z":130
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldBossStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Boss_Respawn",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-1250
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"boss001",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-2000
+        },
+        "ActiveScenarios":[
+          2
+        ]
+      },
+      {
+        "Name":"boss001",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-2000
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "Name":"boss002",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":-5038
+        },
+        "ActiveScenarios":[
+          3,
+          4,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"PackunPoisonExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"PoisonEx",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":3598,
+          "Y":600,
+          "Z":-10400
+        },
+        "ActiveScenarios":[
+          1
+        ]
+      },
+      {
+        "Name":"PoisonEx_Exit",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":2750,
+          "Y":800,
+          "Z":3252
+        },
+        "ActiveScenarios":[
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"KillerRoadExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"KillerRoad",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":1377,
+          "Y":200,
+          "Z":953
+        },
+        "ActiveScenarios":[
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldWaterExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"EX_Water_Exit",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-300,
+          "Y":1433,
+          "Z":-1710
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EX_Water",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-300,
+          "Y":402,
+          "Z":5710
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldBonusStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"bonus",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-0,
+          "Y":0,
+          "Z":-2
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"bonus2",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":103,
+          "Z":-910
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ShootingElevatorExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"EX_Tankuro",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-750,
+          "Y":5600,
+          "Z":2950
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"EX_Tankuro_Exit",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":50,
+          "Y":800,
+          "Z":-12648
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldTowerStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Tower002",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-1559,
+          "Y":5150,
+          "Z":-1509
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Tower001",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-0,
+          "Y":-0,
+          "Z":2150
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldWoodsStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Jyukai001v",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":7898,
+          "Y":-256,
+          "Z":-19400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai002",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-7797,
+          "Y":-744,
+          "Z":-17691
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai004",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":-7400,
+          "Y":-2059,
+          "Z":-4501
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai003v",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":8358,
+          "Y":2157,
+          "Z":-4234
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Explorer_Bonus",
+        "ConnectedStage":"ForestWorldWoodsCostumeStage",
+        "Position":{
+          "X":-5875,
+          "Y":514,
+          "Z":-23792
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"TreasureTree",
+        "ConnectedStage":"ForestWorldWoodsTreasureStage",
+        "Position":{
+          "X":709,
+          "Y":-1485,
+          "Z":-8048
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai001",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":7900,
+          "Y":19,
+          "Z":-20895
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"Jyukai003",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":10349,
+          "Y":-2006,
+          "Z":-4549
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldWoodsCostumeStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Explorer_Bonus",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-5,
+          "Y":-0,
+          "Z":457
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ForestWorldWoodsTreasureStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"TreasureTree",
+        "ConnectedStage":"ForestWorldWoodsStage",
+        "Position":{
+          "X":-0,
+          "Y":0,
+          "Z":198
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"RailCollisionExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"EX_RailCollision",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":350,
+          "Y":400,
+          "Z":500
+        },
+        "ActiveScenarios":[
+          1
+        ]
+      },
+      {
+        "Name":"EX_RailCollision_Exit",
+        "ConnectedStage":"ForestWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          1
+        ]
+      }
+    ]
+  },
+
+  {
+    "StageName":"CloudWorldHomeStage",
+    "Alias":[
+      "cloud",
+      "Cloud Kingdom"
+    ],
+    "Warps":[
+      {
+        "Name":"Fukuwarai",
+        "ConnectedStage":"FukuwaraiKuriboStage",
+        "Position":{
+          "X":0,
+          "Y":280,
+          "Z":245
+        },
+        "ActiveScenarios":[
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "Name":"MoonRock",
+        "ConnectedStage":"CloudWorldHomeStage",
+        "Position":{
+          "X":-50,
+          "Y":60,
+          "Z":-10650
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"cube",
+        "ConnectedStage":"Cube2DExStage",
+        "Position":{
+          "X":-3200,
+          "Y":206,
+          "Z":3445
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"Cube2DExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"cube",
+        "ConnectedStage":"CloudWorldHomeStage",
+        "Position":{
+          "X":1902,
+          "Y":4520,
+          "Z":-1400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"FukuwaraiKuriboStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Fukuwarai",
+        "ConnectedStage":"CloudWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":2,
+          "Z":1148
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+
+  {
+    "StageName":"ClashWorldHomeStage",
+    "Alias":[
+      "lost",
+      "Lost Kingdom"
+    ],
+    "Warps":[
+      {
+        "Name":"Kinopio",
+        "ConnectedStage":"ClashWorldShopStage",
+        "Position":{
+          "X":-3172,
+          "Y":7195,
+          "Z":3878
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "Name":"ClashStart1",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":6700,
+          "Y":400,
+          "Z":13300
+        },
+        "ActiveScenarios":[
+          3,
+          4
+        ]
+      },
+      {
+        "Name":"MoonRock",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":8200,
+          "Y":-422,
+          "Z":-1150
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"ClashWorldMoonEX2",
+        "ConnectedStage":"JangoExStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"imomu_01",
+        "ConnectedStage":"ImomuPoisonExStage",
+        "Position":{
+          "X":6363,
+          "Y":400,
+          "Z":8914
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"imomu_02",
+        "ConnectedStage":"ImomuPoisonExStage",
+        "Position":{
+          "X":5425,
+          "Y":400,
+          "Z":8545
+        },
+        "ActiveScenarios":[
+          4
+        ]
+      },
+      {
+        "Name":"ClashStart1",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":6700,
+          "Y":400,
+          "Z":13300
+        },
+        "ActiveScenarios":[
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ClashWorldShopStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"Kinopio",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"kinopio",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":-0,
+          "Z":-400
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"JangoExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"ClashWorldMoonEX2",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":0,
+          "Y":0,
+          "Z":0
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "StageName":"ImomuPoisonExStage",
+    "Alias":[
+
+    ],
+    "Warps":[
+      {
+        "Name":"imomu_01",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":-15200,
+          "Y":-300,
+          "Z":-4952
+        },
+        "ActiveScenarios":[
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "Name":"imomu_02",
+        "ConnectedStage":"ClashWorldHomeStage",
+        "Position":{
+          "X":-15300,
+          "Y":-100,
+          "Z":-27198
+        },
+        "ActiveScenarios":[
           1,
           2,
           3,

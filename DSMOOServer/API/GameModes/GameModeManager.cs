@@ -35,12 +35,25 @@ public class GameModeManager(
         eventManager.OnPlayerState.Subscribe(OnPlayerState);
     }
 
-    public IGame? StartGame(string gameName, IPlayer[] players, StageConfig stageConfig, HintConfig hintConfig,
-        string[] arguments)
+    public IGame? StartGame(string gameName, string players, string stageConfig, string hintConfig,
+        params string[] args)
     {
-        if(!_games.ContainsKey(gameName.ToLower()))
+        var stage = GetStageConfig(stageConfig);
+        if (stage == null)
             return null;
-        
+        var hint = GetHintConfig(hintConfig);
+        var playerSearch = playerManager.SearchForPlayers(players.Split(' '));
+        return playerSearch.Players.Count == 0
+            ? null
+            : StartGame(gameName, playerSearch.Players.ToArray(), stage, hint, args);
+    }
+
+    public IGame? StartGame(string gameName, IPlayer[] players, StageConfig stageConfig, HintConfig hintConfig,
+        params string[] arguments)
+    {
+        if (!_games.ContainsKey(gameName.ToLower()))
+            return null;
+
         var game = (IGame?)objectController.CreateObject(_games[gameName.ToLower()]);
         if (game == null)
             return null;
@@ -51,23 +64,38 @@ public class GameModeManager(
     public StageConfig? GetStageConfig(string configName)
     {
         foreach (var stageConfig in gameConfigHolder.Config.StageConfigs)
-        {
             if (string.Equals(stageConfig.Name, configName, StringComparison.OrdinalIgnoreCase))
                 return stageConfig;
-        }
-        
+
         var stage = stageManager.GetStageFromInput(configName);
         if (stage == null)
             return null;
-        
-        return new StageConfig()
+
+        return new StageConfig
         {
             Name = configName,
             AllowAll = false,
             AllowedStages = [stage],
             StartingStage = [stage],
-            WaitingStage = [stage],
+            WaitingStage = [stage]
         };
+    }
+
+    public HintConfig? GetHintConfig(string configName)
+    {
+        foreach (var hintConfig in gameConfigHolder.Config.HintConfigs)
+            if (string.Equals(hintConfig.Name, configName, StringComparison.OrdinalIgnoreCase))
+                return hintConfig;
+
+        if (configName.ToLower() == "none")
+            return new HintConfig()
+            {
+                Name = "None",
+                Hints = [],
+                UpdateOldHintOnNewOnes = false,
+            };
+
+        return null;
     }
 
     public HintData GetHint(string[] hintTypes, IPlayer player, IGame? forGame = null)
@@ -107,15 +135,12 @@ public class GameModeManager(
 
     private void OnAnalyzeGames(AnalyzeEventArgs args)
     {
-        if(!args.Is<IGame>()) return;
+        if (!args.Is<IGame>()) return;
         var names = args.GetAttribute<GameAttribute>()?.Names;
         if (names == null) return;
-        foreach (var name in names)
-        {
-            _games[name.ToLower()] = args.Type;
-        }
+        foreach (var name in names) _games[name.ToLower()] = args.Type;
     }
-    
+
     private void OnAnalyzeHint(AnalyzeEventArgs args)
     {
         if (!args.Is<IHint>()) return;

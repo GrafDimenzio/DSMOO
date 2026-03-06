@@ -272,10 +272,12 @@ public class BanManager(
 
     public void OnPacket(PacketReceivedEventArgs args)
     {
+        if (!Enabled) return;
         switch (args.Packet)
         {
             case TagPacket tagPacket:
-                //TODO: Player enter Banned GameMode Logic
+                if (IsGameModeBanned(tagPacket.GameMode))
+                    args.Sender.Player.Crash(false);
                 break;
         }
     }

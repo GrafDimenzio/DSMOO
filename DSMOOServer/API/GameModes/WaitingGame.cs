@@ -75,7 +75,7 @@ public abstract class WaitingGame : BasicGame
 
     protected virtual void SpawnWaitingPlayers()
     {
-        EventManager.OnWaitingPlayersReleased.RaiseEvent(new WaitingGameEventArgs() { Game = this });
+        EventManager.OnWaitingPlayersReleased.RaiseEvent(new WaitingGameEventArgs { Game = this });
         foreach (var player in WaitingTeamPlayers) player.ChangeStage(GetStartingStage());
     }
 }
