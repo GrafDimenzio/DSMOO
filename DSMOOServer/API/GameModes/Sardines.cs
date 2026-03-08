@@ -74,6 +74,6 @@ public class Sardines : WaitingGame
 
     public override IPlayer[] PlayersToHint()
     {
-        return StartTeamPlayers.Where(x => !x.IsIt).ToArray();
+        return [StartTeamPlayers.First()];
     }
 }

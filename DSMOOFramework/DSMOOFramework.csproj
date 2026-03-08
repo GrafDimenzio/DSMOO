@@ -4,6 +4,23 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        
+        <PackageId>DSMOO.Framework</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Dimenzio</Authors>
+        <Copyright>Dimenzio</Copyright>
+        <Description>Base Framework for the DSMOO Server</Description>
+        <PackageTags>smoo;plugin</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        
+        <RepositoryUrl>https://github.com/GrafDimenzio/DSMOO</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
 </Project>

@@ -176,7 +176,7 @@ public class GameModeConfig : IConfig
                 "CapWorldHomeStage", "CapWorldTowerStage", "PoisonWaveExStage", "PushBlockExStage", "FrogSearchExStage",
                 "RollingExStage"
             ],
-            WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
+            WaitingStage = ["HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
         },
         new()
         {
@@ -191,7 +191,18 @@ public class GameModeConfig : IConfig
             StartingStage = ["CapWorldHomeStage"],
             AllowAll = true,
             WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
-        }
+        },
+        new()
+        {
+            Name = "cascade",
+            StartingStage = ["WaterfallWorldHomeStage"],
+            AllowedStages =
+            [
+                "WaterfallWorldHomeStage", "WindBlowExStage", "Lift2DExStage", "TrexPoppunExStage", "WanwanClashExStage",
+                "CapAppearExStage"
+            ],
+            WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
+        },
     ];
 
     public HintPreset[] HintConfigs { get; set; } =

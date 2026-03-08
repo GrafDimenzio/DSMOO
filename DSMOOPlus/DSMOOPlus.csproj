@@ -4,7 +4,23 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
+        <PackageId>DSMOO.Plus</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Dimenzio</Authors>
+        <Description>DSMOO Extension API for SMOO+ Clients</Description>
+        <PackageTags>smoo;plugin</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <RepositoryUrl>https://github.com/GrafDimenzio/DSMOO</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj"/>

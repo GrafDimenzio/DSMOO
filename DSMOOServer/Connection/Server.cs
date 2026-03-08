@@ -16,7 +16,6 @@ using DSMOOServer.Network.Packets;
 
 namespace DSMOOServer.Connection;
 
-[Analyze(Priority = -1)] // That way the actual server will start last when everything else is initialised
 public class Server(
     ILogger log,
     ConfigHolder<ServerMainConfig> configHolder,
@@ -36,6 +35,7 @@ public class Server(
 
     public override void Initialize()
     {
+        //The Server should start after the plugins are loaded, since otherwise a player could join before some plugins are loaded
         pluginManager.OnPluginLoaded.Subscribe(Start);
     }
 

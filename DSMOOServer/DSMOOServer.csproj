@@ -6,8 +6,24 @@
         <Nullable>enable</Nullable>
         <AssemblyName>DSMOOServer</AssemblyName>
         <RootNamespace>DSMOOServer</RootNamespace>
+
+        <PackageId>DSMOO.Server</PackageId>
+        <Version>0.0.1</Version>
+        <Authors>Dimenzio</Authors>
+        <Description>Dimenzio's Super Mario Odyssey Online Server with Plugin Support</Description>
+        <PackageTags>smoo;plugin</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <RepositoryUrl>https://github.com/GrafDimenzio/DSMOO</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    
     <ItemGroup>
         <ProjectReference Include="..\DSMOOFramework\DSMOOFramework.csproj"/>
     </ItemGroup>

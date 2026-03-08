@@ -26,7 +26,7 @@ public class Player : IPlayer
         Client = client;
     }
 
-    public Client Client { get; set; }
+    public Client Client { get; internal set; }
 
     public bool DisableMoonSync { get; set; } = false;
 
