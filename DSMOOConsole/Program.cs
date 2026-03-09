@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using DSMOOConsole;
 using DSMOOFramework;
 using DSMOOFramework.Controller;
@@ -28,12 +29,13 @@ static Dictionary<string, string> GetPaths()
             { "mods", "/dsmoo/mods" },
         };
 
+    var path = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
     return new Dictionary<string, string>
     {
-        { "config", Path.Combine(AppContext.BaseDirectory, "configs") },
-        { "plugins", Path.Combine(AppContext.BaseDirectory, "plugins") },
-        { "recordings", Path.Combine(AppContext.BaseDirectory, "recordings") },
-        { "mods", Path.Combine(AppContext.BaseDirectory, "mods") },
+        { "config", Path.Combine(path, "configs") },
+        { "plugins", Path.Combine(path, "plugins") },
+        { "recordings", Path.Combine(path, "recordings") },
+        { "mods", Path.Combine(path, "mods") },
     };
 }
 

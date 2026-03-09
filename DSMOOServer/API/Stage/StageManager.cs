@@ -23,8 +23,6 @@ public class StageManager(ILogger logger, PathLocation pathLocation) : Manager
     {
         InitialiseVanillaLogic();
         ReadMods();
-
-        base.Initialize();
     }
 
     private void InitialiseVanillaLogic()
