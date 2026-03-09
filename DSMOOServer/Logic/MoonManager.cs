@@ -149,7 +149,7 @@ public class MoonManager(
     }
 }
 
-[Config(Name = "MoonList")]
+[Config(Name = "moons")]
 public class MoonList : IConfig
 {
     public HashSet<int> Moons { get; set; } = [];
