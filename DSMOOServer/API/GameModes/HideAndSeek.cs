@@ -11,17 +11,11 @@ public class HideAndSeek : WaitingGame
     [Inject] public Server Server { get; set; }
 
     public override string DisplayName { get; } = "Hide & Seek";
-    
+
     public override void OnGameStart()
     {
-        if (Arguments.Length > 0 && int.TryParse(Arguments[0], out var waitingTime))
-        {
-            WaitingTime = waitingTime * 1000;
-        }
-        if (Arguments.Length > 1 && int.TryParse(Arguments[1], out var teamSize))
-        {
-            TeamSize = teamSize;
-        }
+        if (Arguments.Length > 0 && int.TryParse(Arguments[0], out var waitingTime)) WaitingTime = waitingTime * 1000;
+        if (Arguments.Length > 1 && int.TryParse(Arguments[1], out var teamSize)) TeamSize = teamSize;
         base.OnGameStart();
     }
 

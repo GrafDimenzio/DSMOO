@@ -1,13 +1,18 @@
-using DSMOOServer.API.Map;
+using DSMOOFramework.Controller;
 using DSMOOServer.API.Player;
+using DSMOOServer.API.Stage;
+using DSMOOServer.API.Stage.Map;
 
 namespace DSMOOServer.API.GameModes.Hints;
 
 public abstract class MapLocationHint : IHint
 {
+    [Inject] public StageManager StageManager;
+
     public string GetHint(IPlayer player)
     {
-        return GetHint(player, new MapLocation(player.Position, player.Stage));
+        var location = StageManager.GetMapLocation(player.Position, player.Stage);
+        return location == null ? "No location found" : GetHint(player, location);
     }
 
     protected abstract string GetHint(IPlayer player, MapLocation location);

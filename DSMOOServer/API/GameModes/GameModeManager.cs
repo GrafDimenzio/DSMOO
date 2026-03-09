@@ -88,11 +88,11 @@ public class GameModeManager(
                 return hintConfig;
 
         if (configName.ToLower() == "none")
-            return new HintPreset()
+            return new HintPreset
             {
                 Name = "None",
                 Hints = [],
-                UpdateOldHintOnNewOnes = false,
+                UpdateOldHintOnNewOnes = false
             };
 
         return null;
@@ -176,7 +176,11 @@ public class GameModeConfig : IConfig
                 "CapWorldHomeStage", "CapWorldTowerStage", "PoisonWaveExStage", "PushBlockExStage", "FrogSearchExStage",
                 "RollingExStage"
             ],
-            WaitingStage = ["HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
+            WaitingStage =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
         },
         new()
         {
@@ -198,11 +202,12 @@ public class GameModeConfig : IConfig
             StartingStage = ["WaterfallWorldHomeStage"],
             AllowedStages =
             [
-                "WaterfallWorldHomeStage", "WindBlowExStage", "Lift2DExStage", "TrexPoppunExStage", "WanwanClashExStage",
+                "WaterfallWorldHomeStage", "WindBlowExStage", "Lift2DExStage", "TrexPoppunExStage",
+                "WanwanClashExStage",
                 "CapAppearExStage"
             ],
             WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
-        },
+        }
     ];
 
     public HintPreset[] HintConfigs { get; set; } =

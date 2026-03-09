@@ -4,7 +4,6 @@ using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
-using DSMOOServer.API.Map;
 using DSMOOServer.API.Player;
 using DSMOOServer.API.Stage;
 using DSMOOServer.Network.Packets;
@@ -209,13 +208,13 @@ public class BanManager(
     public string GetSafeStage(string currentStage)
     {
         if (!IsStageBanned(currentStage)) return currentStage;
-        var kingdom = MapInfo.AllKingdoms.FirstOrDefault(x => x.SubAreas.Any(y => y.SubAreaName == currentStage));
+        var kingdom = stageManager.MapInfo.FirstOrDefault(x => x.SubAreas.Any(y => y.SubAreaName == currentStage));
         //A Subarea is banned so send him back to the world the subarea belongs to
         if (kingdom != null && !IsStageBanned(kingdom.MainStageName))
             return kingdom.MainStageName;
 
         //Check if you can send him to any Kingdom
-        var kingdoms = MapInfo.AllKingdoms.Where(x => x.MainStageName != "HomeShipInsideStage").ToList();
+        var kingdoms = stageManager.MapInfo.Where(x => x.MainStageName != "HomeShipInsideStage").ToList();
         foreach (var king in kingdoms)
             if (!IsStageBanned(king.MainStageName))
                 return king.MainStageName;

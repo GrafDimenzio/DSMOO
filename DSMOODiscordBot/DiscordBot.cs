@@ -32,8 +32,7 @@ public class DiscordBot(CommandManager commandManager) : Plugin<Config>
             return;
         }
 
-        if (Logger is BasicLogger basicLogger)
-            basicLogger.Log += OnLog;
+        BasicLogger.GlobalLog += OnLog;
 
         Task.Run(Run);
     }

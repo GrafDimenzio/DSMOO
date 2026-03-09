@@ -6,6 +6,11 @@ public abstract class BasicLogger : ILogger
 
     public abstract string Name { get; set; }
 
+    protected BasicLogger()
+    {
+        Log += OnLogToGlobal;
+    }
+
     public void Info(object message)
     {
         Log?.Invoke(FormatMessage(message, LogType.Info), LogType.Info);
@@ -47,5 +52,11 @@ public abstract class BasicLogger : ILogger
         return $"[{DateTime.Now.ToLocalTime()}] [{Name.ToUpper()}] [{type.ToString().ToUpper()}]: {message}";
     }
 
+    private void OnLogToGlobal(string message, LogType type)
+    {
+        GlobalLog?.Invoke(message, type);
+    }
+
     public event LogHandler? Log;
+    public static event LogHandler? GlobalLog;
 }

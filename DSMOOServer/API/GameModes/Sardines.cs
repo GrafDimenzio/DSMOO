@@ -16,10 +16,7 @@ public class Sardines : WaitingGame
 
     public override void OnGameStart()
     {
-        if (Arguments.Length > 0 && int.TryParse(Arguments[0], out var waitingTime))
-        {
-            WaitingTime = waitingTime * 1000;
-        }
+        if (Arguments.Length > 0 && int.TryParse(Arguments[0], out var waitingTime)) WaitingTime = waitingTime * 1000;
         base.OnGameStart();
     }
 

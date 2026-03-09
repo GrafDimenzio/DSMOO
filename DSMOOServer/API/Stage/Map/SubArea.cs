@@ -1,6 +1,6 @@
 using DSMOOServer.API.Serialized;
 
-namespace DSMOOServer.API.Map;
+namespace DSMOOServer.API.Stage.Map;
 
 public class SubArea
 {

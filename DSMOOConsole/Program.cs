@@ -22,16 +22,18 @@ static Dictionary<string, string> GetPaths()
     if (File.Exists("/.dockerenv"))
         return new Dictionary<string, string>()
         {
-            { "config", Path.Combine(AppContext.BaseDirectory, "/dsmoo/configs") },
-            { "plugins", Path.Combine(AppContext.BaseDirectory, "/dsmoo/plugins") },
-            { "recordings", Path.Combine(AppContext.BaseDirectory, "/dsmoo/recordings") }
+            { "config", "/dsmoo/configs" },
+            { "plugins", "/dsmoo/plugins" },
+            { "recordings", "/dsmoo/recordings" },
+            { "mods", "/dsmoo/mods" },
         };
-    
+
     return new Dictionary<string, string>
     {
         { "config", Path.Combine(AppContext.BaseDirectory, "configs") },
         { "plugins", Path.Combine(AppContext.BaseDirectory, "plugins") },
-        { "recordings", Path.Combine(AppContext.BaseDirectory, "recordings") }
+        { "recordings", Path.Combine(AppContext.BaseDirectory, "recordings") },
+        { "mods", Path.Combine(AppContext.BaseDirectory, "mods") },
     };
 }
 
