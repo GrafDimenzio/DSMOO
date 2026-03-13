@@ -1,10 +1,12 @@
+using DSMOOFramework.Commands;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOFramework.Plugins;
+using DSMOOPlus.Commands;
+using DSMOOPlus.Enum;
 using DSMOOPlus.Packets;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
-using DSMOOServer.Logic;
 using DSMOOServer.Network.Packets;
 using InitPacket = DSMOOServer.Network.Packets.InitPacket;
 
@@ -17,14 +19,13 @@ namespace DSMOOPlus;
     Repository = "https://github.com/GrafDimenzio/DSMOO",
     Version = "1.0.0"
 )]
-public class DSMOOPlusManager(EventManager eventManager, PlayerManager playerManager, ILogger logger) : Manager
+public class DSMOOPlusManager(EventManager eventManager, CommandManager commandManager, ILogger logger) : Manager
 {
     public override void Initialize()
     {
         eventManager.OnSendPlayerInitPacket.Subscribe(OnSendInitPacket);
         eventManager.OnPlayerAddComponents.Subscribe(OnAddComponent);
         eventManager.OnPacketReceived.Subscribe(OnPacket);
-        
     }
 
     private void OnPacket(PacketReceivedEventArgs args)
@@ -32,7 +33,6 @@ public class DSMOOPlusManager(EventManager eventManager, PlayerManager playerMan
         switch (args.Packet)
         {
             case ChangeCostumePacket changeCostumePacket:
-            case MessagePacket sendMessagePacket:
             case PlayerStatePacket playerStatePacket:
                 logger.Warn("Received packet  " + args.Packet.GetType().Name);
                 break;
@@ -40,12 +40,25 @@ public class DSMOOPlusManager(EventManager eventManager, PlayerManager playerMan
             case DisconnectPacket:
                 args.Sender.Send(new UnhandledPacket());
                 break;
+            
+            case MessagePacket sendMessagePacket:
+                switch (sendMessagePacket.MessageType)
+                {
+                    case MessageType.Chat:
+                    case MessageType.Private:
+                    case MessageType.System:
+                        commandManager.ProcessQuery(sendMessagePacket.Message,
+                            args.Sender.Player.GetComponent<PlayerPlus>()!.CommandSender);
+                        break;
+                }
+                break;
         }
     }
 
     private void OnAddComponent(PlayerAddComponentsEventArgs args)
     {
-        args.Player.AddComponent<PlayerPlus>();
+        var comp = args.Player.AddComponent<PlayerPlus>();
+        comp.CommandSender = new PlayerCommandSender(args.Player);
     }
 
     private void OnSendInitPacket(SendPlayerInitPacketEventArgs args)

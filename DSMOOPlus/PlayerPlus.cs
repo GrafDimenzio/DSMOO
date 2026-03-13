@@ -1,3 +1,4 @@
+using DSMOOPlus.Commands;
 using DSMOOPlus.Enum;
 using DSMOOPlus.Packets;
 using DSMOOServer.API.Player;
@@ -6,6 +7,8 @@ namespace DSMOOPlus;
 
 public class PlayerPlus : PlayerComponent
 {
+    public PlayerCommandSender CommandSender { get; internal set; }
+    
     public async Task SendMessage(string message, MessageType messageType = MessageType.System, Guid? sender = null)
     {
         await Player.Send(new MessagePacket
