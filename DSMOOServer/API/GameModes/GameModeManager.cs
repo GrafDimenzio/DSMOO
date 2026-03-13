@@ -76,8 +76,8 @@ public class GameModeManager(
             Name = configName,
             AllowAll = false,
             AllowedStages = [stage],
-            StartingStage = [stage],
-            WaitingStage = [stage]
+            StartingStages = [stage],
+            WaitingStages = [stage]
         };
     }
 
@@ -170,13 +170,13 @@ public class GameModeConfig : IConfig
         new()
         {
             Name = "cap",
-            StartingStage = ["CapWorldHomeStage"],
+            StartingStages = ["CapWorldHomeStage"],
             AllowedStages =
             [
-                "CapWorldHomeStage", "CapWorldTowerStage", "PoisonWaveExStage", "PushBlockExStage", "FrogSearchExStage",
+                "CapWorldTowerStage", "PoisonWaveExStage", "PushBlockExStage", "FrogSearchExStage",
                 "RollingExStage"
             ],
-            WaitingStage =
+            WaitingStages =
             [
                 "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
                 "SeaWorldLavaZone"
@@ -185,29 +185,296 @@ public class GameModeConfig : IConfig
         new()
         {
             Name = "cap-nosub",
-            StartingStage = ["CapWorldHomeStage"],
-            AllowedStages = ["CapWorldHomeStage"],
-            WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
+            StartingStages = ["CapWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
         },
         new()
         {
             Name = "cap-all",
-            StartingStage = ["CapWorldHomeStage"],
+            StartingStages = ["CapWorldHomeStage"],
             AllowAll = true,
-            WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
         },
         new()
         {
             Name = "cascade",
-            StartingStage = ["WaterfallWorldHomeStage"],
+            StartingStages = ["WaterfallWorldHomeStage"],
             AllowedStages =
             [
-                "WaterfallWorldHomeStage", "WindBlowExStage", "Lift2DExStage", "TrexPoppunExStage",
+                "WindBlowExStage", "Lift2DExStage", "TrexPoppunExStage",
                 "WanwanClashExStage",
                 "CapAppearExStage"
             ],
-            WaitingStage = ["HomeShipInsideStage", "SeaWorldLighthouseZone", "SeaWorldLavaZone"]
-        }
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "cascade-nosub",
+            StartingStages = ["WaterfallWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "cascade-all",
+            StartingStages = ["WaterfallWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "sand",
+            StartingStages = ["SandWorldHomeStage"],
+            AllowedStages =
+            [
+                "SandWorldCostumeStage", "MeganeLiftExStage", "RocketFlowerExStage",
+                "SandWorldPressExStage", "SandWorldKillerExStage", "SandWorldPyramid000Stage",
+                "SandWorldPyramid001Stage", "SandWorldShopStage", "SandWorldSecretStage", "SandWorldRotateExStage",
+                "SandWorldSlotStage", "SandWorldVibrationStage", "SandWorldUnderground000Stage",
+                "SandWorldUnderground001Stage", "WaterTubeExStage", "SandWorldMeganeExStage", "SandWorldSphinxExStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "sand-nosub",
+            StartingStages = ["SandWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "sand-all",
+            StartingStages = ["SandWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "lake",
+            StartingStages = ["LakeWorldHomeStage"],
+            AllowedStages =
+            [
+                "GotogotonExStage", "FastenerExStage", "FrogPoisonExStage", "TrampolineWallCatchExStage",
+                "LakeWorldShopStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "lake-nosub",
+            StartingStages = ["LakeWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "lake-all",
+            StartingStages = ["LakeWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "wooded",
+            StartingStages = ["ForestWorldHomeStage"],
+            AllowedStages =
+            [
+                "ForestWorldCloudBonusExStage", "AnimalChaseExStage", "FogMountainExStage", "ForestWorldBossStage",
+                "PackunPoisonExStage", "KillerRoadExStage", "ForestWorldWaterExStage", "ForestWorldBonusStage",
+                "ShootingElevatorExStage", "ForestWorldTowerStage", "RailCollisionExStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "wooded-nosub",
+            StartingStages = ["ForestWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "wooded-all",
+            StartingStages = ["ForestWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "deepwoods",
+            StartingStages = ["ForestWorldWoodsStage"],
+            AllowedStages =
+            [
+                "ForestWorldWoodsCostumeStage", "ForestWorldWoodsTreasureStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "cloud",
+            StartingStages = ["CloudWorldHomeStage"],
+            AllowedStages =
+            [
+                "Cube2DExStage", "FukuwaraiKuriboStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "cloud-nosub",
+            StartingStages = ["CloudWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "cloud-all",
+            StartingStages = ["CloudWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "lost",
+            StartingStages = ["ClashWorldHomeStage"],
+            AllowedStages =
+            [
+                "ClashWorldShopStage", "JangoExStage", "ImomuPoisonExStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "lost-nosub",
+            StartingStages = ["ClashWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "lost-all",
+            StartingStages = ["ClashWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "metro",
+            StartingStages = ["ClashWorldHomeStage"],
+            AllowedStages =
+            [
+                "BikeSteelExStage", "CityWorldFactoryStage", "CapRotatePackunExStage", "CityPeopleRoadStage",
+                "ShootingCityExStage", "PoleGrabCeilExStage", "Theater2DExStage", "DonsukeExStage",
+                "CityWorldMainTowerStage", "CityWorldShop01Stage", "Note2D3DRoomExStage", "PoleKillerExStage",
+                "RadioControlExStage", "SwingSteelExStage", "ElectricWireExStage", "CityWorldSandSlotStage",
+                "TrexBikeExStage"
+            ],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "metro-nosub",
+            StartingStages = ["ClashWorldHomeStage"],
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
+        new()
+        {
+            Name = "metro-all",
+            StartingStages = ["ClashWorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
+        },
     ];
 
     public HintPreset[] HintConfigs { get; set; } =

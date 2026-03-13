@@ -192,7 +192,6 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
 
                 if (player.LastPlayerAction != action)
                 {
-                    logger.Warn(playerPacket.Act);
                     eventManager.OnPlayerAction.RaiseEvent(new PlayerActionEventArgs
                     {
                         Player = player,

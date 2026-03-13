@@ -124,7 +124,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         if (!string.IsNullOrEmpty(_startingStage))
             return _startingStage;
-        var stages = StagePreset.StartingStage;
+        var stages = StagePreset.StartingStages;
         var stage = stages[_random.Next(stages.Length)];
         if (StagePreset.AllOnSameStartingStage)
             _startingStage = stage;
@@ -135,7 +135,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         if (!string.IsNullOrEmpty(_waitingStage))
             return _waitingStage;
-        var stages = StagePreset.WaitingStage;
+        var stages = StagePreset.WaitingStages;
         var stage = stages[_random.Next(stages.Length)];
         if (StagePreset.AllOnSameWaitingStage)
             _waitingStage = stage;
@@ -144,6 +144,6 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     public bool IsStageAllowed(string stage)
     {
-        return StagePreset.StartingStage.Contains(stage) || StagePreset.AllowedStages.Contains(stage);
+        return StagePreset.StartingStages.Contains(stage) || StagePreset.AllowedStages.Contains(stage);
     }
 }

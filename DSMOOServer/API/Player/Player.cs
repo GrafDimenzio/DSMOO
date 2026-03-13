@@ -86,20 +86,31 @@ public class Player : IPlayer
 
     public Task ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0, int delay = 0)
     {
+        return AsyncChangeStage(stage, warp, scenario, subScenarioType, delay);
+    }
+
+    private async Task AsyncChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0,
+        int delay = 0)
+    {
         if (Encoding.UTF8.GetBytes(warp).Length > Constants.WarpIdSize)
         {
             warp = "";
         }
-        return Task.Run(async () =>
-        {
+
+        if (delay > 0)
             await Task.Delay(delay);
-            await Client.Send(new ChangeStagePacket
-            {
-                Stage = stage,
-                Id = warp,
-                Scenario = scenario,
-                SubScenarioType = subScenarioType
-            });
+        //Scenario is 255 during transitions, so we need to wait
+        while (Scenario == 255)
+        {
+            await Task.Delay(100);
+        }
+        
+        await Client.Send(new ChangeStagePacket
+        {
+            Stage = stage,
+            Id = warp,
+            Scenario = scenario,
+            SubScenarioType = subScenarioType
         });
     }
 

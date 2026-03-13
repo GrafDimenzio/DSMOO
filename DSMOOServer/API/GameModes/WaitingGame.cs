@@ -61,7 +61,7 @@ public abstract class WaitingGame : BasicGame
     {
         if (IsRunning && Waiting && WaitingTeamPlayers.Contains(eventArgs.Player))
         {
-            if (StagePreset.WaitingStage.Contains(eventArgs.NewStage))
+            if (StagePreset.WaitingStages.Contains(eventArgs.NewStage))
                 return;
 
             eventArgs.SendBack = true;
