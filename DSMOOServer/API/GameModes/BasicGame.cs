@@ -58,7 +58,8 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     protected virtual void OnChangeStage(PlayerChangeStageEventArgs eventArgs)
     {
-        if (!IsRunning || !Players.Contains(eventArgs.Player) || IsStageAllowed(eventArgs.NewStage))
+        if (StagePreset.AllowAll || !IsRunning || !Players.Contains(eventArgs.Player) ||
+            IsStageAllowed(eventArgs.NewStage))
             return;
         eventArgs.SendBack = true;
     }
