@@ -4,11 +4,12 @@ namespace DSMOOFramework.Commands;
     CommandName = "help",
     Aliases = [],
     Parameters = [],
-    Description = "Command that displays a list of available commands."
+    Description = "Command that displays a list of available commands.",
+    Permission = "framework.help"
 )]
 public class HelpCommand(CommandManager manager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         var msg = "All Available Commands:";
         foreach (var cmd in manager.Commands)

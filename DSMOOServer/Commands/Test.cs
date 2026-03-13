@@ -24,7 +24,7 @@ public class Debug(
     ObjectController objectController,
     ConfigHolder<GameModeConfig> gameConfig) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         gameModeManager.StartGame(args[0], args[1], args[2], args[3]);
         return "";

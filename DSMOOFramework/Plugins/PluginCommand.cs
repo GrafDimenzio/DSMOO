@@ -1,7 +1,9 @@
+using DSMOOFramework.Analyzer;
 using DSMOOFramework.Commands;
 
 namespace DSMOOFramework.Plugins;
 
+[Analyze(Priority = -1)]
 [Command(
     CommandName = "plugin",
     Aliases = ["plugins"],
@@ -10,7 +12,7 @@ namespace DSMOOFramework.Plugins;
 )]
 public class PluginCommand(PluginManager manager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         var msg = "All Plugins:";
         foreach (var plugin in manager.Plugins)

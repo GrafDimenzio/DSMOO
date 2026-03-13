@@ -15,7 +15,7 @@ public class Record(DummyManager dummyManager, PlayerManager playerManager, Reco
 {
     private Recording? _recording;
 
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length < 1)
             return new CommandResult

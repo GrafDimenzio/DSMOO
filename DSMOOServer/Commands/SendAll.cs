@@ -14,7 +14,7 @@ namespace DSMOOServer.Commands;
 )]
 public class SendAll(PlayerManager manager, StageManager stageManager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length < 1)
             return new CommandResult

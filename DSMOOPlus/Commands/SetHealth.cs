@@ -13,7 +13,7 @@ namespace DSMOOPlus.Commands;
 )]
 public class SetHealth(PlayerManager manager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length < 2)
             return new CommandResult

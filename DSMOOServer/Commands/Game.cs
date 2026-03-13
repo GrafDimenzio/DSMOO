@@ -17,7 +17,7 @@ public class Game(GameModeManager gameModeManager, PlayerManager playerManager, 
 {
     public IGame? CurrentGame { get; private set; }
     
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length == 0)
             return new CommandResult

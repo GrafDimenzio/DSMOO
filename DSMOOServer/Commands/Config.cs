@@ -15,13 +15,13 @@ public class Config(
     ConfigManager configManager,
     PlayerManager playerManager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length < 1)
             return new CommandResult
             {
                 ResultType = ResultType.MissingParameter,
-                Message = "Usage: config [merge/maxplayer]"
+                Message = "Usage: config [merge/maxplayer/load]"
             };
 
         switch (args[0])

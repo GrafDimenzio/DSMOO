@@ -30,13 +30,18 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
         Commands.Add(command);
         logger.Setup($"Added command {command.CommandInfo.CommandName}");
     }
-
+    
     public CommandResult ProcessQuery(string query)
     {
-        return ProcessArguments(GetArguments(query));
+        return ProcessArguments(GetArguments(query), new DefaultSender());
     }
 
-    public CommandResult ProcessArguments(string[] arguments)
+    public CommandResult ProcessQuery(string query, ICommandSender sender)
+    {
+        return ProcessArguments(GetArguments(query), sender);
+    }
+
+    public CommandResult ProcessArguments(string[] arguments, ICommandSender sender)
     {
         var cmd = GetCommand(arguments[0]);
         if (cmd == null)
@@ -48,8 +53,8 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
 
         try
         {
-            var preResult = cmd.PreExecute(arguments[0], arguments[1..]);
-            return preResult.ResultType != ResultType.Success ? preResult : cmd.Execute(arguments[0], arguments[1..]);
+            var preResult = cmd.PreExecute(arguments[0], arguments[1..], sender);
+            return preResult.ResultType != ResultType.Success ? preResult : cmd.Execute(arguments[0], arguments[1..], sender);
         }
         catch (Exception e)
         {

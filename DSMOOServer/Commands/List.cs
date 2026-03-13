@@ -11,7 +11,7 @@ namespace DSMOOServer.Commands;
 )]
 public class List(PlayerManager manager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         return manager.Players.Count == 0
             ? "No Players connected"

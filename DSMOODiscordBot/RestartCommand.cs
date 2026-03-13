@@ -10,7 +10,7 @@ namespace DSMOODiscordBot;
 )]
 public class RestartCommand(DiscordBot bot) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         Task.Run(bot.Reconnect);
         return "Restarting the Discord Bot";

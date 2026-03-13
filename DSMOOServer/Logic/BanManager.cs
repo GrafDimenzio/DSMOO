@@ -244,9 +244,13 @@ public class BanManager(
     private void OnPlayerCapture(PlayerCaptureEventArgs args)
     {
         if (!Enabled) return;
-        if (IsCapturesBanned(args.Capture))
-            args.Player.ChangeStage(args.Player.Stage,
-                stageManager.GetNearestWarp(args.Player.Stage, args.Player.Position) ?? "");
+        if (!IsCapturesBanned(args.Capture)) return;
+        
+        var warp = "";
+        if (Config.ResetOnBannedCaptureToNearestWarp)
+            warp = stageManager.GetNearestWarp(args.Player.Stage, args.Player.Position) ?? "";
+        
+        args.Player.ChangeStage(args.Player.Stage, warp);
     }
 
     private void OnPlayerPreJoin(PlayerPreJoinEventArgs args)
@@ -269,7 +273,7 @@ public class BanManager(
         args.SendBackWarp = stageManager.GetConnection(args.PreviousStage, args.SendBackStage);
     }
 
-    public void OnPacket(PacketReceivedEventArgs args)
+    private void OnPacket(PacketReceivedEventArgs args)
     {
         if (!Enabled) return;
         switch (args.Packet)
@@ -286,6 +290,7 @@ public class BanManager(
 public class BanList : IConfig
 {
     public bool Enabled { get; set; } = true;
+    public bool ResetOnBannedCaptureToNearestWarp { get; set; } = true;
     public HashSet<string> IPs { get; set; } = [];
     public HashSet<Guid> Profiles { get; set; } = [];
     public HashSet<string> Stages { get; set; } = [];

@@ -12,7 +12,7 @@ namespace DSMOOFlip;
 )]
 public class FlipCommand(PlayerManager manager, FlipManager flip) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length == 0)
             return new CommandResult

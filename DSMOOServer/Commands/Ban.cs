@@ -25,7 +25,7 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
         { "gamemode", "gamemode <gamemode>" }
     };
 
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         var banMode = command.Equals("ban", StringComparison.CurrentCultureIgnoreCase);
         var subcommands = $"[{(banMode ? "list/enable/disable/player/" : "")}profile/ip/stage/gamemode]";

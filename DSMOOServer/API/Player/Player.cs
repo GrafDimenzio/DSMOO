@@ -1,6 +1,7 @@
 using System.Collections.Concurrent;
 using System.Net;
 using System.Numerics;
+using System.Text;
 using DSMOOFramework.Controller;
 using DSMOOServer.API.Enum;
 using DSMOOServer.Connection;
@@ -85,6 +86,10 @@ public class Player : IPlayer
 
     public Task ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0, int delay = 0)
     {
+        if (Encoding.UTF8.GetBytes(warp).Length > Constants.WarpIdSize)
+        {
+            warp = "";
+        }
         return Task.Run(async () =>
         {
             await Task.Delay(delay);

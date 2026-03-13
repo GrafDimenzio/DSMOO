@@ -106,22 +106,24 @@ public class StageManager(ILogger logger, PathLocation pathLocation) : Manager
         return null;
     }
 
+    public MapInfo? GetMapInfo(string stage)
+    {
+        var kingdom = GetKingdomFromStage(stage);
+        return kingdom == null ? null : _maps.FirstOrDefault(x => x.MainStageName == kingdom);
+    }
+
     public MapLocation? GetMapLocation(Vector3 position, string stageName)
     {
-        var kingdom = GetKingdomFromStage(stageName);
-        if (kingdom == null)
-            return null;
-
-        var infoTable = _maps.FirstOrDefault(x => x.MainStageName == kingdom);
+        var infoTable = GetMapInfo(stageName);
         if (infoTable == null)
             return null;
 
         var location = new MapLocation
         {
-            Kingdom = kingdom
+            Kingdom = infoTable.MainStageName
         };
 
-        if (stageName == kingdom)
+        if (stageName == location.Kingdom)
         {
             location.X = position.X;
             location.Y = position.Z;

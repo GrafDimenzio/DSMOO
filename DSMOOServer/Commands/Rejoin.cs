@@ -12,7 +12,7 @@ namespace DSMOOServer.Commands;
 )]
 public class Rejoin(PlayerManager manager) : Command
 {
-    public override CommandResult Execute(string command, string[] args)
+    public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length == 0)
             return new CommandResult
