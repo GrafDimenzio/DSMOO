@@ -44,11 +44,14 @@ public class DSMOOPlusManager(EventManager eventManager, CommandManager commandM
             case MessagePacket sendMessagePacket:
                 switch (sendMessagePacket.MessageType)
                 {
+                    //TODO: Only do this for SYSTEM Messages. For Testing every type will react
                     case MessageType.Chat:
                     case MessageType.Private:
                     case MessageType.System:
-                        commandManager.ProcessQuery(sendMessagePacket.Message,
+                        var response = commandManager.ProcessQuery(sendMessagePacket.Message,
                             args.Sender.Player.GetComponent<PlayerPlus>()!.CommandSender);
+                        args.Sender.Player.GetComponent<PlayerPlus>()!
+                            .SendMessage($"[Server] [{response.ResultType}] {response.Message}");
                         break;
                 }
                 break;
