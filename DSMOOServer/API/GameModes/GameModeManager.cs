@@ -25,8 +25,12 @@ public class GameModeManager(
     PlayerManager playerManager) : Manager
 {
     private readonly Dictionary<string, Type> _games = [];
-    public readonly Dictionary<string, IHint> Hints = new();
-    public ReadOnlyDictionary<string, Type> Games => _games.AsReadOnly();
+    private readonly Dictionary<string, IHint> _hints = [];
+
+    public ReadOnlyDictionary<string, IHint> Hints => _hints.AsReadOnly();
+    public ReadOnlyDictionary<string, Type> GameTypes => _games.AsReadOnly();
+    
+    public IGame? ActiveGame { get; private set; }
 
     public override void Initialize()
     {
@@ -51,6 +55,9 @@ public class GameModeManager(
     public IGame? StartGame(string gameName, IPlayer[] players, StagePreset stagePreset, HintPreset hintPreset,
         params string[] arguments)
     {
+        if (ActiveGame != null)
+            return null;
+        
         if (!_games.ContainsKey(gameName.ToLower()))
             return null;
 
@@ -58,7 +65,14 @@ public class GameModeManager(
         if (game == null)
             return null;
         game.StartGame(players, stagePreset, hintPreset, arguments);
+        ActiveGame = game;
         return game;
+    }
+
+    public void EndCurrentGame()
+    {
+        ActiveGame?.EndGame();
+        ActiveGame = null;
     }
 
     public StagePreset? GetStageConfig(string configName)
@@ -148,7 +162,7 @@ public class GameModeManager(
         if (name == null) return;
         var hintObject = objectController.GetObject(args.Type);
         if (hintObject is not IHint hint) return;
-        Hints[name] = hint;
+        _hints[name] = hint;
     }
 
     private void OnPlayerState(PlayerStateEventArgs args)

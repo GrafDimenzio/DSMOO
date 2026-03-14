@@ -143,31 +143,7 @@ public class Server(
                     continue;
                 }
 
-                try
-                {
-                    var packetType = packetManager.GetPacketType(packetHeader.Type);
-                    if (packetType == null)
-                        //The Client send an unknown Packet Type
-                        //Most likely a modification that the Server doesn't Support
-                        //Ignore the Packet and don't broadcast it to other Player
-                        continue;
-                    var packet = (IPacket?)Activator.CreateInstance(packetType);
-                    if (packet == null) continue;
-
-                    packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
-                    if (packetHeader.Type != (short)PacketType.Player)
-                        Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
-
-                    var arg = new PacketReceivedEventArgs(packetHeader, packet, client);
-                    EventManager.OnPacketReceived.RaiseEvent(arg);
-
-                    if (arg.Broadcast)
-                        await ReplaceBroadcast(arg.ReplacePacket ?? arg.Packet, client.Id, arg.SpecificReplacePackets);
-                }
-                catch (Exception ex)
-                {
-                    client.Logger.Error("Error while deserializing a packet", ex);
-                }
+                await HandlePacket(packetHeader, memory, client);
 
                 memory.Dispose();
             }
@@ -195,6 +171,35 @@ public class Server(
         }
 
         client.Dispose();
+    }
+
+    private async Task HandlePacket(PacketHeader packetHeader, IMemoryOwner<byte> memory, Client client)
+    {
+        try
+        {
+            var packetType = packetManager.GetPacketType(packetHeader.Type);
+            if (packetType == null)
+                //The Client send an unknown Packet Type
+                //Most likely a modification that the Server doesn't Support
+                //Ignore the Packet and don't broadcast it to other Player
+                return;
+            var packet = (IPacket?)Activator.CreateInstance(packetType);
+            if (packet == null) return;
+
+            packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
+            if (packetHeader.Type != (short)PacketType.Player)
+                Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
+
+            var arg = new PacketReceivedEventArgs(packetHeader, packet, client);
+            EventManager.OnPacketReceived.RaiseEvent(arg);
+
+            if (arg.Broadcast)
+                await ReplaceBroadcast(arg.ReplacePacket ?? arg.Packet, client.Id, arg.SpecificReplacePackets);
+        }
+        catch (Exception ex)
+        {
+            client.Logger.Error("Error while deserializing a packet", ex);
+        }
     }
 
     private async Task<bool> Read(Socket socket, Memory<byte> readMem, int readSize, int readOffset)

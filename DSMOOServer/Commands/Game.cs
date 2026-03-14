@@ -18,8 +18,6 @@ public class Game(
     PlayerManager playerManager,
     ConfigHolder<GameModeConfig> gameConfigHolder) : Command
 {
-    public IGame? CurrentGame { get; private set; }
-
     public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length == 0)
@@ -43,7 +41,7 @@ public class Game(
                             "\n Use none as hint preset to disable hints" +
                             "\n Example usage: game start hide&seek cap none * 60 2 (this means all players participate, 2 players search and have to wait 60 seconds) or game start hide&seek cap-nosub default \"mario luigi\""
                     };
-                if (!gameModeManager.Games.ContainsKey(args[1].ToLower()))
+                if (!gameModeManager.GameTypes.ContainsKey(args[1].ToLower()))
                     return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
@@ -70,27 +68,29 @@ public class Game(
                         ResultType = ResultType.InvalidParameter,
                         Message = "No Players were found"
                     };
-                CurrentGame = gameModeManager.StartGame(args[1].ToLower(), playerSearch.Players.ToArray(), stage, hint,
+                var newGame = gameModeManager.StartGame(args[1].ToLower(), playerSearch.Players.ToArray(), stage, hint,
                     args.Length >= 6 ? args[5..] : []);
-                return CurrentGame == null
+                return newGame == null
                     ? "Couldn't start the game"
-                    : MessageHelper.FormatMessage(playerSearch, $"Started a round of {CurrentGame.DisplayName} for ");
+                    : MessageHelper.FormatMessage(playerSearch, $"Started a round of {newGame.DisplayName} for ");
 
             case "end":
             case "stop:":
-                if (CurrentGame is not { IsRunning: true })
+                if (gameModeManager.ActiveGame == null)
                     return new CommandResult
                     {
                         ResultType = ResultType.Error,
                         Message = "No Game is currently active"
                     };
-                CurrentGame.EndGame();
-                return $"Ended game of {CurrentGame.DisplayName}";
+                var name = gameModeManager.ActiveGame.DisplayName;
+                gameModeManager.EndCurrentGame();
+                return $"Ended game of {name}";
 
             case "list":
                 var message = new StringBuilder();
                 message.AppendLine("Installed Games:");
-                foreach (var game in gameModeManager.Games.Keys) message.AppendLine($"    - {game}");
+                foreach (var game in gameModeManager.GameTypes.Keys)
+                    message.AppendLine($"    - {game}");
 
                 message.AppendLine("Stage Presets:");
                 foreach (var stageConfig in gameConfigHolder.Config.StageConfigs)

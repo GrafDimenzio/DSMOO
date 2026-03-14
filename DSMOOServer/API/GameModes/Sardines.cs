@@ -14,7 +14,7 @@ public class Sardines : WaitingGame
 
     public override string DisplayName { get; } = "Sardines";
 
-    public override void OnGameStart()
+    protected override void OnGameStart()
     {
         if (Arguments.Length > 0 && int.TryParse(Arguments[0], out var waitingTime)) WaitingTime = waitingTime * 1000;
         base.OnGameStart();
@@ -69,7 +69,7 @@ public class Sardines : WaitingGame
         base.SpawnWaitingPlayers();
     }
 
-    public override IPlayer[] PlayersToHint()
+    protected override IPlayer[] PlayersToHint()
     {
         return [StartTeamPlayers.First()];
     }

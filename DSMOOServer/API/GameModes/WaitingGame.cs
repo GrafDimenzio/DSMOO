@@ -15,7 +15,7 @@ public abstract class WaitingGame : BasicGame
 
     public bool Waiting { get; protected set; }
 
-    public override void OnGameStart()
+    protected override void OnGameStart()
     {
         var possiblePlayers = Players.ToList();
         var waitingTeam = new List<IPlayer>();
@@ -35,7 +35,7 @@ public abstract class WaitingGame : BasicGame
         _waitingTask = Task.Run(WaitForStart);
     }
 
-    public override void OnGameEnd()
+    protected override void OnGameEnd()
     {
         WaitingTeamPlayers = [];
         StartTeamPlayers = [];
@@ -52,7 +52,7 @@ public abstract class WaitingGame : BasicGame
             _hintTask = Task.Run(HintTask);
     }
 
-    public override IPlayer[] PlayersToHint()
+    protected override IPlayer[] PlayersToHint()
     {
         return StartTeamPlayers;
     }

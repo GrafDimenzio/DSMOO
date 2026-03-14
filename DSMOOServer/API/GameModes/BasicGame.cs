@@ -64,23 +64,23 @@ public abstract class BasicGame : IGame, IInject, IDisposable
         eventArgs.SendBack = true;
     }
 
-    public virtual void OnGameStart()
+    protected virtual void OnGameStart()
     {
         if (HintPreset.Hints.Length > 0)
             _hintTask = Task.Run(HintTask);
         foreach (var player in Players) player.ChangeStage(GetStartingStage());
     }
 
-    public virtual void OnGameEnd()
+    protected virtual void OnGameEnd()
     {
     }
 
-    public virtual IPlayer[] PlayersToHint()
+    protected virtual IPlayer[] PlayersToHint()
     {
         return Players;
     }
 
-    public virtual void SendHint(HintData hintData)
+    protected virtual void SendHint(HintData hintData)
     {
         foreach (var player in Players)
             //if (player == hintData.Player)

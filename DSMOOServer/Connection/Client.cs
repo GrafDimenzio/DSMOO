@@ -45,8 +45,14 @@ public class Client : IDisposable
 
     public void Dispose()
     {
-        if (Socket.Connected)
-            Socket.Disconnect(false);
+        try
+        {
+            if (Socket.Connected)
+                Socket.Disconnect(false);
+        }
+        catch (ObjectDisposedException e) {}
+        catch (SocketException e) {}
+        
         Socket.Close();
     }
 
