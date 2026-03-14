@@ -3,7 +3,6 @@ using System.Net.Sockets;
 using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
 using DSMOOServer.API.Events;
-using DSMOOServer.API.Events.Args;
 using DSMOOServer.API.Player;
 using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
@@ -22,7 +21,7 @@ public class Client : IDisposable
         Socket = socket;
     }
 
-    public Player? Player { get; internal set; }
+    public Player Player { get; internal set; }
 
     public ILogger Logger { get; }
 
@@ -31,7 +30,7 @@ public class Client : IDisposable
     public bool FirstPacketSend { get; internal set; } = false;
 
     public Guid Id { get; internal set; }
-    
+
     public bool IsBanned { get; internal set; } = false;
 
     public bool GotMigrated { get; internal set; } = false;
@@ -42,7 +41,7 @@ public class Client : IDisposable
         set => Logger.Name = value;
     }
 
-    public bool Ignored { get; internal set; } = false;
+    public bool Ignored { get; internal set; }
 
     public void Dispose()
     {
@@ -107,7 +106,7 @@ public class Client : IDisposable
 
         await Socket!.SendAsync(data[..(Constants.HeaderSize + header.PacketSize)], SocketFlags.None);
     }
-    
+
     public async Task Crash(bool ban)
     {
         await Send(new ChangeStagePacket

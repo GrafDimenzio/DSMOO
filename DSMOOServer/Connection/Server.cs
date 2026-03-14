@@ -2,7 +2,6 @@ using System.Buffers;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
-using DSMOOFramework.Analyzer;
 using DSMOOFramework.Config;
 using DSMOOFramework.Controller;
 using DSMOOFramework.Events;
@@ -133,8 +132,10 @@ public class Server(
                 {
                     if (client.Player != null)
                         lock (playerManager.PlayerList)
+                        {
                             playerManager.PlayerList.Remove(client.Player);
-                        
+                        }
+
                     //If the player is getting kicked/banned while he can't receive a ChangeStagePacket he won't see the notification
                     //therefore this will send it a second time if he is still able to switch stages
                     if (packetHeader.Type == (short)PacketType.Game)
@@ -176,20 +177,23 @@ public class Server(
             Logger.Error("Error during main socket loop", ex);
             memory?.Dispose();
         }
+
         Logger.Info($"Client {client.Name} disconnected from EndPoint {endPointString}");
         if (client.Id != Guid.Empty)
             _ = Broadcast(new DisconnectPacket(), client.Id);
-        
-        if(!client.GotMigrated)
+
+        if (!client.GotMigrated)
         {
             if (client.Id != Guid.Empty)
                 Clients.TryRemove(client.Id, out _);
-            
-            if(client.Player != null)
+
+            if (client.Player != null)
                 lock (playerManager.PlayerList)
+                {
                     playerManager.PlayerList.Remove(client.Player);
+                }
         }
-        
+
         client.Dispose();
     }
 

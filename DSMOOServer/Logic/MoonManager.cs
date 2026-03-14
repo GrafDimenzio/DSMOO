@@ -4,7 +4,7 @@ using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
 using DSMOOServer.API.Events.Args;
-using DSMOOServer.Connection;
+using DSMOOServer.API.Player;
 using DSMOOServer.Network.Packets;
 using Timer = System.Timers.Timer;
 
@@ -14,7 +14,7 @@ public class MoonManager(
     EventManager eventManager,
     ILogger logger,
     ConfigHolder<ServerMainConfig> configHolder,
-    Server server,
+    PlayerManager playerManager,
     ConfigHolder<MoonList> moonListHolder) : Manager
 {
     private readonly Timer _timer = new(120000);
@@ -48,29 +48,33 @@ public class MoonManager(
 
     public async Task SyncMoons()
     {
-        await Parallel.ForEachAsync(server.Clients.Values, async (client, _) => await SyncMoonsForClient(client));
+        await Parallel.ForEachAsync(playerManager.Players, async (player, _) => await SyncMoonsForPlayer(player));
     }
 
     public async Task SyncMoon(int moonId)
     {
-        await Parallel.ForEachAsync(server.Clients.Values, async (client, _) => await SyncMoonForClient(client, moonId));
+        await Parallel.ForEachAsync(playerManager.Players,
+            async (player, _) => await SyncMoonForPlayer(player, moonId));
     }
 
-    public async Task SyncMoonForClient(Client client, int moonId)
+    public async Task SyncMoonForPlayer(IPlayer player, int moonId)
     {
-        if (!Config.MoonSyncEnabled || client.Player.DisableMoonSync || !client.FirstPacketSend) return;
-        if (Config.ExcludedMoons.Contains(moonId) || client.Player.SyncedMoons.Contains(moonId)) return;
-        await client.Send(new MoonPacket
+        if (player is not Player ply)
+            return;
+
+        if (!Config.MoonSyncEnabled || ply.DisableMoonSync) return;
+        if (Config.ExcludedMoons.Contains(moonId) || ply.SyncedMoons.Contains(moonId)) return;
+        await player.Send(new MoonPacket
         {
             MoonId = moonId
         });
-        client.Player.SyncedMoons.Add(moonId);
+        ply.SyncedMoons.Add(moonId);
     }
 
-    public async Task SyncMoonsForClient(Client client)
+    public async Task SyncMoonsForPlayer(IPlayer player)
     {
         foreach (var moon in MoonSync)
-            await SyncMoonForClient(client, moon);
+            await SyncMoonForPlayer(player, moon);
     }
 
     public override void Initialize()
@@ -134,7 +138,7 @@ public class MoonManager(
                                 "Entered Cascade or later with moon sync disabled, enabling moon sync again");
                             await Task.Delay(2000);
                             args.Sender.Player.DisableMoonSync = false;
-                            await SyncMoonsForClient(args.Sender);
+                            await SyncMoonsForPlayer(args.Sender.Player);
                         });
                         break;
                 }
@@ -143,7 +147,7 @@ public class MoonManager(
 
             case CostumePacket:
                 //When loading a different Save the Client will send a CostumePacket so this is just to be sure I assume
-                Task.Run(() => SyncMoonsForClient(args.Sender));
+                Task.Run(() => SyncMoonsForPlayer(args.Sender.Player));
                 break;
         }
     }

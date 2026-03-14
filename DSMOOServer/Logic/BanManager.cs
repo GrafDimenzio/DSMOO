@@ -245,11 +245,11 @@ public class BanManager(
     {
         if (!Enabled) return;
         if (!IsCapturesBanned(args.Capture)) return;
-        
+
         var warp = "";
         if (Config.ResetOnBannedCaptureToNearestWarp)
             warp = stageManager.GetNearestWarp(args.Player.Stage, args.Player.Position) ?? "";
-        
+
         args.Player.ChangeStage(args.Player.Stage, warp);
     }
 

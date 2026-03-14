@@ -165,7 +165,7 @@ public class GameModeManager(
 [Config(Name = "gameModes")]
 public class GameModeConfig : IConfig
 {
-    public Dictionary<string, string> AreaTypes { get; set; } = new Dictionary<string, string>()
+    public Dictionary<string, string> AreaTypes { get; set; } = new()
     {
         { "HomeShipInsideStage", "Odyssey" },
         { "CapWorldHomeStage", "Overworld" },
@@ -192,9 +192,9 @@ public class GameModeConfig : IConfig
         { "SnowWorldLobby001Stage", "Shiveria" },
         { "ForestWorldWoodsStage", "Deepwoods" },
         { "ForestWorldWoodsCostumeStage", "Deepwoods" },
-        { "ForestWorldWoodsTreasureStage", "Deepwoods" },
+        { "ForestWorldWoodsTreasureStage", "Deepwoods" }
     };
-    
+
     public StagePreset[] StageConfigs { get; set; } =
     [
         new()
@@ -795,7 +795,7 @@ public class GameModeConfig : IConfig
         {
             Name = "dark-all",
             StartingStages = ["Special1WorldHomeStage"],
-            AllowAll =  true,
+            AllowAll = true,
             WaitingStages =
             [
                 "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
@@ -815,7 +815,7 @@ public class GameModeConfig : IConfig
                 "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
                 "SeaWorldLavaZone"
             ]
-        },
+        }
     ];
 
     public HintPreset[] HintConfigs { get; set; } =
@@ -855,7 +855,7 @@ public class GameModeConfig : IConfig
                     Time = 1800,
                     HintType = "MapCell"
                 },
-                new HintPreset.Hint()
+                new HintPreset.Hint
                 {
                     Time = 2100,
                     HintType = "StageName"

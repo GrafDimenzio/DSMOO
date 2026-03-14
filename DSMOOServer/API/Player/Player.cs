@@ -85,31 +85,6 @@ public class Player(Client client, ObjectController objectController) : IPlayer
         return AsyncChangeStage(stage, warp, scenario, subScenarioType, delay);
     }
 
-    private async Task AsyncChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0,
-        int delay = 0)
-    {
-        if (Encoding.UTF8.GetBytes(warp).Length > Constants.WarpIdSize)
-        {
-            warp = "";
-        }
-
-        if (delay > 0)
-            await Task.Delay(delay);
-        //Scenario is 255 during transitions, so we need to wait
-        while (Scenario == 255)
-        {
-            await Task.Delay(100);
-        }
-        
-        await Client.Send(new ChangeStagePacket
-        {
-            Stage = stage,
-            Id = warp,
-            Scenario = scenario,
-            SubScenarioType = subScenarioType
-        });
-    }
-
     public async Task Send<T>(T packet, Guid? sender) where T : struct, IPacket
     {
         await Client.Send(packet, sender);
@@ -130,5 +105,24 @@ public class Player(Client client, ObjectController objectController) : IPlayer
         comp.Player = this;
         _components[typeof(T)] = comp;
         return comp;
+    }
+
+    private async Task AsyncChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0,
+        int delay = 0)
+    {
+        if (Encoding.UTF8.GetBytes(warp).Length > Constants.WarpIdSize) warp = "";
+
+        if (delay > 0)
+            await Task.Delay(delay);
+        //Scenario is 255 during transitions, so we need to wait
+        while (Scenario == 255) await Task.Delay(100);
+
+        await Client.Send(new ChangeStagePacket
+        {
+            Stage = stage,
+            Id = warp,
+            Scenario = scenario,
+            SubScenarioType = subScenarioType
+        });
     }
 }

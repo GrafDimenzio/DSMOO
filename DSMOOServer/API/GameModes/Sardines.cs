@@ -31,7 +31,7 @@ public class Sardines : WaitingGame
         foreach (var player in StartTeamPlayers)
         {
             Server.Broadcast(packet, player.Id);
-            player.Send(packet, null);
+            player.Send(packet);
             player.ChangeStage(GetStartingStage());
         }
     }
@@ -47,7 +47,7 @@ public class Sardines : WaitingGame
         foreach (var player in WaitingTeamPlayers)
         {
             Server.Broadcast(packet, player.Id);
-            player.Send(packet, null);
+            player.Send(packet);
             player.ChangeStage(GetWaitingStage());
         }
     }
@@ -63,7 +63,7 @@ public class Sardines : WaitingGame
         foreach (var player in StartTeamPlayers)
         {
             Server.Broadcast(packet, player.Id);
-            player.Send(packet, null);
+            player.Send(packet);
         }
 
         base.SpawnWaitingPlayers();

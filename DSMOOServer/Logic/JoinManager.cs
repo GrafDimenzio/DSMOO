@@ -72,7 +72,7 @@ public class JoinManager(
         if (!Enum.IsDefined(connectPacket.ConnectionType))
             throw new Exception(
                 $"Invalid connection type {connectPacket.ConnectionType} for {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint})");
-            
+
         if (!server.Clients.TryGetValue(args.Sender.Id, out var oldClient))
         {
             CreatePlayerForClient(args.Sender);
@@ -86,7 +86,6 @@ public class JoinManager(
                 Logger.Debug("MIGRATE PLAYER OBJECT");
                 args.Sender.Player = oldClient.Player;
                 oldClient.GotMigrated = true;
-                oldClient.Player = null;
                 args.Sender.Player!.Client = args.Sender;
             }
             else
@@ -114,18 +113,18 @@ public class JoinManager(
         {
             if (ply.Id == args.Sender.Id)
                 continue;
-            _ = SendPlayerStateToOtherPlayer(ply, args.Sender.Player!);
+            _ = SendPlayerStateToOtherPlayer(ply, args.Sender.Player);
 
             //A Player that completely restarts but was still connected no longer has the same values like Stage
             //So the default Values will be send to update all Players
             if (isRestartReconnect)
-                _ = SendPlayerStateToOtherPlayer(args.Sender.Player!, ply);
+                _ = SendPlayerStateToOtherPlayer(args.Sender.Player, ply);
         }
 
 
         eventManager.OnPlayerJoined.RaiseEvent(new PlayerJoinedEventArgs
         {
-            Player = args.Sender.Player!
+            Player = args.Sender.Player
         });
 
         Logger.Info($"Client {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint}) connected.");
@@ -171,7 +170,7 @@ public class JoinManager(
             AnimationBlendWeights = ply.AnimationBlendWeights
         }, ply.Id);
     }
-    
+
     private void CreatePlayerForClient(Client client)
     {
         client.Player = new Player(client, objectController);

@@ -63,15 +63,19 @@ public class Dummy : IPlayer, IDisposable
         _joinManager = joinManager;
         _packetManager = packetManager;
         _objectController = objectController;
-        lock(_playerManager.PlayerList)
+        lock (_playerManager.PlayerList)
+        {
             _playerManager.PlayerList.Add(this);
+        }
     }
 
     public void Dispose()
     {
         BroadcastPacketAsync(new DisconnectPacket()).GetAwaiter().GetResult();
-        lock(_playerManager.PlayerList)
+        lock (_playerManager.PlayerList)
+        {
             _playerManager.PlayerList.Remove(this);
+        }
     }
 
     public IPAddress? Ip { get; } = null;

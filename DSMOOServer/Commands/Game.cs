@@ -13,10 +13,13 @@ namespace DSMOOServer.Commands;
     Description = "Starts or ends a gamemode.",
     Parameters = ["start/end/list"]
 )]
-public class Game(GameModeManager gameModeManager, PlayerManager playerManager, ConfigHolder<GameModeConfig> gameConfigHolder) : Command
+public class Game(
+    GameModeManager gameModeManager,
+    PlayerManager playerManager,
+    ConfigHolder<GameModeConfig> gameConfigHolder) : Command
 {
     public IGame? CurrentGame { get; private set; }
-    
+
     public override CommandResult Execute(string command, string[] args, ICommandSender sender)
     {
         if (args.Length == 0)
@@ -31,7 +34,7 @@ public class Game(GameModeManager gameModeManager, PlayerManager playerManager, 
             case "start":
             case "begin":
                 if (args.Length < 5)
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.MissingParameter,
                         Message =
@@ -41,70 +44,65 @@ public class Game(GameModeManager gameModeManager, PlayerManager playerManager, 
                             "\n Example usage: game start hide&seek cap none * 60 2 (this means all players participate, 2 players search and have to wait 60 seconds) or game start hide&seek cap-nosub default \"mario luigi\""
                     };
                 if (!gameModeManager.Games.ContainsKey(args[1].ToLower()))
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "No Game with this name was found"
                     };
                 var stage = gameModeManager.GetStageConfig(args[2]);
                 if (stage == null)
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "No Stage Preset with that name was found"
                     };
                 var hint = gameModeManager.GetHintConfig(args[3]);
                 if (hint == null)
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "No Hint Preset with that name was found"
                     };
                 var playerSearch = playerManager.SearchForPlayers(args[4].Split(' '));
                 if (playerSearch.Players.Count == 0)
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.InvalidParameter,
                         Message = "No Players were found"
                     };
                 CurrentGame = gameModeManager.StartGame(args[1].ToLower(), playerSearch.Players.ToArray(), stage, hint,
                     args.Length >= 6 ? args[5..] : []);
-                return  CurrentGame == null ? "Couldn't start the game" : MessageHelper.FormatMessage(playerSearch, $"Started a round of {CurrentGame.DisplayName} for ");
-            
+                return CurrentGame == null
+                    ? "Couldn't start the game"
+                    : MessageHelper.FormatMessage(playerSearch, $"Started a round of {CurrentGame.DisplayName} for ");
+
             case "end":
             case "stop:":
                 if (CurrentGame is not { IsRunning: true })
-                    return new CommandResult()
+                    return new CommandResult
                     {
                         ResultType = ResultType.Error,
                         Message = "No Game is currently active"
                     };
                 CurrentGame.EndGame();
                 return $"Ended game of {CurrentGame.DisplayName}";
-            
+
             case "list":
                 var message = new StringBuilder();
                 message.AppendLine("Installed Games:");
-                foreach (var game in gameModeManager.Games.Keys)
-                {
-                    message.AppendLine($"    - {game}");
-                }
+                foreach (var game in gameModeManager.Games.Keys) message.AppendLine($"    - {game}");
 
                 message.AppendLine("Stage Presets:");
                 foreach (var stageConfig in gameConfigHolder.Config.StageConfigs)
-                {
                     message.AppendLine($"    - {stageConfig.Name}");
-                }
 
                 message.AppendLine("Hint Presets");
                 foreach (var hintPreset in gameConfigHolder.Config.HintConfigs)
-                {
                     message.AppendLine($"    - {hintPreset.Name}");
-                }
                 return message.ToString();
-            
+
             default:
-                return new CommandResult()
+                return new CommandResult
                 {
                     ResultType = ResultType.InvalidParameter,
                     Message = "Please specify one of those subcommands: start/end/list"
