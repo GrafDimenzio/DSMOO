@@ -63,13 +63,15 @@ public class Dummy : IPlayer, IDisposable
         _joinManager = joinManager;
         _packetManager = packetManager;
         _objectController = objectController;
-        _playerManager.Players.Add(this);
+        lock(_playerManager.PlayerList)
+            _playerManager.PlayerList.Add(this);
     }
 
     public void Dispose()
     {
         BroadcastPacketAsync(new DisconnectPacket()).GetAwaiter().GetResult();
-        _playerManager.Players.Remove(this);
+        lock(_playerManager.PlayerList)
+            _playerManager.PlayerList.Remove(this);
     }
 
     public IPAddress? Ip { get; } = null;
@@ -252,9 +254,10 @@ public class Dummy : IPlayer, IDisposable
         Dispose();
     }
 
-    public void Crash(bool ban)
+    public Task Crash(bool ban)
     {
         Dispose();
+        return Task.CompletedTask;
     }
 
     public Task SendShine(int id)

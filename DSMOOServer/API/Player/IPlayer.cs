@@ -40,7 +40,7 @@ public interface IPlayer
 
     public void Disconnect();
 
-    public void Crash(bool ban);
+    public Task Crash(bool ban);
 
     public Task SendShine(int id);
 

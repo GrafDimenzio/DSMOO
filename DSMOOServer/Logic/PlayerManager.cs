@@ -17,10 +17,13 @@ namespace DSMOOServer.Logic;
 
 public class PlayerManager(EventManager eventManager, StageManager stageManager, ILogger logger) : Manager
 {
-    public readonly List<IPlayer> Players = [];
+    internal readonly List<IPlayer> PlayerList = [];
 
-    public List<IPlayer> RealPlayers =>
-        Players.Where(x => !x.IsDummy && x is Player { Client.Socket.Connected: true }).ToList();
+    public List<IPlayer> Players => PlayerList.ToList();
+
+    public List<IPlayer> RealPlayers => PlayerList.Where(x => !x.IsDummy).ToList();
+
+    public List<IPlayer> Dummies => PlayerList.Where(x => x.IsDummy).ToList();
 
     public int PlayerCount => RealPlayers.Select(x => x.Id).Distinct().Count();
 
@@ -97,6 +100,7 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
     private void OnPacket(PacketReceivedEventArgs args)
     {
         var player = args.Sender.Player;
+        if (player == null) return;
         switch (args.Packet)
         {
             case GamePacket gamePacket:

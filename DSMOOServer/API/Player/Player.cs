@@ -16,18 +16,11 @@ namespace DSMOOServer.API.Player;
 ///     The Client can be null for Player's that are don't have a connection like a bot
 /// </summary>
 /// <param name="client"></param>
-public class Player : IPlayer
+public class Player(Client client, ObjectController objectController) : IPlayer
 {
     private readonly Dictionary<Type, PlayerComponent> _components = [];
-    private readonly ObjectController _objectController;
 
-    public Player(Client client, ObjectController objectController)
-    {
-        _objectController = objectController;
-        Client = client;
-    }
-
-    public Client Client { get; internal set; }
+    public Client Client { get; internal set; } = client;
 
     public bool DisableMoonSync { get; set; } = false;
 
@@ -58,22 +51,25 @@ public class Player : IPlayer
 
     public bool IsSaveLoaded { get; internal set; }
 
-    public bool IsBanned { get; internal set; } = false;
+    public bool IsBanned => Client.IsBanned;
 
     public PlayerAction LastPlayerAction { get; set; }
 
     public void Disconnect()
     {
-        Client.Socket?.Disconnect(false);
+        try
+        {
+            Client.Socket?.Disconnect(false);
+        }
+        catch (ObjectDisposedException)
+        {
+            //Ignore when already disposed
+        }
     }
 
-    public void Crash(bool ban)
+    public Task Crash(bool ban)
     {
-        Send(new ChangeStagePacket
-        {
-            Stage = ban ? "$ejected" : "$agogusStage"
-        }, null).GetAwaiter().GetResult();
-        Client.Ignored = true;
+        return Client.Crash(ban);
     }
 
     public Task SendShine(int id)
@@ -130,27 +126,9 @@ public class Player : IPlayer
     {
         if (_components.TryGetValue(typeof(T), out var component))
             return (T)component;
-        var comp = _objectController.CreateObject<T>()!;
+        var comp = objectController.CreateObject<T>()!;
         comp.Player = this;
         _components[typeof(T)] = comp;
         return comp;
-    }
-
-    public void CopyDataFromOtherPlayer(IPlayer player)
-    {
-        Position = player.Position;
-        Rotation = player.Rotation;
-        Act = player.Act;
-        SubAct = player.SubAct;
-        AnimationBlendWeights = player.AnimationBlendWeights;
-        Costume = player.Costume;
-        Capture = player.Capture;
-        Is2d = player.Is2d;
-        Scenario = player.Scenario;
-        Stage = player.Stage;
-        CurrentGameMode = player.CurrentGameMode;
-        IsIt = player.IsIt;
-        Time = player.Time;
-        IsSaveLoaded = player.IsSaveLoaded;
     }
 }

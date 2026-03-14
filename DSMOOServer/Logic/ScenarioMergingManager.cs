@@ -25,10 +25,10 @@ public class ScenarioMergingManager(
         {
             case GamePacket gamePacket:
                 if (Config.ScenarioMerging)
-                    foreach (var client in server.Clients)
+                    foreach (var client in server.Clients.Values)
                     {
                         if (client == args.Sender) continue;
-                        if (client.Player.Stage != gamePacket.Stage) continue;
+                        if (client.Player!.Stage != gamePacket.Stage) continue;
                         //255 means the player is in a transition between worlds
                         if (gamePacket.ScenarioNum == 255) continue;
                         if (client.Player.Scenario == gamePacket.ScenarioNum) continue;

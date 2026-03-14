@@ -25,7 +25,6 @@ public class ConsoleCommands(CommandManager manager)
             };
 
             Console.WriteLine($"[{response.ResultType}] " + response.Message);
-            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

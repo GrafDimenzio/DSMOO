@@ -20,11 +20,9 @@ public class Client : IDisposable
         _packetManager = packetManager;
         Logger = logger;
         Socket = socket;
-        Player = new Player(this, objectController);
-        eventManager.OnPlayerAddComponents.RaiseEvent(new PlayerAddComponentsEventArgs { Player = Player });
     }
 
-    public Player Player { get; }
+    public Player? Player { get; internal set; }
 
     public ILogger Logger { get; }
 
@@ -33,6 +31,10 @@ public class Client : IDisposable
     public bool FirstPacketSend { get; internal set; } = false;
 
     public Guid Id { get; internal set; }
+    
+    public bool IsBanned { get; internal set; } = false;
+
+    public bool GotMigrated { get; internal set; } = false;
 
     public string Name
     {
@@ -104,5 +106,14 @@ public class Client : IDisposable
         }
 
         await Socket!.SendAsync(data[..(Constants.HeaderSize + header.PacketSize)], SocketFlags.None);
+    }
+    
+    public async Task Crash(bool ban)
+    {
+        await Send(new ChangeStagePacket
+        {
+            Stage = ban ? "$ejected" : "$agogusStage"
+        });
+        Ignored = true;
     }
 }

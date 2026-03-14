@@ -55,7 +55,7 @@ public class Config(
 
                 configHolder.Config.MaxPlayers = amount;
                 configHolder.SaveConfig();
-                foreach (var player in playerManager.Players)
+                foreach (var player in playerManager.RealPlayers)
                     player.Disconnect();
                 return $"Set Max Players to {amount}";
 
@@ -66,7 +66,7 @@ public class Config(
                 return new CommandResult
                 {
                     ResultType = ResultType.MissingParameter,
-                    Message = "Usage: scenario merge (true/false)"
+                    Message = "Usage: config [merge/maxplayer/load]"
                 };
         }
     }

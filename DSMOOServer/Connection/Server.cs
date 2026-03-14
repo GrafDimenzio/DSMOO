@@ -1,4 +1,5 @@
 using System.Buffers;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
 using DSMOOFramework.Analyzer;
@@ -27,7 +28,7 @@ public class Server(
 {
     private readonly MemoryPool<byte> _memoryPool = MemoryPool<byte>.Shared;
 
-    public readonly List<Client> Clients = [];
+    public readonly ConcurrentDictionary<Guid, Client> Clients = [];
     private bool _active;
     private ILogger Logger { get; } = log;
     private ServerMainConfig Config { get; } = configHolder.Config;
@@ -78,7 +79,7 @@ public class Server(
                     }
                     catch (Exception ex)
                     {
-                        Logger.Error("Error while handling socket", ex);
+                        Logger.Error("Error during HandleSocket Method", ex);
                     }
                 });
             }
@@ -105,10 +106,8 @@ public class Server(
     private async Task HandleSocket(Socket socket)
     {
         var client = new Client(socket, Logger.Copy(), packetManager, objectController, EventManager);
-        playerManager.Players.Add(client.Player);
         IMemoryOwner<byte> memory = null!;
-        var id = Guid.Empty;
-        var endPointString = socket.RemoteEndPoint.ToString();
+        var endPointString = socket.RemoteEndPoint?.ToString() ?? "";
 
         try
         {
@@ -129,16 +128,17 @@ public class Server(
                     continue;
                 }
 
-                id = packetHeader.Id;
-
                 //Ignored players will still be connected but the server won't accept any Packets from them
                 if (client.Ignored)
                 {
-                    playerManager.Players.Remove(client.Player);
+                    if (client.Player != null)
+                        lock (playerManager.PlayerList)
+                            playerManager.PlayerList.Remove(client.Player);
+                        
                     //If the player is getting kicked/banned while he can't receive a ChangeStagePacket he won't see the notification
                     //therefore this will send it a second time if he is still able to switch stages
                     if (packetHeader.Type == (short)PacketType.Game)
-                        client.Player.Crash(client.Player.IsBanned);
+                        await client.Crash(client.IsBanned);
                     continue;
                 }
 
@@ -154,7 +154,8 @@ public class Server(
                     if (packet == null) continue;
 
                     packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
-                    Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
+                    if (packetHeader.Type != (short)PacketType.Player)
+                        Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
 
                     var arg = new PacketReceivedEventArgs(packetHeader, packet, client);
                     EventManager.OnPacketReceived.RaiseEvent(arg);
@@ -172,17 +173,23 @@ public class Server(
         }
         catch (Exception ex)
         {
-            Logger.Error("Error while handling socket", ex);
+            Logger.Error("Error during main socket loop", ex);
             memory?.Dispose();
         }
-
-        if (id != Guid.Empty)
-            await Broadcast(new DisconnectPacket(), id);
-
         Logger.Info($"Client {client.Name} disconnected from EndPoint {endPointString}");
-
-        Clients.Remove(client);
-        playerManager.Players.Remove(client.Player);
+        if (client.Id != Guid.Empty)
+            _ = Broadcast(new DisconnectPacket(), client.Id);
+        
+        if(!client.GotMigrated)
+        {
+            if (client.Id != Guid.Empty)
+                Clients.TryRemove(client.Id, out _);
+            
+            if(client.Player != null)
+                lock (playerManager.PlayerList)
+                    playerManager.PlayerList.Remove(client.Player);
+        }
+        
         client.Dispose();
     }
 
@@ -196,7 +203,7 @@ public class Server(
                 var size = await socket.ReceiveAsync(readMem[readOffset..readSize], SocketFlags.None);
                 if (size == 0)
                 {
-                    Logger.Info($"Socket {socket.RemoteEndPoint} disconnected");
+                    Logger.Debug($"Socket {socket.RemoteEndPoint} disconnected");
                     if (socket.Connected) await socket.DisconnectAsync(false);
                     return false;
                 }
@@ -208,7 +215,7 @@ public class Server(
         }
         catch (SocketException e)
         {
-            Logger.Info($"Socket {socket.RemoteEndPoint} disconnected");
+            Logger.Debug($"Socket {socket.RemoteEndPoint} disconnected");
             return false;
         }
     }
@@ -243,14 +250,14 @@ public class Server(
 
     public async Task ReplaceBroadcast(IPacket packet, Guid? sender, Dictionary<Guid, IPacket> replacePackets)
     {
-        await Parallel.ForEachAsync(Clients, async (client, _) =>
+        await Parallel.ForEachAsync(Clients.Values, async (client, _) =>
         {
             if (client.Ignored || !client.FirstPacketSend)
                 return;
 
-            if (replacePackets.ContainsKey(client.Id))
+            if (replacePackets.TryGetValue(client.Id, out var packetReplace))
             {
-                await client.Send(replacePackets[client.Id], sender);
+                await client.Send(packetReplace, sender);
                 return;
             }
 
@@ -276,11 +283,12 @@ public class Server(
 
     public async Task Broadcast(IMemoryOwner<byte> data, Guid? sender = null)
     {
-        await Parallel.ForEachAsync(Clients.Where(x => x is { Ignored: false, FirstPacketSend: true }),
+        await Parallel.ForEachAsync(Clients.Values,
             async (client, _) =>
             {
-                if (client.Id == sender)
+                if (client.Ignored || !client.FirstPacketSend || client.Id == sender)
                     return;
+
                 await client.Send(data.Memory);
             });
     }

@@ -117,7 +117,7 @@ public class RecordingManager(
 
     private void OnPacket(PacketReceivedEventArgs e)
     {
-        if (!_activeRecordings.TryGetValue(e.Sender.Player, out var recording))
+        if (e.Sender.Player == null || !_activeRecordings.TryGetValue(e.Sender.Player, out var recording))
             return;
         recording.AddPacket(e.Packet);
     }

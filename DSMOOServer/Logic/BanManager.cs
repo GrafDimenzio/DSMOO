@@ -123,7 +123,7 @@ public class BanManager(
     public void BanPlayer(IPlayer player)
     {
         if (player is Player realPlayer)
-            realPlayer.IsBanned = true;
+            realPlayer.Client.IsBanned = true;
         player.Crash(true);
         if (player.Ip != null)
             BanIPv4(player.Ip.ToString());
@@ -259,6 +259,7 @@ public class BanManager(
         if (!IsProfileBanned(args.Client.Id) &&
             !IsIPv4Banned((args.Client.Socket.RemoteEndPoint as IPEndPoint)?.Address)) return;
         args.AllowJoin = false;
+        args.Client.IsBanned = true;
     }
 
     private void PlayerChangeStage(PlayerChangeStageEventArgs args)

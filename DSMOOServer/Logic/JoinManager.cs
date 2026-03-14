@@ -1,4 +1,5 @@
 using DSMOOFramework.Config;
+using DSMOOFramework.Controller;
 using DSMOOFramework.Logger;
 using DSMOOFramework.Managers;
 using DSMOOServer.API.Events;
@@ -14,6 +15,7 @@ public class JoinManager(
     Server server,
     ILogger logger,
     PlayerManager playerManager,
+    ObjectController objectController,
     ConfigHolder<ServerMainConfig> configHolder) : Manager
 {
     private ILogger Logger { get; } = logger;
@@ -35,6 +37,9 @@ public class JoinManager(
             return;
         }
 
+        if (args.Sender.FirstPacketSend)
+            return;
+
         args.Sender.FirstPacketSend = true;
 
         args.Sender.Id = args.Header.Id;
@@ -43,14 +48,14 @@ public class JoinManager(
         var initArgs = new SendPlayerInitPacketEventArgs(new InitPacket
         {
             MaxPlayers = Config.MaxPlayers
-        }, args.Sender.Player);
+        }, args.Sender);
         eventManager.OnSendPlayerInitPacket.RaiseEvent(initArgs);
         args.Sender.Send(initArgs.Packet).GetAwaiter().GetResult();
 
         var preJoinArgs = new PlayerPreJoinEventArgs
         {
             Client = args.Sender,
-            AllowJoin = playerManager.PlayerCount <= Config.MaxPlayers
+            AllowJoin = CanJoin(args.Sender.Id)
         };
         if (!preJoinArgs.AllowJoin)
             args.Sender.Logger.Warn("Rejected join since the server reached max players amount");
@@ -64,42 +69,63 @@ public class JoinManager(
 
         var isRestartReconnect = false;
 
-        lock (server.Clients)
+        if (!Enum.IsDefined(connectPacket.ConnectionType))
+            throw new Exception(
+                $"Invalid connection type {connectPacket.ConnectionType} for {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint})");
+            
+        if (!server.Clients.TryGetValue(args.Sender.Id, out var oldClient))
         {
-            if (!Enum.IsDefined(connectPacket.ConnectionType))
-                throw new Exception(
-                    $"Invalid connection type {connectPacket.ConnectionType} for {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint})");
-
-            var oldClient = server.Clients.Find(x => x.Id == args.Sender.Id);
-            if (oldClient != null)
+            CreatePlayerForClient(args.Sender);
+        }
+        else
+        {
+            Logger.Info($"DETECTED OLD CLIENT ID {oldClient.Id}");
+            if (connectPacket.ConnectionType == ConnectPacket.ConnectionTypes.Reconnecting)
             {
-                Logger.Info($"DETECTED OLD CLIENT ID {oldClient.Id}");
-                if (connectPacket.ConnectionType == ConnectPacket.ConnectionTypes.Reconnecting)
-                    args.Sender.Player.CopyDataFromOtherPlayer(oldClient.Player);
-                else
-                    isRestartReconnect = true;
-                server.Clients.Remove(oldClient);
-                if (oldClient.Socket.Connected)
-                {
-                    oldClient.Logger.Info(
-                        $"Disconnecting already connected client {oldClient.Socket?.RemoteEndPoint} for {args.Sender.Socket?.RemoteEndPoint}");
-                    oldClient.Dispose();
-                }
+                //Migrate Player Object to new Client
+                Logger.Debug("MIGRATE PLAYER OBJECT");
+                args.Sender.Player = oldClient.Player;
+                oldClient.GotMigrated = true;
+                oldClient.Player = null;
+                args.Sender.Player!.Client = args.Sender;
+            }
+            else
+            {
+                isRestartReconnect = true;
+                CreatePlayerForClient(args.Sender);
             }
 
-            server.Clients.Add(args.Sender);
+            oldClient.Logger.Info(
+                $"Disconnecting already connected client with id {oldClient.Id}");
+            server.Clients.TryRemove(oldClient.Id, out _);
+            try
+            {
+                oldClient.Socket.Disconnect(false);
+            }
+            catch (ObjectDisposedException)
+            {
+                //Ignore when already disposed - will be disconnected automatically soon
+            }
         }
 
-        Parallel.ForEachAsync(playerManager.Players.FindAll(x => x.Id != args.Sender.Id),
-            async (ply, _) => { await SendPlayerStateToOtherPlayer(ply, args.Sender.Player); });
-        if (isRestartReconnect)
-            Parallel.ForEachAsync(playerManager.Players.FindAll(x => x.Id != args.Sender.Id),
-                async (ply, _) => { await SendPlayerStateToOtherPlayer(args.Sender.Player, ply); });
+        server.Clients.TryAdd(args.Sender.Id, args.Sender);
+
+        foreach (var ply in playerManager.RealPlayers)
+        {
+            if (ply.Id == args.Sender.Id)
+                continue;
+            _ = SendPlayerStateToOtherPlayer(ply, args.Sender.Player!);
+
+            //A Player that completely restarts but was still connected no longer has the same values like Stage
+            //So the default Values will be send to update all Players
+            if (isRestartReconnect)
+                _ = SendPlayerStateToOtherPlayer(args.Sender.Player!, ply);
+        }
 
 
         eventManager.OnPlayerJoined.RaiseEvent(new PlayerJoinedEventArgs
         {
-            Player = args.Sender.Player
+            Player = args.Sender.Player!
         });
 
         Logger.Info($"Client {args.Sender.Name} ({args.Sender.Id}/{args.Sender.Socket.RemoteEndPoint}) connected.");
@@ -144,5 +170,23 @@ public class JoinManager(
             SubAct = ply.SubAct,
             AnimationBlendWeights = ply.AnimationBlendWeights
         }, ply.Id);
+    }
+    
+    private void CreatePlayerForClient(Client client)
+    {
+        client.Player = new Player(client, objectController);
+        eventManager.OnPlayerAddComponents.RaiseEvent(new PlayerAddComponentsEventArgs { Player = client.Player });
+        lock (playerManager.PlayerList)
+        {
+            playerManager.PlayerList.Add(client.Player);
+        }
+    }
+
+    private bool CanJoin(Guid guid)
+    {
+        var ids = playerManager.PlayerList.Where(x => !x.IsDummy).Select(x => x.Id).ToList();
+        ids.Add(guid);
+        ids = ids.Distinct().ToList();
+        return ids.Count <= Config.MaxPlayers;
     }
 }

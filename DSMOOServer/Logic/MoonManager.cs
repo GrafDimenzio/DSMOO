@@ -48,12 +48,12 @@ public class MoonManager(
 
     public async Task SyncMoons()
     {
-        await Parallel.ForEachAsync(server.Clients, async (client, _) => await SyncMoonsForClient(client));
+        await Parallel.ForEachAsync(server.Clients.Values, async (client, _) => await SyncMoonsForClient(client));
     }
 
     public async Task SyncMoon(int moonId)
     {
-        await Parallel.ForEachAsync(server.Clients, async (client, _) => await SyncMoonForClient(client, moonId));
+        await Parallel.ForEachAsync(server.Clients.Values, async (client, _) => await SyncMoonForClient(client, moonId));
     }
 
     public async Task SyncMoonForClient(Client client, int moonId)
