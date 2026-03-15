@@ -2,10 +2,8 @@ using System.Text;
 using DSMOOFramework.Analyzer;
 using DSMOOFramework.Controller;
 using DSMOOFramework.Plugins;
-using DSMOOWebInterface.Setup;
 using DSMOOWebInterface.Setup.Template;
 using EmbedIO;
-using Swan.Logging;
 
 namespace DSMOOWebInterface;
 

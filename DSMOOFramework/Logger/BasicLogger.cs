@@ -4,12 +4,12 @@ public abstract class BasicLogger : ILogger
 {
     public delegate void LogHandler(string message, LogType type);
 
-    public abstract string Name { get; set; }
-
     protected BasicLogger()
     {
         Log += OnLogToGlobal;
     }
+
+    public abstract string Name { get; set; }
 
     public void Info(object message)
     {

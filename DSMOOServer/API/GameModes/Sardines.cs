@@ -22,30 +22,21 @@ public class Sardines : WaitingGame
 
     protected override void StartPlayers()
     {
-        foreach (var player in StartTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.Sardines, false);
-        }
-        
+        foreach (var player in StartTeamPlayers) player.ChangeGameState(GameMode.Sardines, false);
+
         base.StartPlayers();
     }
 
     protected override void StartWaitingPlayers()
     {
-        foreach (var player in WaitingTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.Sardines, false);
-        }
-        
+        foreach (var player in WaitingTeamPlayers) player.ChangeGameState(GameMode.Sardines, false);
+
         base.StartWaitingPlayers();
     }
 
     protected override void SpawnWaitingPlayers()
     {
-        foreach (var player in StartTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.Sardines, true);
-        }
+        foreach (var player in StartTeamPlayers) player.ChangeGameState(GameMode.Sardines, true);
 
         base.SpawnWaitingPlayers();
     }

@@ -25,11 +25,11 @@ public struct MessagePacket : IPacket
     {
         if (data.Length >= sizeof(uint))
             MemoryMarshal.Write(data, SenderId);
-        
-        if (data.Length >= (sizeof(uint) + sizeof(MessageType)))
+
+        if (data.Length >= sizeof(uint) + sizeof(MessageType))
             MemoryMarshal.Write(data[sizeof(uint)..], MessageType);
 
-        if (data.Length >= (sizeof(uint) + sizeof(MessageType) + MessageSize))
+        if (data.Length >= sizeof(uint) + sizeof(MessageType) + MessageSize)
             Encoding.ASCII.GetBytes(Message).CopyTo(data[(sizeof(uint) + sizeof(MessageType))..]);
     }
 

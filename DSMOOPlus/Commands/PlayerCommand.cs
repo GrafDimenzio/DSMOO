@@ -13,7 +13,7 @@ public abstract class PlayerCommand : Command
                 ResultType = ResultType.Error,
                 Message = "This command can only be executed by a Player!"
             };
-        
+
         return Execute(command, args, playerSender.Player);
     }
 

@@ -40,7 +40,7 @@ public class DSMOOPlusManager(EventManager eventManager, CommandManager commandM
             case DisconnectPacket:
                 args.Sender.Send(new UnhandledPacket());
                 break;
-            
+
             case MessagePacket sendMessagePacket:
                 break;
                 switch (sendMessagePacket.MessageType)
@@ -55,6 +55,7 @@ public class DSMOOPlusManager(EventManager eventManager, CommandManager commandM
                             .SendMessage($"[Server] [{response.ResultType}] {response.Message}");
                         break;
                 }
+
                 break;
         }
     }

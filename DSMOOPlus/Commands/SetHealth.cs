@@ -1,5 +1,4 @@
 using DSMOOFramework.Commands;
-using DSMOOPlus.Packets;
 using DSMOOServer.Helper;
 using DSMOOServer.Logic;
 
@@ -22,13 +21,13 @@ public class SetHealth(PlayerManager manager) : Command
                 Message = "usage sethealth (player) (health) (optional true/false for assist health)"
             };
         if (!byte.TryParse(args[1], out var health))
-            return new CommandResult()
+            return new CommandResult
             {
                 ResultType = ResultType.InvalidParameter,
                 Message = "invalid number for health"
             };
-        
-        if(args.Length == 2 || !bool.TryParse(args[2], out var isAssist))
+
+        if (args.Length == 2 || !bool.TryParse(args[2], out var isAssist))
             isAssist = false;
 
         var players = manager.SearchForPlayers(args[0].Split(' '));

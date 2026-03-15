@@ -24,10 +24,7 @@ public class SendMessage(PlayerManager playerManager) : Command
         var playerArgs = args[1..];
         var players = playerManager.SearchForPlayers(playerArgs.Length == 1 ? playerArgs[0].Split(' ') : playerArgs);
 
-        foreach (var player in players.Players)
-        {
-            player.GetComponent<PlayerPlus>()!.SendMessage(args[0]);
-        }
+        foreach (var player in players.Players) player.GetComponent<PlayerPlus>()!.SendMessage(args[0]);
 
         return MessageHelper.FormatMessage(players, "send message to");
     }

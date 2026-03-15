@@ -21,47 +21,35 @@ public class HideAndSeek : WaitingGame
 
     protected override void OnGameEnd()
     {
-        foreach (var player in StartTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.HideAndSeek, true);
-        }
-        
+        foreach (var player in StartTeamPlayers) player.ChangeGameState(GameMode.HideAndSeek, true);
+
         base.OnGameEnd();
     }
 
     protected override void OnPlayerJoinGame(IPlayer player)
     {
         player.ChangeGameState(GameMode.HideAndSeek, Waiting);
-        
+
         base.OnPlayerJoinGame(player);
     }
 
     protected override void StartPlayers()
     {
-        foreach (var player in StartTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.HideAndSeek, true);
-        }
-        
+        foreach (var player in StartTeamPlayers) player.ChangeGameState(GameMode.HideAndSeek, true);
+
         base.StartPlayers();
     }
 
     protected override void StartWaitingPlayers()
     {
-        foreach (var player in WaitingTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.HideAndSeek, true);
-        }
-        
+        foreach (var player in WaitingTeamPlayers) player.ChangeGameState(GameMode.HideAndSeek, true);
+
         base.StartWaitingPlayers();
     }
 
     protected override void SpawnWaitingPlayers()
     {
-        foreach (var player in StartTeamPlayers)
-        {
-            player.ChangeGameState(GameMode.HideAndSeek, false);
-        }
+        foreach (var player in StartTeamPlayers) player.ChangeGameState(GameMode.HideAndSeek, false);
 
         base.SpawnWaitingPlayers();
     }

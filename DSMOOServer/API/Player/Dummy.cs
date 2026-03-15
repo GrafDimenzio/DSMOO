@@ -282,7 +282,7 @@ public class Dummy : IPlayer, IDisposable
 
     public Task ChangeGameState(GameMode gameMode, bool isIt)
     {
-        return BroadcastPacketAsync(new TagPacket()
+        return BroadcastPacketAsync(new TagPacket
         {
             GameMode = gameMode,
             IsIt = isIt,
@@ -292,7 +292,7 @@ public class Dummy : IPlayer, IDisposable
 
     public Task ChangeGameTime(Time time)
     {
-        return BroadcastPacketAsync(new TagPacket()
+        return BroadcastPacketAsync(new TagPacket
         {
             Minutes = time.Minutes,
             Seconds = time.Seconds,

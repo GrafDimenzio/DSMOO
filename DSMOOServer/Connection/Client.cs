@@ -50,9 +50,13 @@ public class Client : IDisposable
             if (Socket.Connected)
                 Socket.Disconnect(false);
         }
-        catch (ObjectDisposedException e) {}
-        catch (SocketException e) {}
-        
+        catch (ObjectDisposedException e)
+        {
+        }
+        catch (SocketException e)
+        {
+        }
+
         Socket.Close();
     }
 

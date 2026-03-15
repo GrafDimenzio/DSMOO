@@ -29,7 +29,7 @@ public class GameModeManager(
 
     public ReadOnlyDictionary<string, IHint> Hints => _hints.AsReadOnly();
     public ReadOnlyDictionary<string, Type> GameTypes => _games.AsReadOnly();
-    
+
     public IGame? ActiveGame { get; private set; }
 
     public override void Initialize()
@@ -58,10 +58,10 @@ public class GameModeManager(
     {
         if (ActiveGame != null)
             return null;
-        
+
         if (!_games.ContainsKey(gameName.ToLower()))
             return null;
-        
+
         players = players.Where(x => !x.IsDummy).ToArray();
 
         var game = (IGame?)objectController.CreateObject(_games[gameName.ToLower()]);
@@ -183,7 +183,7 @@ public class GameModeManager(
         if (!gameConfigHolder.Config.AddJoiningPlayerToActiveGame || ActiveGame == null ||
             ActiveGame.Players.Contains(args.Player))
             return;
-        
+
         ActiveGame.AddPlayerToGame(args.Player);
     }
 }
@@ -192,7 +192,7 @@ public class GameModeManager(
 public class GameModeConfig : IConfig
 {
     public bool AddJoiningPlayerToActiveGame { get; set; } = true;
-    
+
     public Dictionary<string, string> AreaTypes { get; set; } = new()
     {
         { "HomeShipInsideStage", "Odyssey" },

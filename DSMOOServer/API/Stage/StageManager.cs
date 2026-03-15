@@ -11,6 +11,8 @@ namespace DSMOOServer.API.Stage;
 
 public class StageManager(ILogger logger, PathLocation pathLocation) : Manager
 {
+    private readonly Random _random = new();
+
     private List<MapInfo> _maps = [];
     private List<StageInfo> _stages = [];
     private List<string> _zones = [];
@@ -177,6 +179,23 @@ public class StageManager(ILogger logger, PathLocation pathLocation) : Manager
             if (stageInfo.StageName == stage)
                 return stageInfo;
         return null;
+    }
+
+    public string? GetRandomWarp(string stage)
+    {
+        var stageInfo = GetStageInfo(stage);
+        if (stageInfo == null)
+            return null;
+        var possibleWarps = new List<string>();
+        foreach (var warp in stageInfo.Warps)
+        {
+            if (warp.Position == Vector3.Zero)
+                continue;
+
+            possibleWarps.Add(warp.Name);
+        }
+
+        return possibleWarps[_random.Next(possibleWarps.Count)];
     }
 
     public string? GetNearestWarp(string stage, Vector3 position)

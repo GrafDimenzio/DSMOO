@@ -21,12 +21,12 @@ static ObjectController ConsoleSetup(string loggerName)
 static Dictionary<string, string> GetPaths()
 {
     if (File.Exists("/.dockerenv"))
-        return new Dictionary<string, string>()
+        return new Dictionary<string, string>
         {
             { "config", "/dsmoo/configs" },
             { "plugins", "/dsmoo/plugins" },
             { "recordings", "/dsmoo/recordings" },
-            { "mods", "/dsmoo/mods" },
+            { "mods", "/dsmoo/mods" }
         };
 
     var path = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
@@ -35,7 +35,7 @@ static Dictionary<string, string> GetPaths()
         { "config", Path.Combine(path, "configs") },
         { "plugins", Path.Combine(path, "plugins") },
         { "recordings", Path.Combine(path, "recordings") },
-        { "mods", Path.Combine(path, "mods") },
+        { "mods", Path.Combine(path, "mods") }
     };
 }
 

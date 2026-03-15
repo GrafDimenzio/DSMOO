@@ -20,8 +20,8 @@ namespace DSMOOServer.API.Player;
 public class Player(Client client, ObjectController objectController) : IPlayer
 {
     private readonly Dictionary<Type, PlayerComponent> _components = [];
-    private readonly Server _server = objectController.GetObject<Server>()!;
     private readonly PlayerManager _playerManager = objectController.GetObject<PlayerManager>()!;
+    private readonly Server _server = objectController.GetObject<Server>()!;
 
     public Client Client { get; internal set; } = client;
 
@@ -93,36 +93,9 @@ public class Player(Client client, ObjectController objectController) : IPlayer
         return AsyncChangeGameState(gameMode, isIt);
     }
 
-    private async Task AsyncChangeGameState(GameMode gameMode, bool isIt)
-    {
-        var packet = new TagPacket
-        {
-            IsIt = isIt,
-            GameMode = gameMode,
-            UpdateType = TagPacket.TagUpdate.State
-        };
-        await _server.Broadcast(packet, Id);
-        await Send(packet, Id);
-        CurrentGameMode = gameMode;
-        IsIt = isIt;
-    }
-
     public Task ChangeGameTime(Time time)
     {
         return AsyncChangeGameTime(time);
-    }
-    
-    private async Task AsyncChangeGameTime(Time time)
-    {
-        var packet = new TagPacket
-        {
-            Seconds = time.Seconds,
-            Minutes = time.Minutes,
-            UpdateType = TagPacket.TagUpdate.Time
-        };
-        await _server.Broadcast(packet, Id);
-        await Send(packet, Id);
-        Time = time;
     }
 
     public async Task Send<T>(T packet, Guid? sender) where T : struct, IPacket
@@ -145,6 +118,33 @@ public class Player(Client client, ObjectController objectController) : IPlayer
         comp.Player = this;
         _components[typeof(T)] = comp;
         return comp;
+    }
+
+    private async Task AsyncChangeGameState(GameMode gameMode, bool isIt)
+    {
+        var packet = new TagPacket
+        {
+            IsIt = isIt,
+            GameMode = gameMode,
+            UpdateType = TagPacket.TagUpdate.State
+        };
+        await _server.Broadcast(packet, Id);
+        await Send(packet, Id);
+        CurrentGameMode = gameMode;
+        IsIt = isIt;
+    }
+
+    private async Task AsyncChangeGameTime(Time time)
+    {
+        var packet = new TagPacket
+        {
+            Seconds = time.Seconds,
+            Minutes = time.Minutes,
+            UpdateType = TagPacket.TagUpdate.Time
+        };
+        await _server.Broadcast(packet, Id);
+        await Send(packet, Id);
+        Time = time;
     }
 
     private async Task AsyncChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0,

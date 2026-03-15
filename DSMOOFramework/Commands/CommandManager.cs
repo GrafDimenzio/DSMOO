@@ -30,7 +30,7 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
         Commands.Add(command);
         logger.Setup($"Added command {command.CommandInfo.CommandName}");
     }
-    
+
     public CommandResult ProcessQuery(string query)
     {
         return ProcessArguments(GetArguments(query), new DefaultSender());
@@ -54,7 +54,9 @@ public class CommandManager(Analyzer.Analyzer analyzer, ObjectController objectC
         try
         {
             var preResult = cmd.PreExecute(arguments[0], arguments[1..], sender);
-            return preResult.ResultType != ResultType.Success ? preResult : cmd.Execute(arguments[0], arguments[1..], sender);
+            return preResult.ResultType != ResultType.Success
+                ? preResult
+                : cmd.Execute(arguments[0], arguments[1..], sender);
         }
         catch (Exception e)
         {

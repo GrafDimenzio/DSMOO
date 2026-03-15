@@ -55,7 +55,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         Players = Players.Concat([player]).ToArray();
         OnPlayerJoinGame(player);
-        EventManager.OnPlayerJoinGame.RaiseEvent(new PlayerJoinGameEventArgs() { Player = player, Game = this });
+        EventManager.OnPlayerJoinGame.RaiseEvent(new PlayerJoinGameEventArgs { Player = player, Game = this });
     }
 
     public void AfterInject()

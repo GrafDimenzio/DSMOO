@@ -5,8 +5,8 @@ namespace DSMOOFramework.Controller;
 
 public class ObjectController
 {
-    public readonly Dictionary<Type, object> Objects = new();
     public readonly Dictionary<Type, IFactory<object>> Factories = new();
+    public readonly Dictionary<Type, object> Objects = new();
 
     public ObjectController(ILogger logger)
     {
@@ -50,7 +50,7 @@ public class ObjectController
         var factoryObject = CreateFromFactory(type, null);
         if (factoryObject != null)
             return factoryObject;
-        
+
         var constructors = type.GetConstructors();
         var hasEmptyConstructor = false;
         var possibleConstructors = new List<ConstructorInfo>();
