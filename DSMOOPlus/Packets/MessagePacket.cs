@@ -23,9 +23,14 @@ public struct MessagePacket : IPacket
 
     public void Serialize(Span<byte> data)
     {
-        MemoryMarshal.Write(data, SenderId);
-        MemoryMarshal.Write(data[sizeof(uint)..], MessageType);
-        Encoding.ASCII.GetBytes(Message).CopyTo(data[(sizeof(uint) + sizeof(MessageType))..]);
+        if (data.Length >= sizeof(uint))
+            MemoryMarshal.Write(data, SenderId);
+        
+        if (data.Length >= (sizeof(uint) + sizeof(MessageType)))
+            MemoryMarshal.Write(data[sizeof(uint)..], MessageType);
+
+        if (data.Length >= (sizeof(uint) + sizeof(MessageType) + MessageSize))
+            Encoding.ASCII.GetBytes(Message).CopyTo(data[(sizeof(uint) + sizeof(MessageType))..]);
     }
 
     public void Deserialize(ReadOnlySpan<byte> data)

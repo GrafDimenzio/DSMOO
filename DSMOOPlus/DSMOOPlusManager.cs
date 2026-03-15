@@ -42,6 +42,7 @@ public class DSMOOPlusManager(EventManager eventManager, CommandManager commandM
                 break;
             
             case MessagePacket sendMessagePacket:
+                break;
                 switch (sendMessagePacket.MessageType)
                 {
                     //TODO: Only do this for SYSTEM Messages. For Testing every type will react

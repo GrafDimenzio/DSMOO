@@ -186,7 +186,7 @@ public class Server(
             var packet = (IPacket?)Activator.CreateInstance(packetType);
             if (packet == null) return;
 
-            packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..(Constants.HeaderSize + packet.Size)]);
+            packet.Deserialize(memory.Memory.Span[Constants.HeaderSize..]);
             if (packetHeader.Type != (short)PacketType.Player)
                 Logger.Debug($"Received Packet {packet.GetType()} {client.Socket.RemoteEndPoint}");
 
