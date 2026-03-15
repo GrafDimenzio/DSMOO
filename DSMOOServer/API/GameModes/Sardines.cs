@@ -22,48 +22,29 @@ public class Sardines : WaitingGame
 
     protected override void StartPlayers()
     {
-        var packet = new TagPacket
-        {
-            IsIt = false,
-            GameMode = GameMode.Sardines,
-            UpdateType = TagPacket.TagUpdate.State
-        };
         foreach (var player in StartTeamPlayers)
         {
-            Server.Broadcast(packet, player.Id);
-            player.Send(packet);
-            player.ChangeStage(GetStartingStage());
+            player.ChangeGameState(GameMode.Sardines, false);
         }
+        
+        base.StartPlayers();
     }
 
     protected override void StartWaitingPlayers()
     {
-        var packet = new TagPacket
-        {
-            IsIt = false,
-            GameMode = GameMode.Sardines,
-            UpdateType = TagPacket.TagUpdate.State
-        };
         foreach (var player in WaitingTeamPlayers)
         {
-            Server.Broadcast(packet, player.Id);
-            player.Send(packet);
-            player.ChangeStage(GetWaitingStage());
+            player.ChangeGameState(GameMode.Sardines, false);
         }
+        
+        base.StartWaitingPlayers();
     }
 
     protected override void SpawnWaitingPlayers()
     {
-        var packet = new TagPacket
-        {
-            IsIt = true,
-            GameMode = GameMode.Sardines,
-            UpdateType = TagPacket.TagUpdate.State
-        };
         foreach (var player in StartTeamPlayers)
         {
-            Server.Broadcast(packet, player.Id);
-            player.Send(packet);
+            player.ChangeGameState(GameMode.Sardines, true);
         }
 
         base.SpawnWaitingPlayers();

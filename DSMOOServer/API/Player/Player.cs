@@ -6,6 +6,7 @@ using DSMOOFramework.Controller;
 using DSMOOServer.API.Enum;
 using DSMOOServer.Connection;
 using DSMOOServer.Helper;
+using DSMOOServer.Logic;
 using DSMOOServer.Network;
 using DSMOOServer.Network.Packets;
 
@@ -19,6 +20,8 @@ namespace DSMOOServer.API.Player;
 public class Player(Client client, ObjectController objectController) : IPlayer
 {
     private readonly Dictionary<Type, PlayerComponent> _components = [];
+    private readonly Server _server = objectController.GetObject<Server>()!;
+    private readonly PlayerManager _playerManager = objectController.GetObject<PlayerManager>()!;
 
     public Client Client { get; internal set; } = client;
 
@@ -83,6 +86,43 @@ public class Player(Client client, ObjectController objectController) : IPlayer
     public Task ChangeStage(string stage, string warp, sbyte scenario = 0, byte subScenarioType = 0, int delay = 0)
     {
         return AsyncChangeStage(stage, warp, scenario, subScenarioType, delay);
+    }
+
+    public Task ChangeGameState(GameMode gameMode, bool isIt)
+    {
+        return AsyncChangeGameState(gameMode, isIt);
+    }
+
+    private async Task AsyncChangeGameState(GameMode gameMode, bool isIt)
+    {
+        var packet = new TagPacket
+        {
+            IsIt = isIt,
+            GameMode = gameMode,
+            UpdateType = TagPacket.TagUpdate.State
+        };
+        await _server.Broadcast(packet, Id);
+        await Send(packet, Id);
+        CurrentGameMode = gameMode;
+        IsIt = isIt;
+    }
+
+    public Task ChangeGameTime(Time time)
+    {
+        return AsyncChangeGameTime(time);
+    }
+    
+    private async Task AsyncChangeGameTime(Time time)
+    {
+        var packet = new TagPacket
+        {
+            Seconds = time.Seconds,
+            Minutes = time.Minutes,
+            UpdateType = TagPacket.TagUpdate.Time
+        };
+        await _server.Broadcast(packet, Id);
+        await Send(packet, Id);
+        Time = time;
     }
 
     public async Task Send<T>(T packet, Guid? sender) where T : struct, IPacket

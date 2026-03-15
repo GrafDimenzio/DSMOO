@@ -19,50 +19,48 @@ public class HideAndSeek : WaitingGame
         base.OnGameStart();
     }
 
-    protected override void StartPlayers()
+    protected override void OnGameEnd()
     {
-        var packet = new TagPacket
-        {
-            IsIt = true,
-            GameMode = GameMode.HideAndSeek,
-            UpdateType = TagPacket.TagUpdate.State
-        };
         foreach (var player in StartTeamPlayers)
         {
-            Server.Broadcast(packet, player.Id);
-            player.Send(packet);
-            player.ChangeStage(GetStartingStage());
+            player.ChangeGameState(GameMode.HideAndSeek, true);
         }
+        
+        base.OnGameEnd();
+    }
+
+    protected override void OnPlayerJoinGame(IPlayer player)
+    {
+        player.ChangeGameState(GameMode.HideAndSeek, Waiting);
+        
+        base.OnPlayerJoinGame(player);
+    }
+
+    protected override void StartPlayers()
+    {
+        foreach (var player in StartTeamPlayers)
+        {
+            player.ChangeGameState(GameMode.HideAndSeek, true);
+        }
+        
+        base.StartPlayers();
     }
 
     protected override void StartWaitingPlayers()
     {
-        var packet = new TagPacket
-        {
-            IsIt = true,
-            GameMode = GameMode.HideAndSeek,
-            UpdateType = TagPacket.TagUpdate.State
-        };
         foreach (var player in WaitingTeamPlayers)
         {
-            Server.Broadcast(packet, player.Id);
-            player.Send(packet);
-            player.ChangeStage(GetWaitingStage());
+            player.ChangeGameState(GameMode.HideAndSeek, true);
         }
+        
+        base.StartWaitingPlayers();
     }
 
     protected override void SpawnWaitingPlayers()
     {
-        var packet = new TagPacket
-        {
-            IsIt = false,
-            GameMode = GameMode.HideAndSeek,
-            UpdateType = TagPacket.TagUpdate.State
-        };
         foreach (var player in StartTeamPlayers)
         {
-            Server.Broadcast(packet, player.Id);
-            player.Send(packet);
+            player.ChangeGameState(GameMode.HideAndSeek, false);
         }
 
         base.SpawnWaitingPlayers();

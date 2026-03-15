@@ -41,6 +41,12 @@ public abstract class WaitingGame : BasicGame
         StartTeamPlayers = [];
     }
 
+    protected override void OnPlayerJoinGame(IPlayer player)
+    {
+        StartTeamPlayers = StartTeamPlayers.Concat([player]).ToArray();
+        base.OnPlayerJoinGame(player);
+    }
+
     protected virtual async Task WaitForStart()
     {
         await Task.Delay(WaitingTime);

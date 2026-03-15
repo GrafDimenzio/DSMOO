@@ -280,6 +280,26 @@ public class Dummy : IPlayer, IDisposable
         });
     }
 
+    public Task ChangeGameState(GameMode gameMode, bool isIt)
+    {
+        return BroadcastPacketAsync(new TagPacket()
+        {
+            GameMode = gameMode,
+            IsIt = isIt,
+            UpdateType = TagPacket.TagUpdate.State
+        });
+    }
+
+    public Task ChangeGameTime(Time time)
+    {
+        return BroadcastPacketAsync(new TagPacket()
+        {
+            Minutes = time.Minutes,
+            Seconds = time.Seconds,
+            UpdateType = TagPacket.TagUpdate.Time
+        });
+    }
+
     public Task Send<T>(T packet, Guid? sender) where T : struct, IPacket
     {
         //Send is to display things client side but a dummy doesn't have a client side

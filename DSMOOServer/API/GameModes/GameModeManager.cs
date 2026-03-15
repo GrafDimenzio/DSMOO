@@ -37,6 +37,7 @@ public class GameModeManager(
         analyzer.OnAnalyze.Subscribe(OnAnalyzeGames);
         analyzer.OnAnalyze.Subscribe(OnAnalyzeHint);
         eventManager.OnPlayerState.Subscribe(OnPlayerState);
+        eventManager.OnPlayerJoined.Subscribe(OnPlayerJoin);
     }
 
     public IGame? StartGame(string gameName, string players, string stageConfig, string hintConfig,
@@ -60,12 +61,14 @@ public class GameModeManager(
         
         if (!_games.ContainsKey(gameName.ToLower()))
             return null;
+        
+        players = players.Where(x => !x.IsDummy).ToArray();
 
         var game = (IGame?)objectController.CreateObject(_games[gameName.ToLower()]);
         if (game == null)
             return null;
-        game.StartGame(players, stagePreset, hintPreset, arguments);
         ActiveGame = game;
+        game.StartGame(players, stagePreset, hintPreset, arguments);
         return game;
     }
 
@@ -174,11 +177,22 @@ public class GameModeManager(
             if (!realPlayer.IsIt && realPlayer.CurrentGameMode != GameMode.None)
                 args.SpecificInvisible.Add(realPlayer.Id);
     }
+
+    private void OnPlayerJoin(PlayerJoinedEventArgs args)
+    {
+        if (!gameConfigHolder.Config.AddJoiningPlayerToActiveGame || ActiveGame == null ||
+            ActiveGame.Players.Contains(args.Player))
+            return;
+        
+        ActiveGame.AddPlayerToGame(args.Player);
+    }
 }
 
 [Config(Name = "gameModes")]
 public class GameModeConfig : IConfig
 {
+    public bool AddJoiningPlayerToActiveGame { get; set; } = true;
+    
     public Dictionary<string, string> AreaTypes { get; set; } = new()
     {
         { "HomeShipInsideStage", "Odyssey" },

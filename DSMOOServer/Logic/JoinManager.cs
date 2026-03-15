@@ -109,7 +109,7 @@ public class JoinManager(
 
         server.Clients.TryAdd(args.Sender.Id, args.Sender);
 
-        foreach (var ply in playerManager.RealPlayers)
+        foreach (var ply in playerManager.Players)
         {
             if (ply.Id == args.Sender.Id)
                 continue;

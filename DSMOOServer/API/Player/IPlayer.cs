@@ -47,6 +47,10 @@ public interface IPlayer
     public Task ChangeStage(string stage, string warp = "", sbyte scenario = -1, byte subScenarioType = 0,
         int delay = 0);
 
+    public Task ChangeGameState(GameMode gameMode, bool isIt);
+    
+    public Task ChangeGameTime(Time time);
+
     public Task Send<T>(T packet, Guid? sender = null) where T : struct, IPacket;
 
     public T? GetComponent<T>() where T : PlayerComponent;
