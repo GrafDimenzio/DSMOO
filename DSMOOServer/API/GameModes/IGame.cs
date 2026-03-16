@@ -12,4 +12,5 @@ public interface IGame
     public void StartGame(IPlayer[] playingPlayers, StagePreset stagePreset, HintPreset hintPreset, string[] arguments);
     public void EndGame();
     public void AddPlayerToGame(IPlayer player);
+    public void RemovePlayerFromGame(IPlayer player);
 }

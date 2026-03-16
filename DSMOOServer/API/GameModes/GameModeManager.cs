@@ -38,6 +38,7 @@ public class GameModeManager(
         analyzer.OnAnalyze.Subscribe(OnAnalyzeHint);
         eventManager.OnPlayerState.Subscribe(OnPlayerState);
         eventManager.OnPlayerJoined.Subscribe(OnPlayerJoin);
+        eventManager.OnPlayerDisconnect.Subscribe(OnPlayerDisconnect);
     }
 
     public IGame? StartGame(string gameName, string players, string stageConfig, string hintConfig,
@@ -185,6 +186,14 @@ public class GameModeManager(
             return;
 
         ActiveGame.AddPlayerToGame(args.Player);
+    }
+
+    private void OnPlayerDisconnect(PlayerDisconnectEventArg args)
+    {
+        if(ActiveGame == null || !ActiveGame.Players.Contains(args.Player))
+            return;
+        
+        ActiveGame.RemovePlayerFromGame(args.Player);
     }
 }
 

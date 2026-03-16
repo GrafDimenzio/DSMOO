@@ -133,6 +133,8 @@ public class Server(
                     if (client.Player != null)
                         lock (playerManager.PlayerList)
                         {
+                            EventManager.OnPlayerDisconnect.RaiseEvent(
+                                new PlayerDisconnectEventArg { Player = client.Player });
                             playerManager.PlayerList.Remove(client.Player);
                         }
 
@@ -166,6 +168,8 @@ public class Server(
             if (client.Player != null)
                 lock (playerManager.PlayerList)
                 {
+                    EventManager.OnPlayerDisconnect.RaiseEvent(
+                        new PlayerDisconnectEventArg { Player = client.Player });
                     playerManager.PlayerList.Remove(client.Player);
                 }
         }

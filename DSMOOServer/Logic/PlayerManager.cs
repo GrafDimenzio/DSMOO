@@ -216,7 +216,7 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
                 eventManager.OnPlayerState.RaiseEvent(ev);
                 if (!ev.Packet.Equals(playerPacket) || ev.Invisible)
                 {
-                    var copy = playerPacket;
+                    var copy = ev.Packet;
                     if (ev.Invisible)
                         copy.Position = Vector3.UnitY * -10000;
                     args.ReplacePacket = copy;

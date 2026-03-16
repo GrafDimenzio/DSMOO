@@ -55,7 +55,17 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         Players = Players.Concat([player]).ToArray();
         OnPlayerJoinGame(player);
-        EventManager.OnPlayerJoinGame.RaiseEvent(new PlayerJoinGameEventArgs { Player = player, Game = this });
+        EventManager.OnPlayerJoinGame.RaiseEvent(new PlayerGameEventArgs { Player = player, Game = this });
+    }
+
+    public void RemovePlayerFromGame(IPlayer player)
+    {
+        if (!Players.Contains(player))
+            return;
+        
+        Players = Players.Except([player]).ToArray();
+        OnPlayerLeaveGame(player);
+        EventManager.OnPlayerLeaveGame.RaiseEvent(new PlayerGameEventArgs { Player = player, Game = this });
     }
 
     public void AfterInject()
@@ -88,6 +98,11 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     protected virtual void OnPlayerJoinGame(IPlayer player)
     {
         player.ChangeStage(GetStartingStage());
+    }
+
+    protected virtual void OnPlayerLeaveGame(IPlayer player)
+    {
+        
     }
 
     protected virtual IPlayer[] PlayersToHint()

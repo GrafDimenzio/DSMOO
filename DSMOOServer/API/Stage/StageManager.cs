@@ -195,7 +195,7 @@ public class StageManager(ILogger logger, PathLocation pathLocation) : Manager
             possibleWarps.Add(warp.Name);
         }
 
-        return possibleWarps[_random.Next(possibleWarps.Count)];
+        return possibleWarps.Count == 0 ? null : possibleWarps[_random.Next(possibleWarps.Count)];
     }
 
     public string? GetNearestWarp(string stage, Vector3 position)

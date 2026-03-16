@@ -47,6 +47,13 @@ public abstract class WaitingGame : BasicGame
         base.OnPlayerJoinGame(player);
     }
 
+    protected override void OnPlayerLeaveGame(IPlayer player)
+    {
+        StartTeamPlayers = StartTeamPlayers.Except([player]).ToArray();
+        WaitingTeamPlayers = WaitingTeamPlayers.Except([player]).ToArray();
+        base.OnPlayerLeaveGame(player);
+    }
+
     protected virtual async Task WaitForStart()
     {
         await Task.Delay(WaitingTime);
