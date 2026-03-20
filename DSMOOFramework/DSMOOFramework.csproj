@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
         <PackageId>DSMOO.Framework</PackageId>
-        <Version>0.0.3</Version>
+        <Version>0.1.0</Version>
         <Authors>Dimenzio</Authors>
         <Copyright>Dimenzio</Copyright>
         <Description>Base Framework for the DSMOO Server</Description>
@@ -18,9 +18,9 @@
 
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
-        <AssemblyVersion>0.0.3</AssemblyVersion>
+        <AssemblyVersion>0.1.0</AssemblyVersion>
 
-        <FileVersion>0.0.3</FileVersion>
+        <FileVersion>0.1.0</FileVersion>
     </PropertyGroup>
 
     <ItemGroup>
