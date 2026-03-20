@@ -190,9 +190,9 @@ public class GameModeManager(
 
     private void OnPlayerDisconnect(PlayerDisconnectEventArg args)
     {
-        if(ActiveGame == null || !ActiveGame.Players.Contains(args.Player))
+        if (ActiveGame == null || !ActiveGame.Players.Contains(args.Player))
             return;
-        
+
         ActiveGame.RemovePlayerFromGame(args.Player);
     }
 }

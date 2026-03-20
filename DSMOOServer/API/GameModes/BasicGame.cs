@@ -62,7 +62,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
     {
         if (!Players.Contains(player))
             return;
-        
+
         Players = Players.Except([player]).ToArray();
         OnPlayerLeaveGame(player);
         EventManager.OnPlayerLeaveGame.RaiseEvent(new PlayerGameEventArgs { Player = player, Game = this });
@@ -102,7 +102,6 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     protected virtual void OnPlayerLeaveGame(IPlayer player)
     {
-        
     }
 
     protected virtual IPlayer[] PlayersToHint()

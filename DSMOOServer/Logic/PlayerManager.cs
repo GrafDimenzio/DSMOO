@@ -30,7 +30,7 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
     public PlayerSearch SearchForPlayers(string[] args)
     {
         var search = new PlayerSearch();
-        var playerList = Players.DistinctBy(x => x.Id).ToList();
+        var playerList = RealPlayers.DistinctBy(x => x.Id).ToList();
 
         if (args.Length == 0)
             return search;
@@ -152,8 +152,19 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
                 break;
 
             case TagPacket tagPacket:
+                if (tagPacket.UpdateType.HasFlag(TagPacket.TagUpdate.State))
+                {
+                    eventManager.OnPlayerUpdateTagState.RaiseEvent(new PlayerUpdateTagStateEventArgs
+                    {
+                        GameMode = tagPacket.GameMode,
+                        IsIt = tagPacket.IsIt,
+                        PreviousGameMode = player.CurrentGameMode,
+                        PreviousIsIt = player.IsIt
+                    });
+                    player.IsIt = tagPacket.IsIt;
+                }
+
                 player.CurrentGameMode = tagPacket.GameMode;
-                if (tagPacket.UpdateType.HasFlag(TagPacket.TagUpdate.State)) player.IsIt = tagPacket.IsIt;
 
                 if (tagPacket.UpdateType.HasFlag(TagPacket.TagUpdate.Time))
                     player.Time = new Time(tagPacket.Minutes, tagPacket.Seconds, DateTime.Now);

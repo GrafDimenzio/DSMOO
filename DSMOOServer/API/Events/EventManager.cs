@@ -18,14 +18,15 @@ public class EventManager(ILogger logger) : Manager
     public readonly EventReactor<PlayerChangeCostumeEventArgs> OnPlayerChangeCostume = new(logger);
     public readonly EventReactor<PlayerChangeStageEventArgs> OnPlayerChangeStage = new(logger);
     public readonly EventReactor<PlayerCollectMoonEventArgs> OnPlayerCollectMoon = new(logger);
-    public readonly EventReactor<PlayerJoinedEventArgs> OnPlayerJoined = new(logger);
     public readonly EventReactor<PlayerDisconnectEventArg> OnPlayerDisconnect = new(logger);
+    public readonly EventReactor<PlayerJoinedEventArgs> OnPlayerJoined = new(logger);
     public readonly EventReactor<PlayerGameEventArgs> OnPlayerJoinGame = new(logger);
     public readonly EventReactor<PlayerGameEventArgs> OnPlayerLeaveGame = new(logger);
     public readonly EventReactor<PlayerLoadedSaveEventArgs> OnPlayerLoadedSave = new(logger);
     public readonly EventReactor<PlayerPreJoinEventArgs> OnPlayerPreJoin = new(logger);
     public readonly EventReactor<PlayerStateEventArgs> OnPlayerState = new(logger);
     public readonly EventReactor<PlayerSwitch2dStateEventArgs> OnPlayerSwitch2dState = new(logger);
+    public readonly EventReactor<PlayerUpdateTagStateEventArgs> OnPlayerUpdateTagState = new(logger);
     public readonly EventReactor<GameEventArgs> OnPreGameStart = new(logger);
     public readonly EventReactor<SendHintEventArgs> OnSendHint = new(logger);
     public readonly EventReactor<SendPlayerInitPacketEventArgs> OnSendPlayerInitPacket = new(logger);
