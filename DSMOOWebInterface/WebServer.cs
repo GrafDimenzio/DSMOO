@@ -13,7 +13,7 @@ namespace DSMOOWebInterface;
     Author = "Dimenzio",
     Description = "A Plugin that hosts a WebInterface",
     Repository = "https://github.com/GrafDimenzio/DSMOO",
-    Version = "0.0.3"
+    Version = "0.1.0"
 )]
 public class WebServer(TemplateManager templateManager, ObjectController objectController) : Plugin<Config>
 {

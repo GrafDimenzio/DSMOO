@@ -14,7 +14,7 @@ namespace DSMOOProximityVoiceChat;
     Name = "DSMOOProximityVoiceChat",
     Description = "Proximty Voice Chat via WebInterface",
     Repository = "https://github.com/GrafDimenzio/DSMOO",
-    Version = "0.0.3"
+    Version = "0.1.0"
 )]
 public class WebServerManager(
     TemplateManager templateManager,

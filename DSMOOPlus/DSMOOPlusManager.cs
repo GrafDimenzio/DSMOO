@@ -17,7 +17,7 @@ namespace DSMOOPlus;
     Name = "DSMOOPlus",
     Description = "Adds support for SMOO+",
     Repository = "https://github.com/GrafDimenzio/DSMOO",
-    Version = "0.0.3"
+    Version = "0.1.0"
 )]
 public class DSMOOPlusManager(EventManager eventManager, CommandManager commandManager, ILogger logger) : Manager
 {
