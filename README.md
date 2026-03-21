@@ -34,6 +34,18 @@ It includes all features of the original SMOO server while introducing many new 
 
 ---
 
+## Docker
+
+DSMOO can be run via Docker. A docker-compose.yml is included in the repo.
+
+```bash
+docker-compose up -d
+```
+
+Configs, plugins, and mods are loaded from `/dsmoo`
+
+---
+
 ## Usage
 
 ### Commands

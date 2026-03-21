@@ -1,0 +1,18 @@
+services:
+  dsmoo:
+    image: ghcr.io/grafdimenzio/dsmoo:latest
+    container_name: dsmoo
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+    ports:
+      - "1027:1027"
+    volumes:
+      - dsmoo:/dsmoo
+
+volumes:
+  dsmoo:
