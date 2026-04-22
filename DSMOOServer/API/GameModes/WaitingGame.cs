@@ -6,11 +6,11 @@ namespace DSMOOServer.API.GameModes;
 public abstract class WaitingGame : BasicGame
 {
     protected Task _waitingTask;
-    
-    public Guid[] WaitingPlayersBackup { get; protected set; }
 
-    public IPlayer[] WaitingTeamPlayers { get; protected set; }
-    public IPlayer[] StartTeamPlayers { get; protected set; }
+    public Guid[] WaitingPlayersBackup { get; protected set; } = [];
+
+    public IPlayer[] WaitingTeamPlayers { get; protected set; } = [];
+    public IPlayer[] StartTeamPlayers { get; protected set; } = [];
 
     public virtual int WaitingTime { get; protected set; } = 15000;
     public virtual int TeamSize { get; protected set; } = 1;
@@ -19,20 +19,24 @@ public abstract class WaitingGame : BasicGame
 
     protected override void OnGameStart()
     {
-        var possiblePlayers = Players.ToList();
-        var waitingTeam = new List<IPlayer>();
-        while (waitingTeam.Count < TeamSize)
+        //Check if Teams are already assigned
+        if (WaitingTeamPlayers.Length + StartTeamPlayers.Length != Players.Length)
         {
-            var player = possiblePlayers[_random.Next(0, possiblePlayers.Count)];
-            possiblePlayers.Remove(player);
-            waitingTeam.Add(player);
+            var possiblePlayers = Players.ToList();
+            var waitingTeam = new List<IPlayer>();
+            while (waitingTeam.Count < TeamSize)
+            {
+                var player = possiblePlayers[_random.Next(0, possiblePlayers.Count)];
+                possiblePlayers.Remove(player);
+                waitingTeam.Add(player);
+            }
+
+            WaitingTeamPlayers = waitingTeam.ToArray();
+            StartTeamPlayers = possiblePlayers.ToArray();
         }
-
-        WaitingTeamPlayers = waitingTeam.ToArray();
-        WaitingPlayersBackup = waitingTeam.Select(x => x.Id).ToArray();
-        StartTeamPlayers = possiblePlayers.ToArray();
+        WaitingPlayersBackup = WaitingTeamPlayers.Select(x => x.Id).ToArray();
+        
         Waiting = true;
-
         StartPlayers();
         StartWaitingPlayers();
         _waitingTask = Task.Run(WaitForStart);
@@ -48,7 +52,7 @@ public abstract class WaitingGame : BasicGame
     {
         if (WaitingPlayersBackup.Contains(player.Id))
         {
-            WaitingTeamPlayers = WaitingTeamPlayers.Where(x => x.Id != player.Id).Concat([player]).ToArray();
+            WaitingTeamPlayers = WaitingTeamPlayers.Concat([player]).ToArray();
             player.NextStageOverride = Waiting ? GetWaitingStage() : GetStartingStage();
             return;
         }

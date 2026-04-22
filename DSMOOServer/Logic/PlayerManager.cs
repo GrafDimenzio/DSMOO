@@ -129,7 +129,7 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
                         PreviousScenario = player.Scenario,
                         NewScenario = gamePacket.ScenarioNum,
 
-                        SendBackScenario = player.Scenario > sbyte.MaxValue ? (sbyte)-1 : (sbyte)player.Scenario,
+                        SendBackScenario = -1,
                         SendBackWarp = warp,
                         SendBackStage = player.Stage
                     };
