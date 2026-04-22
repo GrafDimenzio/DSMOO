@@ -133,6 +133,14 @@ public class PlayerManager(EventManager eventManager, StageManager stageManager,
                         SendBackWarp = warp,
                         SendBackStage = player.Stage
                     };
+                    if (player.NextStageOverride != null)
+                    {
+                        changeStageArgs.SendBack = true;
+                        changeStageArgs.SendBackStage = player.NextStageOverride;
+                        player.NextStageOverride = null;
+                        changeStageArgs.SendBackScenario = -1;
+                        changeStageArgs.SendBackWarp = stageManager.GetConnection(gamePacket.Stage, changeStageArgs.SendBackStage);
+                    }
                     eventManager.OnPlayerChangeStage.RaiseEvent(changeStageArgs);
                     if (changeStageArgs.SendBack && !string.IsNullOrWhiteSpace(changeStageArgs.SendBackStage))
                         player.ChangeStage(changeStageArgs.SendBackStage, changeStageArgs.SendBackWarp,

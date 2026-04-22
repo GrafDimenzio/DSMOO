@@ -97,7 +97,7 @@ public abstract class BasicGame : IGame, IInject, IDisposable
 
     protected virtual void OnPlayerJoinGame(IPlayer player)
     {
-        player.ChangeStage(GetStartingStage());
+        player.NextStageOverride = GetStartingStage();
     }
 
     protected virtual void OnPlayerLeaveGame(IPlayer player)

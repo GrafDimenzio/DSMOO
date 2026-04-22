@@ -57,6 +57,8 @@ public class Player(Client client, ObjectController objectController) : IPlayer
     public bool IsBanned => Client.IsBanned;
 
     public PlayerAction LastPlayerAction { get; set; }
+    
+    public string? NextStageOverride { get; set; }
 
     public void Disconnect()
     {

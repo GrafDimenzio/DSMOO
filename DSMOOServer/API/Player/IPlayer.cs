@@ -37,6 +37,8 @@ public interface IPlayer
 
     public PlayerAction LastPlayerAction { get; set; }
 
+    public string? NextStageOverride { get; set; }
+
 
     public void Disconnect();
 

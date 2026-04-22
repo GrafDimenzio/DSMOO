@@ -252,6 +252,7 @@ public class Dummy : IPlayer, IDisposable
     public bool IsSaveLoaded => true;
     public bool IsBanned => false;
     public PlayerAction LastPlayerAction { get; set; }
+    public string? NextStageOverride { get; set; }
 
     public void Disconnect()
     {

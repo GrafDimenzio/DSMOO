@@ -6,6 +6,8 @@ namespace DSMOOServer.API.GameModes;
 public abstract class WaitingGame : BasicGame
 {
     protected Task _waitingTask;
+    
+    public Guid[] WaitingPlayersBackup { get; protected set; }
 
     public IPlayer[] WaitingTeamPlayers { get; protected set; }
     public IPlayer[] StartTeamPlayers { get; protected set; }
@@ -27,6 +29,7 @@ public abstract class WaitingGame : BasicGame
         }
 
         WaitingTeamPlayers = waitingTeam.ToArray();
+        WaitingPlayersBackup = waitingTeam.Select(x => x.Id).ToArray();
         StartTeamPlayers = possiblePlayers.ToArray();
         Waiting = true;
 
@@ -43,6 +46,12 @@ public abstract class WaitingGame : BasicGame
 
     protected override void OnPlayerJoinGame(IPlayer player)
     {
+        if (WaitingPlayersBackup.Contains(player.Id))
+        {
+            WaitingTeamPlayers = WaitingTeamPlayers.Where(x => x.Id != player.Id).Concat([player]).ToArray();
+            player.NextStageOverride = Waiting ? GetWaitingStage() : GetStartingStage();
+            return;
+        }
         StartTeamPlayers = StartTeamPlayers.Concat([player]).ToArray();
         base.OnPlayerJoinGame(player);
     }
