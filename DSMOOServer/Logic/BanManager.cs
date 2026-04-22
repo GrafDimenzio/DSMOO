@@ -48,6 +48,16 @@ public class BanManager(
         }
     }
 
+    public HashSet<string> Names
+    {
+        get => Config.Names;
+        set
+        {
+            Config.Names = value;
+            SaveBanList();
+        }
+    }
+
     public HashSet<string> Stages
     {
         get => Config.Stages;
@@ -86,7 +96,7 @@ public class BanManager(
     public bool IsPlayerBanned(IPlayer player)
     {
         if (player.IsDummy || player.Ip == null) return false;
-        return IsIPv4Banned(player.Ip) || IsProfileBanned(player.Id);
+        return IsIPv4Banned(player.Ip) || IsProfileBanned(player.Id) || IsNameBanned(player.Name);
     }
 
     public bool IsIPv4Banned(IPAddress? address)
@@ -102,6 +112,11 @@ public class BanManager(
     public bool IsProfileBanned(Guid id)
     {
         return Profiles.Contains(id);
+    }
+
+    public bool IsNameBanned(string name)
+    {
+        return Names.Any(x => name.Contains(x, StringComparison.InvariantCultureIgnoreCase));
     }
 
     public bool IsStageBanned(string stage)
@@ -156,6 +171,21 @@ public class BanManager(
     {
         if (!Profiles.Contains(id)) return false;
         Profiles.Remove(id);
+        SaveBanList();
+        return true;
+    }
+
+    public bool BanName(string name)
+    {
+        if(!Names.Add(name)) return false;
+        SaveBanList();
+        return true;
+    }
+
+    public bool UnBanName(string name)
+    {
+        if (!Names.Contains(name)) return false;
+        Names.Remove(name);
         SaveBanList();
         return true;
     }
@@ -257,7 +287,8 @@ public class BanManager(
     {
         if (!Enabled) return;
         if (!IsProfileBanned(args.Client.Id) &&
-            !IsIPv4Banned((args.Client.Socket.RemoteEndPoint as IPEndPoint)?.Address)) return;
+            !IsIPv4Banned((args.Client.Socket.RemoteEndPoint as IPEndPoint)?.Address) &&
+            !IsNameBanned(args.Client.Name)) return;
         args.AllowJoin = false;
         args.Client.IsBanned = true;
     }
@@ -294,6 +325,7 @@ public class BanList : IConfig
     public bool ResetOnBannedCaptureToNearestWarp { get; set; } = true;
     public HashSet<string> IPs { get; set; } = [];
     public HashSet<Guid> Profiles { get; set; } = [];
+    public HashSet<string> Names { get; set; } = [];
     public HashSet<string> Stages { get; set; } = [];
     public HashSet<sbyte> GameModes { get; set; } = [];
     public HashSet<string> Captures { get; set; } = [];

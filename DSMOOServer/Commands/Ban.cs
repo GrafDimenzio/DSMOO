@@ -21,6 +21,7 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
         { "player", "player <* | !* (usernames to not ban...) | (usernames to ban...)>" },
         { "profile", "profile <profile-id>" },
         { "ip", "ip <ipv4-address>" },
+        { "name", "name <name>" },
         { "stage", "stage <stage-name>" },
         { "gamemode", "gamemode <gamemode>" }
     };
@@ -44,6 +45,7 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
             case "player" when !hasParameter && banMode:
             case "profile" when !hasParameter:
             case "ip" when !hasParameter:
+            case "name" when !hasParameter:
             case "stage" when !hasParameter:
             case "gamemode" when !hasParameter:
                 return new CommandResult
@@ -68,6 +70,12 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
                 {
                     msg.Append("\nBanned Profiles:" + join);
                     msg.Append(string.Join(join, manager.Profiles));
+                }
+                
+                if (manager.Names.Count > 0)
+                {
+                    msg.Append("\nBanned Names:" + join);
+                    msg.Append(string.Join(join, manager.Names));
                 }
 
                 if (manager.Stages.Count > 0)
@@ -140,6 +148,21 @@ public class Ban(BanManager manager, PlayerManager playerManager, StageManager s
 
                 manager.UnBanIPv4(ip);
                 return "Unbanned ip " + ip;
+            
+            case "name":
+                if (banMode)
+                {
+                    manager.BanName(args[1]);
+                    foreach (var player in playerManager.Players)
+                    {
+                        if (manager.IsNameBanned(player.Name))
+                            player.Crash(true);
+                    }
+                    return "Banned name " + args[1];
+                }
+
+                manager.UnBanName(args[1]);
+                return "Unbanned name " + args[1];
 
             case "stage":
                 var stage = stageManager.GetStageFromInput(args[1]);
