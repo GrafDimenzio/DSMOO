@@ -852,6 +852,17 @@ public class GameModeConfig : IConfig
                 "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
                 "SeaWorldLavaZone"
             ]
+        },
+        new()
+        {
+            Name = "darker-all",
+            StartingStages = ["Special2WorldHomeStage"],
+            AllowAll = true,
+            WaitingStages =
+            [
+                "HomeShipInsideStage", "CityWorldFactory01Zone", "LakeWorldTownZone", "SeaWorldLighthouseZone",
+                "SeaWorldLavaZone"
+            ]
         }
     ];
 

@@ -11,6 +11,7 @@ namespace DSMOOServer.Connection;
 
 public class Client : IDisposable
 {
+    private readonly SemaphoreSlim _sendLock = new(1, 1);
     private readonly PacketManager _packetManager;
 
     public Client(Socket socket, ILogger logger, PacketManager packetManager, ObjectController objectController,
@@ -58,7 +59,26 @@ public class Client : IDisposable
         }
 
         Socket.Close();
+        _sendLock.Dispose();
     }
+    
+    private async Task SendAll(ReadOnlyMemory<byte> data)
+    {
+        var totalSent = 0;
+
+        while (totalSent < data.Length)
+        {
+            var sent = await Socket.SendAsync(
+                data[totalSent..],
+                SocketFlags.None);
+
+            if (sent <= 0)
+                throw new SocketException();
+
+            totalSent += sent;
+        }
+    }
+
 
     public async Task Send(IPacket packet, Guid? sender = null)
     {
@@ -75,8 +95,7 @@ public class Client : IDisposable
         }
 
         var memory = MemoryPool<byte>.Shared.RentZero(Constants.HeaderSize + packet.Size);
-
-
+        
         var packetTypeId = _packetManager.GetPacketId(packet.GetType());
         try
         {
@@ -87,7 +106,18 @@ public class Client : IDisposable
                 PacketSize = packet.Size
             }, packet, memory.Memory);
 
-            await Socket!.SendAsync(memory.Memory[..(Constants.HeaderSize + packet.Size)], SocketFlags.None);
+            var packetMemory = memory.Memory[..(Constants.HeaderSize + packet.Size)];
+            
+            await _sendLock.WaitAsync();
+
+            try
+            {
+                await SendAll(packetMemory);
+            }
+            finally
+            {
+                _sendLock.Release();
+            }
         }
         catch (Exception e)
         {
@@ -114,7 +144,25 @@ public class Client : IDisposable
             return;
         }
 
-        await Socket!.SendAsync(data[..(Constants.HeaderSize + header.PacketSize)], SocketFlags.None);
+        try
+        {
+            var packetMemory = data[..(Constants.HeaderSize + header.PacketSize)];
+
+            await _sendLock.WaitAsync();
+
+            try
+            {
+                await SendAll(packetMemory);
+            }
+            finally
+            {
+                _sendLock.Release();
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error("Failed to send raw packet", e);
+        }
     }
 
     public async Task Crash(bool ban)
